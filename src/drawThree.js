@@ -28,7 +28,7 @@ export default function drawThree() {
 		model.receiveShadow = true;
 		model.position.y = -0.2;
 
-		// 모델링에 포함된
+		// 모델링에 포함된 모든 mesh의 그림자 표현
 		model.children.map(mesh => {
 			mesh.castShadow = true;
 			mesh.receiveShadow = true;
@@ -69,11 +69,35 @@ export default function drawThree() {
 
 	scene.add(ambientLight, directionalLight, directionalLightHelper);
 
+	// Geometry & Material
+	const floorGeometry = new THREE.PlaneGeometry(15, 15, 50);
+	const floorMaterial = new THREE.MeshStandardMaterial({
+		color: 'white',
+		side: THREE.DoubleSide,
+	});
+
+	// Mesh
+	const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+
+	floor.rotation.x = THREE.MathUtils.degToRad(-90);
+	floor.receiveShadow = true;
+
+	scene.add(floor);
+
 	// AxesHelper
 	const axesHelper = new THREE.AxesHelper(3);
 	scene.add(axesHelper);
 
+	// 디바이스 스펙 차이로 생기는 이슈를 보정하기 위한 시간값 객체
+	const clock = new THREE.Clock();
+
 	function draw() {
+		const time = clock.getElapsedTime(); // 경과시간
+
+		// 조명 위치를 원형으로 배회하며 테스팅
+		directionalLight.position.x = Math.cos(time) * 5;
+		directionalLight.position.z = Math.sin(time) * 5;
+
 		renderer.render(scene, camera);
 		renderer.setAnimationLoop(draw);
 	}
