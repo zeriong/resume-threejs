@@ -1,8 +1,25 @@
 body {
 	margin: 0;
 }
+button {
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
 #three-canvas {
 	position: absolute;
 	left: 0;
 	top: 0;
+}
+#back-btn {
+	transition: 300ms ease-in-out;
+	position: fixed;
+	bottom: -140px;
+	left: 40px;
+	font-size: 50px;
+	background: black;
+	color: white;
+	padding: 20px 40px;
+	border-radius: 16px;
 }

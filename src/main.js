@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader';
 import {OrbitControls} from 'three/addons/controls/OrbitControls';
-import { Reflector } from 'three/addons/objects/Reflector.js';
 import {
 	floorGeometry,
 	floorMaterial,
@@ -14,7 +13,7 @@ import {
 	drawMonitor, drawSmPoster,
 } from './canvases';
 import dat from 'dat.gui';
-import {Vector2} from 'three';
+import gsap from 'gsap';
 
 // Dat GUI
 const gui = new dat.GUI();
@@ -107,18 +106,6 @@ loader.load('/models/dino.glb', (glb) => {
 	scene.add(model);
 });
 
-
-// Reflector Mesh
-// const mirrorMesh = new Reflector(floorGeometry, {
-// 	textureWidth: window.innerWidth * window.devicePixelRatio,
-// 	textureHeight: window.innerHeight * window.devicePixelRatio,
-// 	clipBias: 0.003,
-// 	color: 0x777777
-// });
-// mirrorMesh.position.y = 10;
-// console.log('미러매쉬',mirrorMesh)
-// scene.add(mirrorMesh);
-
 // Camera
 const camera = new THREE.PerspectiveCamera(
 	75,
@@ -126,9 +113,7 @@ const camera = new THREE.PerspectiveCamera(
 	0.1,
 	1000
 );
-camera.position.x = 3;
-camera.position.y = 5;
-camera.position.z = 5;
+camera.position.set(3,5,3);
 scene.add(camera);
 
 // Controls
@@ -186,17 +171,73 @@ function draw() {
 	renderer.setAnimationLoop(draw);
 }
 
-// mesh 감지
+// gsap play 여부
+let isPlay = false;
+
+gui.add(camera.position, 'x', -10, 10, 0.01)
+gui.add(camera.position, 'y', -10, 10, 0.01)
+gui.add(camera.position, 'z', -10, 10, 0.01)
+
+gui.add(camera.rotation, 'x', -10, 10, 0.01).name('카메라 X 회전')
+gui.add(camera.rotation, 'y', -10, 10, 0.01).name('카메라 Y 회전')
+gui.add(camera.rotation, 'z', -10, 10, 0.01).name('카메라 Z 회전')
+
+// mesh 감지 함수
 function checkIntersects() {
+	if (isPlay) return;
+
 	rayCaster.setFromCamera(mouse, camera); // 카메라 기준으로 ray 관통
 	const intersects = rayCaster.intersectObjects(meshes); // rayCaster가 meshes에 담긴 mesh를 통과하면 객체에 담음
+
 	if (!intersects[0]) return; // intersects에 담긴 item이 없다면 return;
 
 	// 기본적으로 rayCaster는 관통하는 모든 item을 담기 때문에 가장 처음 관통한 item(intesrsects[0])을 식별
 	const name = intersects[0].object.name;
 
 	if (name === 'dino') {
-		console.log('디노~!!!!!!!!!');
+		gsap.to(camera.position, {
+			x: 0, y: 0, z: 0,
+			duration: 2,
+			ease: 'power1.inOut',
+			onStart: () => {
+				isPlay = true;
+				controls.enabled = false;
+			},
+			onComplete: () => {
+				backBtn.style.bottom = '40px';
+			}
+		});
+		gsap.to(controls.target, {
+			x: -10.05, y: -0.45, z: 0.95,
+			duration: 2,
+			ease: 'power1.inOut',
+			onComplete: () => {
+				camera.lookAt(-1.6,10,0.15);
+			}
+		});
+	}
+
+	if (name === 'monitor') {
+		gsap.to(camera.position, {
+			x: -1, y: 1, z: -1,
+			duration: 2,
+			ease: 'power1.inOut',
+			onStart: () => {
+				isPlay = true;
+				controls.enabled = false;
+			},
+			onComplete: () => {
+				backBtn.style.bottom = '40px';
+			}
+		});
+		gsap.to(controls.target, {
+			x: -5, y: -0.45, z: 0.95,
+			duration: 2,
+			ease: 'power1.inOut',
+			onComplete: () => {
+				camera.lookAt(-1.6,10,0.15);
+			}
+		});
 	}
 }
 
@@ -229,7 +270,43 @@ canvas.addEventListener('click', e => {
 	mouse.x = e.clientX / canvas.clientWidth * 2 - 1;
 	mouse.y = -(e.clientY / canvas.clientHeight * 2 - 1);
 	// console.log(mouse);
-	checkIntersects()
-})
+	checkIntersects();
+});
+
+const backBtn = document.querySelector('#back-btn');
+
+// Back 버튼 이벤트
+backBtn.addEventListener('click', () => {
+	backBtn.style.bottom = '-120px';
+	gsap.to(camera.position, {
+		x: 3, y: 5, z: 3,
+		duration: 1.5,
+		ease: 'power2.inOut',
+		onComplete: () => {
+			isPlay = false;
+			controls.enabled = true;
+		}
+	});
+	gsap.to(controls.target, {
+		x: 0, y: 0, z: 0,
+		duration: 2,
+		ease: 'power1.inOut'
+	});
+});
 
 draw();
+
+
+
+// 임시 영역
+const click = document.querySelector('#click');
+let toggle = false;
+click.addEventListener('click', () => {
+	if (toggle) {
+		click.style.top = '50%';
+		toggle = false;
+	} else {
+		click.style.top = 0;
+		toggle = true;
+	}
+})
