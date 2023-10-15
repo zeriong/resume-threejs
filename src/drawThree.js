@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader';
+import {OrbitControls} from 'three/addons/controls/OrbitControls';
 
 
 export default function drawThree() {
@@ -53,8 +54,15 @@ export default function drawThree() {
 	camera.position.x = 3;
 	camera.position.y = 5;
 	camera.position.z = 5;
-	camera.lookAt(0,0,0);
 	scene.add(camera);
+
+	// Controls
+	const controls = new OrbitControls(camera, renderer.domElement);
+	controls.enableDamping = true; // 카메라 컨트롤 시 smooth 적용 (draw 함수에 controls.update() 를 넣어야 함)
+	controls.maxDistance = 9; // 멀어지는 최대거리를 설정
+	controls.minDistance = 3.5; // 가까워지는 최소거리 설정
+	controls.maxPolarAngle = THREE.MathUtils.degToRad(80); // 바닥 아래를 볼 수 없도록 제한
+	controls.mouseButtons.RIGHT = null; // 마우스 오른쪽 드래그로 중심 축 변경 잠금
 
 	// Light
 	const ambientLight = new THREE.AmbientLight('white', 2);
@@ -95,9 +103,10 @@ export default function drawThree() {
 		const time = clock.getElapsedTime(); // 경과시간
 
 		// 조명 위치를 원형으로 배회하며 테스팅
-		directionalLight.position.x = Math.cos(time) * 5;
-		directionalLight.position.z = Math.sin(time) * 5;
+		// directionalLight.position.x = Math.cos(time) * 5;
+		// directionalLight.position.z = Math.sin(time) * 5;
 
+		controls.update();
 		renderer.render(scene, camera);
 		renderer.setAnimationLoop(draw);
 	}
@@ -106,7 +115,6 @@ export default function drawThree() {
 	function setSize() {
 		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
-
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		renderer.render(scene, camera);
 	}
