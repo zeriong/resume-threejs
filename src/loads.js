@@ -1,11 +1,15 @@
 import * as THREE from 'three';
 import {lgPosterMaterial, mdPosterMaterial, monitorMaterial, smPosterMaterial} from './geometryAndMaterial';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+
 
 export const meshes = [];
 export const monitorPosition = new THREE.Vector3();
 
 export function modelsLoad(canvas, scene) {
+    // 로드매니저
     const loadingManager = new THREE.LoadingManager();
     loadingManager.onLoad = () => {
         // 모델링이 로드되면 보이게
@@ -13,6 +17,8 @@ export function modelsLoad(canvas, scene) {
     }
 
     const loader = new GLTFLoader(loadingManager);
+
+    // Room 로드
     loader.load('/models/room.glb', (glb) => {
         const model = glb.scene;
         model.castShadow = true;
@@ -82,6 +88,8 @@ export function modelsLoad(canvas, scene) {
         scene.add(model);
         console.log(model);
     });
+
+    // Dino 로드
     loader.load('/models/dino.glb', (glb) => {
         const model = glb.scene;
         model.scale.set(0.1, 0.1, 0.1);
@@ -99,5 +107,102 @@ export function modelsLoad(canvas, scene) {
         model.name = 'dino';
         meshes.push(model);
         scene.add(model);
+    });
+
+    // 폰트 Bold 로드
+    const fontLoad = new FontLoader();
+    fontLoad.load('/font/Pretendard_Bold.json', (font) => {
+        // console.log(font)
+        const boldGeometry = new TextGeometry('Hello, Three.js bold', {
+            font: font,       // 외부 CDN에서 로드한 폰트 사용
+            size: 0.2,
+            height: 0.05,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.02,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 5,
+        });
+        const boldMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+        const boldMesh = new THREE.Mesh(boldGeometry, boldMaterial);
+        boldMesh.position.set(0, 3, 0);
+        // scene.add(boldMesh);
+    });
+
+    // 폰트 Semi Bold 로드
+    fontLoad.load('/font/Pretendard SemiBold_Regular.json', (font) => {
+        const semiBoldGeometry = new TextGeometry('Hello, Three.js semi bold', {
+            font: font,       // 외부 CDN에서 로드한 폰트 사용
+            size: 0.2,
+            height: 0.05,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.02,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 5,
+        });
+        const semiBoldMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+        const semiBoldMesh = new THREE.Mesh(semiBoldGeometry, semiBoldMaterial);
+        semiBoldMesh.position.set(0, 3, 0);
+        // scene.add(semiBoldMesh);
+    });
+
+    // 폰트 Medium 로드
+    fontLoad.load('/font/Pretendard Medium_Regular.json', (font) => {
+        const mediumGeometry = new TextGeometry('Hello, Three.js Medium', {
+            font: font,       // 외부 CDN에서 로드한 폰트 사용
+            size: 0.2,
+            height: 0.05,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.02,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 5,
+        });
+        const mediumMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+        const mediumMesh = new THREE.Mesh(mediumGeometry, mediumMaterial);
+        mediumMesh.position.set(0, 3, 0);
+        // scene.add(mediumMesh);
+    });
+
+    // 폰트 Regular 로드
+    fontLoad.load('/font/Pretendard_Regular.json', (font) => {
+        const regularGeometry = new TextGeometry('Hello, Three.js Regular', {
+            font: font,       // 외부 CDN에서 로드한 폰트 사용
+            size: 0.2,
+            height: 0.05,
+            curveSegments: 5,
+            bevelEnabled: true,
+            bevelThickness: 0.02,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 5,
+        });
+        const regularMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+        const regularMesh = new THREE.Mesh(regularGeometry, regularMaterial);
+        regularMesh.position.set(0, 3, 0);
+        scene.add(regularMesh);
+    });
+
+    // 폰트 Thin 로드
+    fontLoad.load('/font/Pretendard Thin_Regular.json', (font) => {
+        const thinGeometry = new TextGeometry('Hello, Three.js Regular', {
+            font: font,       // 외부 CDN에서 로드한 폰트 사용
+            size: 0.2,
+            height: 0.05,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.02,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 5,
+        });
+        const thinMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+        const thinMesh = new THREE.Mesh(thinGeometry, thinMaterial);
+        thinMesh.position.set(0, 3, 0);
+        // scene.add(thinMesh);
     });
 }

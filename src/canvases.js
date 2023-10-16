@@ -62,8 +62,3 @@ export const drawSmPoster = () => {
 }
 
 // Menu
-export const titleCanvas = document.createElement('canvas');
-export const positionCanvas = document.createElement('canvas');
-export const aboutMeCanvas = document.createElement('canvas');
-export const projectsCanvas = document.createElement('canvas');
-

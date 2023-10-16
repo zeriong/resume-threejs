@@ -1,13 +1,19 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls';
-import {floorGeometry, floorMaterial} from './geometryAndMaterial';
+import {
+	floorGeometry,
+	floorMaterial,
+	particleGeometry,
+	particleMaterial,
+	runLightParticle
+} from './geometryAndMaterial';
 import {
 	drawLgPoster, drawMdPoster,
 	drawMonitor, drawSmPoster,
 } from './canvases';
 import dat from 'dat.gui';
 import gsap from 'gsap';
-import {ambientPointLight, fromRightLight, fromSkyLight, innerLight, toDoorLight, toWindowLight} from './lights';
+import {setLights} from './lights';
 import {meshes, modelsLoad, monitorPosition} from './loads';
 
 // Dat GUI
@@ -50,23 +56,22 @@ const downControlLimitBreak = () => {
 	// 제한 해제
 	controls.maxPolarAngle = THREE.MathUtils.degToRad(360);
 }
-
 downControlLimitSet();
 
 // Models Load
 modelsLoad(canvas, scene);
 
-// Insert Lights
-scene.add(
-	toDoorLight, toWindowLight, fromRightLight, fromSkyLight, ambientPointLight, innerLight,
-	toDoorLight.target, toWindowLight.target, fromRightLight.target, fromSkyLight.target, ambientPointLight.target, innerLight.target
-);
+// set Lights
+setLights(scene);
 
-// Floor
+// Mesh
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 floor.rotation.x = THREE.MathUtils.degToRad(-90);
 floor.position.y = 0;
 scene.add(floor);
+
+const lightParticle = new THREE.Points(particleGeometry, particleMaterial);
+scene.add(lightParticle);
 
 // AxesHelper
 const axesHelper = new THREE.AxesHelper(3);
@@ -89,6 +94,7 @@ function draw() {
 	drawLgPoster();
 	drawMdPoster();
 	drawSmPoster();
+	runLightParticle();
 
 	controls.update();
 	renderer.render(scene, camera);
