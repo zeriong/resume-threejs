@@ -60,3 +60,10 @@ export const drawSmPoster = () => {
     smPosterCtx.font = 'bold 40px sans-serif';
     smPosterCtx.fillText('sm 포스터입니다', 100, 200);
 }
+
+// Menu
+export const titleCanvas = document.createElement('canvas');
+export const positionCanvas = document.createElement('canvas');
+export const aboutMeCanvas = document.createElement('canvas');
+export const projectsCanvas = document.createElement('canvas');
+

@@ -1,12 +1,11 @@
 import * as THREE from 'three';
 import {lgPosterTexture, mdPosterTexture, monitorTexture, smPosterTexture} from './canvases';
 
+const PRETENDARD_URL = 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css';
+
 // Floor
-export const floorGeometry = new THREE.PlaneGeometry(15, 15, 50);
-export const floorMaterial = new THREE.MeshStandardMaterial({
-    color: 'white',
-    side: THREE.DoubleSide,
-});
+export const floorGeometry = new THREE.PlaneGeometry(50, 50, 50, 50);
+export const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xe8eaff });
 
 // Monitor
 export const monitorGeometry = new THREE.PlaneGeometry(0.88, 0.437, 1);
@@ -39,3 +38,5 @@ export const smPosterMaterial = new THREE.MeshStandardMaterial({
     side: THREE.DoubleSide,
     map: smPosterTexture,
 });
+
+// Menu
