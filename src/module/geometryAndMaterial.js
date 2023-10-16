@@ -5,6 +5,10 @@ import {lgPosterTexture, mdPosterTexture, monitorTexture, smPosterTexture} from 
 export const floorGeometry = new THREE.PlaneGeometry(50, 50, 50, 50);
 export const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xe8eaff });
 
+// Floor2
+export const floor2Geometry = new THREE.PlaneGeometry(7, 7, 10, 10);
+export const floor2Material = new THREE.MeshStandardMaterial({ color: 'red' });
+
 // Monitor
 export const monitorGeometry = new THREE.PlaneGeometry(0.88, 0.437, 1);
 export const monitorMaterial = new THREE.MeshStandardMaterial({
