@@ -65,6 +65,7 @@ module.exports = {
 				{ from: "./src/main.css", to: "./main.css" },
 				{ from: "./src/models", to: "./models" },
 				{ from: "./src/font", to: "./font" },
+				{ from: "./src/html.html", to: "./html.html" },
 			],
 		})
 	]

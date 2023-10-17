@@ -11,6 +11,11 @@ button {
 	margin: 0;
 }
 #three-canvas {
+	position: fixed;
+	left: 0;
+	top: 0;
+}
+#three-html {
 	position: absolute;
 	left: 0;
 	top: 0;
