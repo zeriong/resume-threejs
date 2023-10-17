@@ -27,6 +27,8 @@ export const setRayCaster = (canvas, camera, controls) => {
         // 기본적으로 rayCaster는 관통하는 모든 item을 담기 때문에 가장 처음 관통한 item(intesrsects[0])을 식별
         const name = intersects[0].object.name;
 
+        console.log('야호~',intersects[0])
+
         /** ------ 모델링 클릭 카메라 줌인 무빙 애니메이션 ------ */
         if (name === 'dino') {
             gsap.to(camera.position, {
@@ -50,6 +52,7 @@ export const setRayCaster = (canvas, camera, controls) => {
         }
 
         if (name === 'monitor') {
+            console.log('모니터 정보', intersects[0])
             gsap.to(camera.position, {
                 x: monitorPosition.x, y: monitorPosition.y, z: monitorPosition.z,
                 duration: 2,

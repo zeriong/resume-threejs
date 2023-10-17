@@ -3,19 +3,19 @@ import {lgPosterMaterial, mdPosterMaterial, monitorMaterial, smPosterMaterial} f
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-
+import {InteractiveGroup} from 'three/addons/interactive/InteractiveGroup';
+import {HTMLMesh} from 'three/addons/interactive/HTMLMesh.js';
 
 export const meshes = [];
 export const monitorPosition = new THREE.Vector3();
 
-export function modelsLoad(canvas, scene) {
+export function modelsLoad(canvas, scene, renderer, camera) {
     // 로드매니저
     const loadingManager = new THREE.LoadingManager();
     loadingManager.onLoad = () => {
         // 모델링이 로드되면 보이게
         canvas.style.display = 'block';
     }
-
     const loader = new GLTFLoader(loadingManager);
 
     // Room 로드
@@ -43,7 +43,35 @@ export function modelsLoad(canvas, scene) {
                 if (node.name === 'Plane202_3') {  // 모니터
                     node.material = monitorMaterial;
                     node.name = 'monitor';
+
                     node.getWorldPosition(monitorPosition);
+                    const scale = new THREE.Vector3();
+                    node.getWorldScale(scale);
+                    // const width = window.innerWidth;
+                    // const height = window.innerHeight;
+                    // const x = (monitorPosition.x + 1) * width / 2;
+                    // const y = (-monitorPosition.y + 1) * height / 2;
+                    // console.log('scale: ', scale)
+                    // console.log('position: ', monitorPosition)
+                    // console.log('x: ' + x + 'px' + '\n', 'y: ' + y + 'px')
+                    // console.log('모니터 속성: ', node)
+
+                    // HTML Mesh
+                    const interactiveGroup = new InteractiveGroup(renderer, camera);
+                    const htmlMesh = new HTMLMesh(document.querySelector('#click'));
+                    // console.log('html mesh 속성: ', htmlMesh)
+                    // htmlMesh.position.set(...monitorPosition);
+                    htmlMesh.name = 'monitor'
+                    htmlMesh.rotation.y = THREE.MathUtils.degToRad(90);
+                    htmlMesh.position.copy(monitorPosition);
+                    htmlMesh.position.x = monitorPosition.x + 0.026;
+                    htmlMesh.position.y = monitorPosition.y + 0.066;
+                    // htmlMesh.position.z = monitorPosition.z - 0.0009;
+                    console.log('노드 포지션', node.position)
+
+                    interactiveGroup.add(htmlMesh);
+                    scene.add(htmlMesh);
+                    meshes.push(htmlMesh);
                 }
                 if (node.name === 'Plane221_1') {  // lg 포스터
                     node.material = lgPosterMaterial;
@@ -60,6 +88,14 @@ export function modelsLoad(canvas, scene) {
                 if (node.name === 'Plane219_1') {
                     // 1. 미러큐브 구현을 통한 거울
                     // 2. 포지션과 좌표를 카피하여 Reflector mesh로 덮어쓰기
+                    const scale = new THREE.Vector3();
+                    const position = new THREE.Vector3();
+
+                    node.getWorldPosition(position);
+                    node.getWorldScale(scale);
+
+                    console.log(position, scale);
+
                     node.name = 'mirror';
                 }
 
@@ -240,7 +276,6 @@ export function modelsLoad(canvas, scene) {
         const githubAreaMesh = aboutMeAreaMesh.clone();
         githubAreaMesh.position.set(-1.2, 0.25, 4.9);
         githubAreaMesh.name = 'github';
-        console.log('ㄱ깃허브 에어리어',githubAreaMesh.geometry.parameters.width)
         menuGroup.add(GithubMesh, githubAreaMesh);
         meshes.push(GithubMesh, githubAreaMesh);
 

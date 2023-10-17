@@ -53,7 +53,7 @@ controls.mouseButtons.RIGHT = null; // 마우스 오른쪽 드래그로 중심 �
 controls.maxPolarAngle = THREE.MathUtils.degToRad(80); // 바닥 아래를 볼 수 없도록 제한
 
 setLights(scene);  // set Lights
-modelsLoad(canvas, scene);// Models Load
+modelsLoad(canvas, scene, renderer, camera);// Models Load
 setRayCaster(canvas, camera, controls);  // set RayCaster
 
 // Mesh
@@ -67,7 +67,6 @@ floor2.position.z = 0;
 floor2.position.y = 0.001;
 floor2.receiveShadow = true;
 scene.add(floor, floor2);
-
 
 const lightParticle = new THREE.Points(particleGeometry, particleMaterial);
 scene.add(lightParticle);
@@ -120,11 +119,30 @@ draw();
 const click = document.querySelector('#click');
 let toggle = false;
 click.addEventListener('click', () => {
-	if (toggle) {
-		click.style.top = '50%';
-		toggle = false;
-	} else {
-		click.style.top = 0;
-		toggle = true;
-	}
+	console.log('검댕이 클릭 이벤트');
+	// if (toggle) {
+	// 	click.innerHTML = '중앙이야';
+	// 	click.style.top = '50%';
+	// 	toggle = false;
+	// } else {
+	// 	click.innerHTML = '위에 있어';
+	// 	click.style.top = 0;
+	// 	toggle = true;
+	// }
+})
+// click.addEventListener('mousedown', () => {
+// 	console.log('검댕이 마우스 다운 이벤트');
+// })
+// click.addEventListener('mouseup', () => {
+// 	console.log('검댕이 마우스 업 이벤트');
+// })
+// click.addEventListener('wheel', () => {
+// 	console.log('검댕이 마우스 휠');
+// })
+// click.addEventListener('mousemove', () => {
+// 	console.log('검댕이 마우스 Move!');
+// })
+const input = document.querySelector('#input');
+input.addEventListener('input', (e) => {
+	input.innerHTML = e.target.value;
 })
