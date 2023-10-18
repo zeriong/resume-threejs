@@ -22,13 +22,12 @@ import {CSS3DRenderer} from 'three/addons/renderers/CSS3DRenderer';
 const gui = new dat.GUI();
 
 // Three Canvas, HTML
-const canvas = document.querySelector('#three-canvas');
-const html = document.querySelector(`#three-html`);
-canvas.style.display = 'none'  // 모델링 렌더링 전에 보이지 않도록 설정
+const webgl = document.querySelector('#webgl');
+const css3DObject = document.querySelector(`#css3DObject`);
+webgl.style.display = 'none'  // 모델링 렌더링 전에 보이지 않도록 설정
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
-	canvas,
 	antialias: true,
 	alpha: true,
 	powerPreference: 'high-performance',
@@ -37,39 +36,34 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 renderer.shadowMap.enabled = true; // 그림자 설정
 renderer.shadowMap.type = THREE.PCFSoftShadowMap; // 그림자 맵 타입 설정
-renderer.domElement.style.zIndex = '1px';
+renderer.domElement.style.position = 'absolute';
+webgl.appendChild(renderer.domElement);
 
 // CSS 3D Renderer
 const cssRenderer = new CSS3DRenderer();
 cssRenderer.setSize(window.innerWidth, window.innerHeight);
-html.appendChild(cssRenderer.domElement);
-console.log(cssRenderer)
+css3DObject.appendChild(cssRenderer.domElement);
 
 const scene = new THREE.Scene();  // Scene
 const cssScene = new THREE.Scene();  // CSS Scene
 
 // Camera
 const camera = new THREE.PerspectiveCamera(24, window.innerWidth / window.innerHeight, 1, 8000);
-camera.position.set(14, 12, 14);
+camera.position.set(-14, 12, 14);
 scene.add(camera);
 
 // Controls
 const controls = new OrbitControls(camera, renderer.domElement);
+controls.enablePan = false;
 controls.enableDamping = true; // 카메라 컨트롤 시 smooth 적용 (draw 함수에 controls.update() 를 넣어야 함)
 controls.maxDistance = 25; // 멀어지는 최대거리를 설정
 controls.minDistance = 5; // 가까워지는 최소거리 설정
 controls.mouseButtons.RIGHT = null; // 마우스 오른쪽 드래그로 중심 축 변경 잠금
 controls.maxPolarAngle = THREE.MathUtils.degToRad(80); // 바닥 아래를 볼 수 없도록 제한
-const htmlControls = new OrbitControls(camera, cssRenderer.domElement);
-htmlControls.enableDamping = true; // 카메라 컨트롤 시 smooth 적용 (draw 함수에 controls.update() 를 넣어야 함)
-htmlControls.maxDistance = 25; // 멀어지는 최대거리를 설정
-htmlControls.minDistance = 5; // 가까워지는 최소거리 설정
-htmlControls.mouseButtons.RIGHT = null; // 마우스 오른쪽 드래그로 중심 축 변경 잠금
-htmlControls.maxPolarAngle = THREE.MathUtils.degToRad(80); // 바닥 아래를 볼 수 없도록 제한
 
 setLights(scene);  // set Lights
-modelsLoad(canvas, scene, cssScene);// Models Load
-setRayCaster(canvas, camera, controls);  // set RayCaster
+modelsLoad(webgl, scene, cssScene, cssRenderer.domElement);// Models Load
+setRayCaster(renderer.domElement, camera, controls);  // set RayCaster
 
 // Mesh
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
@@ -99,71 +93,25 @@ function draw() {
 	// 조명 위치를 원형으로 배회하며 테스팅
 	// directionalLight.position.x = Math.cos(time) * 5;
 	// directionalLight.position.z = Math.sin(time) * 5;
-
-	// camera.updateProjectionMatrix();
-
-	drawMonitor();
-	drawLgPoster();
-	drawMdPoster();
-	drawSmPoster();
-	runLightParticle();
-
-	htmlControls.update();
 	controls.update();
 
-	cssRenderer.render(cssScene, camera);
+	runLightParticle();
+
 	renderer.render(scene, camera);
-	renderer.setAnimationLoop(draw);
+	cssRenderer.render(cssScene, camera);
+
+	requestAnimationFrame(draw);
 }
 
-gui.add(camera.position, 'x', -10, 10, 0.01);
-gui.add(camera.position, 'y', -10, 10, 0.01);
-gui.add(camera.position, 'z', -10, 10, 0.01);
+gui.add(camera.position, 'x', -10, 100, 0.01);
+gui.add(camera.position, 'y', -10, 100, 0.01);
+gui.add(camera.position, 'z', -10, 100, 0.01);
 
-gui.add(camera.rotation, 'x', -10, 10, 0.01).name('카메라 X 회전');
-gui.add(camera.rotation, 'y', -10, 10, 0.01).name('카메라 Y 회전');
-gui.add(camera.rotation, 'z', -10, 10, 0.01).name('카메라 Z 회전');
+gui.add(camera.rotation, 'x', -10, 100, 0.01).name('카메라 X 회전');
+gui.add(camera.rotation, 'y', -10, 100, 0.01).name('카메라 Y 회전');
+gui.add(camera.rotation, 'z', -10, 100, 0.01).name('카메라 Z 회전');
 
 // resize 시 동적으로 scale 변경
 window.addEventListener('resize', () => setSize(renderer, scene, camera));
 
 draw();
-
-
-
-
-
-
-
-
-// 임시 영역
-const click = document.querySelector('#click');
-let toggle = false;
-click.addEventListener('click', () => {
-	console.log('검댕이 클릭 이벤트');
-	// if (toggle) {
-	// 	click.innerHTML = '중앙이야';
-	// 	click.style.top = '50%';
-	// 	toggle = false;
-	// } else {
-	// 	click.innerHTML = '위에 있어';
-	// 	click.style.top = 0;
-	// 	toggle = true;
-	// }
-})
-// click.addEventListener('mousedown', () => {
-// 	console.log('검댕이 마우스 다운 이벤트');
-// })
-// click.addEventListener('mouseup', () => {
-// 	console.log('검댕이 마우스 업 이벤트');
-// })
-// click.addEventListener('wheel', () => {
-// 	console.log('검댕이 마우스 휠');
-// })
-// click.addEventListener('mousemove', () => {
-// 	console.log('검댕이 마우스 Move!');
-// })
-const input = document.querySelector('#input');
-input.addEventListener('input', (e) => {
-	input.innerHTML = e.target.value;
-})

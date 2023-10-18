@@ -152,11 +152,6 @@ export function loadFonts(scene, targetMeshes) {
         blogMesh.name = 'blog';
         menuGroup.add(blogMesh);
         targetMeshes.push(blogMesh);
-
-        scene.add(
-            nameMesh, projectsMesh, skillsMesh, aboutMeMesh, learningMesh, GithubMesh, blogMesh,
-            aboutMeAreaMesh, projectsAreaMesh, githubAreaMesh,
-        );
     });
 
     // "Frontend Engineer" meshes
@@ -175,9 +170,9 @@ export function loadFonts(scene, targetMeshes) {
         positionMesh.position.set(3.35, 0.25, -0.03);
         positionMesh.castShadow = true;
         nameGroup.add(positionMesh);
-
-        scene.add(positionMesh);
     });
 
     totalGroup.add(menuGroup, nameGroup);
+    totalGroup.rotation.y = THREE.MathUtils.degToRad(-90);
+    scene.add(totalGroup)
 }

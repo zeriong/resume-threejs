@@ -5,16 +5,15 @@ import {loadFonts} from './Fonts';
 import {loadRoom} from './Room';
 
 export const targetMeshes = [];
-export const monitorPosition = new THREE.Vector3();
 
-export function modelsLoad(canvas, scene, cssScene) {
+export function modelsLoad(webgl, scene, cssScene, cssDomEl) {
     // 로드매니저 모두 로드되면, display: block
     const loadingManager = new THREE.LoadingManager();
-    loadingManager.onLoad = () => canvas.style.display = 'block';
+    loadingManager.onLoad = () => webgl.style.display = 'block';
 
     const loader = new GLTFLoader(loadingManager);
 
-    loadRoom(scene, cssScene, loader, targetMeshes);
+    loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes);
     loadDino(scene, loader, targetMeshes);
     loadFonts(scene, targetMeshes);
 }

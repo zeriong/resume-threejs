@@ -1,17 +1,19 @@
 import * as THREE from 'three';
 import {lgPosterMaterial, mdPosterMaterial, monitorMaterial, smPosterMaterial} from '../meshes/Meshes';
-import {monitorPosition} from './MainLoader';
 import {CSS3DObject} from 'three/addons/renderers/CSS3DRenderer';
 
-export const SCREEN_SIZE = { width: 879, height: 438 };
+export const SCREEN_SIZE = { w: 879, h: 438 };
+const CSS_SCALE = new Array(3).fill(0.001);  // x, y, z
+export const monitorPosition = new THREE.Vector3();
 
-export function loadRoom(scene, cssScene, loader, targetMeshes) {
+export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
     // Room 로드
     loader.load('/models/room.glb', (glb) => {
         const model = glb.scene;
         model.castShadow = true;
         model.receiveShadow = true;
-        // model.position.y = -0.2;
+        model.rotation.y = THREE.MathUtils.degToRad(-90);
+        console.log('모델입니다', model);
 
         // 모델링에 포함된 모든 mesh의 그림자 표현
         model.traverse(node => {
@@ -26,17 +28,23 @@ export function loadRoom(scene, cssScene, loader, targetMeshes) {
                 }
 
                 if (node.name === 'Plane202_3') {  // 모니터
-                    const scale = new THREE.Vector3();
+
                     node.name = 'monitor';
                     node.getWorldPosition(monitorPosition);
 
+                    // html의 바탕이 될 container
+                    const container = document.createElement('div');
+                    container.style.width = SCREEN_SIZE.w + 'px';
+                    container.style.height = SCREEN_SIZE.h + 'px';
+                    container.style.opacity = '1';
+                    container.style.background = '#fff';
+                    container.id = 'containerMan';
+
                     // iframe 생성
                     const iframe = document.createElement('iframe');
-                    iframe.src = '/html.html';
-                    // iframe.style.width = `${SCREEN_SIZE.width}px`;
-                    // iframe.style.height = `${SCREEN_SIZE.height}px`;
-                    iframe.style.width = `100px`;
-                    iframe.style.height = `200px`;
+                    iframe.src = 'https://resume.zeriong.com/';
+                    iframe.style.width = SCREEN_SIZE.w + 'px';
+                    iframe.style.height = SCREEN_SIZE.h + 'px';
                     console.log('이프레임 높이',iframe.style.height)
                     console.log('이프레임 너비',iframe.style.width)
                     iframe.style.boxSizing = 'border-box';
@@ -47,32 +55,49 @@ export function loadRoom(scene, cssScene, loader, targetMeshes) {
                     console.log('iframe: ',iframe);
 
                     // CSS3DObject 생성
-                    const cssObject = new CSS3DObject(iframe);
-                    // cssObject.position.x = monitorPosition.x + 0.026;
-                    // cssObject.position.y = monitorPosition.y + 0.066;
-                    // cssObject.position.z = monitorPosition.y;
-                    cssObject.name = 'monitor';
-                    cssObject.position.copy(monitorPosition);
-                    cssObject.scale.set(0.01,0.01,0.01);
-                    cssObject.rotation.y = THREE.MathUtils.degToRad(90);
-                    cssScene.add(cssObject);
+                    const cssObj = new CSS3DObject(iframe);
+                    cssObj.name = 'monitor';
+                    cssObj.position.x = monitorPosition.x;
+                    cssObj.position.y = monitorPosition.y + 0.066;
+                    cssObj.position.z = monitorPosition.z + 0.026;
+                    cssObj.scale.set(...CSS_SCALE);
+                    // cssObj.rotation.y = THREE.MathUtils.degToRad(90);
+                    console.log('이거슨?',cssObj);
 
-                    console.log('cssObj: ',cssObject);
+                    // HTML 상호작용을 위한 요소
+                    const htmlActionDom = cssDomEl.querySelector('div > div > div').children[0]; // matrix3d
+                    const newMatrix3d = cssObj.matrixWorld.elements;
+                    const array = [];
+                    console.log('매트리스월드~~', newMatrix3d)
 
-                    // CSS3DObject의 뒷면을 가리기 위한 PlaneMesh
-                    const geometry = new THREE.PlaneGeometry(800, 800);
+
+
+                    // htmlActionDom.style.matrix3d
+                    console.log('htmlActionDom입니다~',htmlActionDom);
+
+                    container.appendChild(iframe);
+                    cssScene.add(cssObj);
+
+                    console.log('cssObj: ',cssObj);
+
+                    // CSS3DObject를 표현하기 위한 Mesh
+                    const geometry = new THREE.PlaneGeometry(SCREEN_SIZE.w, SCREEN_SIZE.h);
                     const material = new THREE.MeshLambertMaterial();
                     // material.color = new THREE.Color('#fff');
                     material.side = THREE.DoubleSide;
                     material.opacity = 0;
                     material.transparent = true;
-                    material.blending = THREE.NoBlending;  // CSS3DObject를 가리는 옵션
+                    material.blending = THREE.NoBlending;  // CSS3DObject를 투과 해주는 옵션
+                    material.emissive = 0x0033ff;  // 반사되는 빛의 색상 (반사 색)
+                    material.emissiveIntensity = 0  // 반사되는 빛의 강도 (0부터 1 사이의 값)
                     const mesh = new THREE.Mesh(geometry, material);
-                    mesh.position.copy(monitorPosition);
-                    // mesh.position.x = monitorPosition.x - 0.12;
-                    mesh.rotation.y = THREE.MathUtils.degToRad(90);
-                    mesh.scale.set(0.01,0.01,0.01);
-                    // scene.add(mesh);
+                    mesh.position.x = monitorPosition.x;
+                    mesh.position.y = monitorPosition.y + 0.066;
+                    mesh.position.z = monitorPosition.z + 0.026;
+                    // mesh.rotation.y = THREE.MathUtils.degToRad(90);
+                    mesh.scale.set(...CSS_SCALE);
+                    mesh.name = 'monitor';
+                    scene.add(mesh);
                 }
                 if (node.name === 'Plane221_1') {  // lg 포스터
                     node.material = lgPosterMaterial;
@@ -123,6 +148,5 @@ export function loadRoom(scene, cssScene, loader, targetMeshes) {
             }
         });
         scene.add(model);
-        console.log(model);
     });
 }
