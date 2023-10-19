@@ -18,7 +18,14 @@ module.exports = {
 	},
 	// target: ['web', 'es5'], // es5 환경 작업 시 사용
 	devServer: {
-		liveReload: true
+		liveReload: true,
+		devMiddleware: {
+			publicPath: "/",
+		},
+		static: {
+			directory: path.resolve('./dist')
+		},
+		port: 3000,
 	},
 	optimization: {
 		minimizer: webpackMode === 'production' ? [
@@ -65,7 +72,7 @@ module.exports = {
 				{ from: "./src/main.css", to: "./main.css" },
 				{ from: "./src/models", to: "./models" },
 				{ from: "./src/font", to: "./font" },
-				{ from: "./src/html.html", to: "./html.html" },
+				{ from: "./src/contentElement", to: "./contentElement" },
 			],
 		})
 	]

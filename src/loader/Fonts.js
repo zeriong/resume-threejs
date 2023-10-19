@@ -111,7 +111,7 @@ export function loadFonts(scene, targetMeshes) {
         skillsMesh.rotation.x = THREE.MathUtils.degToRad(-90);
         skillsMesh.position.set(0, 0.25, 4);
         skillsMesh.castShadow = true;
-        skillsMesh.name = 'skills';
+        skillsMesh.name = 'menu-skills';
         menuGroup.add(skillsMesh);
         targetMeshes.push(skillsMesh);
 
@@ -174,5 +174,7 @@ export function loadFonts(scene, targetMeshes) {
 
     totalGroup.add(menuGroup, nameGroup);
     totalGroup.rotation.y = THREE.MathUtils.degToRad(-90);
+    totalGroup.position.x = 1;
+    totalGroup.position.z = 2;
     scene.add(totalGroup)
 }

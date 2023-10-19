@@ -2,11 +2,15 @@ import * as THREE from 'three';
 import {lgPosterTexture, mdPosterTexture, monitorTexture, smPosterTexture} from '../common/canvases';
 
 // Floor
-export const floorGeometry = new THREE.PlaneGeometry(50, 50, 50, 50);
+export const floorGeometry = new THREE.PlaneGeometry(70, 70, 1, 1);
 export const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xe8eaff });
 
+// room dom
+export const domGeometry = new THREE.BoxGeometry(70, 70, 70, 1);
+export const domMaterial = new THREE.MeshStandardMaterial({ color: 0x000000, side: THREE.BackSide });
+
 // Floor2
-export const floor2Geometry = new THREE.PlaneGeometry(7, 7, 10, 10);
+export const floor2Geometry = new THREE.PlaneGeometry(7, 7, 1, 1);
 export const floor2Material = new THREE.MeshStandardMaterial({ color: 'red' });
 
 // Monitor

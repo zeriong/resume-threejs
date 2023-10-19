@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls';
 import {
+	domGeometry, domMaterial,
 	floor2Geometry, floor2Material,
 	floorGeometry, floorMaterial,
 	particleGeometry, particleMaterial,
@@ -8,7 +9,7 @@ import {
 } from './meshes/Meshes';
 import {
 	drawLgPoster, drawMdPoster,
-	drawMonitor, drawSmPoster,
+	drawSmPoster,
 } from './common/canvases';
 import dat from 'dat.gui';
 import {setLights} from './lights/Lights';
@@ -16,7 +17,6 @@ import {modelsLoad} from './loader/MainLoader';
 import {setRayCaster} from './rayCaster/RayCaster';
 import {setSize} from './common/Libs';
 import {CSS3DRenderer} from 'three/addons/renderers/CSS3DRenderer';
-
 
 // Dat GUI
 const gui = new dat.GUI();
@@ -28,6 +28,7 @@ webgl.style.display = 'none'  // 모델링 렌더링 전에 보이지 않도록 
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
+	color: new THREE.Color('black'),
 	antialias: true,
 	alpha: true,
 	powerPreference: 'high-performance',
@@ -49,17 +50,18 @@ const cssScene = new THREE.Scene();  // CSS Scene
 
 // Camera
 const camera = new THREE.PerspectiveCamera(24, window.innerWidth / window.innerHeight, 1, 8000);
-camera.position.set(-14, 12, 14);
+camera.position.set(-22.5, 18, 24);
 scene.add(camera);
 
 // Controls
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enablePan = false;
 controls.enableDamping = true; // 카메라 컨트롤 시 smooth 적용 (draw 함수에 controls.update() 를 넣어야 함)
-controls.maxDistance = 25; // 멀어지는 최대거리를 설정
+controls.maxDistance = 40; // 멀어지는 최대거리를 설정
 controls.minDistance = 5; // 가까워지는 최소거리 설정
 controls.mouseButtons.RIGHT = null; // 마우스 오른쪽 드래그로 중심 축 변경 잠금
 controls.maxPolarAngle = THREE.MathUtils.degToRad(80); // 바닥 아래를 볼 수 없도록 제한
+controls.target.set(1,1,2)
 
 setLights(scene);  // set Lights
 modelsLoad(webgl, scene, cssScene, cssRenderer.domElement);// Models Load
@@ -69,16 +71,21 @@ setRayCaster(renderer.domElement, camera, controls);  // set RayCaster
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 floor.rotation.x = THREE.MathUtils.degToRad(-90);
 floor.position.y = 0;
-
+// 그림자 적용
 const floor2 = new THREE.Mesh(floor2Geometry, floor2Material);
 floor2.rotation.x = THREE.MathUtils.degToRad(-90);
-floor2.position.x = 3;
-floor2.position.z = 0;
+floor2.position.x = 4;
+floor2.position.z = 2;
 floor2.position.y = 0.001;
 floor2.receiveShadow = true;
 scene.add(floor, floor2);
+// 돔 mesh
+const dom = new THREE.Mesh(domGeometry, domMaterial);
+dom.position.y = -1;
+scene.add(dom);
 
 const lightParticle = new THREE.Points(particleGeometry, particleMaterial);
+lightParticle.position.set(1, 0, 2);
 scene.add(lightParticle);
 
 // AxesHelper
@@ -93,10 +100,13 @@ function draw() {
 	// 조명 위치를 원형으로 배회하며 테스팅
 	// directionalLight.position.x = Math.cos(time) * 5;
 	// directionalLight.position.z = Math.sin(time) * 5;
-	controls.update();
+
+	drawLgPoster();
+	drawMdPoster();
+	drawSmPoster();
 
 	runLightParticle();
-
+	controls.update();
 	renderer.render(scene, camera);
 	cssRenderer.render(cssScene, camera);
 
@@ -112,6 +122,6 @@ gui.add(camera.rotation, 'y', -10, 100, 0.01).name('카메라 Y 회전');
 gui.add(camera.rotation, 'z', -10, 100, 0.01).name('카메라 Z 회전');
 
 // resize 시 동적으로 scale 변경
-window.addEventListener('resize', () => setSize(renderer, scene, camera));
+window.addEventListener('resize', () => setSize(renderer, cssRenderer, scene, camera));
 
 draw();

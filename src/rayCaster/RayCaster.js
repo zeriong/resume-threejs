@@ -26,20 +26,16 @@ export const setRayCaster = (renderDom, camera, controls) => {
         rayCaster.setFromCamera(mouse, camera); // 카메라 기준으로 ray 관통
 
         const intersects = rayCaster.intersectObjects(targetMeshes); // rayCaster가 meshes에 담긴 mesh를 통과하면 객체에 담음
-        console.log('meshes 입니다~', targetMeshes);
-        console.log('intersects 입니다~', intersects);
         if (!intersects[0]) return; // intersects에 담긴 item이 없다면 return;
 
         // 기본적으로 rayCaster는 관통하는 모든 item을 담기 때문에 가장 처음 관통한 item(intesrsects[0])을 식별
-        const name = intersects[0].object.name;
-
-        console.log('야호~',intersects[0])
+        const target = intersects[0].object;
 
         /** ------ 모델링 클릭 카메라 줌인 무빙 애니메이션 ------ */
-        if (name === 'dino') {
+        if (target.name === 'dino') {
             console.log('디노에요')
             gsap.to(camera.position, {
-                x: 0, y: 1.4, z: 1,
+                x: 1, y: 1.4, z: 3,
                 duration: 2,
                 ease: 'power1.inOut',
                 onStart: () => {
@@ -52,14 +48,15 @@ export const setRayCaster = (renderDom, camera, controls) => {
                 }
             });
             gsap.to(controls.target, {
-                x: 0, y: 1.1, z: -4,
+                x: 1, y: 1.1, z: -2,
                 duration: 2,
                 ease: 'power1.inOut',
             });
         }
 
-        if (name === 'monitor') {
-            console.log('모니터 정보', intersects[0])
+        if (target.name === 'monitor') {
+            console.log('모니터', intersects[0]);
+
             gsap.to(camera.position, {
                 x: monitorPosition.x, y: monitorPosition.y, z: monitorPosition.z + 2,
                 duration: 2,
@@ -76,22 +73,102 @@ export const setRayCaster = (renderDom, camera, controls) => {
             });
             gsap.to(controls.target, {
                 x: monitorPosition.x, y: monitorPosition.y, z: -5,
-                // x: monitorPosition.x, y: monitorPosition.y, z: monitorPosition.z,
+                duration: 2,
+                ease: 'power1.inOut',
+            });
+        }
+
+        if (target.name === 'poster') {
+            console.log('poster', intersects[0]);
+
+            const position = new THREE.Vector3();
+            target.getWorldPosition(position);
+
+            gsap.to(camera.position, {
+                x: position.x, y: position.y, z: position.z + 3,
+                duration: 2,
+                ease: 'power1.inOut',
+                onStart: () => {
+                    isPlay = true;
+                    controls.enabled = false;
+                    downControlLimitBreak(); // down control 제한 해제
+                },
+                onComplete: () => {
+                    backBtn.style.bottom = '40px';
+                    webgl.style.zIndex = -1;
+                }
+            });
+            gsap.to(controls.target, {
+                x: position.x, y: position.y, z: -2,
+                duration: 2,
+                ease: 'power1.inOut',
+            });
+        }
+
+        if (target.name === 'learning') {
+            console.log('learning', intersects[0])
+
+            const position = new THREE.Vector3();
+            target.getWorldPosition(position);
+
+            gsap.to(camera.position, {
+                x: position.x, y: position.y, z: position.z + 2,
+                duration: 2,
+                ease: 'power1.inOut',
+                onStart: () => {
+                    isPlay = true;
+                    controls.enabled = false;
+                    downControlLimitBreak(); // down control 제한 해제
+                },
+                onComplete: () => {
+                    backBtn.style.bottom = '40px';
+                    webgl.style.zIndex = -1;
+                }
+            });
+            gsap.to(controls.target, {
+                x: position.x, y: position.y, z: -3,
+                duration: 2,
+                ease: 'power1.inOut',
+            });
+        }
+
+        if (target.name === 'skills') {
+            console.log('skills', intersects[0])
+
+            const position = new THREE.Vector3();
+            target.getWorldPosition(position);
+
+            gsap.to(camera.position, {
+                x: position.x, y: position.y, z: position.z + 1,
+                duration: 2,
+                ease: 'power1.inOut',
+                onStart: () => {
+                    isPlay = true;
+                    controls.enabled = false;
+                    downControlLimitBreak(); // down control 제한 해제
+                },
+                onComplete: () => {
+                    backBtn.style.bottom = '40px';
+                    webgl.style.zIndex = -1;
+                }
+            });
+            gsap.to(controls.target, {
+                x: position.x, y: position.y, z: -3.5,
                 duration: 2,
                 ease: 'power1.inOut',
             });
         }
 
         /** ------ 메뉴 클릭 이벤트 ------ */
-        if (name === 'github') {
+        if (target === 'github') {
             console.log('github');
             window.open('https://github.com/zeriong/','_blank');
         }
-        if (name === 'projects') console.log('projects');
-        if (name === 'aboutMe') console.log('aboutMe');
-        if (name === 'skills') console.log('skills');
-        if (name === 'learning') console.log('learning');
-        if (name === 'blog') console.log('blog');
+        if (target === 'projects') console.log('projects');
+        if (target === 'aboutMe') console.log('aboutMe');
+        if (target === 'skills') console.log('skills');
+        if (target === 'learning') console.log('learning');
+        if (target === 'blog') console.log('blog');
     }
 
     // 마우스 드래그 시 발생하는 rayCaster 방지
@@ -115,14 +192,15 @@ export const setRayCaster = (renderDom, camera, controls) => {
         mouse.y = -(e.clientY / renderDom.clientHeight * 2 - 1);
         // console.log(mouse);
         checkIntersects();
-        console.log('클릭감지~',e)
+        // console.log('클릭감지~',e)
     });
 
     // Back 버튼 이벤트
     backBtn.addEventListener('click', () => {
         backBtn.style.bottom = '-120px';
+        window.getSelection().removeAllRanges()
         gsap.to(camera.position, {
-            x: -14, y: 12, z: 14,
+            x: -13, y: 12, z: 16,
             duration: 2,
             ease: 'power1.inOut',
             onComplete: () => {
@@ -133,7 +211,7 @@ export const setRayCaster = (renderDom, camera, controls) => {
             }
         });
         gsap.to(controls.target, {
-            x: 0, y: 0, z: 0,
+            x: 1, y: 1, z: 2,
             duration: 2,
             ease: 'power1.inOut',
         });

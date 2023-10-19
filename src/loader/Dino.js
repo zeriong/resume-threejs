@@ -7,9 +7,9 @@ export function loadDino(scene, loader, targetMeshes) {
         model.scale.set(0.1, 0.1, 0.1);
         model.castShadow = true;
         model.receiveShadow = true;
-        model.position.x = 0;
+        model.position.x = 1;
         model.position.y = 1;
-        model.position.z = -1.3;
+        model.position.z = 0.5;
         model.rotation.y = THREE.MathUtils.degToRad(270);
 
         model.children.map(mesh => {
