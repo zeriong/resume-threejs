@@ -1,79 +1,55 @@
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <link rel="stylesheet" href="../../src/main.css">-->
-<!--    <script>import '../../src/main.css';</script>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="relative flex items-center">-->
-<!--    <p id="hell" class="text-[36px] text-blue-500 font-semibold leading-none max-sm:text-[28px]">-->
-<!--        Skills<span class="text-gray-400/80 ml-2">{</span>-->
-<!--    </p>-->
-<!--    {comment && (-->
-<!--    <p class="text-[16px] text-gray-800 ml-3 mt-1 whitespace-nowrap max-sm:ml-1.5 max-sm:text-[14px] max-sm:tracking-[-0.4px]">-->
-<!--        {'//'} {comment}-->
-<!--    </p>-->
-<!--    )}-->
-<!--</div>-->
-<!--{description && (-->
-<!--<p class="text-[18px] text-gray-700 mt-[16px] max-sm:text-[16px]">-->
-<!--    {description}-->
-<!--</p>-->
-<!--)}-->
-<!--<div class="border-l border-gray-300/90 pl-8 max-md:pl-4">-->
-<!--    {children}-->
-<!--</div>-->
-<!--<p class="text-[36px] text-gray-400/80 font-semibold leading-none mt-1 max-sm:text-[28px]">-->
-<!--    {'}'}-->
-<!--</p>-->
-
-
-<!--<div class="flex flex-col gap-y-[28px] mt-[32px] max-md:mt-[24px]">-->
-<!--    <div class="flex gap-x-[52px] gap-y-[20px] max-md:flex-col">-->
-<!--        <div class="flex flex-col w-[130px]">-->
-<!--            <p class="text-gray-500 text-xl font-semibold leading-none">Frontend</p>-->
-<!--        </div>-->
-<!--        <div class="">-->
-<!--            HTML/CSS, JavaScript, TypeScript, React, Redux Toolkit, React Query, NextJS,-->
-<!--            Tailwindcss-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="flex gap-x-[52px] gap-y-[20px] max-md:flex-col">-->
-<!--        <div class="flex flex-col w-[130px]">-->
-<!--            <p class="text-gray-500 text-xl font-semibold leading-none">Backend</p>-->
-<!--        </div>-->
-<!--        <div class="flex flex-col gap-y-[44px]">-->
-<!--            NodeJS, NestJS, Typeorm, JWT, Swagger, Mariadb-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="flex gap-x-[52px] gap-y-[20px] max-md:flex-col">-->
-<!--        <div class="flex flex-col w-[130px]">-->
-<!--            <p class="text-gray-500 text-xl font-semibold leading-none">Etc</p>-->
-<!--        </div>-->
-<!--        <div class="flex flex-col gap-y-[44px]">-->
-<!--            Firebase, Openapi Generator, Linux Ubuntu, PM2,<br/>-->
-<!--            Git/Github, WebStorm, DataGrip-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<script>import './main.css';</script>-->
-<!--</body>-->
-<!--</html>-->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../src/main.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" />
+    <link rel="stylesheet" href="../main.css">
+    <title>Skills</title>
 </head>
 <body>
-<div style="font-size: 120px; position: fixed; z-index: 10000" class="bg-yellow-500 text-red-500">하이</div>
-<div id="css3DObject"></div>
-<div id="webgl"></div>
-<button id="back-btn" type="button">Back</button>
+<div class="skills-title-wrap">
+    <p class="skills-title">
+        Skills<span class="text-gray-400/80 ml-2">{</span>
+    </p>
+</div>
+<div class="text-[18px] text-gray-700 mt-[16px] max-sm:text-[16px]">
+    프로젝트에 사용 경험이 있는 기술들입니다. <span class="border-b-2 border-blue-500">React</span>를 주력으로 서비스에
+    필요한 전반적인 과정을 경험하고 문제를 해결하며 이해하고 성장하는 데 중점을 두었습니다. 백엔드에서는 <span class="border-b-2 border-blue-500">NestJS</span> 사용에 익숙합니다.
+</div>
+<div class="border-l border-gray-300/90 pl-8 max-md:pl-4">
+    <div class="flex flex-col gap-y-[28px] mt-[32px] max-md:mt-[24px]">
+        <div class="flex gap-x-[52px] gap-y-[20px] max-md:flex-col">
+            <div class="flex flex-col w-[130px]">
+                <p class="text-gray-500 text-xl font-semibold leading-none">Frontend</p>
+            </div>
+            <div class="">
+                HTML/CSS, JavaScript, TypeScript, React, Redux Toolkit, React Query, NextJS,
+                Tailwindcss
+            </div>
+        </div>
+        <div class="flex gap-x-[52px] gap-y-[20px] max-md:flex-col">
+            <div class="flex flex-col w-[130px]">
+                <p class="text-gray-500 text-xl font-semibold leading-none">Backend</p>
+            </div>
+            <div class="flex flex-col gap-y-[44px]">
+                NodeJS, NestJS, Typeorm, JWT, Swagger, Mariadb
+            </div>
+        </div>
+        <div class="flex gap-x-[52px] gap-y-[20px] max-md:flex-col">
+            <div class="flex flex-col w-[130px]">
+                <p class="text-gray-500 text-xl font-semibold leading-none">Etc</p>
+            </div>
+            <div class="flex flex-col gap-y-[44px]">
+                Firebase, Openapi Generator, Linux Ubuntu, PM2,<br/>
+                Git/Github, WebStorm, DataGrip
+            </div>
+        </div>
+    </div>
+</div>
+<p class="text-[36px] text-gray-400/80 font-semibold leading-none mt-1 max-sm:text-[28px]">
+    }
+</p>
+
 </body>
 </html>

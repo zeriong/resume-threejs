@@ -26,13 +26,20 @@ module.exports = {
 				use: ['source-map-loader'],
 			},
 			{
-				test: /\.css$/i,
-				include: path.resolve(__dirname, '../src'),
-				use: ['style-loader', 'css-loader', 'postcss-loader'],
+				test: /\.s?css$/,
+				use: [
+					'style-loader',
+					'css-loader',
+					'sass-loader'
+				]
 			},
 			{
 				test: /\.(glb|gltf)$/,
 				use: ['file-loader']
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/i,
+				use: ['file-loader'],
 			},
 		]
 	},
@@ -40,12 +47,15 @@ module.exports = {
 		// origin 그대로 복사할 파일을 지정
 		new CopyWebpackPlugin({
 			// 빌드 시 dist 폴더 자동 생성(patterns 경로에 해당 파일이 없으면 에러발생)
-			patterns: [{ from: path.resolve(__dirname, '../static') }]
+			patterns: [
+				{ from: path.resolve(__dirname, '../static') },
+				{ from: path.resolve(__dirname, '../src/main.scss') }
+			]
 		}),
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, '../src/index.html'),
+			filename: 'index.html',
 			minify: true
-		}),
-		new CleanWebpackPlugin(),
+		})
 	]
 };

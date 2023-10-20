@@ -1,4 +1,4 @@
-import './main.css';
+import './main.scss';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls';
 import {runLightParticle, setMeshes} from './meshes/Meshes';
@@ -8,8 +8,7 @@ import {modelsLoad} from './loader/MainLoader';
 import {setRayCaster} from './rayCaster/RayCaster';
 import {setSize} from './common/Libs';
 import {CSS3DRenderer} from 'three/addons/renderers/CSS3DRenderer';
-console.log('main.js start!!!!!!!!!!!!!!!!!!!!!!!!!')
-console.log('main.js content: ', document.querySelector('#hi').style)
+
 // Dat GUI
 const gui = new dat.GUI();
 

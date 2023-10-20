@@ -11,6 +11,8 @@ module.exports = merge(
             static: {
                 directory: path.resolve(__dirname, '../public')
             },
+            hot: true,
+            watchFiles: ['src/**/*', 'static/**/*'],
             port: 3000,
         },
     }

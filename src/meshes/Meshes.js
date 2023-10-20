@@ -9,7 +9,7 @@ floor.position.y = 0;
 
 // room dom
 const domGeometry = new THREE.BoxGeometry(70, 70, 70, 1);
-const domMaterial = new THREE.MeshStandardMaterial({ color: 0x000000, side: THREE.BackSide });
+const domMaterial = new THREE.MeshStandardMaterial({ color: 'black', side: THREE.BackSide });
 const dom = new THREE.Mesh(domGeometry, domMaterial);
 dom.position.y = -1;
 
@@ -54,7 +54,7 @@ lightParticle.position.set(1, 0, 2);
 
 // 반투명 door cover
 const doorCoverGeometry = new THREE.BoxGeometry(100, 0.2, 460);
-const doorCoverMaterial = new THREE.MeshStandardMaterial({ color: '0x000000', transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+const doorCoverMaterial = new THREE.MeshStandardMaterial({ color: 'black', transparent: true, opacity: 0.3, side: THREE.DoubleSide });
 const doorCover = new THREE.Mesh(doorCoverGeometry, doorCoverMaterial);
 //doorCover.castShadow = true;
 doorCover.rotation.x = THREE.MathUtils.degToRad(-90);

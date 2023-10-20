@@ -96,7 +96,7 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
 
                     // content 생성
                     const posterEl = document.createElement('iframe');
-                    posterEl.src = '/content/poster.html';
+                    posterEl.src = './content/poster.html';
                     posterEl.style.width = SCREEN.w + 'px';
                     posterEl.style.height = SCREEN.h + 'px';
                     posterEl.style.overflow = 'scroll';
@@ -138,7 +138,7 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
 
                     // content 생성
                     const learningEl = document.createElement('iframe');
-                    learningEl.src = '/content/learning.html'
+                    learningEl.src = './content/learning.html'
                     learningEl.style.width = SCREEN.w + 'px';
                     learningEl.style.height = SCREEN.h + 'px';
                     learningEl.style.overflow = 'scroll';
@@ -180,7 +180,7 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
 
                     // content 생성
                     const skillsEl = document.createElement('iframe');
-                    skillsEl.src = '/content/skills.html'
+                    skillsEl.src = './content/skills.html'
                     skillsEl.style.width = SCREEN.w + 'px';
                     skillsEl.style.height = SCREEN.h + 'px';
                     skillsEl.style.overflow = 'scroll';
