@@ -1,52 +1,30 @@
 import * as THREE from 'three';
-import {lgPosterTexture, mdPosterTexture, monitorTexture, smPosterTexture} from '../common/canvases';
 
 // Floor
-export const floorGeometry = new THREE.PlaneGeometry(70, 70, 1, 1);
-export const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xe8eaff });
+const floorGeometry = new THREE.PlaneGeometry(70, 70, 1, 1);
+const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xe8eaff });
+const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+floor.rotation.x = THREE.MathUtils.degToRad(-90);
+floor.position.y = 0;
 
 // room dom
-export const domGeometry = new THREE.BoxGeometry(70, 70, 70, 1);
-export const domMaterial = new THREE.MeshStandardMaterial({ color: 0x000000, side: THREE.BackSide });
+const domGeometry = new THREE.BoxGeometry(70, 70, 70, 1);
+const domMaterial = new THREE.MeshStandardMaterial({ color: 0x000000, side: THREE.BackSide });
+const dom = new THREE.Mesh(domGeometry, domMaterial);
+dom.position.y = -1;
 
-// Floor2
-export const floor2Geometry = new THREE.PlaneGeometry(7, 7, 1, 1);
-export const floor2Material = new THREE.MeshStandardMaterial({ color: 'red' });
-
-// Monitor
-export const monitorGeometry = new THREE.PlaneGeometry(0.88, 0.437, 1);
-export const monitorMaterial = new THREE.MeshStandardMaterial({
-    // color: 'white',
-    side: THREE.DoubleSide,
-    map: monitorTexture,
-});
-
-// Lg Poster
-export const lgPosterGeometry = new THREE.PlaneGeometry(0.995, 1.228, 1);
-export const lgPosterMaterial = new THREE.MeshStandardMaterial({
-    // color: 'white',
-    side: THREE.DoubleSide,
-    map: lgPosterTexture,
-});
-
-// Md Poster
-export const mdPosterGeometry = new THREE.PlaneGeometry(0.88, 0.437, 1);
-export const mdPosterMaterial = new THREE.MeshStandardMaterial({
-    // color: 'white',
-    side: THREE.DoubleSide,
-    map: mdPosterTexture,
-});
-
-// Sm Poster
-export const smPosterGeometry = new THREE.PlaneGeometry(0.88, 0.437, 1);
-export const smPosterMaterial = new THREE.MeshStandardMaterial({
-    // color: 'white',
-    side: THREE.DoubleSide,
-    map: smPosterTexture,
-});
+// Floor2 그림자 적용되는 바닥
+// const floor2Geometry = new THREE.PlaneGeometry(7, 7, 1, 1);
+// const floor2Material = new THREE.MeshStandardMaterial({ color: 'red' });
+// const floor2 = new THREE.Mesh(floor2Geometry, floor2Material);
+// floor2.rotation.x = THREE.MathUtils.degToRad(-90);
+// floor2.position.x = 4;
+// floor2.position.z = 2;
+// floor2.position.y = 0.001;
+// floor2.receiveShadow = true;
 
 // 빛 가루 파티클
-export const particleGeometry = new THREE.BufferGeometry();
+const particleGeometry = new THREE.BufferGeometry();
 const particlesCount = 60;
 const positions = new Float32Array(particlesCount * 3);
 for(let i = 0; i < particlesCount * 3; i += 3) {
@@ -55,12 +33,13 @@ for(let i = 0; i < particlesCount * 3; i += 3) {
     positions[i + 2] = (Math.random() - 0.5) * 5;
 }
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-export const particleMaterial = new THREE.PointsMaterial({
+const particleMaterial = new THREE.PointsMaterial({
     size: 0.05,
     blending: THREE.AdditiveBlending,  // 산술 블렌딩을 사용하여 빛의 누적 효과를 만듭니다
     transparent: true,
     color: 0xffff00  // 노란색 빛으로 설정
 });
+
 // 빛 가루 이벤트
 export const runLightParticle = () => {
     const positions = particleGeometry.attributes.position.array;
@@ -69,4 +48,22 @@ export const runLightParticle = () => {
         if (positions[i + 1] < 0) positions[i + 1] = 5;
     }
     particleGeometry.attributes.position.needsUpdate = true;  // 위치 업데이트
+}
+const lightParticle = new THREE.Points(particleGeometry, particleMaterial);
+lightParticle.position.set(1, 0, 2);
+
+// 반투명 door cover
+const doorCoverGeometry = new THREE.BoxGeometry(100, 0.2, 460);
+const doorCoverMaterial = new THREE.MeshStandardMaterial({ color: '0x000000', transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+const doorCover = new THREE.Mesh(doorCoverGeometry, doorCoverMaterial);
+//doorCover.castShadow = true;
+doorCover.rotation.x = THREE.MathUtils.degToRad(-90);
+doorCover.rotation.z = THREE.MathUtils.degToRad(90);
+doorCover.position.x = 2.9;
+doorCover.position.y = 0.5;
+doorCover.position.z = 3.3;
+doorCover.scale.set(0.01, 0.01, 0.01);
+
+export const setMeshes = (scene) => {
+    scene.add(dom, floor, lightParticle, doorCover);
 }

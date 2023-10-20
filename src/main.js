@@ -1,23 +1,15 @@
+import './main.css';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls';
-import {
-	domGeometry, domMaterial,
-	floor2Geometry, floor2Material,
-	floorGeometry, floorMaterial,
-	particleGeometry, particleMaterial,
-	runLightParticle,
-} from './meshes/Meshes';
-import {
-	drawLgPoster, drawMdPoster,
-	drawSmPoster,
-} from './common/canvases';
+import {runLightParticle, setMeshes} from './meshes/Meshes';
 import dat from 'dat.gui';
 import {setLights} from './lights/Lights';
 import {modelsLoad} from './loader/MainLoader';
 import {setRayCaster} from './rayCaster/RayCaster';
 import {setSize} from './common/Libs';
 import {CSS3DRenderer} from 'three/addons/renderers/CSS3DRenderer';
-
+console.log('main.js start!!!!!!!!!!!!!!!!!!!!!!!!!')
+console.log('main.js content: ', document.querySelector('#hi').style)
 // Dat GUI
 const gui = new dat.GUI();
 
@@ -66,27 +58,7 @@ controls.target.set(1,1,2)
 setLights(scene);  // set Lights
 modelsLoad(webgl, scene, cssScene, cssRenderer.domElement);// Models Load
 setRayCaster(renderer.domElement, camera, controls);  // set RayCaster
-
-// Mesh
-const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-floor.rotation.x = THREE.MathUtils.degToRad(-90);
-floor.position.y = 0;
-// 그림자 적용
-const floor2 = new THREE.Mesh(floor2Geometry, floor2Material);
-floor2.rotation.x = THREE.MathUtils.degToRad(-90);
-floor2.position.x = 4;
-floor2.position.z = 2;
-floor2.position.y = 0.001;
-floor2.receiveShadow = true;
-scene.add(floor, floor2);
-// 돔 mesh
-const dom = new THREE.Mesh(domGeometry, domMaterial);
-dom.position.y = -1;
-scene.add(dom);
-
-const lightParticle = new THREE.Points(particleGeometry, particleMaterial);
-lightParticle.position.set(1, 0, 2);
-scene.add(lightParticle);
+setMeshes(scene);  // set Meshes
 
 // AxesHelper
 const axesHelper = new THREE.AxesHelper(3);
@@ -100,10 +72,6 @@ function draw() {
 	// 조명 위치를 원형으로 배회하며 테스팅
 	// directionalLight.position.x = Math.cos(time) * 5;
 	// directionalLight.position.z = Math.sin(time) * 5;
-
-	drawLgPoster();
-	drawMdPoster();
-	drawSmPoster();
 
 	runLightParticle();
 	controls.update();
