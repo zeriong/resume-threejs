@@ -1,5 +1,8 @@
 @font-face {
-  src: url("./font/Pretendard-Bold.woff") format("woff"), url("./font/Pretendard-ExtraBold.woff") format("woff"), url("./font/Pretendard-Light.woff") format("woff"), url("./font/Pretendard-Medium.woff") format("woff"), url("./font/Pretendard-Regular.woff") format("woff"), url("./font/Pretendard-SemiBold.woff") format("woff"), url("./font/Pretendard-Thin.woff") format("woff");
+  font-family: "Pretendard";
+  src: url("/public/font/Pretendard-Bold.woff") format("woff"), url("/public/font/Pretendard-ExtraBold.woff") format("woff"), url("/public/font/Pretendard-Light.woff") format("woff"), url("/public/font/Pretendard-Medium.woff") format("woff"), url("/public/font/Pretendard-Regular.woff") format("woff"), url("/public/font/Pretendard-SemiBold.woff") format("woff"), url("/public/font/Pretendard-Thin.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
 }
 body, html {
   margin: 0;
