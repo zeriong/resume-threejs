@@ -9,7 +9,7 @@ module.exports = merge(
         devServer: {
             liveReload: true,
             static: {
-                directory: path.resolve(__dirname, '../dist')
+                directory: path.resolve(__dirname, '../public')
             },
             port: 3000,
         },

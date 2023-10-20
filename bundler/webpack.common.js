@@ -9,7 +9,7 @@ module.exports = {
 		main: path.resolve(__dirname, '../src/main.js')
 	},
 	output: {
-		path: path.resolve(__dirname, '../dist'),
+		path: path.resolve(__dirname, '../public'),
 		filename: '[name].min.js'
 	},
 	// target: ['web', 'es5'], // es5 환경 작업 시 사용
