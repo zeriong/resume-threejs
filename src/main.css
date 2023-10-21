@@ -1,7 +1,37 @@
 @font-face {
   font-family: "Pretendard";
-  src: url("/fonts/Pretendard-Bold.woff") format("woff"), url("/fonts/Pretendard-ExtraBold.woff") format("woff"), url("/fonts/Pretendard-Light.woff") format("woff"), url("/fonts/Pretendard-Medium.woff") format("woff"), url("/fonts/Pretendard-Regular.woff") format("woff"), url("/fonts/Pretendard-SemiBold.woff") format("woff"), url("/fonts/Pretendard-Thin.woff") format("woff");
+  src: url("/fonts/Pretendard-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-Medium.woff") format("woff");
   font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-ExtraBold.woff") format("woff");
+  font-weight: 800;
   font-style: normal;
 }
 body, html {
@@ -37,15 +67,69 @@ button {
   border-radius: 16px;
 }
 
-.skills-title-wrap {
+p {
+  margin: 0;
+  font-weight: 0;
+}
+
+.skills-body {
+  width: 511px;
+  height: 300px;
+  padding: 16px 20px;
+  overflow: hidden;
+}
+.skills-body .skills-title-wrap {
   position: relative;
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
-.skills-title-wrap .skills-title {
-  font-size: 36px;
+.skills-body .skills-title-wrap .skills-title {
+  font-size: 24px;
   color: rgb(59, 130, 246);
-  font-weight: bolder;
+  font-weight: 700;
+}
+.skills-body .skills-braces {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(156, 163, 175);
+  opacity: 0.8;
+}
+.skills-body .skills-intro {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(55, 65, 81);
+  margin: 12px 0;
+  line-height: 1.5;
+}
+.skills-body .skills-intro .important-skill {
+  border-bottom: rgb(59, 130, 246) solid 2px;
+}
+.skills-body .skills-content-wrap {
+  border-left: 1px solid rgba(209, 213, 219, 0.9);
+  padding-left: 30px;
+  margin-top: 26px;
+}
+.skills-body .skills-content-wrap .skills-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.skills-body .skills-content-wrap .skills-content .skills-position {
+  display: flex;
+  gap: 26px;
+}
+.skills-body .skills-content-wrap .skills-content .stack-title {
+  width: 100px;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 15px;
+  color: rgb(107, 114, 128);
+}
+.skills-body .skills-content-wrap .skills-content .position-stack {
+  font-size: 13px;
+  display: flex;
+  line-height: 1.5;
 }
 
 /*# sourceMappingURL=main.css.map */

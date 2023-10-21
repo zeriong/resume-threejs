@@ -5,7 +5,7 @@ import {runLightParticle, setMeshes} from './meshes/Meshes';
 import dat from 'dat.gui';
 import {setLights} from './lights/Lights';
 import {modelsLoad} from './loader/MainLoader';
-import {setRayCaster} from './rayCaster/RayCaster';
+import {setRayCaster, skillsPos} from './rayCaster/RayCaster';
 import {setSize} from './common/Libs';
 import {CSS3DRenderer} from 'three/addons/renderers/CSS3DRenderer';
 
@@ -39,20 +39,21 @@ css3DObject.appendChild(cssRenderer.domElement);
 const scene = new THREE.Scene();  // Scene
 const cssScene = new THREE.Scene();  // CSS Scene
 
-// Camera
-const camera = new THREE.PerspectiveCamera(24, window.innerWidth / window.innerHeight, 1, 8000);
-camera.position.set(-22.5, 18, 24);
-scene.add(camera);
+// Camera todo: skills 작업 끝나고 export 제거 후 주석 제거
+export const camera = new THREE.PerspectiveCamera(24, window.innerWidth / window.innerHeight, 1, 8000);
+// camera.position.set(-22.5, 18, 24);
+// camera.position.set(skillsPos.x, skillsPos.y, skillsPos.z + 1);
+// scene.add(camera);
 
-// Controls
-const controls = new OrbitControls(camera, renderer.domElement);
+// Controls todo: skills 작업 끝나고 export 제거 후 target주석 제거
+export const controls = new OrbitControls(camera, renderer.domElement);
 controls.enablePan = false;
 controls.enableDamping = true; // 카메라 컨트롤 시 smooth 적용 (draw 함수에 controls.update() 를 넣어야 함)
 controls.maxDistance = 40; // 멀어지는 최대거리를 설정
 controls.minDistance = 5; // 가까워지는 최소거리 설정
 controls.mouseButtons.RIGHT = null; // 마우스 오른쪽 드래그로 중심 축 변경 잠금
 controls.maxPolarAngle = THREE.MathUtils.degToRad(80); // 바닥 아래를 볼 수 없도록 제한
-controls.target.set(1,1,2)
+// controls.target.set(1,1,2)
 
 setLights(scene);  // set Lights
 modelsLoad(webgl, scene, cssScene, cssRenderer.domElement);// Models Load

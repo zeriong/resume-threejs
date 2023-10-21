@@ -3,6 +3,8 @@ import {targetMeshes} from '../loader/MainLoader';
 import gsap from 'gsap';
 import {monitorPosition} from '../loader/Room';
 
+export const skillsPos = new THREE.Vector3();
+
 export const setRayCaster = (renderDom, camera, controls) => {
     // RayCaster
     const rayCaster = new THREE.Raycaster();
@@ -135,11 +137,10 @@ export const setRayCaster = (renderDom, camera, controls) => {
         if (target.name === 'skills') {
             console.log('skills', intersects[0])
 
-            const position = new THREE.Vector3();
-            target.getWorldPosition(position);
+            target.getWorldPosition(skillsPos);
 
             gsap.to(camera.position, {
-                x: position.x, y: position.y, z: position.z + 1,
+                x: skillsPos.x, y: skillsPos.y, z: skillsPos.z + 1,
                 duration: 2,
                 ease: 'power1.inOut',
                 onStart: () => {
@@ -153,7 +154,7 @@ export const setRayCaster = (renderDom, camera, controls) => {
                 }
             });
             gsap.to(controls.target, {
-                x: position.x, y: position.y, z: -3.5,
+                x: skillsPos.x, y: skillsPos.y, z: -3.5,
                 duration: 2,
                 ease: 'power1.inOut',
             });

@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {lgPosterMaterial, mdPosterMaterial, monitorMaterial, smPosterMaterial} from '../meshes/Meshes';
 import {CSS3DObject} from 'three/addons/renderers/CSS3DRenderer';
+import {camera, controls} from '../main';
 
 const setScale = (val) => new Array(3).fill(val);  // x, y, z
 export const monitorPosition = new THREE.Vector3();
@@ -208,6 +209,11 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                     mesh.scale.set(...setScale(SCALE));
                     mesh.name = 'skills';
                     scene.add(mesh);
+
+                    // todo: skills 작업 완료 시 삭제
+                    camera.position.set(pos.x + 0.08, pos.y, pos.z + 1)
+                    controls.target.set(pos.x, pos.y - 0.5, -3)
+                    scene.add(camera);
 
                     node.name = 'skills';
                 }
