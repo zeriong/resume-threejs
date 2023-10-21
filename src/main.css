@@ -34,19 +34,26 @@
   font-weight: 800;
   font-style: normal;
 }
-body, html {
+* {
   font-family: "Pretendard";
+  box-sizing: border-box;
+}
+
+body, html {
   margin: 0;
   width: 100%;
   height: 100%;
-  /*background-color: black;*/
 }
 
-button {
+button, h1 {
   background: transparent;
   border: none;
   padding: 0;
   margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 #webgl, #css3DObject {
@@ -73,9 +80,11 @@ p {
 }
 
 .skills-body {
-  width: 511px;
-  height: 300px;
+  position: relative;
+  width: 100%;
+  height: 100%;
   padding: 16px 20px;
+  margin-left: 13px;
   overflow: hidden;
 }
 .skills-body .skills-title-wrap {
@@ -83,6 +92,7 @@ p {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  margin-top: 3px;
 }
 .skills-body .skills-title-wrap .skills-title {
   font-size: 24px;
@@ -130,6 +140,125 @@ p {
   font-size: 13px;
   display: flex;
   line-height: 1.5;
+}
+
+#projects-body {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  left: -100%;
+  transition: ease-in-out 500ms;
+}
+#projects-body .projects-header {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  padding: 14px 20px;
+  width: 100%;
+  background-color: rgb(59, 130, 246);
+}
+#projects-body .projects-header .projects-title {
+  margin-right: 10px;
+  font-size: 38px;
+  color: white;
+}
+#projects-body .projects-header .projects-headline {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: ease-in-out 500ms;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  width: 0;
+}
+#projects-body .projects-header .projects-headline .projects-braces {
+  font-size: 38px;
+  font-weight: 500;
+}
+#projects-body #projects-demo {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  transition: ease-in-out 500ms;
+  position: fixed;
+  top: 14px;
+  right: 20px;
+  z-index: 1;
+  padding: 12px 20px;
+  scale: 0;
+  font-weight: 700;
+  background-color: white;
+  color: rgb(59, 130, 246);
+  border-radius: 20px;
+  cursor: default;
+}
+#projects-body .go-main-btn {
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 12px;
+  color: white;
+  position: fixed;
+  bottom: -50px;
+  right: 20px;
+  border-radius: 20px;
+  font-size: 20px;
+  transition: ease-in-out 500ms;
+}
+#projects-body #section-wrap {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding-top: 73px;
+}
+#projects-body #section-wrap #projects-login {
+  flex: 0 0 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: red;
+}
+#projects-body #section-wrap #projects-main {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+}
+#projects-body #section-wrap #projects-main .projects-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+#projects-body #section-wrap #projects-side-project {
+  flex: 0 0 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: green;
+}
+#projects-body #projects-zete {
+  overflow: hidden;
+  position: relative;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  padding: 93px 20px 0 20px;
+  background-color: skyblue;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,3 +1,144 @@
-<div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../main.css">
+    <title>Skills</title>
+</head>
+<body id="projects-body">
 
+<!--- projects header --->
+<header class="projects-header">
+    <h1 class="projects-title">Projects</h1>
+    <div id="login-headline" class="projects-headline">
+        <div>
+            <span class="projects-braces">{</span>
+            <span style="margin: 0 16px">회원가입, 로그인 서비스</span>
+            <span class="projects-braces">}</span>
+        </div>
+        <div class="projects-git-demo">
+
+        </div>
+    </div>
+    <div id="zete-headline" class="projects-headline">
+        <div>
+            <span class="projects-braces">{</span>
+            <span style="margin: 0 16px">ZETE AI 메모서비스</span>
+            <span class="projects-braces">}</span>
+        </div>
+    </div>
+    <div id="side-headline" class="projects-headline">
+        <div>
+            <span class="projects-braces">{</span>
+            <span style="margin: 0 16px">유튜브 요약 서비스</span>
+            <span class="projects-braces">}</span>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</header>
+
+<!---------------  demo link -------------->
+<a id="projects-demo" href="/" target="_blank">
+    Demo >
+</a>
+
+<!---------------  go main button -------------->
+<button class="go-main-btn">메인 화면</button>
+
+<!--- login, main, side project wrapping --->
+<div id="section-wrap">
+    <!---------------  login section -------------->
+    <section id="projects-login">
+        login project
+    </section>
+
+    <!---------------  main section -------------->
+    <section id="projects-main">
+
+        <article class="projects-content">
+            <div id="go-login" class="project-box">
+                로그인으로
+            </div>
+            <div id="go-zete" class="project-box">
+                지트로
+            </div>
+            <div id="go-side" class="project-box">
+                사이드로
+            </div>
+        </article>
+    </section>
+
+    <!---------------  side section -------------->
+    <section id="projects-side-project">
+        side project
+    </section>
 </div>
+
+<!---------------  zete section -------------->
+<section id="projects-zete">
+    zete project
+</section>
+
+<script>
+    const projectsBody = document.querySelector('#projects-body');  // body
+    const goButtons = [
+        document.querySelector('#go-login'),
+        document.querySelector('#go-zete'),
+        document.querySelector('#go-side'),
+    ];
+    const loginHeadline = document.querySelector('#login-headline');
+    const zeteHeadline = document.querySelector('#zete-headline');
+    const sideHeadline = document.querySelector('#side-headline');
+    const goMainBtn = document.querySelector('.go-main-btn');
+
+    const projectsDemo = document.querySelector('#projects-demo');
+    projectsDemo.addEventListener('click', () => {
+
+        console.log('발동!')
+    })
+
+    // 메인으로가는 버튼
+    goMainBtn.addEventListener('click', () => {
+        projectsBody.style.top = '0';
+        projectsBody.style.left = '-100%';
+
+        loginHeadline.style.width = '0';
+        zeteHeadline.style.width = '0';
+        sideHeadline.style.width = '0';
+
+        goMainBtn.style.bottom = '-50px';
+
+        projectsDemo.style.scale = '0';
+    });
+
+    // go 버튼 이벤트 추가
+    goButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            if (btn.id === 'go-login') {
+                projectsBody.style.left = '0';
+                loginHeadline.style.width = '296px';
+            }
+            if (btn.id === 'go-zete') {
+                projectsBody.style.top = '-100%';
+                zeteHeadline.style.width = '267px';
+                projectsDemo.style.scale = '1';
+                projectsDemo.href = 'https://zete.zeriong.com/?type=demo&modal=sign-in';
+            }
+            if (btn.id === 'go-side') {
+                projectsBody.style.left = '-200%';
+                sideHeadline.style.width = '248px';
+                projectsDemo.style.scale = '1';
+                projectsDemo.href = 'https://side.zeriong.com/';
+            }
+
+            goMainBtn.style.bottom = '20px';
+        })
+    })
+
+</script>
+</body>
+</html>

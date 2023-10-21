@@ -43,7 +43,7 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
 
                     // iframe 생성
                     const iframe = document.createElement('iframe');
-                    iframe.src = 'https://resume.zeriong.com/';
+                    iframe.src = './content/projects.html';
                     iframe.style.width = SIZE.w + 'px';
                     iframe.style.height = SIZE.h + 'px';
                     iframe.style.boxSizing = 'border-box';
@@ -82,6 +82,11 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                     mesh.scale.set(...setScale(SCALE));
                     mesh.name = 'monitor';
                     scene.add(mesh);
+
+                    // todo: 작업 완료 시 삭제
+                    camera.position.set(monitorPosition.x + 0.08, monitorPosition.y, monitorPosition.z + 1)
+                    controls.target.set(monitorPosition.x, monitorPosition.y, -3)
+                    scene.add(camera);
 
                     node.name = 'monitor';
                 }
@@ -209,11 +214,6 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                     mesh.scale.set(...setScale(SCALE));
                     mesh.name = 'skills';
                     scene.add(mesh);
-
-                    // todo: skills 작업 완료 시 삭제
-                    camera.position.set(pos.x + 0.08, pos.y, pos.z + 1)
-                    controls.target.set(pos.x, pos.y - 0.5, -3)
-                    scene.add(camera);
 
                     node.name = 'skills';
                 }
