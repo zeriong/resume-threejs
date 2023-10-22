@@ -1,27 +1,22 @@
 import * as THREE from 'three';
 
 // Floor
-const floorGeometry = new THREE.PlaneGeometry(70, 70, 1, 1);
-const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xe8eaff });
+const floorGeometry = new THREE.PlaneGeometry(120, 120, 120, 120);
+const floorMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0x9AB8CE,
+    clearcoat: 0.6,
+    clearcoatRoughness: 0.4,
+    metalness: 0.8,
+});
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 floor.rotation.x = THREE.MathUtils.degToRad(-90);
 floor.position.y = 0;
 
 // room dom
-const domGeometry = new THREE.BoxGeometry(70, 70, 70, 1);
-const domMaterial = new THREE.MeshStandardMaterial({ color: 'black', side: THREE.BackSide });
-const dom = new THREE.Mesh(domGeometry, domMaterial);
-dom.position.y = -1;
-
-// Floor2 그림자 적용되는 바닥
-// const floor2Geometry = new THREE.PlaneGeometry(7, 7, 1, 1);
-// const floor2Material = new THREE.MeshStandardMaterial({ color: 'red' });
-// const floor2 = new THREE.Mesh(floor2Geometry, floor2Material);
-// floor2.rotation.x = THREE.MathUtils.degToRad(-90);
-// floor2.position.x = 4;
-// floor2.position.z = 2;
-// floor2.position.y = 0.001;
-// floor2.receiveShadow = true;
+// const domGeometry = new THREE.BoxGeometry(70, 70, 70, 1);
+// const domMaterial = new THREE.MeshStandardMaterial({ color: 'black', side: THREE.BackSide });
+// const dom = new THREE.Mesh(domGeometry, domMaterial);
+// dom.position.y = -1;
 
 // 빛 가루 파티클
 const particleGeometry = new THREE.BufferGeometry();
@@ -33,18 +28,19 @@ for(let i = 0; i < particlesCount * 3; i += 3) {
     positions[i + 2] = (Math.random() - 0.5) * 5;
 }
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
 const particleMaterial = new THREE.PointsMaterial({
     size: 0.05,
     blending: THREE.AdditiveBlending,  // 산술 블렌딩을 사용하여 빛의 누적 효과를 만듭니다
     transparent: true,
-    color: 0xffff00  // 노란색 빛으로 설정
+    color: 0xffff00,  // 노란색 빛으로 설정
 });
 
 // 빛 가루 이벤트
 export const runLightParticle = () => {
     const positions = particleGeometry.attributes.position.array;
     for(let i = 0; i < positions.length; i += 3) {
-        positions[i + 1] -= 0.0075;  // 천천히 아래로 이동
+        positions[i + 1] -= 0.0035;  // 천천히 아래로 이동
         if (positions[i + 1] < 0) positions[i + 1] = 5;
     }
     particleGeometry.attributes.position.needsUpdate = true;  // 위치 업데이트
@@ -54,7 +50,7 @@ lightParticle.position.set(1, 0, 2);
 
 // 반투명 door cover
 const doorCoverGeometry = new THREE.BoxGeometry(100, 0.2, 460);
-const doorCoverMaterial = new THREE.MeshStandardMaterial({ color: 'black', transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+const doorCoverMaterial = new THREE.MeshBasicMaterial({ color: 0xffEEDD, transparent: true, opacity: 0.5, side: THREE.DoubleSide });
 const doorCover = new THREE.Mesh(doorCoverGeometry, doorCoverMaterial);
 //doorCover.castShadow = true;
 doorCover.rotation.x = THREE.MathUtils.degToRad(-90);
@@ -65,5 +61,5 @@ doorCover.position.z = 3.3;
 doorCover.scale.set(0.01, 0.01, 0.01);
 
 export const setMeshes = (scene) => {
-    scene.add(dom, floor, lightParticle, doorCover);
+    scene.add(doorCover, floor, lightParticle);
 }

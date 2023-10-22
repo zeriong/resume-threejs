@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import {lgPosterMaterial, mdPosterMaterial, monitorMaterial, smPosterMaterial} from '../meshes/Meshes';
 import {CSS3DObject} from 'three/addons/renderers/CSS3DRenderer';
 import {camera, controls} from '../main';
+import {Reflector} from 'three/addons/objects/Reflector';
 
 const setScale = (val) => new Array(3).fill(val);  // x, y, z
 export const monitorPosition = new THREE.Vector3();
@@ -84,9 +84,9 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                     scene.add(mesh);
 
                     // todo: 작업 완료 시 삭제
-                    camera.position.set(monitorPosition.x + 0.08, monitorPosition.y, monitorPosition.z + 1)
-                    controls.target.set(monitorPosition.x, monitorPosition.y, -3)
-                    scene.add(camera);
+                    // camera.position.set(monitorPosition.x + 0.08, monitorPosition.y, monitorPosition.z + 1)
+                    // controls.target.set(monitorPosition.x, monitorPosition.y, -3)
+                    // scene.add(camera);
 
                     node.name = 'monitor';
                 }
@@ -220,16 +220,35 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
 
                 // 거울
                 if (node.name === 'Plane219_1') {
-                    // 1. 미러큐브 구현을 통한 거울
-                    // 2. 포지션과 좌표를 카피하여 Reflector mesh로 덮어쓰기
-                    const position = new THREE.Vector3();
-
-                    node.getWorldPosition(position);
+                    // const pos = new THREE.Vector3();
+                    // const scale = new THREE.Vector3();
+                    // node.getWorldPosition(pos);
+                    // node.getWorldScale(scale);
+                    //
+                    // node.material.opacity = 0;
+                    //
+                    // // geometry 생성
+                    // const mirrorGeometry = new THREE.PlaneGeometry(0.7, 0.7);
+                    //
+                    // // Reflector를 만들고 설정
+                    // const mirror = new Reflector(mirrorGeometry, {
+                    //     textureWidth: window.innerWidth * window.devicePixelRatio,
+                    //     textureHeight: window.innerHeight * window.devicePixelRatio,
+                    //     clipBias: 0.003,
+                    //     color: 0x777777
+                    // });
+                    // mirror.rotation.z = THREE.MathUtils.degToRad(-90);
+                    // mirror.rotation.y = THREE.MathUtils.degToRad(-90);
+                    // // mirror.rotation.x = THREE.MathUtils.degToRad(90);
+                    // mirror.position.set(pos.x - 0.027, pos.y, pos.z);
+                    // mirror.scale.set(scale.x, scale.y, scale.z);
+                    //
+                    // scene.add(mirror);
 
                     node.name = 'mirror';
                 }
 
-                node.material = new THREE.MeshPhongMaterial({
+                node.material = new THREE.MeshPhysicalMaterial({
                     color: node.material.color,
                     map: node.material.map,
                     normalMap: node.material.normalMap,
@@ -248,6 +267,7 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                     //shininess: 1000,
                     //specular  : 30,
                 });
+
                 targetMeshes.push(node);
             }
         });

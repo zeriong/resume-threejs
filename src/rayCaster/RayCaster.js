@@ -161,15 +161,15 @@ export const setRayCaster = (renderDom, camera, controls) => {
         }
 
         /** ------ 메뉴 클릭 이벤트 ------ */
-        if (target === 'github') {
+        if (target.name === 'github') {
             console.log('github');
             window.open('https://github.com/zeriong/','_blank');
         }
-        if (target === 'projects') console.log('projects');
-        if (target === 'aboutMe') console.log('aboutMe');
-        if (target === 'skills') console.log('skills');
-        if (target === 'learning') console.log('learning');
-        if (target === 'blog') console.log('blog');
+        if (target.name === 'projects') console.log('projects');
+        if (target.name === 'aboutMe') console.log('aboutMe');
+        if (target.name === 'skills') console.log('skills');
+        if (target.name === 'learning') console.log('learning');
+        if (target.name === 'blog') console.log('blog');
     }
 
     // 마우스 드래그 시 발생하는 rayCaster 방지
