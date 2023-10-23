@@ -105,27 +105,96 @@ p {
   border-radius: 16px;
   border: 6px solid $blue-600;
   z-index: 1;
-}
-#dialogInterface {
-  position: fixed;
-  bottom: -30%;
-
-  #dialogBox {
-    transition: 300ms ease-in-out;
-    position: fixed;
-    bottom: -30%;
-    left: 20px;
-    font-size: 50px;
-    font-weight: 700;
-    background-color: rgba(255,255,255,0.7);
-    backdrop-filter: blur(10px);
-    color: black;
-    border: 6px solid $blue-600;
-    border-radius: 16px;
-    width: calc(100% - 40px);
-    height: 30%;
+  &:hover {
+    color: $blue-600;
+    background: white;
   }
 }
+
+#dialogBox {
+  transition: 300ms ease-in-out;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 130px;
+  width: 460px;
+  height: 300px;
+  font-size: 50px;
+  font-weight: 700;
+  background-color: #fff;
+  color: black;
+  border-radius: 20px;
+  padding: 20px;
+  opacity: 0;
+  display: none;
+
+  // 말풍선 꼬리
+  &:after {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 30%;
+    width: 0;
+    height: 0;
+    border: 40px solid transparent;
+    border-bottom-color: #fff;
+    border-top: 0;
+    border-left: 0;
+    margin-left: -20px;
+    margin-top: -40px;
+  }
+  .dialog-name {
+    font-size: 30px;
+    margin-bottom: 16px;
+    .dialog-position {
+      font-size: 20px;
+    }
+  }
+  .dialog-content {
+    font-size: 24px;
+  }
+}
+
+#contentMenuBtns {
+  transition: 300ms ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 10;
+  //bottom: -70px;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 460px;
+  .dialog-btns-style {
+    font-size: 24px;
+    font-weight: 700;
+    padding: 20px 45px;
+    border-radius: 20px;
+  }
+  #skipBtn {
+    background: rgba(108, 117, 125);
+    color: white;
+    &:hover {
+      background: rgb(95, 104, 110);
+    }
+  }
+  #prevBtn {
+    //background: rgb(108, 117, 125); // 활성화 배경
+    background: rgb(185, 188, 190); // 비활성화 배경
+    //color: white;  // 활성화 글자
+    color: #d3d3d3; // 비활성화 글자
+
+  }
+  #nextBtn {
+    background: $blue-500;
+    color: white;
+    &:hover {
+      background: rgba(27, 97, 215);
+    }
+  }
+}
+
 
 
 // -------------- skills ---------------

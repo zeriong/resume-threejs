@@ -34,7 +34,7 @@ export const fixRayCasterCamPos = repairRayCasterCameraPos();
 // 반응형 대응 camera position (모든 축에 곱할 값 생성) todo: 적용
 const repairCameraPos = () => {
 	if (deviceWidth >= 1400) return 1;
-	return (1400 - deviceWidth) * 0.0003 + 1;
+	return (1400 - deviceWidth) * (deviceWidth <= 420 ? 0.0003 : 0.0007) + 1;
 }
 export const fixCamPos = repairCameraPos();
 
@@ -76,7 +76,7 @@ export const camera = new THREE.PerspectiveCamera(24, window.innerWidth / window
 // 입장 애니메이션 시작지점 (pc)
 camera.position.set(
 	(deviceWidth <= 420) ? (-2.96 * fixCamPos) : (-24 * fixCamPos),
-	(deviceWidth <= 420) ? (-10.63 * fixCamPos) : (14.4 * fixCamPos),
+	(deviceWidth <= 420) ? (10.63 * fixCamPos) : (14.4 * fixCamPos),
 	(deviceWidth <= 420) ? (30.98 * fixCamPos) : (14 * fixCamPos),
 );
 

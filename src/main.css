@@ -103,25 +103,87 @@ p {
   border: 6px solid rgb(37, 99, 235);
   z-index: 1;
 }
-
-#dialogInterface {
-  position: fixed;
-  bottom: -30%;
+#back-btn:hover {
+  color: rgb(37, 99, 235);
+  background: white;
 }
-#dialogInterface #dialogBox {
+
+#dialogBox {
   transition: 300ms ease-in-out;
   position: fixed;
-  bottom: -30%;
-  left: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 130px;
+  width: 460px;
+  height: 300px;
   font-size: 50px;
   font-weight: 700;
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+  background-color: #fff;
   color: black;
-  border: 6px solid rgb(37, 99, 235);
-  border-radius: 16px;
-  width: calc(100% - 40px);
-  height: 30%;
+  border-radius: 20px;
+  padding: 20px;
+  opacity: 0;
+  display: none;
+}
+#dialogBox:after {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 30%;
+  width: 0;
+  height: 0;
+  border: 40px solid transparent;
+  border-bottom-color: #fff;
+  border-top: 0;
+  border-left: 0;
+  margin-left: -20px;
+  margin-top: -40px;
+}
+#dialogBox .dialog-name {
+  font-size: 30px;
+  margin-bottom: 16px;
+}
+#dialogBox .dialog-name .dialog-position {
+  font-size: 20px;
+}
+#dialogBox .dialog-content {
+  font-size: 24px;
+}
+
+#contentMenuBtns {
+  transition: 300ms ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 10;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 460px;
+}
+#contentMenuBtns .dialog-btns-style {
+  font-size: 24px;
+  font-weight: 700;
+  padding: 20px 45px;
+  border-radius: 20px;
+}
+#contentMenuBtns #skipBtn {
+  background: rgb(108, 117, 125);
+  color: white;
+}
+#contentMenuBtns #skipBtn:hover {
+  background: rgb(95, 104, 110);
+}
+#contentMenuBtns #prevBtn {
+  background: rgb(185, 188, 190);
+  color: #d3d3d3;
+}
+#contentMenuBtns #nextBtn {
+  background: rgb(59, 130, 246);
+  color: white;
+}
+#contentMenuBtns #nextBtn:hover {
+  background: rgb(27, 97, 215);
 }
 
 .skills-body {
