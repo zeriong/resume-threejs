@@ -4,7 +4,12 @@ import {camera, controls} from '../main';
 import {Reflector} from 'three/addons/objects/Reflector';
 
 const setScale = (val) => new Array(3).fill(val);  // x, y, z
-export const monitorPosition = new THREE.Vector3();
+export const projectsPos = new THREE.Vector3();
+export const skillsPos = new THREE.Vector3();
+export const learningPos = new THREE.Vector3();
+export const posterPos = new THREE.Vector3();
+
+
 const SCALE = 0.001;
 
 export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
@@ -33,7 +38,7 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                 // 모니터 스크린
                 if (node.name === 'Plane202_3') {
                     const SIZE = { w: 879, h: 438 };
-                    node.getWorldPosition(monitorPosition);
+                    node.getWorldPosition(projectsPos);
 
                     // html의 바탕이 될 container
                     const container = document.createElement('div');
@@ -48,16 +53,13 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                     iframe.style.height = SIZE.h + 'px';
                     iframe.style.boxSizing = 'border-box';
                     iframe.style.opacity = '1';
-                    iframe.className = 'monitor';
-                    iframe.id = 'screen';
-                    iframe.title = 'screen';
 
                     // CSS3DObject 생성
                     const cssObj = new CSS3DObject(iframe);
                     cssObj.name = 'monitor';
-                    cssObj.position.x = monitorPosition.x;
-                    cssObj.position.y = monitorPosition.y + 0.066;
-                    cssObj.position.z = monitorPosition.z + 0.026;
+                    cssObj.position.x = projectsPos.x;
+                    cssObj.position.y = projectsPos.y + 0.066;
+                    cssObj.position.z = projectsPos.z + 0.026;
                     cssObj.scale.set(...setScale(SCALE));
 
                     // HTML 상호작용을 위한 element이며 반드시 카메라가 앞면을 마주보고 있어야 상호작용 가능
@@ -76,11 +78,11 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                     material.emissive = 0x0033ff;  // 반사되는 빛의 색상 (반사 색)
                     material.emissiveIntensity = 0;  // 반사되는 빛의 강도 (0부터 1 사이의 값)
                     const mesh = new THREE.Mesh(geometry, material);
-                    mesh.position.x = monitorPosition.x;
-                    mesh.position.y = monitorPosition.y + 0.066;
-                    mesh.position.z = monitorPosition.z + 0.026;
+                    mesh.position.x = projectsPos.x;
+                    mesh.position.y = projectsPos.y + 0.066;
+                    mesh.position.z = projectsPos.z + 0.026;
                     mesh.scale.set(...setScale(SCALE));
-                    mesh.name = 'monitor';
+                    mesh.name = 'projects';
                     scene.add(mesh);
 
                     // todo: 작업 완료 시 삭제
@@ -88,17 +90,16 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                     // controls.target.set(monitorPosition.x, monitorPosition.y, -3)
                     // scene.add(camera);
 
-                    node.name = 'monitor';
+                    node.name = 'projects';
                 }
 
                 // "Poster" 액자
                 if (node.name === 'Plane221_1') {
                     const SCREEN = { w: 980, h: 1210 };
-                    const pos = new THREE.Vector3();
 
-                    node.getWorldPosition(pos);
+                    node.getWorldPosition(posterPos);
 
-                    const setPos = [pos.x, pos.y, pos.z + 0.049];
+                    const setPos = [posterPos.x, posterPos.y, posterPos.z + 0.049];
 
                     // content 생성
                     const posterEl = document.createElement('iframe');
@@ -128,7 +129,7 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                     const mesh = new THREE.Mesh(geometry, material);
                     mesh.position.set(...setPos);
                     mesh.scale.set(...setScale(SCALE));
-                    mesh.name = 'monitor';
+                    mesh.name = 'projects';
                     scene.add(mesh);
 
                     node.name = 'poster';
@@ -137,10 +138,10 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                 // "Learning" 액자
                 if (node.name === 'Plane218_1') {
                     const SCREEN = { w: 520, h: 740 };
-                    const pos = new THREE.Vector3();
-                    node.getWorldPosition(pos);
 
-                    const setPos = [pos.x, pos.y, pos.z + 0.02];
+                    node.getWorldPosition(learningPos);
+
+                    const setPos = [learningPos.x, learningPos.y, learningPos.z + 0.02];
 
                     // content 생성
                     const learningEl = document.createElement('iframe');
@@ -179,10 +180,9 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
                 // "Skills" 액자
                 if (node.name === 'Plane220_1') {
                     const SCREEN = { w: 553, h: 333 };
-                    const pos = new THREE.Vector3();
-                    node.getWorldPosition(pos);
+                    node.getWorldPosition(skillsPos);
 
-                    const setPos = [pos.x, pos.y, pos.z + 0.02];
+                    const setPos = [skillsPos.x, skillsPos.y, skillsPos.z + 0.02];
 
                     // content 생성
                     const skillsEl = document.createElement('iframe');
@@ -247,6 +247,8 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
 
                     node.name = 'mirror';
                 }
+
+                //todo: 의자매쉬 찾아서 줌인 시 투명화 시키기 material.opacity / on, off
 
                 node.material = new THREE.MeshPhysicalMaterial({
                     color: node.material.color,

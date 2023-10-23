@@ -13,6 +13,31 @@ import {RenderPass} from 'three/addons/postprocessing/RenderPass';
 import {ShaderPass} from "three/addons/postprocessing/ShaderPass";
 import {SMAAPass} from 'three/addons/postprocessing/SMAAPass';
 
+/**
+ * 반응형: 1400px 이하일때 적용해야함
+ * 특정 변수 생성 후 렌더링 후 window.width 담는녀석 넣기
+ * 1400... 기준으로 생각해보자
+ * (1400 - 현재 width) x ...
+ * */
+
+// 브라우저 width
+export const deviceWidth = window.innerWidth;
+console.log('deviceWidth입니다~~~ : ', deviceWidth);
+
+// 반응형 대응 rayCaster camera position (z축에 더할 값 생성)
+const repairRayCasterCameraPos = () => {
+	if (deviceWidth >= 1400) return 0;
+	return (1400 - deviceWidth) * 0.003;
+}
+export const fixRayCasterCamPos = repairRayCasterCameraPos();
+
+// 반응형 대응 camera position (모든 축에 곱할 값 생성) todo: 적용
+const repairCameraPos = () => {
+	if (deviceWidth >= 1400) return 1;
+	return (1400 - deviceWidth) * 0.0003 + 1;
+}
+export const fixCamPos = repairCameraPos();
+
 // Dat GUI
 const gui = new dat.GUI();
 
@@ -47,18 +72,25 @@ const cssScene = new THREE.Scene();  // CSS Scene
 // Camera todo: 작업 끝나고 export 제거 후 주석 제거
 export const camera = new THREE.PerspectiveCamera(24, window.innerWidth / window.innerHeight, 0.1, 1000);
 // camera.position.set(-29.9, 23.76, 31.68); // 모바일 적합 포지션
-camera.position.set(-22.5, 18, 24); // pc 적합 포지션
+// camera.position.set(-18, 14.4, 19.2); // default pc 적합 포지션
+// 입장 애니메이션 시작지점 (pc)
+camera.position.set(
+	(deviceWidth <= 420) ? (-2.96 * fixCamPos) : (-24 * fixCamPos),
+	(deviceWidth <= 420) ? (-10.63 * fixCamPos) : (14.4 * fixCamPos),
+	(deviceWidth <= 420) ? (30.98 * fixCamPos) : (14 * fixCamPos),
+);
+
 scene.add(camera);
 
 // Controls todo: 작업 끝나고 export 제거 후 target주석 제거
 export const controls = new OrbitControls(camera, renderer.domElement);
 controls.enablePan = false;
 controls.enableDamping = true; // 카메라 컨트롤 시 smooth 적용 (draw 함수에 controls.update() 를 넣어야 함)
-// controls.maxDistance = 40; // 멀어지는 최대거리를 설정
+controls.maxDistance = 100; // 멀어지는 최대거리를 설정
 controls.minDistance = 5; // 가까워지는 최소거리 설정
 controls.mouseButtons.RIGHT = null; // 마우스 오른쪽 드래그로 중심 축 변경 잠금
 controls.maxPolarAngle = THREE.MathUtils.degToRad(80); // 바닥 아래를 볼 수 없도록 제한
-controls.target.set(1,1,2);
+controls.target.set(1,1,2)
 
 // EffectComposer
 const composer = new EffectComposer(renderer);

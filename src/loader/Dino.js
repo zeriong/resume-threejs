@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 
+export const dinoPos = new THREE.Vector3();
+
 export function loadDino(scene, loader, targetMeshes) {
     // Dino 로드
     loader.load('/models/dino.glb', (glb) => {
@@ -13,11 +15,12 @@ export function loadDino(scene, loader, targetMeshes) {
         model.rotation.y = THREE.MathUtils.degToRad(270);
 
         model.children.map(mesh => {
-            mesh.name = 'dino';
+            mesh.name = 'aboutMe';
             targetMeshes.push(mesh);
         });
 
-        model.name = 'dino';
+        model.name = 'aboutMe';
+        model.getWorldPosition(dinoPos);
         targetMeshes.push(model);
         scene.add(model);
     });
