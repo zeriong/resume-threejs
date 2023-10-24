@@ -15,11 +15,11 @@ export function loadDino(scene, loader, targetMeshes) {
         model.rotation.y = THREE.MathUtils.degToRad(270);
 
         model.children.map(mesh => {
-            mesh.name = 'aboutMe';
+            mesh.name = 'aboutMe1';
             targetMeshes.push(mesh);
         });
 
-        model.name = 'aboutMe';
+        model.name = 'aboutMe1';
         model.getWorldPosition(dinoPos);
         targetMeshes.push(model);
         scene.add(model);

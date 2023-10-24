@@ -1,7 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
@@ -37,17 +35,6 @@ module.exports = {
 				test: /\.(glb|gltf)$/,
 				use: ['file-loader']
 			},
-			{
-				test: /\.(woff|woff2|eot|ttf|otf)$/i,
-				use: [
-					{
-						loader: 'file-loader',
-						options: {
-							name: 'fonts/[name].[ext]',
-						},
-					},
-				],
-			},
 		]
 	},
 	plugins: [
@@ -62,7 +49,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, '../src/index.html'),
 			filename: 'index.html',
-			minify: true
+			minify: true,
 		})
 	]
 };

@@ -15,22 +15,33 @@ export const setRayCaster = (renderDom, camera, controls) => {
     const skipBtn = document.querySelector('#skipBtn');
     const dialogBox = document.querySelector('#dialogBox');
     const contentMenuBtns = document.querySelector('#contentMenuBtns');
-    const playStart = document.querySelector('#playStart'); // 로딩 후 시작버튼 이벤트(객체지향 구조로 변경 시 분리 필요 start & skip)
+    const playStart = document.querySelector('#playStart'); // 로딩 후 play 시작버튼
+    const playSkip = document.querySelector('#playSkip'); // 로딩 후 skip 시작버튼
 
     // 컨텐츠 리스트
     const contentList = [
         { current: 'aboutMe1', next: 'aboutMe2', prev: 'poster' },
         { current: 'aboutMe2', next: 'projects', prev: 'aboutMe1' },
-        { current: 'projects', next: 'learning', prev: 'aboutMe2' },
+        { current: 'projects', next: 'learning', prev: 'aboutMe1' },
         { current: 'learning', next: 'skills', prev: 'projects' },
         { current: 'skills', next: 'poster', prev: 'learning' },
         { current: 'poster', next: 'aboutMe1', prev: 'skills' },
     ];
 
+    // 대화상자 컨텐츠
+    const dialogList = {
+        step1: '1. 안녕하세요 프론트엔드 엔지니어 제리옹입니다. 동적인 그래픽 구현을 즐깁니다.',
+        step2: '2. 열심히 하겠습니다.',
+    }
+
     // 컨텐츠 리스트화 하여 next content & prev content를 구현하기 위한 변수
     let currentContent = '';
-    // gsap play 여부
-    let isPlay = false;
+    // 컨텐츠 show 상태 여부
+    let isInContent = false;
+    // 카메라 무빙 상태 여부
+    let isMovingCam = false;
+    // 로딩화면 완료 후 start or skip 버튼 여부
+    let isStart = false;
 
     // 컨트롤 제한
     const controlLimitSet = () => {
@@ -43,6 +54,8 @@ export const setRayCaster = (renderDom, camera, controls) => {
         controls.minDistance = 0; // 가까워지는 최소거리 설정
     }
 
+
+    /** ----------------------------------------- gsap function start -------------------------------------------- */
     // gsap functions
     const aboutMeGsap = (target) => {
         gsap.to(camera.position, {
@@ -50,8 +63,10 @@ export const setRayCaster = (renderDom, camera, controls) => {
             duration: 2,
             ease: 'power1.inOut',
             onStart: () => {
-                currentContent = target.name;
-                isPlay = true;
+                if (target) currentContent = target.name;
+                dialogContent.innerHTML = dialogList.step1;
+                isInContent = true;
+                isMovingCam = true;
                 controls.enabled = false;
                 controlLimitBreak(); // down control 제한 해제
             },
@@ -60,6 +75,7 @@ export const setRayCaster = (renderDom, camera, controls) => {
                 dialogBox.style.display = 'block';
 
                 setTimeout(() => {
+                    isMovingCam = false;
                     dialogBox.style.opacity = '1';
 
                     setTimeout(() => {
@@ -82,12 +98,14 @@ export const setRayCaster = (renderDom, camera, controls) => {
             duration: 2,
             ease: 'power1.inOut',
             onStart: () => {
-                currentContent = target.name;
-                isPlay = true;
+                if (target) currentContent = target.name;
+                isInContent = true;
+                isMovingCam = true;
                 controls.enabled = false;
                 controlLimitBreak(); // down control 제한 해제
             },
             onComplete: () => {
+                isMovingCam = false;
                 contentMenuBtns.style.bottom = '30px';
                 webgl.style.zIndex = -1;
             }
@@ -104,12 +122,14 @@ export const setRayCaster = (renderDom, camera, controls) => {
             duration: 2,
             ease: 'power1.inOut',
             onStart: () => {
-                currentContent = target.name;
-                isPlay = true;
+                if (target) currentContent = target.name;
+                isInContent = true;
+                isMovingCam = true;
                 controls.enabled = false;
                 controlLimitBreak(); // down control 제한 해제
             },
             onComplete: () => {
+                isMovingCam = false;
                 contentMenuBtns.style.bottom = '30px';
                 webgl.style.zIndex = -1;
             }
@@ -126,12 +146,14 @@ export const setRayCaster = (renderDom, camera, controls) => {
             duration: 2,
             ease: 'power1.inOut',
             onStart: () => {
-                currentContent = target.name;
-                isPlay = true;
+                if (target) currentContent = target.name;
+                isInContent = true;
+                isMovingCam = true;
                 controls.enabled = false;
                 controlLimitBreak(); // down control 제한 해제
             },
             onComplete: () => {
+                isMovingCam = false;
                 contentMenuBtns.style.bottom = '30px';
                 webgl.style.zIndex = -1;
             }
@@ -147,19 +169,20 @@ export const setRayCaster = (renderDom, camera, controls) => {
         if (fixRayCasterCamPos >= 1.32) {
             repairSkillsZ = 1.32;
         }
-        console.log(repairSkillsZ)
 
         gsap.to(camera.position, {
             x: skillsPos.x, y: skillsPos.y, z: skillsPos.z + 1.6 + repairSkillsZ,
             duration: 2,
             ease: 'power1.inOut',
             onStart: () => {
-                currentContent = target.name;
-                isPlay = true;
+                if (target) currentContent = target.name;
+                isInContent = true;
+                isMovingCam = true;
                 controls.enabled = false;
                 controlLimitBreak(); // control 제한 해제
             },
             onComplete: () => {
+                isMovingCam = false;
                 contentMenuBtns.style.bottom = '30px';
                 webgl.style.zIndex = -1;
             }
@@ -172,7 +195,7 @@ export const setRayCaster = (renderDom, camera, controls) => {
     }
     const playStartGsap = () => {
         // 초기 start 눌러 시작할 경우 aboutMe로 설정
-        currentContent = 'aboutMe';
+        currentContent = 'aboutMe1';
 
         gsap.to(camera.position, {
             x: (deviceWidth <= 420) ? (-18 * fixCamPos) : (0.5 * fixCamPos),
@@ -180,21 +203,24 @@ export const setRayCaster = (renderDom, camera, controls) => {
             z: (deviceWidth <= 420) ? (19.2 * fixCamPos) : (27 * fixCamPos),
             duration: 3,
             ease: 'power1.inOut',
+            onStart: () => {
+                isMovingCam = true;
+                isStart = true;
+                isInContent = true;
+                controls.enabled = false;
+                controlLimitBreak(); // down control 제한 해제
+            },
             onComplete: () => {
                 gsap.to(camera.position, {
                     x: dinoPos.x, y: dinoPos.y + 0.4, z: dinoPos.z + 2.5 + fixRayCasterCamPos,
                     duration: 1.5,
                     ease: 'power1.inOut',
-                    onStart: () => {
-                        isPlay = true;
-                        controls.enabled = false;
-                        controlLimitBreak(); // down control 제한 해제
-                    },
                     onComplete: () => {
                         contentMenuBtns.style.bottom = '30px';
                         dialogBox.style.display = 'block';
 
                         setTimeout(() => {
+                            isMovingCam = false;
                             dialogBox.style.opacity = '1';
 
                             setTimeout(() => {
@@ -213,7 +239,7 @@ export const setRayCaster = (renderDom, camera, controls) => {
             }
         });
     }
-    const skipGsap = () => {
+    const backGsap = () => {
         gsap.to(camera.position, {
             // todo: main.js 에서 repairZoom 적용
             x: (deviceWidth <= 420) ? (-2.96 * fixCamPos) : (-18 * fixCamPos),
@@ -222,9 +248,16 @@ export const setRayCaster = (renderDom, camera, controls) => {
             duration: 2,
             ease: 'power1.inOut',
             onStart: () => {
+                isMovingCam = true;
+
+                if (isStart) {
+                    isStart = false;
+                    skipBtn.innerHTML = 'Back';
+                }
+
                 contentMenuBtns.style.bottom = '-70px';
 
-                if (currentContent === 'aboutMe') {
+                if (currentContent === 'aboutMe1' || 'aboutMe2') {
                     dialogBox.style.opacity = '0';
 
                     setTimeout(() => {
@@ -233,7 +266,8 @@ export const setRayCaster = (renderDom, camera, controls) => {
                 }
             },
             onComplete: () => {
-                isPlay = false;
+                isInContent = false;
+                isMovingCam = false;
                 controls.enabled = true;
                 webgl.style.zIndex = 0;
                 controlLimitSet(); // control 제한
@@ -245,11 +279,23 @@ export const setRayCaster = (renderDom, camera, controls) => {
             ease: 'power1.inOut',
         });
     }
+    const startSkipGsap = () => {
+        skipBtn.innerHTML = 'Back';
+        gsap.to(camera.position, {
+            x: (deviceWidth <= 420) ? (-2.96 * fixCamPos) : (-18 * fixCamPos),
+            y: (deviceWidth <= 420) ? (10.63 * fixCamPos) : (14.4 * fixCamPos),
+            z: (deviceWidth <= 420) ? (30.98 * fixCamPos) : (19.2 * fixCamPos),
+            duration: 0,
+        });
+    }
+
+    /** ----------------------------------------- gsap function end -------------------------------------------- */
+
 
     // meshes 감지 함수
     function checkIntersects() {
         // gsap play중이거나 드래그인 경우 이벤트 x
-        if (isPlay || mouseMoved) return;
+        if (isInContent || mouseMoved) return;
         rayCaster.setFromCamera(mouse, camera); // 카메라 기준으로 ray 관통
 
         const intersects = rayCaster.intersectObjects(targetMeshes); // rayCaster가 meshes에 담긴 mesh를 통과하면 객체에 담음
@@ -259,7 +305,7 @@ export const setRayCaster = (renderDom, camera, controls) => {
         const target = intersects[0].object;
 
         // 모델링 클릭 카메라 줌인 무빙 애니메이션
-        if (target.name === 'aboutMe') aboutMeGsap(target);
+        if (target.name === 'aboutMe1') aboutMeGsap(target);
         if (target.name === 'projects') projectsGsap(target);
         if (target.name === 'poster') posterGsap(target);
         if (target.name === 'learning') learningGsap(target);
@@ -291,10 +337,11 @@ export const setRayCaster = (renderDom, camera, controls) => {
     });
 
     // Skip(Back) 버튼 이벤트
-    skipBtn.addEventListener('click', skipGsap);
+    skipBtn.addEventListener('click', backGsap);
     // play start 이벤트
     playStart.addEventListener('click', playStartGsap);
-
+    // play skip 이벤트
+    playSkip.addEventListener('click', startSkipGsap);
 
 
 
@@ -302,8 +349,10 @@ export const setRayCaster = (renderDom, camera, controls) => {
     // 컨텐트 메뉴버튼 컨트롤
     const prevBtn = document.querySelector('#prevBtn');
     const nextBtn = document.querySelector('#nextBtn');
+    const dialogContent = document.querySelector('.dialog-content');
     const contentLength = contentList.length;
-    let btnActiveCount = 1;
+    let isActivePrev = false;
+    let listCount = 0;
 
     // todo: 구현 우선순위
     // 기본동작: next누르면 count++ , prev누르면 count--
@@ -313,31 +362,133 @@ export const setRayCaster = (renderDom, camera, controls) => {
     // count가 1보다 클 때 prev 지속
     // count가 length보다 커지면 더이상 카운트안하고 이로 인해 prev는 지속 active
 
+    // next 버튼 이벤트
+    nextBtn.addEventListener('click', () => {
+        if (isMovingCam) return;
 
-    // prev 활성화 / 비활성화 컨트롤
-    let isActivePrev = false;
+        if (contentLength > listCount) {
+            listCount++;
+            if (isStart) {
+                isStart = false;
+                skipBtn.innerHTML = 'Back';
+            }
+            if (!isActivePrev) {
+                isActivePrev = true;
+                prevBtn.style.backgroundColor = "rgb(108, 117, 125)";
+                prevBtn.style.color = 'white';
+            }
+        }
+
+        const current = contentList.find(val => val.current === currentContent);
+
+        if (currentContent === 'poster') {
+            currentContent = current.next;
+            aboutMeGsap();
+            return;
+        }
+        if (currentContent === 'skills') {
+            currentContent = current.next;
+            posterGsap();
+            return;
+        }
+        console.log('넥스트 커런트~~~~~',current)
+        if (currentContent === 'learning') {
+            currentContent = current.next;
+            skillsGsap();
+            return;
+        }
+        if (currentContent === 'projects') {
+            currentContent = current.next;
+            learningGsap();
+            return;
+        }
+        if (currentContent === 'aboutMe2') {
+            currentContent = current.next;
+            // 말풍선 사라지는 애니메이션 끝나고 이동
+            dialogBox.style.opacity = '0';
+
+            setTimeout(() => {
+                dialogBox.style.display = 'none';
+                projectsGsap();
+            }, 300);
+            return;
+        }
+        if (currentContent === 'aboutMe1') {
+            currentContent = current.next;
+
+            // todo: 타이핑 이벤트 추가
+            dialogContent.innerHTML = dialogList.step2;
+        }
+    });
+
+    // prev 버튼 이벤트
+    prevBtn.addEventListener('click', () => {
+        if (listCount === 0 || isMovingCam) return console.log('안돼')
+        if (contentLength > listCount) listCount--;
+        // aboutMe의 경우 2가지 step이 존재하기 때문에 한번 더 감소
+        if (currentContent === 'projects') listCount--;
+
+        // 버튼 비활성화
+        if (listCount === 0 && isActivePrev) {
+            isActivePrev = false;
+            prevBtn.style.backgroundColor = "rgb(185, 188, 190)";
+            prevBtn.style.color = '#d3d3d3';
+        }
+
+        const current = contentList.find(val => val.current === currentContent);
+
+        if (currentContent === 'aboutMe1') {
+            currentContent = current.prev;
+            // 말풍선 사라지는 애니메이션 끝나고 이동
+            dialogBox.style.opacity = '0';
+
+            setTimeout(() => {
+                dialogBox.style.display = 'none';
+                posterGsap();
+            }, 300);
+
+            return;
+        }
+        // todo: 타이핑이벤트 추가하여 내용만 변경
+        if (currentContent === 'aboutMe2') {
+            currentContent = current.prev;
+            dialogContent.innerHTML = dialogList.step1;
+            return;
+        }
+        if (currentContent === 'projects') {
+            currentContent = current.prev;
+            aboutMeGsap();
+            return;
+        }
+        if (currentContent === 'learning') {
+            currentContent = current.prev;
+            projectsGsap();
+            return;
+        }
+        if (currentContent === 'skills') {
+            currentContent = current.prev;
+            learningGsap();
+            return;
+        }
+        if (currentContent === 'poster') {
+            currentContent = current.prev;
+            skillsGsap();
+        }
+    });
+
+    // prev 버튼 활성화 시 hover 애니메이션
     prevBtn.addEventListener('mouseenter', () => {
+        if (isMovingCam) return;
         if (isActivePrev) {
             prevBtn.style.backgroundColor = "rgb(95, 104, 110)";
         }
     });
     prevBtn.addEventListener('mouseleave', () => {
+        if (isMovingCam) return;
         if (isActivePrev) {
             prevBtn.style.backgroundColor = "rgb(108, 117, 125)";
         }
     });
-
-    // 클릭 시 활성, 비활성 컨트롤
-    prevBtn.addEventListener('click', () => {
-        if (!isActivePrev) {
-            isActivePrev = true;
-            prevBtn.style.backgroundColor = "rgb(108, 117, 125)";
-        } else {
-            isActivePrev = false;
-            prevBtn.style.backgroundColor = "rgb(185, 188, 190)";
-        }
-    });
-
 
 
 
@@ -347,34 +498,11 @@ export const setRayCaster = (renderDom, camera, controls) => {
     // 테스트 이벤트
     const testEvent = document.querySelector('#test');
 
-    const startAnim = 'moveDialog 1s forwards';
-    const endAnim = 'moveDialog 1s forwards reverse';
-    let isOpen = false;
-    let isAnimPlay = false;
-
-    function dialogHandler() {
-        if (isAnimPlay) return;
-        isAnimPlay = true;
-        if (isOpen) {
-            isOpen = false;
-            dialogBox.style.animation = endAnim;
-            dialogBox.style.bottom = '-440px';
-            setTimeout(() => {
-                dialogBox.style.animation = 'none';
-                isAnimPlay = false;
-            }, 1000);
-        } else {
-            isOpen = true;
-            dialogInterface.style.animation = startAnim;
-            dialogInterface.style.bottom = '0';
-            setTimeout(() => {
-                dialogInterface.style.animation = 'none';
-                isAnimPlay = false;
-            }, 1000);
-        }
+    function testHandler() {
+        console.log('테스트')
     }
 
-    testEvent.addEventListener('click', dialogHandler);
+    testEvent.addEventListener('click', testHandler);
 }
 
 

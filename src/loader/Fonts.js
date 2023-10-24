@@ -53,7 +53,7 @@ export function loadFonts(scene, targetMeshes) {
         aboutMeMesh.rotation.y = THREE.MathUtils.degToRad(90);
         aboutMeMesh.position.set(-1.9, 3, 3.4);
         aboutMeMesh.castShadow = true;
-        aboutMeMesh.name = 'aboutMe';
+        aboutMeMesh.name = 'aboutMe1';
         aboutMeMesh.getWorldPosition(aboutMePos);
         // click area 해당 mesh를 clone하여 모두 적용
         const CALC_POS = { y: 0.089, z: 0.55 } // position: (y = +), (z = -)
@@ -62,7 +62,7 @@ export function loadFonts(scene, targetMeshes) {
         const clickAreaMesh = new THREE.Mesh(aboutMeAreaGeometry, aboutMeAreaMaterial);
         clickAreaMesh.position.set(aboutMePos.x, aboutMePos.y + CALC_POS.y, aboutMePos.z - CALC_POS.z);
         clickAreaMesh.rotation.y = THREE.MathUtils.degToRad(90);
-        clickAreaMesh.name = 'aboutMe';
+        clickAreaMesh.name = 'aboutMe1';
         menuGroup.add(aboutMeMesh, clickAreaMesh);
         targetMeshes.push(aboutMeMesh, clickAreaMesh);
 
