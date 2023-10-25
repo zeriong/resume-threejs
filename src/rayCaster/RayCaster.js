@@ -34,7 +34,7 @@ export const setRayCaster = (renderDom, camera, controls) => {
         step2: '2. 열심히 하겠습니다.',
     }
 
-    // 컨텐츠 리스트화 하여 next content & prev content를 구현하기 위한 변수
+    // 컨텐츠 리스트화 하여 next htmls & prev content를 구현하기 위한 변수
     let currentContent = '';
     // 컨텐츠 show 상태 여부
     let isInContent = false;
@@ -349,7 +349,7 @@ export const setRayCaster = (renderDom, camera, controls) => {
     // 컨텐트 메뉴버튼 컨트롤
     const prevBtn = document.querySelector('#prevBtn');
     const nextBtn = document.querySelector('#nextBtn');
-    const dialogContent = document.querySelector('.dialog-content');
+    const dialogContent = document.querySelector('.dialog-htmls');
     const contentLength = contentList.length;
     let isActivePrev = false;
     let listCount = 0;

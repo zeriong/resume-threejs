@@ -48,7 +48,7 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
 
                     // iframe 생성
                     const iframe = document.createElement('iframe');
-                    iframe.src = './content/projects.html';
+                    iframe.src = './htmls/projects.html';
                     iframe.style.width = SIZE.w + 'px';
                     iframe.style.height = SIZE.h + 'px';
                     iframe.style.boxSizing = 'border-box';
@@ -101,9 +101,9 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
 
                     const setPos = [posterPos.x, posterPos.y, posterPos.z + 0.049];
 
-                    // content 생성
+                    // htmls 생성
                     const posterEl = document.createElement('iframe');
-                    posterEl.src = './content/poster.html';
+                    posterEl.src = './htmls/poster.html';
                     posterEl.style.width = SCREEN.w + 'px';
                     posterEl.style.height = SCREEN.h + 'px';
                     posterEl.style.overflow = 'scroll';
@@ -143,9 +143,9 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
 
                     const setPos = [learningPos.x, learningPos.y, learningPos.z + 0.02];
 
-                    // content 생성
+                    // htmls 생성
                     const learningEl = document.createElement('iframe');
-                    learningEl.src = './content/learning.html'
+                    learningEl.src = './htmls/learning.html'
                     learningEl.style.width = SCREEN.w + 'px';
                     learningEl.style.height = SCREEN.h + 'px';
                     learningEl.style.overflow = 'scroll';
@@ -184,9 +184,9 @@ export function loadRoom(scene, cssScene, cssDomEl, loader, targetMeshes) {
 
                     const setPos = [skillsPos.x, skillsPos.y, skillsPos.z + 0.02];
 
-                    // content 생성
+                    // htmls 생성
                     const skillsEl = document.createElement('iframe');
-                    skillsEl.src = './content/skills.html'
+                    skillsEl.src = './htmls/skills.html'
                     skillsEl.style.width = SCREEN.w + 'px';
                     skillsEl.style.height = SCREEN.h + 'px';
                     skillsEl.style.overflow = 'scroll';

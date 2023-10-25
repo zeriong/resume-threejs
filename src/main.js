@@ -1,4 +1,3 @@
-import './main.scss';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls';
 import {particleGeometry, particleMaterial, runLightParticle, setMeshes} from './meshes/Meshes';

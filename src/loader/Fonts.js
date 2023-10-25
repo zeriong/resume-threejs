@@ -6,10 +6,10 @@ export function loadFonts(scene, targetMeshes) {
 
     /* 폰트 로드
     * bold: Pretendard_Bold.json
-    * semiBold: Pretendard SemiBold_Regular.json
-    * medium: Pretendard Medium_Regular.json
+    * semiBold: Pretendard_SemiBold_Regular.json
+    * medium: Pretendard_Medium_Regular.json
     * regular: Pretendard_Regular.json
-    * thin: Pretendard Thin_Regular.json
+    * thin: Pretendard_Thin_Regular.json
     * */
 
     const fontLoader = new FontLoader();
@@ -19,7 +19,7 @@ export function loadFonts(scene, targetMeshes) {
     const totalGroup = new THREE.Group();  // 전체 그룹
 
     // "zeriong" meshes
-    fontLoader.load('/letterModelSource/Pretendard_Bold.json', (font) => {
+    fontLoader.load('/fontjson/Pretendard_Bold.json', (font) => {
         // name meshes
         const nameGeometry = new TextGeometry('ZERIONG', {
             font: font,
@@ -197,7 +197,7 @@ export function loadFonts(scene, targetMeshes) {
     });
 
     // "Frontend Engineer" meshes
-    fontLoader.load('/letterModelSource/Pretendard_Regular.json', (font) => {
+    fontLoader.load('/fontjson/Pretendard_Regular.json', (font) => {
         const positionGeometry = new TextGeometry('Frontend Engineer', {
             font: font,
             size: 0.165,
