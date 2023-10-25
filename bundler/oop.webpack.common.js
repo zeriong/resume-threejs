@@ -39,7 +39,7 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: path.resolve(__dirname, '../src/index.html'),
+			template: path.resolve(__dirname, '../src/main.html'),
 			filename: 'index.html',
 			minify: true,
 		}),
@@ -48,7 +48,7 @@ module.exports = {
 			// 빌드 시 dist 폴더 자동 생성(patterns 경로에 해당 파일이 없으면 에러발생)
 			patterns: [
 				{ from: path.resolve(__dirname, '../static') },
-				{ from: path.resolve(__dirname, '../src/main.css') },
+				{ from: path.resolve(__dirname, '../src/style.css') },
 			]
 		}),
 	]

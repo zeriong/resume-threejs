@@ -9,7 +9,7 @@ export const targetMeshes = [];
 export function modelsLoad(webgl, scene, cssScene, cssDomEl) {
     // 로드매니저 모두 로드되면, display: block
     const loadingManager = new THREE.LoadingManager();
-    loadingManager.onLoad = () => webgl.style.display = 'block';
+    // loadingManager.onLoad = () => webgl.style.display = 'block'; // todo: 테스트 끝날 시 삭제
 
     const loader = new GLTFLoader(loadingManager);
 
