@@ -67,24 +67,6 @@ p {
   font-weight: 700;
   padding: 20px;
 }
-#back-btn {
-  transition: 300ms ease-in-out;
-  position: fixed;
-  bottom: -140px;
-  left: 40px;
-  font-size: 50px;
-  font-weight: 700;
-  background: $blue-600;
-  color: white;
-  padding: 14px 26px;
-  border-radius: 16px;
-  border: 6px solid $blue-600;
-  z-index: 1;
-  &:hover {
-    color: $blue-600;
-    background: white;
-  }
-}
 
 #dialogBox {
   transition: 300ms ease-in-out;
@@ -147,7 +129,7 @@ p {
     padding: 20px 45px;
     border-radius: 20px;
   }
-  #skipBtn {
+  #returnToOrbitBtn {
     background: rgba(108, 117, 125);
     color: white;
     &:hover {
@@ -159,7 +141,6 @@ p {
     background: rgb(185, 188, 190); // 비활성화 배경
     //color: white;  // 활성화 글자
     color: #d3d3d3; // 비활성화 글자
-
   }
   #nextBtn {
     background: $blue-500;

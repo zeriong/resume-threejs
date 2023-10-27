@@ -6,13 +6,7 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader';
 export default class Loader {
     constructor() {
         this.loadingManager = new THREE.LoadingManager();
-        this.loader = new GLTFLoader(this.loadingManager);
+        this.gltfLoader = new GLTFLoader(this.loadingManager);
         this.fontLoader = new FontLoader(this.loadingManager);
-    }
-
-    onLoaded() {
-        this.loadingManager.onLoad(() => {
-            console.log('로드완료');
-        })
     }
 }

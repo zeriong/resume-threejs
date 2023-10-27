@@ -2,7 +2,6 @@
 * {
   font-family: "Pretendard";
   box-sizing: border-box;
-  display: none;
 }
 
 body, html {
@@ -65,25 +64,6 @@ p {
   padding: 20px;
 }
 
-#back-btn {
-  transition: 300ms ease-in-out;
-  position: fixed;
-  bottom: -140px;
-  left: 40px;
-  font-size: 50px;
-  font-weight: 700;
-  background: rgb(37, 99, 235);
-  color: white;
-  padding: 14px 26px;
-  border-radius: 16px;
-  border: 6px solid rgb(37, 99, 235);
-  z-index: 1;
-}
-#back-btn:hover {
-  color: rgb(37, 99, 235);
-  background: white;
-}
-
 #dialogBox {
   transition: 300ms ease-in-out;
   position: fixed;
@@ -143,11 +123,11 @@ p {
   padding: 20px 45px;
   border-radius: 20px;
 }
-#contentMenuBtns #skipBtn {
+#contentMenuBtns #returnToOrbitBtn {
   background: rgb(108, 117, 125);
   color: white;
 }
-#contentMenuBtns #skipBtn:hover {
+#contentMenuBtns #returnToOrbitBtn:hover {
   background: rgb(95, 104, 110);
 }
 #contentMenuBtns #prevBtn {
@@ -344,4 +324,4 @@ p {
   background-color: skyblue;
 }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=style.css.map */

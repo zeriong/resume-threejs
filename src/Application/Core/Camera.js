@@ -4,27 +4,32 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls';
 
 export default class Camera {
     constructor() {
-        this.application = Application.getInstance();
-        this.sizes = this.application.sizes;
-        this.scene = this.application.scene;
-        this.renderer = this.application.renderer;
+        const app = Application.getInstance();
+        this.sizes = app.sizes;
+        this.scene = app.scene;
+        this.renderer = app.renderer;
 
         this.setInstance();
     }
 
+    // 카메라 생성
     setInstance() {
         this.instance = new THREE.PerspectiveCamera(24, this.sizes.width / this.sizes.height, 0.1, 1000);
+        this.instance.position.set(...this.sizes.cameraPosition);
+
         this.scene.add(this.instance);
     }
 
+    // 카메라 리사이즈 처리
     resize() {
         this.instance.aspect = this.sizes.width / this.sizes.height;
         this.instance.updateProjectionMatrix();
     }
 
+    // 컨트롤 생성
     createControls() {
-        // Application에서 클래스 생성 순서 때문에 this.renderer를 재할당 후 실행
-        this.renderer = this.application.renderer;
+        // Application에서 클래스 생성 순서 때문에 this.renderer를 초기화
+        this.renderer = Application.getInstance().renderer;
 
         this.orbitControls = new OrbitControls(this.instance, this.renderer.instance.domElement);
         this.orbitControls.enablePan = false;
@@ -37,6 +42,7 @@ export default class Camera {
         this.orbitControls.update();
     }
 
+    // 컨트롤 업데이트 매서드
     update() {
         this.orbitControls.update();
     }

@@ -5,15 +5,14 @@ import {EffectComposer} from 'three/addons/postprocessing/EffectComposer';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass';
 import {ShaderPass} from 'three/addons/postprocessing/ShaderPass';
 import {SMAAPass} from 'three/addons/postprocessing/SMAAPass';
-import {camera} from '../../main';
 
 export default class Renderer {
     constructor() {
-        this.application = Application.getInstance();
-        this.sizes = this.application.sizes;
-        this.scene = this.application.scene;
-        this.cssScene = this.application.cssScene;
-        this.camera = this.application.camera;
+        const app = Application.getInstance();
+        this.sizes = app.sizes;
+        this.scene = app.scene;
+        this.cssScene = app.cssScene;
+        this.camera = app.camera;
 
         this.setInstance();
     }
@@ -95,8 +94,8 @@ export default class Renderer {
 
         this.cssInstance.setSize(this.sizes.width, this.sizes.height);
 
-        this.instance.render(this.scene, this.camera);
-        this.cssInstance.render(this.cssScene, this.camera);
+        this.instance.render(this.scene, this.camera.instance);
+        this.cssInstance.render(this.cssScene, this.camera.instance);
     }
 
     update() {

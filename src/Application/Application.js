@@ -4,10 +4,13 @@ import Camera from './Core/Camera';
 import Renderer from './Core/Renderer';
 import World from './World/World';
 import Loader from './Core/Loader';
-import {camera} from '../main';
+import Raycaster from './Core/Raycaster';
+import Lights from './World/Lights';
+import Gsap from './Core/Gsap';
 
 export default class Application {
 
+    // 싱글톤 패턴 적용
     static getInstance() {
         // 인스턴스가 없다면 새로 생성
         if (!Application.instance) {
@@ -20,25 +23,40 @@ export default class Application {
     constructor() {
         Application.instance = this;
 
-        // this.loading = new Loading();
+        // Setup
+        this.intersectsMeshes = [];
         this.sizes = new Sizes();
         this.scene = new THREE.Scene();
         this.cssScene = new THREE.Scene();
         this.camera = new Camera();
         this.renderer = new Renderer();
-        this.camera.createControls();
-        this.world = new World();
         this.loader = new Loader();
+        this.lights = new Lights();
+        this.world = new World();
+        this.gsap = new Gsap();
+        this.raycaster = new Raycaster();
 
-        this.renderer.setComposer();
+        // 변수
+        this.isStart = false; // 시작모드 여부 (start & skip)
+
+        this.scene.background = new THREE.Color(0x61657a);
 
         this.sizes.on('resize', () => this.resize());
 
+        this.camera.createControls();
+        this.renderer.setComposer();
         this.update();
+
+        // test
+        const axesHelper = new THREE.AxesHelper(10);
+        this.scene.add(axesHelper);
+
+        document.querySelector('#test').addEventListener('click', () => {
+            console.log(this.world.projectsPosition)
+        });
     }
 
-
-
+    // 3D 렌더링 요소 일괄 업데이트
     update() {
         this.camera.update();
         this.world.update();
@@ -49,6 +67,7 @@ export default class Application {
         });
     }
 
+    // resize 일괄 실행
     resize() {
         this.camera.resize();
         this.renderer.resize();
