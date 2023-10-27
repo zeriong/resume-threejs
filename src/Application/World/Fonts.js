@@ -74,7 +74,7 @@ export default class Fonts {
         });
 
         // 그룹 단위로 포지션 지정
-        this.nameGroup.position.z = 2.6;
+        this.nameGroup.position.z = 2.75;
 
         this.menuGroup.position.x = -3.4;
         this.menuGroup.position.z = -1.9;

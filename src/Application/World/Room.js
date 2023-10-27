@@ -250,7 +250,21 @@ export default class Room {
                         child.name = 'mirror';
                     }
 
-                    //todo: 의자매쉬 찾아서 줌인 시 투명화 시키기 material.opacity / on, off
+                    // 후면 허리 받침 기둥
+                    if (child.name === 'Plane193') {
+                        child.name = 'chair1';
+                        this.intersectsMeshes.push(child);
+                    }
+                    // 등받이 테두리
+                    if (child.name === 'Plane207_1') {
+                        child.name = 'chair2';
+                        this.intersectsMeshes.push(child);
+                    }
+                    // 등받이 + 팔걸이 밑단
+                    if (child.name === 'Plane207_2') {
+                        child.name = 'chair3';
+                        this.intersectsMeshes.push(child);
+                    }
 
                     child.material = new THREE.MeshPhysicalMaterial({
                         color: child.material.color,

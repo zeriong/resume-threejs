@@ -52,6 +52,8 @@ export default class Gsap {
 
         const current = contentList.find((val) => val.current === target);
 
+        this.convertChairTransParent('invisible');
+
         gsap.to(camera.position, {
             ...current.cameraPosition, duration: 2, ease: 'power1.inOut',
             onStart: () => {
@@ -81,6 +83,8 @@ export default class Gsap {
 
         // prev 버튼 비활성화
         this.offPrev();
+
+        this.convertChairTransParent('visible');
 
         const { app, camera, controls } = this.getRequireInstance();
         gsap.to(camera.position, {
@@ -121,17 +125,17 @@ export default class Gsap {
         this.currentContent = 'aboutMe1';
 
         gsap.to(camera.position, {
+            duration: 3, ease: 'power1.inOut',
             x: (this.sizes.width <= 420) ? (-18 * this.fixCameraPosition) : (0.5 * this.fixCameraPosition),
             y: (this.sizes.width <= 420) ? (14.4 * this.fixCameraPosition + 5) : (5 * this.fixCameraPosition),
             z: (this.sizes.width <= 420) ? (19.2 * this.fixCameraPosition) : (27 * this.fixCameraPosition),
-            duration: 3,
-            ease: 'power1.inOut',
             onStart: () => {
                 this.isMovingCam = true;
                 this.isInContent = true;
                 controls.enabled = false;
                 app.isStart = true;
                 this.controlLimitBreak(controls); // down control 제한 해제
+                this.convertChairTransParent('invisible', 3000, 1.5);
             },
             onComplete: () => {
                 gsap.to(camera.position, {
@@ -257,6 +261,27 @@ export default class Gsap {
             this.isActivePrev = false;
             this.prevBtn.style.backgroundColor = "rgb(185, 188, 190)";
             this.prevBtn.style.color = '#d3d3d3';
+        }
+    }
+
+    // 의자 등받이 투명화 on/off
+    convertChairTransParent(type, ms = 0, duration = 2) {
+        const intersectsMeshes = Application.getInstance().intersectsMeshes;
+        if (type === 'invisible') {
+            setTimeout(() => {
+                intersectsMeshes.forEach(mesh => {
+                    if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
+                        gsap.to(mesh.material, { transparent: true, opacity: 0, duration });
+                    }
+                });
+            }, ms);
+        }
+        if (type === 'visible') {
+            intersectsMeshes.forEach(mesh => {
+                if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
+                    gsap.to(mesh.material, { transparent: false, opacity: 1, duration });
+                }
+            });
         }
     }
 

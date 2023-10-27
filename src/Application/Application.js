@@ -52,6 +52,19 @@ export default class Application {
         this.scene.add(axesHelper);
 
         document.querySelector('#test').addEventListener('click', () => {
+
+            const chair1 = this.intersectsMeshes.find(val => val.name === 'chair1');
+            const chair2 = this.intersectsMeshes.find(val => val.name === 'chair2');
+            const chair3 = this.intersectsMeshes.find(val => val.name === 'chair3');
+
+            chair1.material.transparent = true;
+            chair2.material.transparent = true;
+            chair3.material.transparent = true;
+            chair1.material.opacity = 0;
+            chair2.material.opacity = 0;
+            chair3.material.opacity = 0;
+
+
             console.log(this.world.projectsPosition)
         });
     }
