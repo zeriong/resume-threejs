@@ -6,10 +6,7 @@ import Application from '../Application';
 
 export default class World {
     constructor() {
-        const app = Application.getInstance();
-        this.loader = app.loader;
-
-        // position들은 raycaster에서 사용하기 위함
+        // positions에 등록
         this.room = new Room();
         this.projectsPosition = this.room.projectsPosition;
         this.learningPosition = this.room.learningPosition;

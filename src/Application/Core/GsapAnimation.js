@@ -2,12 +2,11 @@ import gsap from 'gsap';
 import Application from '../Application';
 import * as THREE from 'three';
 
-export default class Gsap {
+export default class GsapAnimation {
     constructor() {
-        const app = Application.getInstance();
-        this.sizes = app.sizes;
+        this.app = Application.getInstance();
+        this.sizes = this.app.sizes;
         this.isInContent = false;
-        this.fixCameraPosition = this.cameraPositionFixer();
         this.currentContent = '';
         this.listCount = 0;
         this.isActivePrev = false;
@@ -48,21 +47,21 @@ export default class Gsap {
 
     toContent(target, isBtn) {
         // getRequireInstance를 사용하여 최신데이터 사용
-        const { camera, controls, contentList } = this.getRequireInstance();
+        const contentList = this.app.positions.getContentPositions();
 
         const current = contentList.find((val) => val.current === target);
 
         this.convertChairTransParent('invisible');
 
-        gsap.to(camera.position, {
+        gsap.to(this.app.camera.instance.position, {
             ...current.cameraPosition, duration: 2, ease: 'power1.inOut',
             onStart: () => {
                 if (!isBtn) this.currentContent = target;
                 this.dialogContent.innerHTML = this.dialogList.step1;
                 this.isInContent = true;
                 this.isMovingCam = true;
-                controls.enabled = false;
-                this.controlLimitBreak(controls); // down control 제한 해제
+                this.app.camera.orbitControls.enabled = false;
+                this.controlLimitBreak(this.app.camera.orbitControls); // down control 제한 해제
             },
             onComplete: () => {
                 this.contentMenuBtns.style.bottom = '30px';
@@ -71,7 +70,7 @@ export default class Gsap {
                 else this.isMovingCam = false;
             }
         });
-        gsap.to(controls.target, {
+        gsap.to(this.app.camera.orbitControls.target, {
             ...current.controlsTarget, duration: 2, ease: 'power1.inOut',
         });
     }
@@ -86,17 +85,15 @@ export default class Gsap {
 
         this.convertChairTransParent('visible');
 
-        const { app, camera, controls } = this.getRequireInstance();
-        gsap.to(camera.position, {
+        gsap.to(this.app.camera.instance.position, {
             duration: 2, ease: 'power1.inOut',
-            x: (this.sizes.width <= 420) ? (-2.96 * this.fixCameraPosition) : (-18 * this.fixCameraPosition),
-            y: (this.sizes.width <= 420) ? (10.63 * this.fixCameraPosition) : (14.4 * this.fixCameraPosition),
-            z: (this.sizes.width <= 420) ? (30.98 * this.fixCameraPosition) : (19.2 * this.fixCameraPosition),
+            // set position
+            ...this.app.positions.returnToOrbitPositions(),
             onStart: () => {
                 this.isMovingCam = true;
 
-                if (app.isStart) {
-                    app.isStart = false;
+                if (this.app.isStart) {
+                    this.app.isStart = false;
                     this.returnToOrbitBtn.innerHTML = 'Back';
                 }
 
@@ -106,39 +103,36 @@ export default class Gsap {
             onComplete: () => {
                 this.isInContent = false;
                 this.isMovingCam = false;
-                controls.enabled = true;
+                this.app.camera.orbitControls.enabled = true;
                 this.webgl.style.zIndex = 0;
-                this.controlLimitSet(controls); // control 제한
+                this.controlLimitSet(this.app.camera.orbitControls); // control 제한
             }
         });
-        gsap.to(controls.target, {
-            x: 1, y: 1, z: 2,
-            duration: 2,
-            ease: 'power1.inOut',
+        gsap.to(this.app.camera.orbitControls.target, {
+            x: 1, y: 1, z: 2, duration: 2, ease: 'power1.inOut',
         });
     }
 
     // Start로 시작
     playStartAnimation() {
-        const { app, controls, camera, contentList } = this.getRequireInstance();
+        const contentList = this.app.positions.getContentPositions();
         // 초기 start 눌러 시작할 경우 aboutMe1로 설정
         this.currentContent = 'aboutMe1';
 
-        gsap.to(camera.position, {
+        gsap.to(this.app.camera.instance.position, {
             duration: 3, ease: 'power1.inOut',
-            x: (this.sizes.width <= 420) ? (-18 * this.fixCameraPosition) : (0.5 * this.fixCameraPosition),
-            y: (this.sizes.width <= 420) ? (14.4 * this.fixCameraPosition + 5) : (5 * this.fixCameraPosition),
-            z: (this.sizes.width <= 420) ? (19.2 * this.fixCameraPosition) : (27 * this.fixCameraPosition),
+            // set position
+            ...this.app.positions.playStartAnimationPositions(),
             onStart: () => {
                 this.isMovingCam = true;
                 this.isInContent = true;
-                controls.enabled = false;
-                app.isStart = true;
+                this.app.camera.orbitControls.enabled = false;
+                this.app.isStart = true;
                 this.controlLimitBreak(controls); // down control 제한 해제
                 this.convertChairTransParent('invisible', 3000, 1.5);
             },
             onComplete: () => {
-                gsap.to(camera.position, {
+                gsap.to(this.app.camera.instance.position, {
                     ...contentList[0].cameraPosition, duration: 1.5, ease: 'power1.inOut',
                     onComplete: () => {
                         this.isMovingCam = false;
@@ -147,7 +141,7 @@ export default class Gsap {
                         this.appearDialog();
                     }
                 });
-                gsap.to(controls.target, {
+                gsap.to(this.app.camera.orbitControls.target, {
                     ...contentList[0].controlsTarget, duration: 1.5, ease: 'power1.inOut',
                 });
             }
@@ -157,11 +151,8 @@ export default class Gsap {
     // Skip으로 시작
     playAnimationSkip() {
         this.returnToOrbitBtn.innerHTML = 'Back';
-        gsap.to(Application.getInstance().camera.instance.position, {
-            x: (this.sizes.width <= 420) ? (-2.96 * this.fixCameraPosition) : (-18 * this.fixCameraPosition),
-            y: (this.sizes.width <= 420) ? (10.63 * this.fixCameraPosition) : (14.4 * this.fixCameraPosition),
-            z: (this.sizes.width <= 420) ? (30.98 * this.fixCameraPosition) : (19.2 * this.fixCameraPosition),
-            duration: 0,
+        gsap.to(this.app.camera.instance.position, {
+            ...this.app.positions.returnToOrbitPositions(), duration: 0,
         });
     }
 
@@ -169,15 +160,14 @@ export default class Gsap {
     toNext() {
         if (this.isMovingCam) return;
 
-        const { app, contentList, camera, controls } = this.getRequireInstance();
+        const contentList = this.app.positions.getContentPositions();
 
         if (contentList.length > this.listCount) {
             this.listCount++;
-            if (app.isStart) {
-                app.isStart = false;
+            if (this.app.isStart) {
+                this.app.isStart = false;
                 this.returnToOrbitBtn.innerHTML = 'Back';
             }
-
         }
 
         // prev 버튼 활성화
@@ -212,7 +202,7 @@ export default class Gsap {
     toPrev() {
         if (this.listCount === 0 || this.isMovingCam) return console.log('안돼')
 
-        const { app, contentList, camera, controls } = this.getRequireInstance();
+        const contentList = this.app.positions.getContentPositions();
 
         if (contentList.length > this.listCount) this.listCount--;
         // aboutMe의 경우 2가지 step이 존재하기 때문에 한번 더 감소
@@ -308,95 +298,13 @@ export default class Gsap {
 
     // 컨트롤 제한 (컨텐츠에서 zoom in 모드에서 벗어나면 다시 제한)
     controlLimitSet(controls) {
-        controls.maxPolarAngle = THREE.MathUtils.degToRad(80);
+        controls.maxPolarAngle = THREE.MathUtils.degToRad(80); // 하단 시점 제한
         controls.minDistance = 5; // 가까워지는 최소거리 설정
     }
 
     // 컨트롤 제한 해제 (카메라 무빙 이벤트 시 제한 해제 필요)
     controlLimitBreak (controls) {
-        controls.maxPolarAngle = THREE.MathUtils.degToRad(360);
+        controls.maxPolarAngle = THREE.MathUtils.degToRad(360); // 하단 시점 제한해제
         controls.minDistance = 0; // 가까워지는 최소거리 설정
-    }
-
-    cameraPositionFixer() {
-        if (this.sizes.width >= 1400) return 1;
-        return (1400 - this.sizes.width) * (this.sizes.width <= 420 ? 0.0003 : 0.0007) + 1;
-    }
-
-    // 카메라, 컨트롤의 인스턴스 + 각 컨텐츠 포지션을 최신 데이터로 생성
-    getRequireInstance() {
-        const app = Application.getInstance();
-        const camera = app.camera.instance;
-        const controls = app.camera.orbitControls;
-        const world = app.world;
-        const monitorCamPositionFixer = () => {
-            if ( this.sizes.width <= 530) return 4;
-            if (this.sizes.width <= 740) return 3;
-            return 1.9;
-        }
-        const fixMonitorPosition = monitorCamPositionFixer();
-
-        const contentList = [
-            // about me 첫번째 대화
-            {
-                current: 'aboutMe1', next: 'aboutMe2', prev: 'poster',
-                cameraPosition: {
-                    x: (world.dinoPosition.x), y: (world.dinoPosition.y + 0.4), z: (world.dinoPosition.z + 2.5 + this.fixCameraPosition)
-                },
-                controlsTarget: {
-                    x: (world.dinoPosition.x), y: (world.dinoPosition.y + 0.2), z: (world.dinoPosition.z)
-                }
-            },
-
-            // about me 두번째 대화 (카메라 무빙 애니메이션 x)
-            { current: 'aboutMe2', next: 'projects', prev: 'aboutMe1' },
-
-            {
-                current: 'projects', next: 'learning', prev: 'aboutMe1',
-                cameraPosition: {
-                    x: (world.projectsPosition.x), y: (world.projectsPosition.y), z: (world.projectsPosition.z + fixMonitorPosition + this.fixCameraPosition)
-                },
-                controlsTarget: {
-                    x: (world.projectsPosition.x), y: (world.projectsPosition.y), z: (world.projectsPosition.z)
-                }
-            },
-
-            // learning
-            {
-                current: 'learning', next: 'skills', prev: 'projects',
-                cameraPosition: {
-                    x: (world.learningPosition.x), y: (world.learningPosition.y), z: (world.learningPosition.z + 3)
-                },
-                controlsTarget: {
-                    x: (world.learningPosition.x), y: (world.learningPosition.y), z: (world.learningPosition.z)
-                }
-            },
-
-            // skills
-            {
-                current: 'skills', next: 'poster', prev: 'learning',
-                cameraPosition: {
-                    x: (world.skillsPosition.x),
-                    y: (world.skillsPosition.y),
-                    z: (world.skillsPosition.z + 1.6 + (this.fixCameraPosition > 1.32 ? 1.32 : this.fixCameraPosition))
-                },
-                controlsTarget: {
-                    x: (world.skillsPosition.x), y: (world.skillsPosition.y), z: (world.skillsPosition.z)
-                }
-            },
-
-            // poster
-            {
-                current: 'poster', next: 'aboutMe1', prev: 'skills',
-                cameraPosition: {
-                    x: (world.posterPosition.x), y: (world.posterPosition.y), z: (world.posterPosition.z + 4 + this.fixCameraPosition)
-                },
-                controlsTarget: {
-                    x: (world.posterPosition.x), y: (world.posterPosition.y), z: (world.posterPosition.z)
-                }
-            },
-        ];
-
-        return { camera, controls, contentList, app }
     }
 }

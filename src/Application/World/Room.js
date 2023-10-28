@@ -7,7 +7,7 @@ export default class Room {
         const app = Application.getInstance();
         this.sizes = app.sizes;
         this.contentSizes = this.sizes.roomSizes;
-        this.initScale = this.sizes.roomInitScaleArr;
+        this.initScale = this.sizes.roomInitScale;
         this.loader = app.loader;
         this.intersectsMeshes = app.intersectsMeshes;
         this.scene = app.scene;
@@ -264,6 +264,11 @@ export default class Room {
                     if (child.name === 'Plane207_2') {
                         child.name = 'chair3';
                         this.intersectsMeshes.push(child);
+                    }
+                    // 팔걸이
+                    if (child.name === 'Plane210') {
+                        const position = new THREE.Vector3();
+                        child.getWorldPosition(position);
                     }
 
                     child.material = new THREE.MeshPhysicalMaterial({

@@ -9,13 +9,14 @@ export default class Camera {
         this.scene = app.scene;
         this.renderer = app.renderer;
 
+        this.setCameraPosition();
         this.setInstance();
     }
 
     // 카메라 생성
     setInstance() {
         this.instance = new THREE.PerspectiveCamera(24, this.sizes.width / this.sizes.height, 0.1, 1000);
-        this.instance.position.set(...this.sizes.cameraPosition);
+        this.instance.position.set(...this.cameraPosition);
 
         this.scene.add(this.instance);
     }
@@ -24,6 +25,19 @@ export default class Camera {
     resize() {
         this.instance.aspect = this.sizes.width / this.sizes.height;
         this.instance.updateProjectionMatrix();
+    }
+
+    // set 카메라 포지션
+    setCameraPosition() {
+        const fixCamPosition = () => {
+            if (this.sizes.width >= 1400) return 1;
+            return (1400 - this.sizes.width) * (this.sizes.width <= 420 ? 0.0003 : 0.0007) + 1;
+        }
+        this.cameraPosition = [
+            (this.sizes.width <= 420) ? (-2.96 * fixCamPosition()) : (-24 * fixCamPosition()),
+            (this.sizes.width <= 420) ? (10.63 * fixCamPosition()) : (14.4 * fixCamPosition()),
+            (this.sizes.width <= 420) ? (30.98 * fixCamPosition()) : (14 * fixCamPosition()),
+        ]
     }
 
     // 컨트롤 생성
@@ -38,6 +52,8 @@ export default class Camera {
         this.orbitControls.minDistance = 5; // 가까워지는 최소거리 설정
         this.orbitControls.mouseButtons.RIGHT = null; // 마우스 오른쪽 드래그로 중심 축 변경 잠금
         this.orbitControls.maxPolarAngle = THREE.MathUtils.degToRad(80); // 바닥 아래를 볼 수 없도록 제한
+        this.orbitControls.minAzimuthAngle = -THREE.MathUtils.degToRad(90); // 좌측 시점 제한
+        this.orbitControls.maxAzimuthAngle = THREE.MathUtils.degToRad(0); // 우측 시점 제한
         this.orbitControls.target.set(1,1,2);
         this.orbitControls.update();
     }
