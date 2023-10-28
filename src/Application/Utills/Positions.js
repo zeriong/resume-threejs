@@ -1,7 +1,4 @@
-import Sizes from './Sizes';
 import Application from '../Application';
-import Room from '../World/Room';
-import Dino from '../World/Dino';
 
 export default class Positions {
     constructor() {
@@ -18,6 +15,7 @@ export default class Positions {
 
         this.fixCameraPosition = this.cameraPositionFixer();
         this.fixMonitorPosition = this.monitorCamPositionFixer();
+        this.fixSkillsPosition = this.skillsPositionFixer();
     }
 
     // OrbitControls default 시점
@@ -40,7 +38,17 @@ export default class Positions {
 
     cameraPositionFixer() {
         if (this.sizes.width >= 1400) return 1;
-        return (1400 - this.sizes.width) * (this.sizes.width <= 420 ? 0.0003 : 0.0007) + 1;
+        return (1400 - this.sizes.width) * (this.sizes.width <= 420 ? 0.0003 : 0.0001) + 1;
+    }
+
+    skillsPositionFixer() {
+        if (this.sizes.width >= 1400) return 0;
+        if (this.sizes.width <= 420) {
+            const value = (1400 - this.sizes.width) * 0.0003 + 1;
+            if (value > 1.32) return 1.32;
+            return value;
+        }
+        return (1400 - this.sizes.width) * 0.0007 + 0.5;
     }
 
     monitorCamPositionFixer () {
@@ -92,7 +100,7 @@ export default class Positions {
                 cameraPosition: {
                     x: (this.skillsPosition.x),
                     y: (this.skillsPosition.y),
-                    z: (this.skillsPosition.z + 1.6 + (this.fixCameraPosition > 1.32 ? 1.32 : this.fixCameraPosition))
+                    z: (this.skillsPosition.z + 1.6 + this.fixSkillsPosition)
                 },
                 controlsTarget: {
                     x: (this.skillsPosition.x), y: (this.skillsPosition.y), z: (this.skillsPosition.z)

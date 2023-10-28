@@ -71,6 +71,7 @@ p {
 #dialogBox {
   transition: 300ms ease-in-out;
   position: fixed;
+  flex-direction: column;
   left: 50%;
   transform: translateX(-50%);
   bottom: 130px;
@@ -108,7 +109,20 @@ p {
     }
   }
   .dialog-content {
+    //display: inline;
     font-size: 24px;
+  }
+  #dialogCursor {
+    display: block;
+    position: absolute;
+    bottom: -4px;
+    left: 4px;
+    width: 5px;
+    height: 26px;
+    background-color: #424242;
+  }
+  #dialogCursor.toggleCursor {
+    display: none;
   }
 }
 

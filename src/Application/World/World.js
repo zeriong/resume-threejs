@@ -2,7 +2,6 @@ import Dino from './Dino';
 import Room from './Room';
 import Fonts from './Fonts';
 import Environment from './Environment';
-import Application from '../Application';
 
 export default class World {
     constructor() {

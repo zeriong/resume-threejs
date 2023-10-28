@@ -51,11 +51,11 @@ export default class Raycaster {
         const target = intersects[0].object;
 
         // 모델링 클릭 카메라 줌인 무빙 애니메이션
-        if (target.name === 'aboutMe1') this.gsap.toContent(target.name) //aboutMeGsap(target)
-        if (target.name === 'projects') this.gsap.toContent(target.name) //projectsGsap(target)
-        if (target.name === 'poster') this.gsap.toContent(target.name) //posterGsap(target)
-        if (target.name === 'learning') this.gsap.toContent(target.name) //learningGsap(target)
-        if (target.name === 'skills') this.gsap.toContent(target.name) //skillsGsap(target)
+        if (target.name === 'aboutMe1') this.gsap.toContent(target.name)
+        if (target.name === 'projects') this.gsap.toContent(target.name)
+        if (target.name === 'poster') this.gsap.toContent(target.name)
+        if (target.name === 'learning') this.gsap.toContent(target.name)
+        if (target.name === 'skills') this.gsap.toContent(target.name)
 
         // 링크 메뉴 클릭 이벤트
         if (target.name === 'github') window.open('https://github.com/zeriong/','_blank');

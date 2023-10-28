@@ -24,7 +24,7 @@ export default class Lights {
     }
 
     setLights() {
-        // Common Effect
+        // EventModule Effect
         const setLightOption = (light) => {
             light.castShadow = true;
             light.shadow.mapSize.set(2048 * 2, 2048 * 2);

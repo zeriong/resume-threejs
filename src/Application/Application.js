@@ -8,6 +8,7 @@ import Raycaster from './Core/Raycaster';
 import Lights from './World/Lights';
 import GsapAnimation from './Core/GsapAnimation';
 import Positions from './Utills/Positions';
+import EventModule from './Utills/EventModule';
 
 export default class Application {
 
@@ -24,7 +25,6 @@ export default class Application {
         // Setup
         this.intersectsMeshes = [];
         this.sizes = new Sizes();
-
         this.scene = new THREE.Scene();
         this.cssScene = new THREE.Scene();
         this.camera = new Camera();
@@ -34,7 +34,8 @@ export default class Application {
         this.world = new World();
         this.positions = new Positions();
         this.gsap = new GsapAnimation();
-        this.raycaster = new Raycaster();
+        this.raycaster = new Raycaster()
+        this.eventModule = new EventModule();
 
         // 변수
         this.isStart = false; // 시작모드 여부 (start & skip)
@@ -49,8 +50,16 @@ export default class Application {
         const axesHelper = new THREE.AxesHelper(10);
         this.scene.add(axesHelper);
 
+        this.test = false;
+
         document.querySelector('#test').addEventListener('click', () => {
-            console.log(this.world.projectsPosition)
+            if (this.test) {
+                this.test = false;
+                clearInterval(this.eventModule.cursorInterval);
+                return;
+            }
+            this.eventModule.cursorLoop();
+            this.test = true;
         });
     }
 
