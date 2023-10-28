@@ -8,5 +8,18 @@ export default class Loader {
         this.loadingManager = new THREE.LoadingManager();
         this.gltfLoader = new GLTFLoader(this.loadingManager);
         this.fontLoader = new FontLoader(this.loadingManager);
+
+        this.progressPercent = document.querySelector('.progressPercent');
+
+        this.loading();
+    }
+
+    loading() {
+        let progress = 0;
+
+        this.loadingManager.onProgress = (item, loaded, total) => {
+            const progress = (loaded / total * 100).toFixed(1);
+            this.progressPercent.textContent = `${progress}%`;
+        };
     }
 }

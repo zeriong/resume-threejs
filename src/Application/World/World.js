@@ -1,4 +1,4 @@
-import Dino from './Dino';
+import AboutMe from './AboutMe';
 import Room from './Room';
 import Fonts from './Fonts';
 import Environment from './Environment';
@@ -12,8 +12,8 @@ export default class World {
         this.skillsPosition = this.room.skillsPosition;
         this.posterPosition = this.room.posterPosition;
 
-        this.dino = new Dino();
-        this.dinoPosition = this.dino.position;
+        this.aboutMe = new AboutMe();
+        this.aboutMePosition = this.aboutMe.position;
 
         this.fonts = new Fonts();
         this.environment = new Environment();

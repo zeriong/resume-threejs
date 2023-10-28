@@ -33,8 +33,6 @@ export default class Renderer {
         this.cssInstance.setSize(this.sizes.width, this.sizes.height);
         this.cssInstance.domElement.style.position = 'absolute';
         document.querySelector(`#css3DObject`)?.appendChild(this.cssInstance.domElement);
-
-        console.log('렌더러 인스턴스 생성', this.instance)
     }
 
 

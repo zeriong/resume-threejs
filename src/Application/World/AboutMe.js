@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import Application from '../Application';
 
-export default class Dino {
+export default class AboutMe {
     constructor() {
         const app = Application.getInstance();
         this.intersectsMeshes = app.intersectsMeshes;
@@ -9,10 +9,10 @@ export default class Dino {
         this.loader = app.loader;
         this.position = new THREE.Vector3();
 
-        this.dinoLoad();
+        this.aboutMeLoad();
     }
 
-    dinoLoad() {
+    aboutMeLoad() {
         this.loader.gltfLoader.load('/models/dino.glb', (glb) => {
             const model = glb.scene;
             model.scale.set(0.1, 0.1, 0.1);

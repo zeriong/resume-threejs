@@ -16,10 +16,8 @@ export default class EventModule {
         this.dialogCursor.id = 'dialogCursor';
     }
 
-    typing(text, typingSpeed = 50) {
+    typing(text, typingSpeed = 25) {
         let charIndex = 0;
-
-        // 타이핑 커서도 함께 넣어 렌더링
 
         this.cursorWrap.style.display = 'inline-block';
         this.cursorWrap.style.position = 'relative';
@@ -42,7 +40,6 @@ export default class EventModule {
             if (charIndex >= text.length) {
                 this.typingTimout = null;
                 this.cursorLoop();
-                console.log('끝')
             }
         }
         typing();
@@ -57,7 +54,6 @@ export default class EventModule {
     }
 
     cursorLoop() {
-        console.log('안되나?')
         this.cursorInterval = setInterval(() => {
             this.dialogCursor.classList.toggle('toggleCursor');
         }, 500);

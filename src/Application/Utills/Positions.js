@@ -11,15 +11,15 @@ export default class Positions {
         this.skillsPosition = this.world.skillsPosition;
         this.posterPosition = this.world.posterPosition;
 
-        this.dinoPosition = this.world.dinoPosition;
+        this.aboutMePosition = this.world.aboutMePosition;
 
-        this.fixCameraPosition = this.cameraPositionFixer();
-        this.fixMonitorPosition = this.monitorCamPositionFixer();
-        this.fixSkillsPosition = this.skillsPositionFixer();
+        this.fixCameraPosition = this.getFixCameraPosition();
+        this.fixMonitorPosition = this.getFixMonitorCamPosition();
+        this.fixSkillsPosition = this.getFixSkillsPosition();
     }
 
     // OrbitControls default 시점
-    returnToOrbitPositions() {
+    getReturnToOrbitPositions() {
         return {
             x: (this.sizes.width <= 420) ? (-2.96 * this.fixCameraPosition) : (-18 * this.fixCameraPosition),
             y: (this.sizes.width <= 420) ? (10.63 * this.fixCameraPosition) : (14.4 * this.fixCameraPosition),
@@ -28,7 +28,7 @@ export default class Positions {
     }
 
     // Play Start 애니메이션 카메라 포지션
-    playStartAnimationPositions() {
+    getPlayStartAnimationPositions() {
         return {
             x: (this.sizes.width <= 420) ? (-18 * this.fixCameraPosition) : (0.5 * this.fixCameraPosition),
             y: (this.sizes.width <= 420) ? (14.4 * this.fixCameraPosition + 5) : (5 * this.fixCameraPosition),
@@ -36,12 +36,12 @@ export default class Positions {
         }
     }
 
-    cameraPositionFixer() {
+    getFixCameraPosition() {
         if (this.sizes.width >= 1400) return 1;
         return (1400 - this.sizes.width) * (this.sizes.width <= 420 ? 0.0003 : 0.0001) + 1;
     }
 
-    skillsPositionFixer() {
+    getFixSkillsPosition() {
         if (this.sizes.width >= 1400) return 0;
         if (this.sizes.width <= 420) {
             const value = (1400 - this.sizes.width) * 0.0003 + 1;
@@ -51,7 +51,7 @@ export default class Positions {
         return (1400 - this.sizes.width) * 0.0007 + 0.5;
     }
 
-    monitorCamPositionFixer () {
+    getFixMonitorCamPosition () {
         if ( this.sizes.width <= 530) return 4;
         if (this.sizes.width <= 740) return 3;
         return 1.9;
@@ -63,10 +63,10 @@ export default class Positions {
             {
                 current: 'aboutMe1', next: 'aboutMe2', prev: 'poster',
                 cameraPosition: {
-                    x: (this.dinoPosition.x), y: (this.dinoPosition.y + 0.4), z: (this.dinoPosition.z + 2.5 + this.fixCameraPosition)
+                    x: (this.aboutMePosition.x), y: (this.aboutMePosition.y + 0.4), z: (this.aboutMePosition.z + 2.5 + this.fixCameraPosition)
                 },
                 controlsTarget: {
-                    x: (this.dinoPosition.x), y: (this.dinoPosition.y + 0.2), z: (this.dinoPosition.z)
+                    x: (this.aboutMePosition.x), y: (this.aboutMePosition.y + 0.2), z: (this.aboutMePosition.z)
                 }
             },
 

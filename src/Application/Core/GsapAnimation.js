@@ -51,12 +51,10 @@ export default class GsapAnimation {
 
         const current = contentList.find((val) => val.current === target);
 
-        console.log(current);
-
         this.convertChairTransParent('invisible');
 
         gsap.to(app.camera.instance.position, {
-            ...current.cameraPosition, duration: 2, ease: 'power1.inOut',
+            ...current.cameraPosition, duration: 1, ease: 'power1.inOut',
             onStart: () => {
                 if (!isBtn) this.currentContent = target;
                 this.isInContent = true;
@@ -72,7 +70,7 @@ export default class GsapAnimation {
             }
         });
         gsap.to(app.camera.orbitControls.target, {
-            ...current.controlsTarget, duration: 2, ease: 'power1.inOut',
+            ...current.controlsTarget, duration: 1, ease: 'power1.inOut',
         });
     }
 
@@ -80,7 +78,7 @@ export default class GsapAnimation {
     returnToOrbit() {
         // get instance
         const app = Application.getInstance();
-console.log('리턴오빗1')
+
         if (this.isMovingCam) return;
         this.listCount = 0;
 
@@ -88,14 +86,13 @@ console.log('리턴오빗1')
         this.offPrev();
         // 의자 투명화 매서드
         this.convertChairTransParent('visible');
-        console.log('리턴오빗2')
         gsap.to(app.camera.instance.position, {
-            duration: 2, ease: 'power1.inOut',
+            duration: 1, ease: 'power1.inOut',
             // set position
-            ...app.positions.returnToOrbitPositions(),
+            ...app.positions.getReturnToOrbitPositions(),
             onStart: () => {
                 this.isMovingCam = true;
-                console.log('onstart 리턴오빗3')
+
                 // start 모드에 따라서 버튼이름 변경
                 if (app.isStart) {
                     app.isStart = false;
@@ -106,20 +103,17 @@ console.log('리턴오빗1')
                 this.contentMenuBtns.style.bottom = '-70px';
                 // aboutMe의 경우 대화상자 사라지는 애니메이션 적용
                 if (this.currentContent === 'aboutMe1' || 'aboutMe2') this.disappearDialog();
-                console.log('디스어피얼 리턴오빗5')
             },
             onComplete: () => {
-                console.log('oncomplete 리턴오빗6')
                 this.isInContent = false;
                 this.isMovingCam = false;
                 app.camera.orbitControls.enabled = true;
                 this.webgl.style.zIndex = 0;
                 this.controlLimitSet(app.camera.orbitControls); // control 제한
-                console.log('oncomplete 리턴오빗7 마지막')
             }
         });
         gsap.to(app.camera.orbitControls.target, {
-            x: 1, y: 1, z: 2, duration: 2, ease: 'power1.inOut',
+            x: 1, y: 1, z: 2, duration: 1, ease: 'power1.inOut',
         });
     }
 
@@ -133,9 +127,9 @@ console.log('리턴오빗1')
         this.currentContent = 'aboutMe1';
 
         gsap.to(app.camera.instance.position, {
-            duration: 3, ease: 'power1.inOut',
+            duration: 2, ease: 'power1.inOut',
             // set position
-            ...app.positions.playStartAnimationPositions(),
+            ...app.positions.getPlayStartAnimationPositions(),
             onStart: () => {
                 this.isMovingCam = true;
                 this.isInContent = true;
@@ -167,7 +161,7 @@ console.log('리턴오빗1')
         const app = Application.getInstance();
         this.returnToOrbitBtn.innerHTML = 'Back';
         gsap.to(app.camera.instance.position, {
-            ...app.positions.returnToOrbitPositions(), duration: 0,
+            ...app.positions.getReturnToOrbitPositions(), duration: 0,
         });
     }
 
@@ -251,7 +245,6 @@ console.log('리턴오빗1')
             return;
         }
         if (this.currentContent === 'aboutMe2') {
-            // todo: 타이핑이벤트 추가하여 내용만 변경
             this.currentContent = current.prev;
             this.dialogContent.textContent = '';
             // 타이핑이벤트

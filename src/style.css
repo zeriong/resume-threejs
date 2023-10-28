@@ -52,6 +52,31 @@ p {
   font-weight: 700;
   padding: 20px;
 }
+#loading .loading-container {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 0;
+  left: 0;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#loading .loading-bar {
+  width: 50%;
+  background-color: #2196F3;
+  border: 2px solid #1976D2;
+  border-radius: 5px;
+}
+#loading .loading-progress {
+  text-align: center;
+  font-size: 24px;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #1976D2;
+}
 
 #test {
   position: fixed;
