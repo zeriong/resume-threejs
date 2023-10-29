@@ -7,138 +7,120 @@
     <link rel="stylesheet" href="../style.css">
     <title>Skills</title>
 </head>
+<style>
+    ::-webkit-scrollbar {
+        width: 14px;
+        background-color: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        border: 4px solid transparent;
+        border-radius: 7px;
+        background-clip: padding-box;
+        background-color: hsla(0,0%,59%,.5);
+    }
+    ::-webkit-scrollbar-track {
+        padding: 6px;
+        background-color: transparent;
+        border-radius: 10px;
+    }
+</style>
 <body id="projects-body">
+    <div class="content-name-wrap">
+        <p class="content-name">
+            Projects<span class="projects-braces">{</span>
+        </p>
+        <p class="content-comment">
+            // 약 1년 6개월
+        </p>
+    </div>
 
-<!--- projects header --->
-<header class="projects-header">
-    <h1 class="projects-title">Projects</h1>
-    <div id="login-headline" class="projects-headline">
-        <div>
-            <span class="projects-braces">{</span>
-            <span style="margin: 0 16px">회원가입, 로그인 서비스</span>
-            <span class="projects-braces">}</span>
+    <p class="content-desc">
+        주도적인 학습으로 프론트, 백엔드, 배포 등의 개발 경험을 거치며 웹 서비스의 설계와 개발에 대한 전체적인<br/>
+        이해도를 높이려 노력하였습니다.
+    </p>
+
+    <div class="project-container">
+
+
+
+        <div class="project-title-header">
+            <p class="title">ZETE AI 메모서비스</p>
+            <p class='project-type'>개인</p>
+            <a href="https://zete.zeriong.com/?type=demo&modal=sign-in" target="_blank" class="demo">
+                데모
+                <i class="arrow-right"></i>
+            </a>
+            <a href="https://github.com/zeriong/zete-zustand-reactQuery" target="_blank" class="git">
+                <img src="/images/git-symbol.svg" alt="git"/>
+                <i class="arrow-right"></i>
+            </a>
         </div>
-        <div class="projects-git-demo">
+
+        <p class="project-intro-desc">
+            사용성을 극대화 하여 편리한 메모 기능과, AI(Chat GPT) 를 연동하여 검색 결과를 메모에 요약 반영 시킬 수 있는<br/>
+            서비스입니다.
+        </p>
+
+        <div class="project-detail-main">
+            <div class="preview-container">
+                <div class="preview-img-wrap">
+                    <img src="/images/preview/zete.jpg" alt="preview"/>
+                </div>
+                <p class="dev-part">
+                    Frontend/Backend<br/>
+                    Engineer
+                </p>
+                <p class="dev-date-range">2023.03 ~ 2023.09</p>
+                <div class="dev-period">
+                    6개월
+                </div>
+            </div>
+
+            <div class="content-container">
+
+                <div>
+                    <div class="flex items-center gap-x-2">
+                        <p class="text-2xl text-gray-700 font-semibold max-sm:text-xl">
+                            AI 메모서비스 기획 및 기능 개발
+                        </p>
+
+                        <a href="https://github.com/zeriong/zete"
+                           target="_blank"
+                           class="flex items-center min-w-[40px] h-[22px] text-sm text-white bg-gray-600/90 rounded-full pl-1.5 pr-2">
+                            <img src={gitSymbolSvg} class="w-[16px]" alt="git"/>
+                            <i class="arrow-right !border-white ml-0.5"></i>
+                        </a>
+
+                    </div>
+                    <p class="text-gray-600">
+                        2023.03 ~ 2023.08
+                    </p>
+                </div>
+
+
+                <ul class="bullet-list">
+                    <li>기존 사용하던 메모 서비스를 벤치하여 발전시키고 AI를 접목시켜 서비스 기획</li>
+                    <li>NestJS와 MariaDB를 기반으로 백엔드 설계 및 기능 개발</li>
+                    <li>React를 기반으로 프론트엔드의 메모, 카테고리, 태그에 대한 CRUD 인터페이스 개발</li>
+                    <li>Openai ChatGpt3.5 를 연동하여 채팅형식의 정보 검색과 요약 메모기능 개발</li>
+                    <li>Openapi Generator 의 templates 기능을 통해 axios 통신 타입 파일을 커스텀하여 생성
+                        <span class="text-gray-400 ml-0.5">(생산성 증가)</span>
+                    </li>
+                </ul>
+
+                <div>
+                    <p class="text-gray-700 text-[18px] font-semibold">Used Stack</p>
+                    <p class="text-gray-600 mt-1">
+                        TypeScript, NestJS, TypeORM, JWT, Swagger, MariaDB,<br/>
+                        React, Redux Toolkit, Openapi Generator, Tailwind CSS
+                    </p>
+                </div>
+            </div>
 
         </div>
     </div>
-    <div id="zete-headline" class="projects-headline">
-        <div>
-            <span class="projects-braces">{</span>
-            <span style="margin: 0 16px">ZETE AI 메모서비스</span>
-            <span class="projects-braces">}</span>
-        </div>
-    </div>
-    <div id="side-headline" class="projects-headline">
-        <div>
-            <span class="projects-braces">{</span>
-            <span style="margin: 0 16px">유튜브 요약 서비스</span>
-            <span class="projects-braces">}</span>
-        </div>
-        <div>
-
-        </div>
-    </div>
-</header>
-
-<!---------------  demo link -------------->
-<a id="projects-demo" href="/static" target="_blank">
-    Demo >
-</a>
-
-<!---------------  go main button -------------->
-<button class="go-main-btn">메인 화면</button>
-
-<!--- login, main, side project wrapping --->
-<div id="section-wrap">
-    <!---------------  login section -------------->
-    <section id="projects-login">
-        login project
-    </section>
-
-    <!---------------  main section -------------->
-    <section id="projects-main">
-
-        <article class="projects-content">
-            <div id="go-login" class="project-box">
-                로그인으로
-            </div>
-            <div id="go-zete" class="project-box">
-                지트로
-            </div>
-            <div id="go-side" class="project-box">
-                사이드로
-            </div>
-        </article>
-    </section>
-
-    <!---------------  side section -------------->
-    <section id="projects-side-project">
-        side project
-    </section>
-</div>
-
-<!---------------  zete section -------------->
-<section id="projects-zete">
-    zete project
-</section>
-
-<script>
-    const projectsBody = document.querySelector('#projects-body');  // body
-    const goButtons = [
-        document.querySelector('#go-login'),
-        document.querySelector('#go-zete'),
-        document.querySelector('#go-side'),
-    ];
-    const loginHeadline = document.querySelector('#login-headline');
-    const zeteHeadline = document.querySelector('#zete-headline');
-    const sideHeadline = document.querySelector('#side-headline');
-    const goMainBtn = document.querySelector('.go-main-btn');
-
-    const projectsDemo = document.querySelector('#projects-demo');
-    projectsDemo.addEventListener('click', () => {
-
-        console.log('발동!')
-    })
-
-    // 메인으로가는 버튼
-    goMainBtn.addEventListener('click', () => {
-        projectsBody.style.top = '0';
-        projectsBody.style.left = '-100%';
-
-        loginHeadline.style.width = '0';
-        zeteHeadline.style.width = '0';
-        sideHeadline.style.width = '0';
-
-        goMainBtn.style.bottom = '-50px';
-
-        projectsDemo.style.scale = '0';
-    });
-
-    // go 버튼 이벤트 추가
-    goButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            if (btn.id === 'go-login') {
-                projectsBody.style.left = '0';
-                loginHeadline.style.width = '296px';
-            }
-            if (btn.id === 'go-zete') {
-                projectsBody.style.top = '-100%';
-                zeteHeadline.style.width = '267px';
-                projectsDemo.style.scale = '1';
-                projectsDemo.href = 'https://zete.zeriong.com/?type=demo&modal=sign-in';
-            }
-            if (btn.id === 'go-side') {
-                projectsBody.style.left = '-200%';
-                sideHeadline.style.width = '248px';
-                projectsDemo.style.scale = '1';
-                projectsDemo.href = 'https://side.zeriong.com/';
-            }
-
-            goMainBtn.style.bottom = '20px';
-        })
-    })
-
-</script>
+    <p class="projects-braces" style="margin-left: 0; margin-top: 4px;">
+        }
+    </p>
 </body>
 </html>

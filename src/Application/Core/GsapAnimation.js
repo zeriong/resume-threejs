@@ -44,6 +44,7 @@ export default class GsapAnimation {
     }
 
     toContent(target, isBtn) {
+        this.webgl.style.zIndex = 0;
         // get instance
         const app = Application.getInstance();
         // getContentPositions를 통해 포지션 등록
@@ -67,6 +68,7 @@ export default class GsapAnimation {
                 this.dialogBox.style.display = 'block';
                 if (target === 'aboutMe1') this.appearDialog();
                 else this.isMovingCam = false;
+                this.webgl.style.zIndex = -1;
             }
         });
         gsap.to(app.camera.orbitControls.target, {
