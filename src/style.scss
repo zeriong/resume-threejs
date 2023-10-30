@@ -1,8 +1,13 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css");
 
 // index
+$blue-400: rgb(96 165 250);
 $blue-500: rgb(59 130 246);
 $blue-600: rgb(37 99 235);
+$blue-700: rgb(29 78 216);
+$blue-800: rgb(30 64 175);
+$blue-900: rgb(30 58 138);;
+$orange-500: rgb(249 115 22);
 $gray-200: rgb(229 231 235);
 $gray-300: rgb(209 213 219);
 $gray-400: rgb(156 163 175);
@@ -35,6 +40,21 @@ p {
   margin: 0;
   font-weight: 0;
 }
+ul {
+  list-style: none;
+  padding: 0;
+}
+//ul.bullet-list > li {
+//  position: relative;
+//  padding: 4px 0 4px 16px;
+//}
+//ul.bullet-list > li:before {
+//  position: absolute;
+//  left: 0;
+//  display: inline-block;
+//  content: "•";
+//  color: $gray-500;
+//}
 #webgl, #css3DObject {
   position: absolute;
   left: 0;
@@ -431,6 +451,121 @@ p {
     }
   }
 }
+#history-body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  //background-color: white;
+  background-color: #efefef;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  .history-title {
+    color: $gray-800;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .history-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-left: 1.5px solid $gray-300;
+    align-items: center;
+    padding: 0 20px 20px 30px;
+    margin: 20px 0 0 10px;
+
+
+      .content-list {
+        width: 100%;
+        display: grid;
+        gap: 20px;
+
+        li {
+          position: relative;
+
+          .circle {
+            position: absolute;
+            top: 11px;
+            left: -33px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            //background-color: $blue-500;
+            background-color: $gray-700;
+            border-radius: 100%;
+            width: 6px;
+            height: 6px;
+            z-index: 2;
+
+            &:before {
+              position: absolute;
+              z-index: 1;
+              content:'';
+              width: 12px;
+              height: 12px;
+              //background-color: $blue-500;
+              background-color: $gray-700;
+              opacity: 0.2;
+              border-radius: 100%;
+            }
+          }
+
+          .title-year {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            //color: $blue-500;
+            color: $gray-700;
+            border-bottom: 1px solid $gray-300;
+          }
+
+          .list-item {
+            display: grid;
+            gap: 12px;
+
+            .list-area {
+              display: flex;
+
+              .list-year {
+                font-weight: 500;
+                font-size: 16px;
+                color: $gray-700;
+                margin-right: 10px;
+              }
+              .contents {
+                display: grid;
+                gap: 6px;
+              }
+              .content {
+                position: relative;
+                padding-left: 14px;
+                font-weight: 300;
+                font-size: 14px;
+
+                &:before {
+                  position: absolute;
+                  left: 0;
+                  display: inline-block;
+                  content: "•";
+                  color: $gray-500;
+                }
+
+              }
+            }
+          }
+
+        }
+      }
+
+  }
+
+
+}
+
 
 
 

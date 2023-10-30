@@ -14,7 +14,7 @@ export default class Room {
         this.cssScene = app.cssScene;
 
         this.projectsPosition = new THREE.Vector3();
-        this.learningPosition = new THREE.Vector3();
+        this.historyPosition = new THREE.Vector3();
         this.skillsPosition = new THREE.Vector3();
         this.posterPosition = new THREE.Vector3();
 
@@ -65,7 +65,7 @@ export default class Room {
                         const cssObj = new CSS3DObject(iframe);
                         cssObj.name = 'monitor';
                         cssObj.position.x = this.projectsPosition.x;
-                        cssObj.position.y = this.projectsPosition.y + 0.066;
+                        cssObj.position.y = this.projectsPosition.y + 0.115;
                         cssObj.position.z = this.projectsPosition.z + 0.026;
                         cssObj.scale.set(...this.initScale);
 
@@ -86,7 +86,7 @@ export default class Room {
                         material.emissiveIntensity = 0;  // 반사되는 빛의 강도 (0부터 1 사이의 값)
                         const mesh = new THREE.Mesh(geometry, material);
                         mesh.position.x = this.projectsPosition.x;
-                        mesh.position.y = this.projectsPosition.y + 0.066;
+                        mesh.position.y = this.projectsPosition.y + 0.115;
                         mesh.position.z = this.projectsPosition.z + 0.026;
                         mesh.scale.set(...this.initScale);
                         mesh.name = 'projects';
@@ -117,7 +117,7 @@ export default class Room {
 
                         // CSS3DObject 생성
                         const cssObj = new CSS3DObject(posterEl);
-                        cssObj.name = 'learning';
+                        cssObj.name = 'history';
                         cssObj.position.set(...setPosition);
                         cssObj.scale.set(...this.initScale);
                         this.cssScene.add(cssObj);
@@ -140,30 +140,30 @@ export default class Room {
                         child.name = 'poster';
                     }
 
-                    // "Learning" 액자
+                    // "history" 액자
                     if (child.name === 'Plane218_1') {
-                        child.getWorldPosition(this.learningPosition);
+                        child.getWorldPosition(this.historyPosition);
 
-                        const setPosition = [this.learningPosition.x, this.learningPosition.y, this.learningPosition.z + 0.02];
+                        const setPosition = [this.historyPosition.x, this.historyPosition.y, this.historyPosition.z + 0.02];
 
                         // htmls 생성
-                        const learningEl = document.createElement('iframe');
-                        learningEl.src = './htmls/learning.html'
-                        learningEl.style.width = this.contentSizes.learning.width + 'px';
-                        learningEl.style.height = this.contentSizes.learning.height + 'px';
-                        learningEl.style.overflow = 'scroll';
-                        learningEl.style.boxSizing = 'border-box';
-                        learningEl.style.opacity = '1';
+                        const historyEl = document.createElement('iframe');
+                        historyEl.src = './htmls/history.html'
+                        historyEl.style.width = this.contentSizes.history.width + 'px';
+                        historyEl.style.height = this.contentSizes.history.height + 'px';
+                        historyEl.style.overflow = 'scroll';
+                        historyEl.style.boxSizing = 'border-box';
+                        historyEl.style.opacity = '1';
 
                         // CSS3DObject 생성
-                        const cssObj = new CSS3DObject(learningEl);
-                        cssObj.name = 'learning';
+                        const cssObj = new CSS3DObject(historyEl);
+                        cssObj.name = 'history';
                         cssObj.position.set(...setPosition);
                         cssObj.scale.set(...this.initScale);
                         this.cssScene.add(cssObj);
 
                         // CSS3DObject를 표현하기 위한 Mesh
-                        const geometry = new THREE.PlaneGeometry(this.contentSizes.learning.width, this.contentSizes.learning.height);
+                        const geometry = new THREE.PlaneGeometry(this.contentSizes.history.width, this.contentSizes.history.height);
                         const material = new THREE.MeshLambertMaterial();
                         material.side = THREE.DoubleSide;
                         material.opacity = 0;
@@ -174,15 +174,17 @@ export default class Room {
                         const mesh = new THREE.Mesh(geometry, material);
                         mesh.position.set(...setPosition);
                         mesh.scale.set(...this.initScale);
-                        mesh.name = 'learning';
+                        mesh.name = 'history';
                         this.scene.add(mesh);
 
-                        child.name = 'learning';
+                        child.name = 'history';
                     }
 
                     // "Skills" 액자
                     if (child.name === 'Plane220_1') {
+                        const scale = new THREE.Vector3();
                         child.getWorldPosition(this.skillsPosition);
+                        child.getWorldScale(scale);
 
                         const setPosition = [this.skillsPosition.x, this.skillsPosition.y, this.skillsPosition.z + 0.02];
 

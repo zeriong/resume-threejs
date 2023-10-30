@@ -28,7 +28,7 @@ export default class Fonts {
                 { name: 'name', y: 0.45, text: 'ZERIONG' },
                 { name: 'aboutMe1', y: 3, text: 'About Me' },
                 { name: 'projects', y: 2.5, text: 'Projects' },
-                { name: 'learning', y: 2, text: 'Learning' },
+                { name: 'history', y: 2, text: 'history' },
                 { name: 'skills', y: 1.5, text: 'Skills' },
                 { name: 'github', y: 1, text: 'Github' },
                 { name: 'blog', y: 0.5, text: 'Blog' },

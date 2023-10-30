@@ -54,7 +54,7 @@ export default class Raycaster {
         if (target.name === 'aboutMe1') this.gsap.toContent(target.name)
         if (target.name === 'projects') this.gsap.toContent(target.name)
         if (target.name === 'poster') this.gsap.toContent(target.name)
-        if (target.name === 'learning') this.gsap.toContent(target.name)
+        if (target.name === 'history') this.gsap.toContent(target.name)
         if (target.name === 'skills') this.gsap.toContent(target.name)
 
         // 링크 메뉴 클릭 이벤트

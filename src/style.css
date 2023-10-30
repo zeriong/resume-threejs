@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css");
 * {
   font-family: "Pretendard";
@@ -24,6 +25,11 @@ a {
 p {
   margin: 0;
   font-weight: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
 }
 
 #webgl, #css3DObject {
@@ -387,6 +393,100 @@ p {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+#history-body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #efefef;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+#history-body .history-title {
+  color: rgb(31, 41, 55);
+  font-size: 32px;
+  font-weight: 700;
+}
+#history-body .history-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-left: 1.5px solid rgb(209, 213, 219);
+  align-items: center;
+  padding: 0 20px 20px 30px;
+  margin: 20px 0 0 10px;
+}
+#history-body .history-container .content-list {
+  width: 100%;
+  display: grid;
+  gap: 20px;
+}
+#history-body .history-container .content-list li {
+  position: relative;
+}
+#history-body .history-container .content-list li .circle {
+  position: absolute;
+  top: 11px;
+  left: -33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(55, 65, 81);
+  border-radius: 100%;
+  width: 6px;
+  height: 6px;
+  z-index: 2;
+}
+#history-body .history-container .content-list li .circle:before {
+  position: absolute;
+  z-index: 1;
+  content: "";
+  width: 12px;
+  height: 12px;
+  background-color: rgb(55, 65, 81);
+  opacity: 0.2;
+  border-radius: 100%;
+}
+#history-body .history-container .content-list li .title-year {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: rgb(55, 65, 81);
+  border-bottom: 1px solid rgb(209, 213, 219);
+}
+#history-body .history-container .content-list li .list-item {
+  display: grid;
+  gap: 12px;
+}
+#history-body .history-container .content-list li .list-item .list-area {
+  display: flex;
+}
+#history-body .history-container .content-list li .list-item .list-area .list-year {
+  font-weight: 500;
+  font-size: 16px;
+  color: rgb(55, 65, 81);
+  margin-right: 10px;
+}
+#history-body .history-container .content-list li .list-item .list-area .contents {
+  display: grid;
+  gap: 6px;
+}
+#history-body .history-container .content-list li .list-item .list-area .content {
+  position: relative;
+  padding-left: 14px;
+  font-weight: 300;
+  font-size: 14px;
+}
+#history-body .history-container .content-list li .list-item .list-area .content:before {
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  content: "•";
+  color: rgb(107, 114, 128);
 }
 
 /*# sourceMappingURL=style.css.map */

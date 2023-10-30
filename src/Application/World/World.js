@@ -8,7 +8,7 @@ export default class World {
         // positions에 등록
         this.room = new Room();
         this.projectsPosition = this.room.projectsPosition;
-        this.learningPosition = this.room.learningPosition;
+        this.historyPosition = this.room.historyPosition;
         this.skillsPosition = this.room.skillsPosition;
         this.posterPosition = this.room.posterPosition;
 

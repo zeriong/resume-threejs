@@ -7,9 +7,9 @@ export default class Sizes {
         this.height = window.innerHeight;
         this.roomInitScale = new Array(3).fill(0.001);
         this.roomSizes = {
-            monitor: { width: 879, height: 438 },
-            learning: { width: 520, height: 740 },
-            skills: { width: 553, height: 333 },
+            monitor: { width: 879, height: 550 },
+            history: { width: 520, height: 743 },
+            skills: { width: 553, height: 480 },
             poster: { width: 980, height: 1210 },
         }
 

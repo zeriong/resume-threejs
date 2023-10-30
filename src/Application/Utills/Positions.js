@@ -7,7 +7,7 @@ export default class Positions {
         this.world = this.app.world;
 
         this.projectsPosition = this.world.projectsPosition;
-        this.learningPosition = this.world.learningPosition;
+        this.historyPosition = this.world.historyPosition;
         this.skillsPosition = this.world.skillsPosition;
         this.posterPosition = this.world.posterPosition;
 
@@ -74,7 +74,7 @@ export default class Positions {
             { current: 'aboutMe2', next: 'projects', prev: 'aboutMe1' },
 
             {
-                current: 'projects', next: 'learning', prev: 'aboutMe1',
+                current: 'projects', next: 'history', prev: 'aboutMe1',
                 cameraPosition: {
                     x: (this.projectsPosition.x), y: (this.projectsPosition.y), z: (this.projectsPosition.z + this.fixMonitorPosition + this.fixCameraPosition)
                 },
@@ -83,20 +83,20 @@ export default class Positions {
                 }
             },
 
-            // learning
+            // history
             {
-                current: 'learning', next: 'skills', prev: 'projects',
+                current: 'history', next: 'skills', prev: 'projects',
                 cameraPosition: {
-                    x: (this.learningPosition.x), y: (this.learningPosition.y), z: (this.learningPosition.z + 3)
+                    x: (this.historyPosition.x), y: (this.historyPosition.y), z: (this.historyPosition.z + 3)
                 },
                 controlsTarget: {
-                    x: (this.learningPosition.x), y: (this.learningPosition.y), z: (this.learningPosition.z)
+                    x: (this.historyPosition.x), y: (this.historyPosition.y), z: (this.historyPosition.z)
                 }
             },
 
             // skills
             {
-                current: 'skills', next: 'poster', prev: 'learning',
+                current: 'skills', next: 'poster', prev: 'history',
                 cameraPosition: {
                     x: (this.skillsPosition.x),
                     y: (this.skillsPosition.y),
