@@ -32,6 +32,6 @@ export default class AboutMe {
             model.getWorldPosition(this.position);
             this.intersectsMeshes.push(model);
             this.scene.add(model);
-        })
+        });
     }
 }

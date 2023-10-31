@@ -18,6 +18,7 @@ export default class EventModule {
 
     typing(text, typingSpeed = 25) {
         let charIndex = 0;
+        let content = ''
 
         this.cursorWrap.style.display = 'inline-block';
         this.cursorWrap.style.position = 'relative';
@@ -25,7 +26,9 @@ export default class EventModule {
 
         const typing = () => {
             let txt = text[charIndex++];
-            this.dialogContent.textContent += txt
+            content += txt === '<' ? `<br/>` : txt;
+
+            this.dialogContent.innerHTML = content;
             this.dialogContent.appendChild(this.cursorWrap);
 
             if (this.cursorInterval !== null) {
@@ -46,7 +49,7 @@ export default class EventModule {
     }
 
     skipTyping(text) {
-        this.dialogContent.textContent = text;
+        this.dialogContent.innerHTML = text.replace(/</g, `<br/>`);
         this.dialogContent.appendChild(this.cursorWrap);
         this.cursorLoop();
         clearTimeout(this.typingTimout);

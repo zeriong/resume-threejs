@@ -92,11 +92,6 @@ export default class Room {
                         mesh.name = 'projects';
                         this.scene.add(mesh);
 
-                        // todo: 작업 완료 시 삭제
-                        // camera.position.set(monitorPosition.x + 0.08, monitorPosition.y, monitorPosition.z + 1)
-                        // controls.target.set(monitorPosition.x, monitorPosition.y, -3)
-                        // scene.add(camera);
-
                         child.name = 'projects';
                     }
 
@@ -106,35 +101,41 @@ export default class Room {
 
                         const setPosition = [this.posterPosition.x, this.posterPosition.y, this.posterPosition.z + 0.049];
 
-                        // htmls 생성
-                        const posterEl = document.createElement('iframe');
-                        posterEl.src = './htmls/poster.html';
-                        posterEl.style.width = this.contentSizes.poster.width + 'px';
-                        posterEl.style.height = this.contentSizes.poster.height + 'px';
-                        posterEl.style.overflow = 'scroll';
-                        posterEl.style.boxSizing = 'border-box';
-                        posterEl.style.opacity = '1';
+                        // // htmls 생성
+                        // const posterEl = document.createElement('iframe');
+                        // posterEl.src = './htmls/poster.html';
+                        // posterEl.style.width = this.contentSizes.poster.width + 'px';
+                        // posterEl.style.height = this.contentSizes.poster.height + 'px';
+                        // posterEl.style.overflow = 'scroll';
+                        // posterEl.style.boxSizing = 'border-box';
+                        // posterEl.style.opacity = '1';
+                        //
+                        // // CSS3DObject 생성
+                        // const cssObj = new CSS3DObject(posterEl);
+                        // cssObj.name = 'history';
+                        // cssObj.position.set(...setPosition);
+                        // cssObj.scale.set(...this.initScale);
+                        // this.cssScene.add(cssObj);
 
-                        // CSS3DObject 생성
-                        const cssObj = new CSS3DObject(posterEl);
-                        cssObj.name = 'history';
-                        cssObj.position.set(...setPosition);
-                        cssObj.scale.set(...this.initScale);
-                        this.cssScene.add(cssObj);
+                        // texture img
+                        const textureLoad = new THREE.TextureLoader();
+                        const texture = textureLoad.load('/images/dragonBall.png');
 
                         // CSS3DObject를 표현하기 위한 Mesh
                         const geometry = new THREE.PlaneGeometry(this.contentSizes.poster.width, this.contentSizes.poster.height);
-                        const material = new THREE.MeshLambertMaterial();
-                        material.side = THREE.DoubleSide;
-                        material.opacity = 0;
-                        material.transparent = true;
-                        material.blending = THREE.NoBlending;  // CSS3DObject를 투과 해주는 옵션
-                        material.emissive = 0x0033ff;  // 반사되는 빛의 색상 (반사 색)
-                        material.emissiveIntensity = 0  // 반사되는 빛의 강도 (0부터 1 사이의 값)
+                        const material = new THREE.MeshBasicMaterial({ map: texture });
+                        // const material = new THREE.MeshLambertMaterial();
+                        // material.side = THREE.DoubleSide;
+                        // material.opacity = 0;
+                        // material.transparent = true;
+                        // material.blending = THREE.NoBlending;  // CSS3DObject를 투과 해주는 옵션
+                        // material.emissive = 0x0033ff;  // 반사되는 빛의 색상 (반사 색)
+                        // material.emissiveIntensity = 0  // 반사되는 빛의 강도 (0부터 1 사이의 값)
+                        // material.map =  texture;
                         const mesh = new THREE.Mesh(geometry, material);
                         mesh.position.set(...setPosition);
                         mesh.scale.set(...this.initScale);
-                        mesh.name = 'projects';
+                        mesh.name = 'poster';
                         this.scene.add(mesh);
 
                         child.name = 'poster';

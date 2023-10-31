@@ -22,8 +22,24 @@ export default class GsapAnimation {
 
 
         this.dialogTextList = {
-            step1: '1. 안녕하세요 프론트엔드 엔지니어\n 제리옹입니다. 동적인 그래픽 구현을\n 즐깁니다.',
-            step2: '2. 열심히 하겠습니다.',
+            step1: `안녕하세요, 언제나 배가 고픈 개발자 전제룡입니다.<
+            저의 강점은 자기주도적인 문제 해결 능력과 소통, 공감<
+            능력입니다. 개발을 시작하였을 때부터 지금까지 자기<
+            주도학습을 지속하고 있으며 꾸준히 깃허브를<
+            업데이트하고 있습니다. 이러한 학습 방식으로 문제를<
+            다룰 땐 발단부터 절차적인 검증을 통해 해결하는<
+            과정에 익숙합니다.`,
+
+            step2: `또한 소통, 공감능력을 통해<
+            팀원 간 의견 불일치로 인해 분위기가 좋지 않을 때<
+            분위기를 이끌어 모두 함께 공감할 수 있는 분위기를<
+            조성한 경험이 있습니다. 또 하나의 사례로 개발중이던<
+            사이드프로젝트에서 저작권 문제의 여지를 파악하여<
+            검증된 자료를 공유하고 적극적인 커뮤니케이션을 통해<
+            디자인 시안을 바꾸어 위기를 모면한 경험도 있습니다.`,
+
+            step3: `저의 소개는 여기까지 마치겠습니다!<
+            시간내어 방문해주심에 감사드리며 편히 둘러봐주세요!`
         }
 
         // 버튼 hover styles
@@ -104,7 +120,7 @@ export default class GsapAnimation {
                 // 메뉴버튼 사라짐
                 this.contentMenuBtns.style.bottom = '-70px';
                 // aboutMe의 경우 대화상자 사라지는 애니메이션 적용
-                if (this.currentContent === 'aboutMe1' || 'aboutMe2') this.disappearDialog();
+                if (this.currentContent === 'aboutMe1' || 'aboutMe2' || 'aboutMe3') this.disappearDialog();
             },
             onComplete: () => {
                 this.isInContent = false;
@@ -169,13 +185,14 @@ export default class GsapAnimation {
 
     // Next 버튼 클릭 매서드
     toNext() {
+        if (this.isMovingCam) return;
         // get instance
         const app = Application.getInstance();
-        if (this.isMovingCam) return;
         // 타이핑이 진행중일 때 타이핑 스킵
         if (app.eventModule.typingTimout !== null) {
             if (this.currentContent === 'aboutMe1') app.eventModule.skipTyping(this.dialogTextList.step1);
             if (this.currentContent === 'aboutMe2') app.eventModule.skipTyping(this.dialogTextList.step2);
+            if (this.currentContent === 'aboutMe3') app.eventModule.skipTyping(this.dialogTextList.step3);
             return;
         }
 
@@ -194,12 +211,20 @@ export default class GsapAnimation {
 
         const current = contentList.find(val => val.current === this.currentContent);
 
-        if (this.currentContent === 'aboutMe2') {
+        if (this.currentContent === 'aboutMe3') {
             this.currentContent = current.next;
             this.isMovingCam = true;
 
             // 말풍선 사라지는 애니메이션 끝나고 이동
             this.disappearDialog(current.next, true);
+            return;
+        }
+        if (this.currentContent === 'aboutMe2') {
+            this.currentContent = current.next;
+            this.dialogContent.textContent = '';
+
+            // 타이핑이벤트
+            app.eventModule.typing(this.dialogTextList.step3);
             return;
         }
         if (this.currentContent === 'aboutMe1') {
@@ -224,6 +249,7 @@ export default class GsapAnimation {
         if (app.eventModule.typingTimout !== null) {
             if (this.currentContent === 'aboutMe1') app.eventModule.skipTyping(this.dialogTextList.step1);
             if (this.currentContent === 'aboutMe2') app.eventModule.skipTyping(this.dialogTextList.step2);
+            if (this.currentContent === 'aboutMe3') app.eventModule.skipTyping(this.dialogTextList.step3);
             return;
         }
 
@@ -251,6 +277,13 @@ export default class GsapAnimation {
             this.dialogContent.textContent = '';
             // 타이핑이벤트
             app.eventModule.typing(this.dialogTextList.step1);
+            return;
+        }
+        if (this.currentContent === 'aboutMe3') {
+            this.currentContent = current.prev;
+            this.dialogContent.textContent = '';
+            // 타이핑이벤트
+            app.eventModule.typing(this.dialogTextList.step2);
             return;
         }
 

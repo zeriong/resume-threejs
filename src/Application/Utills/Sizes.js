@@ -10,7 +10,7 @@ export default class Sizes {
             monitor: { width: 879, height: 550 },
             history: { width: 520, height: 743 },
             skills: { width: 553, height: 480 },
-            poster: { width: 980, height: 1210 },
+            poster: { width: 986, height: 1500 },
         }
 
         window.addEventListener('resize', () => {

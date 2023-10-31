@@ -70,8 +70,9 @@ export default class Positions {
                 }
             },
 
-            // about me 두번째 대화 (카메라 무빙 애니메이션 x)
-            { current: 'aboutMe2', next: 'projects', prev: 'aboutMe1' },
+            // about me 2,3 대화 (카메라 무빙 애니메이션 x)
+            { current: 'aboutMe2', next: 'aboutMe3', prev: 'aboutMe1' },
+            { current: 'aboutMe3', next: 'projects', prev: 'aboutMe2' },
 
             {
                 current: 'projects', next: 'history', prev: 'aboutMe1',
