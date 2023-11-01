@@ -26,7 +26,7 @@ export default class EventModule {
 
         const typing = () => {
             let txt = text[charIndex++];
-            content += txt === '<' ? `<br/>` : txt;
+            content += txt === '\n' ? `<br/>` : txt;
 
             this.dialogContent.innerHTML = content;
             this.dialogContent.appendChild(this.cursorWrap);
@@ -49,7 +49,7 @@ export default class EventModule {
     }
 
     skipTyping(text) {
-        this.dialogContent.innerHTML = text.replace(/</g, `<br/>`);
+        this.dialogContent.innerHTML = text.replace(/\n/g, `<br/>`);
         this.dialogContent.appendChild(this.cursorWrap);
         this.cursorLoop();
         clearTimeout(this.typingTimout);

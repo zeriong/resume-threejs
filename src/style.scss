@@ -45,17 +45,7 @@ ul {
   list-style: none;
   padding: 0;
 }
-//ul.bullet-list > li {
-//  position: relative;
-//  padding: 4px 0 4px 16px;
-//}
-//ul.bullet-list > li:before {
-//  position: absolute;
-//  left: 0;
-//  display: inline-block;
-//  content: "•";
-//  color: $gray-500;
-//}
+
 #webgl, #css3DObject {
   position: absolute;
   left: 0;
@@ -123,7 +113,7 @@ ul {
   padding: 20px;
 }
 
-
+// about me
 #dialogBox {
   transition: 300ms ease-in-out;
   position: fixed;
@@ -133,7 +123,6 @@ ul {
   bottom: 130px;
   width: 460px;
   height: 300px;
-  font-size: 50px;
   font-weight: 700;
   background-color: #fff;
   color: black;
@@ -158,16 +147,17 @@ ul {
     margin-top: -40px;
   }
   .dialog-name {
-    font-size: 28px;
+    font-size: 30px;
     margin-bottom: 8px;
     .dialog-position {
-      font-size: 20px;
+      font-size: 24px;
     }
   }
   .dialog-content {
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 600;
     line-height: 1.5;
+    color: $gray-800;
   }
   #dialogCursor {
     position: absolute;
@@ -300,6 +290,19 @@ ul {
   flex-direction: column;
   padding: 36px 40px;
 
+  ul.bullet-list > li {
+    position: relative;
+    padding: 4px 0 4px 16px;
+    box-sizing: border-box;
+  }
+  ul.bullet-list > li:before {
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    content: "•";
+    color: $blue-500;
+  }
+
   .arrow-right {
     border: solid white;
     border-width: 0 2px 2px 0;
@@ -311,6 +314,8 @@ ul {
   .projects-braces {
     color: rgba(156, 163, 175, 0.8);
     margin-left: 8px;
+    font-size: 36px;
+    font-weight: 600;
   }
 
   .content-name-wrap {
@@ -348,19 +353,20 @@ ul {
       align-items: center;
       width: 100%;
       border-bottom: 1px solid rgba(169, 169, 169, 0.9);
-      gap: 8px 4px;
+      gap: 8px;
       padding-bottom: 6px;
 
       .title {
-        font-size: 24px;
+        font-size: 26px;
         color: $gray-700;
-        font-weight: 600;
+        font-weight: 700;
+        margin-right: 2px;
       }
       .project-type {
         font-size: 14px;
         color: #ffffff;
         border-radius: 100px;
-        padding: 2px 10px;
+        padding: 4px 12px;
         background-color: rgb(22, 163, 74, 0.8);
       }
       .demo {
@@ -370,7 +376,10 @@ ul {
         color: #ffffff;
         background-color: $blue-500;
         border-radius: 100px;
-        padding: 2px 10px;
+        padding: 4px 10px;
+        i {
+          margin-left: 2px;
+        }
       }
       .git {
         display: flex;
@@ -397,25 +406,24 @@ ul {
       font-size: 16px;
       color: $gray-600;
       padding-top: 12px;
-      padding-bottom: 12px;
     }
 
     .project-detail-main {
       display: flex;
-      gap: 52px 28px;
+      gap: 52px;
       margin-top: 32px;
 
       .preview-container {
         display: flex;
         flex-direction: column;
-        min-width: 270px;
+        min-width: 150px;
         gap: 12px;
         padding-top: 4px;
 
         .preview-img-wrap {
           position: relative;
-          width: 270px;
-          height: 300px;
+          width: 150px;
+          height: 150px;
           border: 1px solid $gray-300;
           border-radius: 6px;
           overflow: hidden;
@@ -446,6 +454,45 @@ ul {
         display: flex;
         flex-direction: column;
         gap: 16px;
+        .content-title-area {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          .content-title {
+            font-size: 24px;
+            color: $gray-700;
+            font-weight: 600;
+          }
+          .github-icon {
+            display: flex;
+            align-items: center;
+            min-width: 40px;
+            height: 24px;
+            font-size: 14px;
+            color: #fff;
+            background-color: rgba(75, 85, 99, 0.9);
+            border-radius: 100px;
+            padding-left: 6px;
+            padding-right: 8px;
+            & > img {
+              width: 17px;
+              margin-right: 4px;
+            }
+          }
+        }
+        .dev-range {
+          color: $gray-600;
+        }
+        .etc-list-title {
+          color: $gray-700;
+          font-size: 18px;
+          font-weight: 600;
+        }
+        .etc-list-content {
+          color: $gray-700;
+          margin-top: 4px;
+          margin-bottom: 10px;
+        }
       }
     }
   }
@@ -568,6 +615,53 @@ ul {
 
 }
 
+// 미디어 쿼리
+@media screen and (max-width: 497px){
+  #dialogBox {
+    bottom: 68px;
+    width: calc(100% - 20px);
+    height: 230px; // org 300px
+    padding: 14px;
+
+    // 말풍선 꼬리
+    &:after {
+      content: '';
+      position: fixed;
+      top: 0;
+      right: 30%;
+      width: 0;
+      height: 0;
+      border: 36px solid transparent;
+      border-bottom-color: #fff;
+      border-top: 0;
+      border-left: 0;
+      margin-left: -20px;
+      margin-top: -36px;
+    }
+    .dialog-name {
+      font-size: 22px;
+      margin-bottom: 8px;
+      .dialog-position {
+        font-size: 17px;
+      }
+    }
+    .dialog-content {
+      font-size: 15px;
+    }
+  }
+
+  #contentMenuBtns {
+    bottom: 10px;
+    width: 100%;
+    padding: 0 10px;
+    .dialog-btns-style {
+      font-size: 14px;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: 16px;
+    }
+  }
+}
 
 
 

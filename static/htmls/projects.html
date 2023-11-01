@@ -33,25 +33,18 @@
             // 약 1년 6개월
         </p>
     </div>
-
     <p class="content-desc">
         주도적인 학습으로 프론트, 백엔드, 배포 등의 개발 경험을 거치며 웹 서비스의 설계와 개발에 대한 전체적인<br/>
         이해도를 높이려 노력하였습니다.
     </p>
 
+    <!-- AI 메모서비스 ZETE -->
     <div class="project-container">
-
-
-
         <div class="project-title-header">
             <p class="title">ZETE AI 메모서비스</p>
             <p class='project-type'>개인</p>
             <a href="https://zete.zeriong.com/?type=demo&modal=sign-in" target="_blank" class="demo">
                 데모
-                <i class="arrow-right"></i>
-            </a>
-            <a href="https://github.com/zeriong/zete-zustand-reactQuery" target="_blank" class="git">
-                <img src="/images/git-symbol.svg" alt="git"/>
                 <i class="arrow-right"></i>
             </a>
         </div>
@@ -61,6 +54,7 @@
             서비스입니다.
         </p>
 
+        <!-- ReactQuery, Zustand 적용, 리팩토링 및 배포 -->
         <div class="project-detail-main">
             <div class="preview-container">
                 <div class="preview-img-wrap">
@@ -75,51 +69,258 @@
                     6개월
                 </div>
             </div>
-
             <div class="content-container">
-
                 <div>
-                    <div class="flex items-center gap-x-2">
-                        <p class="text-2xl text-gray-700 font-semibold max-sm:text-xl">
+                    <div class="content-title-area">
+                        <p class="content-title">
+                            ReactQuery, Zustand 적용, 리팩토링 및 배포
+                        </p>
+
+                        <a href="https://github.com/zeriong/zete-zustand-reactQuery"
+                           target="_blank"
+                           class="github-icon">
+                            <img src="/images/git-symbol.svg" alt="git"/>
+                            <i class="arrow-right"></i>
+                        </a>
+                    </div>
+                    <p class="dev-range">
+                        2023.08 ~ 2023.09
+                    </p>
+                </div>
+                <ul class="bullet-list">
+                    <li>기존에 사용하던 Redux와 다른 타입의 상태 관리에 대한 경험을 위해 상태관리 라이브러리를 ReactQuery, Zustand 조합으로 컨버팅</li>
+                    <li>다소 아쉬웠던 일부 코드 리팩토링</li>
+                    <li>서비스 환경에 대한 이해도를 높이기 위해 우분투 리눅스를 통한 서비스 환경구축, 오픈소스 SSL 인증서 적용</li>
+                    <li>PM2를 통한 서비스 관리 및 무중단 서비스 이해</li>
+                </ul>
+                <div>
+                    <p class="etc-list-title">Review</p>
+                    <p class="etc-list-content">
+                        기존 코드를 리팩토링하며 최근에 만든 코드와 비교했을 때 가독성, 코드 재사용면에서<br/>
+                        많은 부분이 개선 되었다는 것을 느꼈습니다.<br/><br/>
+
+                        또한 서비스 환경을 구성하는 과정에서 SSH를 통해 패키지를 설치하고 필요한 설정을<br/>
+                        UI 없이 적용하면서 UX와 UI의 소중함을 깨닫고 프론트엔드 개발자로서 인터페이스를<br/>
+                        개발한다는 것은 "사용자의 편의"가 핵심이고 절대 망각해선 안되는 요소임을 한번 더<br/>
+                        깨닫는 계기가 되었습니다.<br/><br/>
+
+                        서비스를 원활하게 운영하기 위해서 Node.js런타임과 보편적으로 쓰이는 PM2를 <br/>
+                        접하면서 서버관리는 생각보다 더 까다롭다는 생각이 들었고 PM2같은 고마운 패키지를<br/>
+                        사용하고 있는 나는 참으로 개발하기 좋은 시대에 살고 있다는 것을 깨달았습니다.
+                    </p>
+                </div>
+                <div>
+                    <p class="etc-list-title">Used Stack</p>
+                    <p class="etc-list-content">
+                        ReactQuery, Zustand, Ubuntu Linux, PM2
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI 메모서비스 기획 및 기능 개발 적용 -->
+        <div class="project-detail-main">
+            <div class="preview-container"></div>
+            <div class="content-container">
+                <div>
+                    <div class="content-title-area">
+                        <p class="content-title">
                             AI 메모서비스 기획 및 기능 개발
                         </p>
 
                         <a href="https://github.com/zeriong/zete"
                            target="_blank"
-                           class="flex items-center min-w-[40px] h-[22px] text-sm text-white bg-gray-600/90 rounded-full pl-1.5 pr-2">
-                            <img src={gitSymbolSvg} class="w-[16px]" alt="git"/>
-                            <i class="arrow-right !border-white ml-0.5"></i>
+                           class="github-icon">
+                            <img src="/images/git-symbol.svg" alt="git"/>
+                            <i class="arrow-right"></i>
                         </a>
-
                     </div>
-                    <p class="text-gray-600">
+                    <p class="dev-range">
                         2023.03 ~ 2023.08
                     </p>
                 </div>
-
-
                 <ul class="bullet-list">
                     <li>기존 사용하던 메모 서비스를 벤치하여 발전시키고 AI를 접목시켜 서비스 기획</li>
                     <li>NestJS와 MariaDB를 기반으로 백엔드 설계 및 기능 개발</li>
                     <li>React를 기반으로 프론트엔드의 메모, 카테고리, 태그에 대한 CRUD 인터페이스 개발</li>
                     <li>Openai ChatGpt3.5 를 연동하여 채팅형식의 정보 검색과 요약 메모기능 개발</li>
-                    <li>Openapi Generator 의 templates 기능을 통해 axios 통신 타입 파일을 커스텀하여 생성
-                        <span class="text-gray-400 ml-0.5">(생산성 증가)</span>
+                    <li>
+                        Openapi Generator 의 templates 기능을 통해 axios 통신 타입 파일을 <br/>커스텀하여 생성
+                        <span style="color: rgb(156 163 175); margin-left: 2px;">(생산성 증가)</span>
                     </li>
                 </ul>
-
                 <div>
-                    <p class="text-gray-700 text-[18px] font-semibold">Used Stack</p>
-                    <p class="text-gray-600 mt-1">
+                    <p class="etc-list-title">Review</p>
+                    <p class="etc-list-content">
+                        Chat GPT의 Prompt설정에 따라서 다양하고 많은 기능을 구현할 수 있다는 것을<br/>
+                        깨달았고 인공지능 기술에도 관심이 생긴 계기가 되었습니다.<br/><br/>
+
+                        본격적인 CRUD 설계를 통해 프론트와 백엔드가 리소스를 어떻게 주고받는지에 대한<br/>
+                        이해도를 높일 수 있었고 Openapi Generator를 통해 통신 타입 파일을 커스텀해본<br/>
+                        경험은 개발 생산성에 대해 지속적으로 고민하고 개선할 필요성을 느끼게 해주었습니다.<br/><br/>
+
+                        프론트엔드와 백엔드를 직접 구성하고 서버 아키텍처를 고민하며, 의도한대로 설계해본<br/>
+                        경험이 웹개발에 대한 전체적인 이해도를 높이는 데에 크게 기여하였습니다.<br/><br/>
+
+                        디자인, 기획, 서버를 단독으로 설계하고 개발하였기 때문에 한 프로젝트를 길게 작업<br/>
+                        하게 되었지만 이러한 경험이 각 분야의 전문가들과 협업하게 되었을 때 분야별 의견에<br/>
+                        공감할 수 있고 긍정적인 커뮤니케이션을 할 수 있는 역량을 다져주었다고 생각했습니다.<br/>
+                    </p>
+                </div>
+                <div>
+                    <p class="etc-list-title">Used Stack</p>
+                    <p class="etc-list-content">
                         TypeScript, NestJS, TypeORM, JWT, Swagger, MariaDB,<br/>
                         React, Redux Toolkit, Openapi Generator, Tailwind CSS
                     </p>
                 </div>
             </div>
-
         </div>
     </div>
-    <p class="projects-braces" style="margin-left: 0; margin-top: 4px;">
+
+
+    <!-- ReactQuery, Zustand 적용, 리팩토링 및 배포 -->
+    <div class="project-container">
+        <div class="project-title-header">
+            <p class="title">ZETE AI 메모서비스</p>
+            <p class='project-type'>개인</p>
+            <a href="https://zete.zeriong.com/?type=demo&modal=sign-in" target="_blank" class="demo">
+                데모
+                <i class="arrow-right"></i>
+            </a>
+        </div>
+
+        <p class="project-intro-desc">
+            사용성을 극대화 하여 편리한 메모 기능과, AI(Chat GPT) 를 연동하여 검색 결과를 메모에 요약 반영 시킬 수 있는<br/>
+            서비스입니다.
+        </p>
+
+        <!-- ReactQuery, Zustand 적용, 리팩토링 및 배포 -->
+        <div class="project-detail-main">
+            <div class="preview-container">
+                <div class="preview-img-wrap">
+                    <img src="/images/preview/zete.jpg" alt="preview"/>
+                </div>
+                <p class="dev-part">
+                    Frontend/Backend<br/>
+                    Engineer
+                </p>
+                <p class="dev-date-range">2023.03 ~ 2023.09</p>
+                <div class="dev-period">
+                    6개월
+                </div>
+            </div>
+            <div class="content-container">
+                <div>
+                    <div class="content-title-area">
+                        <p class="content-title">
+                            ReactQuery, Zustand 적용, 리팩토링 및 배포
+                        </p>
+
+                        <a href="https://github.com/zeriong/zete-zustand-reactQuery"
+                           target="_blank"
+                           class="github-icon">
+                            <img src="/images/git-symbol.svg" alt="git"/>
+                            <i class="arrow-right"></i>
+                        </a>
+                    </div>
+                    <p class="dev-range">
+                        2023.08 ~ 2023.09
+                    </p>
+                </div>
+                <ul class="bullet-list">
+                    <li>기존에 사용하던 Redux와 다른 타입의 상태 관리에 대한 경험을 위해 상태관리 라이브러리를 ReactQuery, Zustand 조합으로 컨버팅</li>
+                    <li>다소 아쉬웠던 일부 코드 리팩토링</li>
+                    <li>서비스 환경에 대한 이해도를 높이기 위해 우분투 리눅스를 통한 서비스 환경구축, 오픈소스 SSL 인증서 적용</li>
+                    <li>PM2를 통한 서비스 관리 및 무중단 서비스 이해</li>
+                </ul>
+                <div>
+                    <p class="etc-list-title">Review</p>
+                    <p class="etc-list-content">
+                        기존 코드를 리팩토링하며 최근에 만든 코드와 비교했을 때 가독성, 코드 재사용면에서<br/>
+                        많은 부분이 개선 되었다는 것을 느꼈습니다.<br/><br/>
+
+                        또한 서비스 환경을 구성하는 과정에서 SSH를 통해 패키지를 설치하고 필요한 설정을<br/>
+                        UI 없이 적용하면서 UX와 UI의 소중함을 깨닫고 프론트엔드 개발자로서 인터페이스를<br/>
+                        개발한다는 것은 "사용자의 편의"가 핵심이고 절대 망각해선 안되는 요소임을 한번 더<br/>
+                        깨닫는 계기가 되었습니다.<br/><br/>
+
+                        서비스를 원활하게 운영하기 위해서 Node.js런타임과 보편적으로 쓰이는 PM2를 <br/>
+                        접하면서 서버관리는 생각보다 더 까다롭다는 생각이 들었고 PM2같은 고마운 패키지를<br/>
+                        사용하고 있는 나는 참으로 개발하기 좋은 시대에 살고 있다는 것을 깨달았습니다.
+                    </p>
+                </div>
+                <div>
+                    <p class="etc-list-title">Used Stack</p>
+                    <p class="etc-list-content">
+                        ReactQuery, Zustand, Ubuntu Linux, PM2
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI 메모서비스 기획 및 기능 개발 적용 -->
+        <div class="project-detail-main">
+            <div class="preview-container"></div>
+            <div class="content-container">
+                <div>
+                    <div class="content-title-area">
+                        <p class="content-title">
+                            AI 메모서비스 기획 및 기능 개발
+                        </p>
+
+                        <a href="https://github.com/zeriong/zete"
+                           target="_blank"
+                           class="github-icon">
+                            <img src="/images/git-symbol.svg" alt="git"/>
+                            <i class="arrow-right"></i>
+                        </a>
+                    </div>
+                    <p class="dev-range">
+                        2023.03 ~ 2023.08
+                    </p>
+                </div>
+                <ul class="bullet-list">
+                    <li>기존 사용하던 메모 서비스를 벤치하여 발전시키고 AI를 접목시켜 서비스 기획</li>
+                    <li>NestJS와 MariaDB를 기반으로 백엔드 설계 및 기능 개발</li>
+                    <li>React를 기반으로 프론트엔드의 메모, 카테고리, 태그에 대한 CRUD 인터페이스 개발</li>
+                    <li>Openai ChatGpt3.5 를 연동하여 채팅형식의 정보 검색과 요약 메모기능 개발</li>
+                    <li>
+                        Openapi Generator 의 templates 기능을 통해 axios 통신 타입 파일을 <br/>커스텀하여 생성
+                        <span style="color: rgb(156 163 175); margin-left: 2px;">(생산성 증가)</span>
+                    </li>
+                </ul>
+                <div>
+                    <p class="etc-list-title">Review</p>
+                    <p class="etc-list-content">
+                        Chat GPT의 Prompt설정에 따라서 다양하고 많은 기능을 구현할 수 있다는 것을<br/>
+                        깨달았고 인공지능 기술에도 관심이 생긴 계기가 되었습니다.<br/><br/>
+
+                        본격적인 CRUD 설계를 통해 프론트와 백엔드가 리소스를 어떻게 주고받는지에 대한<br/>
+                        이해도를 높일 수 있었고 Openapi Generator를 통해 통신 타입 파일을 커스텀해본<br/>
+                        경험은 개발 생산성에 대해 지속적으로 고민하고 개선할 필요성을 느끼게 해주었습니다.<br/><br/>
+
+                        프론트엔드와 백엔드를 직접 구성하고 서버 아키텍처를 고민하며, 의도한대로 설계해본<br/>
+                        경험이 웹개발에 대한 전체적인 이해도를 높이는 데에 크게 기여하였습니다.<br/><br/>
+
+                        디자인, 기획, 서버를 단독으로 설계하고 개발하였기 때문에 한 프로젝트를 길게 작업<br/>
+                        하게 되었지만 이러한 경험이 각 분야의 전문가들과 협업하게 되었을 때 분야별 의견에<br/>
+                        공감할 수 있고 긍정적인 커뮤니케이션을 할 수 있는 역량을 다져주었다고 생각했습니다.<br/>
+                    </p>
+                </div>
+                <div>
+                    <p class="etc-list-title">Used Stack</p>
+                    <p class="etc-list-content">
+                        TypeScript, NestJS, TypeORM, JWT, Swagger, MariaDB,<br/>
+                        React, Redux Toolkit, Openapi Generator, Tailwind CSS
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <p class="projects-braces" style="margin-left: 0; margin-top: 4px; padding-bottom: 36px;">
         }
     </p>
 </body>

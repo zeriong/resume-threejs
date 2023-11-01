@@ -22,24 +22,26 @@ export default class GsapAnimation {
 
 
         this.dialogTextList = {
-            step1: `안녕하세요, 언제나 배가 고픈 개발자 전제룡입니다.<
-            저의 강점은 자기주도적인 문제 해결 능력과 소통, 공감<
-            능력입니다. 개발을 시작하였을 때부터 지금까지 자기<
-            주도학습을 지속하고 있으며 꾸준히 깃허브를<
-            업데이트하고 있습니다. 이러한 학습 방식으로 문제를<
-            다룰 땐 발단부터 절차적인 검증을 통해 해결하는<
-            과정에 익숙합니다.`,
+            step1: `안녕하세요, 저는 성장에 목이 마른 개발자입니다!
+            꾸준한 성장을 위해 지속적으로 목표를 수립하고
+            목표 달성하기 위해 투지를 불태우며 개발에 임하고 \n있습니다.`,
 
-            step2: `또한 소통, 공감능력을 통해<
-            팀원 간 의견 불일치로 인해 분위기가 좋지 않을 때<
-            분위기를 이끌어 모두 함께 공감할 수 있는 분위기를<
-            조성한 경험이 있습니다. 또 하나의 사례로 개발중이던<
-            사이드프로젝트에서 저작권 문제의 여지를 파악하여<
-            검증된 자료를 공유하고 적극적인 커뮤니케이션을 통해<
-            디자인 시안을 바꾸어 위기를 모면한 경험도 있습니다.`,
+            step2: `개발을 진행함에 있어 경험해보지 못한
+            까다로운 기술을 구현해야 할 땐 먼저 잘 구현되어
+            있는 레퍼런스를 찾아 발단부터 하나씩 작동 원리를
+            파악한다면 해결하지 못할 문제, 구현하지 못할
+            기술은 없다고 생각하며 개발을 하고 있습니다.`,
 
-            step3: `저의 소개는 여기까지 마치겠습니다!<
-            시간내어 방문해주심에 감사드리며 편히 둘러봐주세요!`
+            step3: `저는 앞으로는 사회에 기여할 수 있는 개발자가
+            되고싶습니다. 저의 꾸준한 성장을 통해 더 나은
+            내일을 만들다보면 더 나은 사회를 만드는 데에
+            기여할 수 있는 저의 모습에 가까이 다가갈 수
+            있을거라고 확신합니다!`,
+
+            step4: `사회에 기여할 수 있는 역량을 갖추는 그 날까지
+            저는 결코 스스로의 투지를 꺾지 않겠습니다!
+
+            시간내어 방문해주심에 감사드립니다!`,
         }
 
         // 버튼 hover styles
@@ -80,7 +82,11 @@ export default class GsapAnimation {
                 this.controlLimitBreak(app.camera.orbitControls); // down control 제한 해제
             },
             onComplete: () => {
-                this.contentMenuBtns.style.bottom = '30px';
+                if (app.sizes.width <= 497) {
+                    this.contentMenuBtns.style.bottom = '10px';
+                } else {
+                    this.contentMenuBtns.style.bottom = '30px';
+                }
                 this.dialogBox.style.display = 'block';
                 if (target === 'aboutMe1') this.appearDialog();
                 else this.isMovingCam = false;
@@ -120,7 +126,7 @@ export default class GsapAnimation {
                 // 메뉴버튼 사라짐
                 this.contentMenuBtns.style.bottom = '-70px';
                 // aboutMe의 경우 대화상자 사라지는 애니메이션 적용
-                if (this.currentContent === 'aboutMe1' || 'aboutMe2' || 'aboutMe3') this.disappearDialog();
+                if (this.currentContent === 'aboutMe1' || 'aboutMe2' || 'aboutMe3' || 'aboutMe4') this.disappearDialog();
             },
             onComplete: () => {
                 this.isInContent = false;
@@ -193,6 +199,7 @@ export default class GsapAnimation {
             if (this.currentContent === 'aboutMe1') app.eventModule.skipTyping(this.dialogTextList.step1);
             if (this.currentContent === 'aboutMe2') app.eventModule.skipTyping(this.dialogTextList.step2);
             if (this.currentContent === 'aboutMe3') app.eventModule.skipTyping(this.dialogTextList.step3);
+            if (this.currentContent === 'aboutMe4') app.eventModule.skipTyping(this.dialogTextList.step4);
             return;
         }
 
@@ -211,18 +218,23 @@ export default class GsapAnimation {
 
         const current = contentList.find(val => val.current === this.currentContent);
 
-        if (this.currentContent === 'aboutMe3') {
+        if (this.currentContent === 'aboutMe4') {
             this.currentContent = current.next;
             this.isMovingCam = true;
-
             // 말풍선 사라지는 애니메이션 끝나고 이동
             this.disappearDialog(current.next, true);
+            return;
+        }
+        if (this.currentContent === 'aboutMe3') {
+            this.currentContent = current.next;
+            this.dialogContent.textContent = '';
+            // 타이핑이벤트
+            app.eventModule.typing(this.dialogTextList.step4);
             return;
         }
         if (this.currentContent === 'aboutMe2') {
             this.currentContent = current.next;
             this.dialogContent.textContent = '';
-
             // 타이핑이벤트
             app.eventModule.typing(this.dialogTextList.step3);
             return;
@@ -250,14 +262,15 @@ export default class GsapAnimation {
             if (this.currentContent === 'aboutMe1') app.eventModule.skipTyping(this.dialogTextList.step1);
             if (this.currentContent === 'aboutMe2') app.eventModule.skipTyping(this.dialogTextList.step2);
             if (this.currentContent === 'aboutMe3') app.eventModule.skipTyping(this.dialogTextList.step3);
+            if (this.currentContent === 'aboutMe4') app.eventModule.skipTyping(this.dialogTextList.step4);
             return;
         }
 
         const contentList = app.positions.getContentPositions();
 
         if (contentList.length > this.listCount) this.listCount--;
-        // aboutMe의 경우 2가지 step이 존재하기 때문에 한번 더 감소
-        if (this.currentContent === 'projects') this.listCount--;
+        // aboutMe의 경우 4가지 step이 존재하기 때문에 추가 감소
+        if (this.currentContent === 'projects') this.listCount -= 3;
 
         // count가 0이고 활성화상태라면 비활성화
         this.offPrev();
@@ -284,6 +297,13 @@ export default class GsapAnimation {
             this.dialogContent.textContent = '';
             // 타이핑이벤트
             app.eventModule.typing(this.dialogTextList.step2);
+            return;
+        }
+        if (this.currentContent === 'aboutMe4') {
+            this.currentContent = current.prev;
+            this.dialogContent.textContent = '';
+            // 타이핑이벤트
+            app.eventModule.typing(this.dialogTextList.step3);
             return;
         }
 

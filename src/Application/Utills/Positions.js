@@ -16,6 +16,7 @@ export default class Positions {
         this.fixCameraPosition = this.getFixCameraPosition();
         this.fixMonitorPosition = this.getFixMonitorCamPosition();
         this.fixSkillsPosition = this.getFixSkillsPosition();
+        this.fixHistoryPosition = this.getFixHistoryCamPosition();
     }
 
     // OrbitControls default 시점
@@ -52,9 +53,16 @@ export default class Positions {
     }
 
     getFixMonitorCamPosition () {
-        if ( this.sizes.width <= 530) return 4;
+        if (this.sizes.width <= 530) return 4;
         if (this.sizes.width <= 740) return 3;
-        return 1.9;
+        if (this.sizes.width <= 1400) return 1.9;
+        if (this.sizes.width <= 1920) return 1.3;
+        return 1.3
+    }
+
+    getFixHistoryCamPosition () {
+        if (this.sizes.width <= 740) return 3;
+        return 2.5
     }
 
     getContentPositions() {
@@ -70,10 +78,12 @@ export default class Positions {
                 }
             },
 
-            // about me 2,3 대화 (카메라 무빙 애니메이션 x)
+            // about me 대화 (카메라 무빙 애니메이션 x)
             { current: 'aboutMe2', next: 'aboutMe3', prev: 'aboutMe1' },
-            { current: 'aboutMe3', next: 'projects', prev: 'aboutMe2' },
+            { current: 'aboutMe3', next: 'aboutMe4', prev: 'aboutMe2' },
+            { current: 'aboutMe4', next: 'projects', prev: 'aboutMe3' },
 
+            // projects
             {
                 current: 'projects', next: 'history', prev: 'aboutMe1',
                 cameraPosition: {
@@ -88,7 +98,7 @@ export default class Positions {
             {
                 current: 'history', next: 'skills', prev: 'projects',
                 cameraPosition: {
-                    x: (this.historyPosition.x), y: (this.historyPosition.y), z: (this.historyPosition.z + 3)
+                    x: (this.historyPosition.x), y: (this.historyPosition.y), z: (this.historyPosition.z + this.fixHistoryPosition)
                 },
                 controlsTarget: {
                     x: (this.historyPosition.x), y: (this.historyPosition.y), z: (this.historyPosition.z)
