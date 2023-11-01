@@ -344,8 +344,13 @@ ul {
   }
   .project-container {
     border-left: 1px solid rgba(209, 213, 219, 0.9);
+    margin-top: 0;
+    padding-top: 40px;
     padding-left: 32px;
-    margin-top: 16px;
+    &.is-first {
+      margin-top: 16px;
+      padding-top: 0;
+    }
 
     .project-title-header {
       display: flex;
