@@ -15,7 +15,6 @@ export default class GsapAnimation {
         this.returnToOrbitBtn = document.querySelector('#returnToOrbitBtn');
         this.contentMenuBtns = document.querySelector('#contentMenuBtns');
         this.playStart = document.querySelector('#playStart');
-        this.playSkip = document.querySelector('#playSkip');
         this.nextBtn = document.querySelector('#nextBtn');
         this.prevBtn = document.querySelector('#prevBtn');
         this.dialogContent = document.querySelector('.dialog-content');
@@ -55,7 +54,6 @@ export default class GsapAnimation {
         });
 
         this.playStart.addEventListener('click', () => this.playStartAnimation());
-        this.playSkip.addEventListener('click', () => this.playAnimationSkip());
         this.returnToOrbitBtn.addEventListener('click', () => this.returnToOrbit());
         this.nextBtn.addEventListener('click', () => this.toNext());
         this.prevBtn.addEventListener('click', () => this.toPrev());
@@ -144,6 +142,14 @@ export default class GsapAnimation {
     // Start로 시작
     playStartAnimation() {
         if (this.isMovingCam) return;
+        
+        // 로딩창 사라짐
+        const loadingEl = document.querySelector('#loading');
+        loadingEl.style.opacity = 0;
+        setTimeout(() => {
+            loadingEl.style.display = 'none';
+        },200);
+
         // get instance
         const app = Application.getInstance();
         const contentList = app.positions.getContentPositions();
@@ -179,16 +185,6 @@ export default class GsapAnimation {
         });
     }
 
-    // Skip으로 시작
-    playAnimationSkip() {
-        // get instance
-        const app = Application.getInstance();
-        this.returnToOrbitBtn.innerHTML = 'Back';
-        gsap.to(app.camera.instance.position, {
-            ...app.positions.getReturnToOrbitPositions(), duration: 0,
-        });
-    }
-
     // Next 버튼 클릭 매서드
     toNext() {
         if (this.isMovingCam) return;
@@ -216,7 +212,15 @@ export default class GsapAnimation {
         // prev 버튼 활성화
         this.onPrev();
 
+        // current content
         const current = contentList.find(val => val.current === this.currentContent);
+
+        // 다음 대화 컨텐츠 이동 함수
+        const nextDialog = (step) => {
+            this.currentContent = current.next;
+            this.dialogContent.textContent = '';
+            app.eventModule.typing(step);
+        }
 
         if (this.currentContent === 'aboutMe4') {
             this.currentContent = current.next;
@@ -225,30 +229,13 @@ export default class GsapAnimation {
             this.disappearDialog(current.next, true);
             return;
         }
-        if (this.currentContent === 'aboutMe3') {
-            this.currentContent = current.next;
-            this.dialogContent.textContent = '';
-            // 타이핑이벤트
-            app.eventModule.typing(this.dialogTextList.step4);
-            return;
-        }
-        if (this.currentContent === 'aboutMe2') {
-            this.currentContent = current.next;
-            this.dialogContent.textContent = '';
-            // 타이핑이벤트
-            app.eventModule.typing(this.dialogTextList.step3);
-            return;
-        }
-        if (this.currentContent === 'aboutMe1') {
-            this.currentContent = current.next;
-            this.dialogContent.textContent = '';
-            // 타이핑이벤트
-            app.eventModule.typing(this.dialogTextList.step2);
-            return;
-        }
 
-        this.toContent(current.next, true);
+        if (this.currentContent === 'aboutMe3') return nextDialog(this.dialogTextList.step4);
+        if (this.currentContent === 'aboutMe2') return nextDialog(this.dialogTextList.step3);
+        if (this.currentContent === 'aboutMe1') return nextDialog(this.dialogTextList.step2);
+
         this.currentContent = current.next;
+        this.toContent(current.next, true);
     }
 
     // Prev 버튼 클릭 매서드
@@ -332,22 +319,14 @@ export default class GsapAnimation {
     // 의자 등받이 투명화 on/off
     convertChairTransParent(type, ms = 0, duration = 2) {
         const intersectsMeshes = Application.getInstance().intersectsMeshes;
-        if (type === 'invisible') {
-            setTimeout(() => {
-                intersectsMeshes.forEach(mesh => {
-                    if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
-                        gsap.to(mesh.material, { transparent: true, opacity: 0, duration });
-                    }
-                });
-            }, ms);
-        }
-        if (type === 'visible') {
+        setTimeout(() => {
             intersectsMeshes.forEach(mesh => {
                 if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
-                    gsap.to(mesh.material, { transparent: false, opacity: 1, duration });
+                    if (type === 'invisible') gsap.to(mesh.material, { transparent: true, opacity: 0, duration });
+                    if (type === 'visible') gsap.to(mesh.material, { transparent: false, opacity: 1, duration });
                 }
             });
-        }
+        }, ms);
     }
 
     // about me 대화창 등장 매서드

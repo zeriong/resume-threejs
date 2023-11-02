@@ -51,45 +51,46 @@ export default class Application {
         this.scene.add(axesHelper);
 
         this.test = false;
+        this.testEl = document.querySelector('#loading');
 
         document.querySelector('#test').addEventListener('click', () => {
-            if (this.test) {
-                this.test = false;
-                clearInterval(this.eventModule.cursorInterval);
+            if (!this.test) {
+                this.test = true;
+                this.testEl.style.display = 'none';
                 return;
             }
-            this.eventModule.cursorLoop();
-            this.test = true;
+            this.testEl.style.display = 'flex';
+            this.test = false;
         });
 
-        // html 작업 시 조정
-        this.loader.loadingManager.onLoad = () => {
-            // html상호작용 가능 설정
-            document.querySelector('#webgl').style.zIndex = -1;
-
-            // 오빗컨트롤 제한 해제
-            this.camera.orbitControls.maxPolarAngle = THREE.MathUtils.degToRad(360); // 하단 시점 제한해제
-            this.camera.orbitControls.minDistance = 0; // 가까워지는 최소거리 설정
-
-
-            // 의자 투명화
-            this.intersectsMeshes.forEach(mesh => {
-                if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
-                    mesh.material.transparent = true;
-                    mesh.material.opacity = 0;
-                }
-            });
-
-            // 원하는 컨텐츠로 변경
-            this.htmlPosition = this.positions.getContentPositions();
-            this.content = this.htmlPosition.find(val => val.current === 'projects');
-            this.camera.instance.position.x = this.content.cameraPosition.x;
-            this.camera.instance.position.y = this.content.cameraPosition.y;
-            this.camera.instance.position.z = this.content.cameraPosition.z;
-            this.camera.orbitControls.target.x = this.content.controlsTarget.x;
-            this.camera.orbitControls.target.y = this.content.controlsTarget.y;
-            this.camera.orbitControls.target.z = this.content.controlsTarget.z;
-        }
+        // // html 작업 시 조정
+        // this.loader.loadingManager.onLoad = () => {
+        //     // html상호작용 가능 설정
+        //     document.querySelector('#webgl').style.zIndex = -1;
+        //
+        //     // 오빗컨트롤 제한 해제
+        //     this.camera.orbitControls.maxPolarAngle = THREE.MathUtils.degToRad(360); // 하단 시점 제한해제
+        //     this.camera.orbitControls.minDistance = 0; // 가까워지는 최소거리 설정
+        //
+        //
+        //     // 의자 투명화
+        //     this.intersectsMeshes.forEach(mesh => {
+        //         if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
+        //             mesh.material.transparent = true;
+        //             mesh.material.opacity = 0;
+        //         }
+        //     });
+        //
+        //     // 원하는 컨텐츠로 변경
+        //     this.htmlPosition = this.positions.getContentPositions();
+        //     this.content = this.htmlPosition.find(val => val.current === 'projects');
+        //     this.camera.instance.position.x = this.content.cameraPosition.x;
+        //     this.camera.instance.position.y = this.content.cameraPosition.y;
+        //     this.camera.instance.position.z = this.content.cameraPosition.z;
+        //     this.camera.orbitControls.target.x = this.content.controlsTarget.x;
+        //     this.camera.orbitControls.target.y = this.content.controlsTarget.y;
+        //     this.camera.orbitControls.target.z = this.content.controlsTarget.z;
+        // }
     }
 
     // 3D 렌더링 요소 일괄 업데이트

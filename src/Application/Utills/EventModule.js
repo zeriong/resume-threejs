@@ -4,16 +4,38 @@ export default class EventModule {
     constructor() {
         this.app = Application.getInstance();
 
-        // typing
+        // variables
         this.typingSkip = false;
         this.typingTimout = null;
         this.cursorInterval = null;
+
+        this.onSound = true;
+        this.onGuestBook = false;
 
         // Elements
         this.dialogContent = document.querySelector('.dialog-content');
         this.cursorWrap = document.createElement('div');
         this.dialogCursor = document.createElement('span');
         this.dialogCursor.id = 'dialogCursor';
+
+        this.soundBtn = document.querySelector('#soundBtn');
+        this.soundOn = document.querySelector('#soundOn');
+        this.soundOff = document.querySelector('#soundOff');
+        this.guestBookBtn = document.querySelector('#guestBookBtn');
+
+        // Events
+        this.soundBtn.addEventListener('click', () => {
+            console.log('사운드 클리!')
+            if (this.onSound) {
+                this.onSound = false;
+                this.soundOff.style.display = 'block';
+                this.soundOn.style.display = 'none';
+            } else {
+                this.onSound = true;
+                this.soundOff.style.display = 'none';
+                this.soundOn.style.display = 'block';
+            }
+        })
     }
 
     typing(text, typingSpeed = 25) {
@@ -60,5 +82,11 @@ export default class EventModule {
         this.cursorInterval = setInterval(() => {
             this.dialogCursor.classList.toggle('toggleCursor');
         }, 500);
+    }
+
+    playSound() {
+        if (this.onSound) {
+            console.log('사운드 플레이');
+        }
     }
 }

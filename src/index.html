@@ -11,17 +11,64 @@
 <body>
 	<div id="css3DObject"></div>
 	<div id="webgl"></div>
-	<div id="loading">
-		<button id="playStart">start</button>
-		<button id="playSkip">skip</button>
 
-		<!-- 로딩 현재 스타일 display: none; -->
-		<div class="loading-container" style="display: none;">
-			<div class="loading-bar">
-				<div class="progressPercent">0%</div>
+	<div id="loading">
+
+		<!-- 로딩중 -->
+		<div id="loadingContainer">
+			<p id="loadingTitle" class="jetbrain-font">LOADING RESOURCES&nbsp;<span id="loadingProgress"></span></p>
+			<div id="inProgressWrap">
+				<ul id="loadingItem">
+				</ul>
+				<ul id="progressPercent">
+				</ul>
+			</div>
+
+			<!-- loading consoles -->
+			<div style="position: absolute; bottom: 20px;">
+				<div id="loadedConsole" class="jetbrain-font">
+					All Content Loaded, launching <span class="jetbrain-font" style="font-weight: 700; color: #00FF00;">'Zeriong Portfolio Showcase'</span> V1.0
+				</div>
+				<div id="loadingConsole" class="jetbrain-font">
+					Just a moment, please. It may take about 10 seconds.
+				</div>
 			</div>
 		</div>
 
+		<!-- 로딩 완료창 -->
+		<div id="loadedMessage">
+			<p class="text1">ZERIONG Portfolio Loaded</p>
+			<p class="text2">Click start to begin&nbsp;<span class="blinking-cursor"></span></p>
+			<button id="playStart">START</button>
+		</div>
+
+	</div>
+
+	<!-- option menu -->
+	<div id="optionMenu">
+		<!-- 사운드 -->
+		<button id="soundBtn" class="option-btn" type="button">
+			<img id="soundOn" src="/images/icons/sound_on.svg" alt="soundOn"/>
+			<img id="soundOff" src="/images/icons/sound_off.svg" alt="soundOff"/>
+		</button>
+
+		<!-- 방명록 버튼 -->
+		<button id="guestBookBtn" class="option-btn" type="button">
+			<img id="guestIcon" src="/images/icons/guest_book.svg" alt="guestBook"/>
+		</button>
+	</div>
+
+	<!-- 방명록 인풋 -->
+	<div id="guestBook">
+		<p>방명록을 입력해주세요</p>
+		<div>
+			<label for="guestBookTitle">제목</label>
+			<input type="text" id="guestBookTitle" placeholder="제목을 입력해주세요."/>
+		</div>
+		<div>
+			<label for="guestBookContent">내용</label>
+			<input type="text" id="guestBookContent" placeholder="내용을 입력해주세요."/>
+		</div>
 	</div>
 
 	<!-- 테스트 -->
