@@ -85,7 +85,6 @@ export default class GsapAnimation {
                 } else {
                     this.contentMenuBtns.style.bottom = '30px';
                 }
-                this.dialogBox.style.display = 'block';
                 if (target === 'aboutMe1') this.appearDialog();
                 else this.isMovingCam = false;
                 this.webgl.style.zIndex = -1;
@@ -335,7 +334,8 @@ export default class GsapAnimation {
         const app = Application.getInstance();
         // 대화창 등장시 대화 초기화
         this.dialogContent.textContent = '';
-
+        // 대화창 등장
+        this.dialogBox.style.display = 'block';
         setTimeout(() => {
             this.dialogBox.style.opacity = '1';
 
@@ -366,7 +366,7 @@ export default class GsapAnimation {
             if (toWhere === undefined && isBtn === undefined) return;
 
             this.toContent(toWhere, isBtn);
-        }, 300);
+        }, 320);
     }
 
     // 컨트롤 제한 (컨텐츠에서 zoom in 모드에서 벗어나면 다시 제한)

@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const DotEnv = require('dotenv-webpack');
 
 module.exports = {
 	entry: {
@@ -51,5 +52,7 @@ module.exports = {
 				{ from: path.resolve(__dirname, '../src/style.css') },
 			]
 		}),
+		// dotenv-webpack패키지를 통한 환경변수(env) 사용
+		new DotEnv({ path: '.env' })
 	]
 };

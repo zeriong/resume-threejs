@@ -12,7 +12,7 @@
 	<div id="css3DObject"></div>
 	<div id="webgl"></div>
 
-	<div id="loading">
+	<div id="loading" style="display: none;">
 
 		<!-- 로딩중 -->
 		<div id="loadingContainer">
@@ -46,16 +46,27 @@
 
 	<!-- option menu -->
 	<div id="optionMenu">
+
+		<!-- 방명록 버튼 -->
+		<button id="guestBookBtn" class="option-btn" type="button">
+			<img id="guestIcon" src="/images/icons/guest_book.svg" alt="guestBook"/>
+		</button>
+		<!-- 방명록 버튼 툴팁 -->
+		<div id="guestBookToolTip">
+			ZERIONG에게 전하고 싶은 말을<br/>
+			방명록을 통해 전달할 수 있어요.
+		</div>
+
 		<!-- 사운드 -->
 		<button id="soundBtn" class="option-btn" type="button">
 			<img id="soundOn" src="/images/icons/sound_on.svg" alt="soundOn"/>
 			<img id="soundOff" src="/images/icons/sound_off.svg" alt="soundOff"/>
 		</button>
 
-		<!-- 방명록 버튼 -->
-		<button id="guestBookBtn" class="option-btn" type="button">
-			<img id="guestIcon" src="/images/icons/guest_book.svg" alt="guestBook"/>
-		</button>
+		<!-- 사운드 버튼 툴팁 -->
+		<div id="soundToolTip">
+			사운드 On / Off 버튼
+		</div>
 	</div>
 
 	<!-- 방명록 인풋 -->
