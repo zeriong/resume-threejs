@@ -9,6 +9,7 @@ import Lights from './World/Lights';
 import GsapAnimation from './Core/GsapAnimation';
 import Positions from './Utills/Positions';
 import EventModule from './Utills/EventModule';
+import {GuestBook} from './World/GuestBook';
 
 export default class Application {
 
@@ -36,6 +37,7 @@ export default class Application {
         this.gsap = new GsapAnimation();
         this.raycaster = new Raycaster()
         this.eventModule = new EventModule();
+        this.guestBook = new GuestBook();
 
         // 변수
         this.isStart = false; // 시작모드 여부 (start & skip)

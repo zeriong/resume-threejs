@@ -35,7 +35,7 @@ export default class EventModule {
                 this.soundOff.style.display = 'none';
                 this.soundOn.style.display = 'block';
             }
-        })
+        });
     }
 
     typing(text, typingSpeed = 25) {
