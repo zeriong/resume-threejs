@@ -52,7 +52,7 @@ export default class Positions {
         return (1400 - this.sizes.width) * 0.0007 + 0.5;
     }
 
-    getFixMonitorCamPosition () {
+    getFixMonitorCamPosition() {
         if (this.sizes.width <= 530) return 4;
         if (this.sizes.width <= 740) return 3;
         if (this.sizes.width <= 1400) return 1.9;
@@ -60,9 +60,21 @@ export default class Positions {
         return 1.3
     }
 
-    getFixHistoryCamPosition () {
+    getFixHistoryCamPosition() {
         if (this.sizes.width <= 740) return 3;
         return 2.5
+    }
+
+    getGuestBookPosition() {
+        // origin: cam = ( 0.5 / 2 / 2.2 ) , target = ( 1 / 2 / 2.2 )
+        return {
+            cameraPosition: {
+                x: 0.5, y: 2, z: 2.2
+            },
+            controlsTarget: {
+                x: 1, y: 2, z: 2.2
+            }
+        }
     }
 
     getContentPositions() {
