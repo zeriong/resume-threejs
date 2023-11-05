@@ -14,6 +14,9 @@ export default class Raycaster {
         this.clickStartY = 0;
         this.isInContent = app.gsap.isInContent;
         this.camera = app.camera.instance;
+        this.timeout1 = null;
+        this.timeout2 = null;
+        this.guestBookPopup = document.querySelector('#guestBookPopup');
 
         // 마우스 드래그 시 발생하는 rayCaster 방지
         this.rendererDom.addEventListener('mousedown', (e) => {
@@ -51,14 +54,37 @@ export default class Raycaster {
         const target = intersects[0].object;
 
         // 모델링 클릭 카메라 줌인 무빙 애니메이션
-        if (target.name === 'aboutMe1') this.gsap.toContent(target.name)
-        if (target.name === 'projects') this.gsap.toContent(target.name)
-        if (target.name === 'poster') this.gsap.toContent(target.name)
-        if (target.name === 'history') this.gsap.toContent(target.name)
-        if (target.name === 'skills') this.gsap.toContent(target.name)
+        if (target.name === 'aboutMe1') this.gsap.toContent(target.name);
+        if (target.name === 'projects') this.gsap.toContent(target.name);
+        if (target.name === 'poster') this.gsap.toContent(target.name);
+        if (target.name === 'history') this.gsap.toContent(target.name);
+        if (target.name === 'skills') this.gsap.toContent(target.name);
+        if (target.name === 'guestBook') {
+            this.timeout1 = setTimeout(() => {
+                this.controlPopup('show');
+
+                this.timeout2 = setTimeout(() => {
+                    this.controlPopup('hidden');
+                },3000);
+            }, 1000);
+            this.gsap.toGuestBook();
+        }
+        if (target.name === 'nextReview') app.guestBook.nextReview();
+        if (target.name === 'prevReview') app.guestBook.prevReview();
 
         // 링크 메뉴 클릭 이벤트
         if (target.name === 'github') window.open('https://github.com/zeriong/','_blank');
         if (target.name === 'blog') window.open('https://zeriong.tistory.com/','_blank');
+    }
+
+    /** type: hidden || show */
+    controlPopup(type) {
+        if (type === 'hidden') {
+            this.guestBookPopup.style.top = '-100px';
+            this.guestBookPopup.style.opacity = 0;
+        } else if (type === 'show') {
+            this.guestBookPopup.style.top = '100px';
+            this.guestBookPopup.style.opacity = 1;
+        }
     }
 }

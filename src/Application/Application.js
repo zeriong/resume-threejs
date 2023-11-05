@@ -64,7 +64,8 @@ export default class Application {
             // this.testEl.style.display = 'flex';
             // this.test = false;
             console.log('얍!')
-            this.guestBook.nextReview();
+            // this.guestBook.nextReview();
+            this.gsap.toGuestBook();
         });
 
         // html 작업 시 조정
@@ -73,8 +74,10 @@ export default class Application {
             // document.querySelector('#webgl').style.zIndex = -1;
 
             // 오빗컨트롤 제한 해제
-            this.camera.orbitControls.maxPolarAngle = THREE.MathUtils.degToRad(360); // 하단 시점 제한해제
+            this.camera.orbitControls.maxPolarAngle = Math.PI; // 하단 시점 제한해제
             this.camera.orbitControls.minDistance = 0; // 가까워지는 최소거리 설정
+            this.camera.orbitControls.minAzimuthAngle = -Infinity; // 좌측 시점 제한해제
+            this.camera.orbitControls.maxAzimuthAngle = Infinity; // 우측 시점 제한해제
 
             // 원하는 컨텐츠로 변경
             // this.htmlPosition = this.positions.getContentPositions();
@@ -86,7 +89,7 @@ export default class Application {
             // this.camera.orbitControls.target.y = this.content.controlsTarget.y;
             // this.camera.orbitControls.target.z = this.content.controlsTarget.z;
 
-            // 원하는 컨텐츠로 변경
+            // 현재 방명록 시점으로 지정.
             this.camera.instance.position.x = 0.5;
             this.camera.instance.position.y = 2;
             this.camera.instance.position.z = 2.2;

@@ -249,13 +249,108 @@ ul {
   }
 }
 
+// 방명록
 #guestBook {
+  transition: ease-in-out 300ms;
   position: fixed;
+  z-index: 20;
   left: 50%;
-  transform: translateX(-50%);
-  bottom: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 2px solid #252525;
+  border-radius: 30px;
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+  width: 300px;
+  height: 300px;
+  opacity: 0;
+
+  .inputWrap {
+    display: flex;
+    white-space: nowrap;
+  }
+  #guestBookTitle {
+    color: $gray-800;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  #guestBookNameTitle {
+    color: $gray-700;
+    font-size: 18px;
+    font-weight: 600;
+    width: 80px;
+  }
+  #guestBookName {
+    border: $gray-300 2px solid;
+    border-radius: 8px;
+    width: 100%;
+    padding: 6px;
+    font-size: 16px;
+  }
+  #guestBookMessageTitle {
+    color: $gray-700;
+    font-size: 18px;
+    font-weight: 600;
+    width: 80px;
+  }
+  #guestBookMessage {
+    border: $gray-300 2px solid;
+    border-radius: 8px;
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    padding: 6px;
+
+    // 커스텀 스크롤
+    &::-webkit-scrollbar {
+      width: 14px;
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      border: 4px solid transparent;
+      border-radius: 7px;
+      background-clip: padding-box;
+      background-color: hsla(0,0%,59%,.5);
+    }
+    &::-webkit-scrollbar-track {
+      padding: 6px;
+      background-color: transparent;
+      border-radius: 10px;
+    }
+  }
+  #guestBookSubmit {
+    background-color: $blue-500;
+    color: white;
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+    font-size: 18px;
+  }
 }
 
+
+
+#guestBookPopup {
+  transition: ease-in-out 500ms;
+  position: fixed;
+  background-color: #252525;
+  color: white;
+  left: 50%;
+  top: -100px;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  padding: 24px 30px;
+  border-radius: 20px;
+  font-size: 22px;
+  font-weight: 500;
+  opacity: 0;
+}
+
+// test
 #test {
   position: fixed;
   bottom: 0;
@@ -359,9 +454,6 @@ ul {
   #nextBtn {
     background: $blue-500;
     color: white;
-    &:hover {
-      background: rgba(27, 97, 215);
-    }
   }
 }
 
@@ -437,225 +529,6 @@ ul {
     }
   }
 }
-
-//// -------------- projects ---------------
-//#projects-body {
-//  display: flex;
-//  flex-direction: column;
-//  padding: 36px 40px;
-//
-//  ul.bullet-list > li {
-//    position: relative;
-//    padding: 4px 0 4px 16px;
-//    box-sizing: border-box;
-//  }
-//  ul.bullet-list > li:before {
-//    position: absolute;
-//    left: 0;
-//    display: inline-block;
-//    content: "•";
-//    color: $blue-500;
-//  }
-//
-//  .arrow-right {
-//    border: solid white;
-//    border-width: 0 2px 2px 0;
-//    display: inline-block;
-//    padding: 3px;
-//    transform: rotate(-45deg);
-//    -webkit-transform: rotate(-45deg);
-//  }
-//  .projects-braces {
-//    color: rgba(156, 163, 175, 0.8);
-//    margin-left: 8px;
-//    font-size: 36px;
-//    font-weight: 600;
-//  }
-//
-//  .content-name-wrap {
-//    position: relative;
-//    display: flex;
-//    align-items: center;
-//    .content-name {
-//      font-size: 36px;
-//      color: $blue-500;
-//      font-weight: 600;
-//      line-height: 1;
-//    }
-//    .content-comment {
-//      font-size: 16px;
-//      color: $gray-800;
-//      margin-left: 12px;
-//      margin-top: 4px;
-//      white-space: nowrap;
-//    }
-//  }
-//
-//  .content-desc {
-//    font-size: 18px;
-//    color: $gray-700;
-//    margin: 16px 0 20px;
-//  }
-//  .project-container {
-//    border-left: 1px solid rgba(209, 213, 219, 0.9);
-//    margin-top: 0;
-//    padding-top: 40px;
-//    padding-left: 32px;
-//    &.is-first {
-//      margin-top: 16px;
-//      padding-top: 0;
-//    }
-//
-//    .project-title-header {
-//      display: flex;
-//      flex-wrap: wrap;
-//      align-items: center;
-//      width: 100%;
-//      border-bottom: 1px solid rgba(169, 169, 169, 0.9);
-//      gap: 8px;
-//      padding-bottom: 6px;
-//
-//      .title {
-//        font-size: 26px;
-//        color: $gray-700;
-//        font-weight: 700;
-//        margin-right: 2px;
-//      }
-//      .project-type {
-//        font-size: 14px;
-//        color: #ffffff;
-//        border-radius: 100px;
-//        padding: 4px 12px;
-//        background-color: rgb(22, 163, 74, 0.8);
-//      }
-//      .demo {
-//        display: flex;
-//        align-items: center;
-//        font-size: 14px;
-//        color: #ffffff;
-//        background-color: $blue-500;
-//        border-radius: 100px;
-//        padding: 4px 10px;
-//        i {
-//          margin-left: 2px;
-//        }
-//      }
-//      .git {
-//        display: flex;
-//        align-items: center;
-//        min-width: 40px;
-//        height: 22px;
-//        font-size: 16px;
-//        color: #ffffff;
-//        background-color: rgba(75, 85, 99, 0.9);
-//        border-radius: 100px;
-//        padding-left: 4px;
-//        padding-right: 8px;
-//        img {
-//          width: 16px;
-//        }
-//        i {
-//          margin-left: 2px;
-//        }
-//      }
-//    }
-//
-//    .project-intro-desc {
-//      width: 100%;
-//      font-size: 16px;
-//      color: $gray-600;
-//      padding-top: 12px;
-//    }
-//
-//    .project-detail-main {
-//      display: flex;
-//      gap: 52px;
-//      margin-top: 32px;
-//
-//      .preview-container {
-//        display: flex;
-//        flex-direction: column;
-//        min-width: 150px;
-//        gap: 12px;
-//        padding-top: 4px;
-//
-//        .preview-img-wrap {
-//          position: relative;
-//          width: 150px;
-//          height: 150px;
-//          border: 1px solid $gray-300;
-//          border-radius: 6px;
-//          overflow: hidden;
-//          margin-bottom: 8px;
-//          img {
-//            width: 100%;
-//          }
-//        }
-//        .dev-part {
-//          color: $gray-600;
-//        }
-//        .dev-date-range {
-//          color: $gray-900;
-//          font-weight: 500;
-//        }
-//        .dev-period {
-//          display: flex;
-//          justify-content: center;
-//          width: 60px;
-//          font-size: 13px;
-//          background-color: $gray-200;
-//          border-radius: 4px;
-//          padding: 4px;
-//        }
-//      }
-//
-//      .content-container {
-//        display: flex;
-//        flex-direction: column;
-//        gap: 16px;
-//        .content-title-area {
-//          display: flex;
-//          align-items: center;
-//          gap: 8px;
-//          .content-title {
-//            font-size: 24px;
-//            color: $gray-700;
-//            font-weight: 600;
-//          }
-//          .github-icon {
-//            display: flex;
-//            align-items: center;
-//            min-width: 40px;
-//            height: 24px;
-//            font-size: 14px;
-//            color: #fff;
-//            background-color: rgba(75, 85, 99, 0.9);
-//            border-radius: 100px;
-//            padding-left: 6px;
-//            padding-right: 8px;
-//            & > img {
-//              width: 17px;
-//              margin-right: 4px;
-//            }
-//          }
-//        }
-//        .dev-range {
-//          color: $gray-600;
-//        }
-//        .etc-list-title {
-//          color: $gray-700;
-//          font-size: 18px;
-//          font-weight: 600;
-//        }
-//        .etc-list-content {
-//          color: $gray-700;
-//          margin-top: 4px;
-//          margin-bottom: 10px;
-//        }
-//      }
-//    }
-//  }
-//}
 
 // -------------- projects ---------------
 #projects-body {

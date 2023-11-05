@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,19 +69,29 @@
 		</div>
 	</div>
 
-	<!-- 방명록 인풋 -->
+	<!-- 방명록 모달 -->
 	<form id="guestBook">
-		<p>방명록을 입력해주세요</p>
-		<div>
-			<label for="guestBookTitle">제목</label>
-			<input type="text" id="guestBookTitle" placeholder="제목을 입력해주세요."/>
+		<p id="guestBookTitle">방명록</p>
+		<div class="inputWrap" style="align-items: center;">
+			<label id="guestBookNameTitle" for="guestBookName">이름</label>
+			<input type="text" id="guestBookName" placeholder="이름을 입력해주세요."/>
 		</div>
-		<div>
-			<label for="guestBookContent">내용</label>
-			<input type="text" id="guestBookContent" placeholder="내용을 입력해주세요."/>
+		<div class="inputWrap" style="height: 100%;">
+			<label id="guestBookMessageTitle" for="guestBookMessage">메시지</label>
+			<textarea id="guestBookMessage" placeholder="메시지를 입력해주세요."></textarea>
 		</div>
-		<button style="background-color: white; padding: 12px;">작성</button>
+		<button id="guestBookSubmit" type="button">작성</button>
 	</form>
+
+	<!-- 방명록 안내 팝업 -->
+	<div id="guestBookPopup">
+		우측 상단 &nbsp;
+		<span>
+			<img src="/images/icons/guest_book.svg" alt="guest_icon" style="width: 22px;">
+		</span>
+		버튼을 누르시면<br/>
+		방명록을 작성할 수 있습니다!
+	</div>
 
 	<!-- 테스트 -->
 	<button id="test">test</button>

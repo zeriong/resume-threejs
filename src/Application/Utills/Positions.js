@@ -10,7 +10,6 @@ export default class Positions {
         this.historyPosition = this.world.historyPosition;
         this.skillsPosition = this.world.skillsPosition;
         this.posterPosition = this.world.posterPosition;
-
         this.aboutMePosition = this.world.aboutMePosition;
 
         this.fixCameraPosition = this.getFixCameraPosition();
