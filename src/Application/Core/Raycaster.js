@@ -37,7 +37,7 @@ export default class Raycaster {
         });
     }
 
-    checkIntersects() {
+    async checkIntersects() {
         // raycaster작동 시 intersectsMeshes 최신데이터를 사용
         const app = Application.getInstance()
         const intersectsMeshes = app.intersectsMeshes;
@@ -69,8 +69,14 @@ export default class Raycaster {
             }, 1000);
             this.gsap.toGuestBook();
         }
-        if (target.name === 'nextReview') app.guestBook.nextReview();
-        if (target.name === 'prevReview') app.guestBook.prevReview();
+        if (target.name === 'nextReview') {
+            await app.guestBook.nextReview();
+            console.log('넥스트 클릭')
+        }
+        if (target.name === 'prevReview') {
+            await app.guestBook.prevReview();
+            console.log('프레브 클릭')
+        }
 
         // 링크 메뉴 클릭 이벤트
         if (target.name === 'github') window.open('https://github.com/zeriong/','_blank');

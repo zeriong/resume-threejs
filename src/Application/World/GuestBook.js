@@ -2,15 +2,18 @@ import * as THREE from 'three';
 import Application from '../Application';
 import {Mesh} from 'three';
 import {db} from '../Utills/Firebase';
-import {  collection, query, orderBy, limit, getDocs, addDoc, startAfter  } from "firebase/firestore";
+import {  collection, query, orderBy, limit, getDocs, addDoc, startAfter, endBefore, limitToLast  } from "firebase/firestore";
 
 export class GuestBook {
     constructor() {
         this.app = Application.getInstance();
 
         this.limit = 6;
-        this.currentPage =  -1;
+        this.currentPage =  1;
+        this.firstVisible = null;
         this.lastVisible = null;
+        this.nextDisabled = true;
+        this.prevDisabled = true;
 
         this.isShowModal = false;
         this.guestReviewList = [];
@@ -84,6 +87,8 @@ export class GuestBook {
         rightArrowMesh.position.set(2.8955, 2.026, 2.55);
         rightArrowMesh.rotation.y = THREE.MathUtils.degToRad(-90);
         rightArrowMesh.name = 'nextReview';
+        // next 활성화 여부
+        if (this.guestReviewList.length === 6) this.nextDisabled = false;
 
         // 방명록 prev 버튼
         const leftArrowMesh = rightArrowMesh.clone();
@@ -105,33 +110,81 @@ export class GuestBook {
         areaMesh.name = 'guestBook';
         this.app.intersectsMeshes.push(areaMesh);
         this.app.scene.add(areaMesh);
-        
 
-        // 변경사항 없는 geometry는 재사용
-        const geometry = new THREE.PlaneGeometry(0.23, 0.23, 1, 1);
+        // 방명록 첫 렌더링 기준으로 painting
+        this.paintGuestReview(true);
+    }
+    // todo: fetch 매서드화 해서 정리
+    createGuestReview() {
+        const name = this.guestBookName.value;
+        const message = this.guestBookMessage.value;
+        // if (name.length < 2 && message.length < 2) alert('이름과 메시지는 2글자 이상으로 입력해주세요.');
 
-        // 리뷰 Mesh를 모두 담은 배열 생성
+        addDoc(collection(db, 'guestBook'), {
+            createAt: new Date().toISOString(),
+            name: name,
+            message: message,
+        })
+            .then(res => {
+                this.guestBookName.value = '';
+                this.guestBookMessage.value = '';
+                this.controlReviewModal('off');
+
+                (async () => {
+                    // 방명록 초기화
+                    this.guestReviewList = [];
+                    // 쿼리 작성
+                    const q = query(
+                        collection(db, 'guestBook'),
+                        orderBy('createAt', 'desc'),
+                        limit(this.limit),
+                    );
+                    // fetch firestore
+                    const snapshot = await getDocs(q);
+                    // get firstVisible
+                    this.firstVisible = snapshot.docs[0].data().createAt;
+                    snapshot.forEach((doc) => {
+                        const data = doc.data();
+                        console.log('방명록 작성 후 데이터',data)
+                        this.guestReviewList.push(data);
+                        this.lastVisible = data.createAt;
+                    });
+                    // painting
+                    this.paintGuestReview();
+                })()
+            })
+            .catch(err => console.log(err));
+    }
+
+    /** isFirstLoad: 첫 데이터인 경우 true 삽입하여 초기세팅 */
+    paintGuestReview(isFirstLoad) {
+        let geometry;
+        if (isFirstLoad) geometry = new THREE.PlaneGeometry(0.23, 0.23, 1, 1);
+
         for (let i = 0; i < 6; i ++) {
-            // create canvas
-            const canvas = document.createElement('canvas');
-            canvas.width = 500;
-            canvas.height = 500;
+            // 데이터 첫 로드 시 기본 세팅
+            if (isFirstLoad) {
+                // create canvas
+                const canvas = document.createElement('canvas');
+                canvas.width = 500;
+                canvas.height = 500;
 
-            // create mesh  / 배경색 : '#FFFB6A'
-            const texture = new THREE.CanvasTexture(canvas);
-            const material = new THREE.MeshBasicMaterial({ map: texture });
-            const reviewMesh = new THREE.Mesh(geometry, material);
-            reviewMesh.rotation.y = THREE.MathUtils.degToRad(-90);
-            reviewMesh.position.set(...this.reviewPositions[i]);
+                // create mesh  / 배경색 : '#FFFB6A'
+                const texture = new THREE.CanvasTexture(canvas);
+                const material = new THREE.MeshBasicMaterial({ map: texture });
+                const reviewMesh = new THREE.Mesh(geometry, material);
+                reviewMesh.rotation.y = THREE.MathUtils.degToRad(-90);
+                reviewMesh.position.set(...this.reviewPositions[i]);
 
-            // review mesh 기울기 랜덤 설정
-            reviewMesh.rotation.x = THREE.MathUtils.degToRad(Math.random() * 7 - 3.5);
+                // review mesh 기울기 랜덤 설정
+                reviewMesh.rotation.x = THREE.MathUtils.degToRad(Math.random() * 7 - 3.5);
 
-            // 이 후 선택하여 painting을 위한 배열
-            this.canvasList.push(canvas);
-            this.canvasTextureList.push(texture);
-            // 데이터 개수에 따라 mesh를 보여주기 위한 배열
-            this.reviewMeshList.push(reviewMesh);
+                // 이 후 선택하여 painting을 위한 배열
+                this.canvasList.push(canvas);
+                this.canvasTextureList.push(texture);
+                // 데이터 개수에 따라 mesh를 보여주기 위한 배열
+                this.reviewMeshList.push(reviewMesh);
+            }
 
             // 리뷰가 존재한다면 리뷰 추가
             const review = this.guestReviewList[i];
@@ -146,8 +199,8 @@ export class GuestBook {
                 // content 가공
                 const contentTxt = this.guestReviewList[i].message.replace(/\n/g, '')
                 const contentArr = [];
-                for (let i = 0; i < contentTxt.length; i += 11) {
-                    contentArr.push(contentTxt.slice(i, i + 11));
+                for (let i = 0; i < contentTxt.length; i += 10) {
+                    contentArr.push(contentTxt.slice(i, i + 10));
                 }
                 // fill background
                 context.fillStyle = '#FFFB6A';
@@ -163,28 +216,14 @@ export class GuestBook {
                     const y = ( idx + 1 ) * 50 + 180; // default 230
                     context.fillText(txt, 55, y);
                 });
+                // 첫 로드가 아닌 경우 texture 업데이트 트리거
+                if (!isFirstLoad) this.canvasTextureList[i].needsUpdate = true;
 
                 this.app.scene.add(this.reviewMeshList[i]);
+            } else { // 리뷰가 존재하지 않는다면 scene에서 제외
+                this.app.scene.remove(this.reviewMeshList[i]);
             }
         }
-    }
-
-    createGuestReview() {
-        const name = this.guestBookName.value;
-        const message = this.guestBookMessage.value;
-        // if (name.length < 2 && message.length < 2) alert('이름과 메시지는 2글자 이상으로 입력해주세요.');
-
-        addDoc(collection(db, 'guestBook'), {
-            createAt: new Date().toISOString(),
-            name: name,
-            message: message,
-        })
-            .then(res => {
-                this.guestBookName.value = '';
-                this.guestBookMessage.value = '';
-                this.controlReviewModal('off');
-            })
-            .catch(err => console.log(err));
     }
 
     controlReviewModal(type, timeout = 320) {
@@ -202,36 +241,87 @@ export class GuestBook {
     }
 
     async nextReview() {
-        // console.log('넥스트리뷰 before', this.canvasContext)
-        // // 메모지 Mesh 배열 생성
-        // this.canvasContext.fillStyle = '#fff';
-        // this.canvasContext.fillRect(0, 0, 500, 500)
-        // this.canvasTexture.needsUpdate = true;
-        // console.log('넥스트리뷰 after', this.canvasContext)
-        // todo: startAfter와 endBefore를 사용한 파이어베이스 페이지네이션 구현
+        if (this.nextDisabled) return;
+        // 방명록 데이터 초기화
+        this.guestReviewList = [];
+        // db 쿼리 생성
         const q = query(
             collection(db, 'guestBook'),
             orderBy('createAt', 'desc'),
             startAfter(this.lastVisible),
             limit(this.limit),
-        )
+        );
+        // 데이터 요청
         const snapshot = await getDocs(q);
+        // 다음 데이터가 없다면 next 비활성화
+        if (snapshot.empty) return this.nextDisabled = true;
+        // get firstVisible
+        this.firstVisible = snapshot.docs[0].data().createAt;
+        // 응답 데이터 추가
         snapshot.forEach((doc) => {
-            console.log(doc.data())
-            this.guestReviewList.push(doc.data());
-        })
-
+            const data = doc.data();
+            this.guestReviewList.push(data);
+            this.lastVisible = data.createAt;
+        });
+        // 첫 next 클릭 시 prev 활성화
+        if (this.currentPage === 1) this.prevDisabled = false;
+        // 페이지++
         this.currentPage++;
+        // painting
+        this.paintGuestReview();
     }
-    prevReview() {
-        // console.log('넥스트리뷰 before', this.canvasContext)
-        // // 메모지 Mesh 배열 생성
-        // this.canvasContext.fillStyle = '#fff';
-        // this.canvasContext.fillRect(0, 0, 500, 500)
-        // this.canvasTexture.needsUpdate = true;
-        // console.log('넥스트리뷰 after', this.canvasContext)
-
-
+    async prevReview() {
+        if (this.prevDisabled) return;
+        // 방명록 데이터 초기화
+        this.guestReviewList = [];
+        // db 쿼리 생성
+        const q = query(
+            collection(db, 'guestBook'),
+            orderBy('createAt', 'desc'),
+            endBefore(this.firstVisible),
+            limitToLast(this.limit),
+        );
+        // 데이터 요청
+        const snapshot = await getDocs(q);
+        console.log(snapshot.size)
+        // get firstVisible
+        this.firstVisible = snapshot.docs[0].data().createAt;
+        // 응답 데이터 추가
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            console.log('prev가 가져온 데이터~',data);
+            this.guestReviewList.push(data);
+            this.lastVisible = data.createAt;
+        });
+        // 페이지--
+        this.currentPage--;
+        // // 1페이지라면 prev 비활성화
+        // if (this.currentPage === 1) this.prevDisabled = true;
+        // // 추가된 데이터가 있다면 최신화 데이터로 리로드
+        // if (this.currentPage < 1) {
+        //     // 페이지 1로 초기화
+        //     this.currentPage = 1;
+        //     // 방명록 초기화
+        //     this.guestReviewList = [];
+        //     // 쿼리 작성
+        //     const q = query(
+        //         collection(db, 'guestBook'),
+        //         orderBy('createAt', 'desc'),
+        //         limit(this.limit),
+        //     );
+        //     // fetch firestore
+        //     const snapshot = await getDocs(q);
+        //     snapshot.forEach((doc) => {
+        //         const data = doc.data();
+        //         console.log('방명록 작성 후 데이터',data)
+        //         this.guestReviewList.push(data);
+        //         this.lastVisible = data.createAt;
+        //     });
+        //     // painting
+        //     this.paintGuestReview();
+        // }
+        // painting
+        this.paintGuestReview();
     }
     async getFirestoreData() {
         // 쿼리 작성
@@ -242,7 +332,9 @@ export class GuestBook {
         );
         // fetch firestore
         const snapshot = await getDocs(q);
-        snapshot.forEach((doc, idx) => {
+        // get firstVisible
+        this.firstVisible = snapshot.docs[0].data().createAt;
+        snapshot.forEach((doc) => {
             const data = doc.data();
             this.guestReviewList.push(data);
             this.lastVisible = data.createAt;
