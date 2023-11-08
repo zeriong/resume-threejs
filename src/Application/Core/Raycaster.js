@@ -70,12 +70,12 @@ export default class Raycaster {
             this.gsap.toGuestBook();
         }
         if (target.name === 'nextReview') {
-            await app.guestBook.nextReview();
             console.log('넥스트 클릭')
+            await app.guestBook.nextReview();
         }
         if (target.name === 'prevReview') {
-            await app.guestBook.prevReview();
             console.log('프레브 클릭')
+            await app.guestBook.prevReview();
         }
 
         // 링크 메뉴 클릭 이벤트

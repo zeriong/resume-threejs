@@ -69,7 +69,7 @@ export default class GsapAnimation {
         const contentList = app.positions.getContentPositions();
         const currentPosition = contentList.find((val) => val.current === target);
         // 시점 방해 대응으로 의자 투명화
-        this.convertChairTransParent('invisible');
+        this.convertTransparent('zoomIn');
 
         if (target !== 'guestBook' && this.isInGuestBook) this.isInGuestBook = false;
 
@@ -129,7 +129,7 @@ export default class GsapAnimation {
         // prev 버튼 비활성화
         this.offPrev();
         // 의자 투명화 매서드
-        this.convertChairTransParent('visible');
+        this.convertTransparent('zoomOut');
         gsap.to(app.camera.instance.position, {
             duration: 1, ease: 'power1.inOut',
             // set position
@@ -188,7 +188,7 @@ export default class GsapAnimation {
                 app.camera.orbitControls.enabled = false;
                 app.isStart = true;
                 this.controlLimitBreak(app.camera.orbitControls); // down control 제한 해제
-                this.convertChairTransParent('invisible', 3000, 1.5);
+                this.convertTransparent('zoomIn', 3000, 1.5);
             },
             onComplete: () => {
                 gsap.to(app.camera.instance.position, {
@@ -329,14 +329,26 @@ export default class GsapAnimation {
         }
     }
 
-    // 의자 등받이 투명화 on/off
-    convertChairTransParent(type, ms = 0, duration = 2) {
+    /** 의자 등받이, 방명록 next/prev 버튼 mesh 투명 on/off */
+    convertTransparent(type, ms = 0, duration = 2) {
         const intersectsMeshes = Application.getInstance().intersectsMeshes;
         setTimeout(() => {
             intersectsMeshes.forEach(mesh => {
-                if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
-                    if (type === 'invisible') gsap.to(mesh.material, { transparent: true, opacity: 0, duration });
-                    if (type === 'visible') gsap.to(mesh.material, { transparent: false, opacity: 1, duration });
+                if (type === 'zoomIn') {
+                    if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
+                        gsap.to(mesh.material, {transparent: true, opacity: 0, duration});
+                    }
+                    if (mesh.name === ('prevReview') || mesh.name === ('nextReview')) {
+                        gsap.to(mesh.material, {transparent: false, opacity: 1, duration});
+                    }
+                }
+                if (type === 'zoomOut') {
+                    if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
+                        gsap.to(mesh.material, {transparent: false, opacity: 1, duration});
+                    }
+                    if (mesh.name === ('prevReview') || mesh.name === ('nextReview')) {
+                        gsap.to(mesh.material, {transparent: true, opacity: 0, duration});
+                    }
                 }
             });
         }, ms);
@@ -398,6 +410,8 @@ export default class GsapAnimation {
     // 방명록 이동 매서드
     toGuestBook() {
         if (this.isMovingCam) return;
+        // next/prev on
+        this.convertTransparent('zoomIn');
         // get instance
         const app = Application.getInstance();
         const position = app.positions.getGuestBookPosition();

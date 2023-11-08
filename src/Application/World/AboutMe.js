@@ -14,7 +14,6 @@ export default class AboutMe {
 
     aboutMeLoad() {
         this.loader.gltfLoader.load('/models/dino.glb', (glb) => {
-            console.log('디노 렌더링')
             const model = glb.scene;
             model.scale.set(0.1, 0.1, 0.1);
             model.castShadow = true;

@@ -70,51 +70,63 @@ export class GuestBook {
             this.createGuestReview();
         });
 
-        this.getFirestoreData();
+        // init setting
+        this.setGuestReviews()
     }
 
     setGuestReviews() {
-        // 방명록 next 버튼
-        const vertices = new Float32Array([
-            -0.03, 0.05, 0,   // 꼭지점 1 (x, y, z)
-            -0.03, -0.05, 0, // 꼭지점 2 (x, y, z)
-            0.01, 0, 0   // 꼭지점 3 (x, y, z)
-        ]);
-        const rightArrowGeometry = new THREE.BufferGeometry();
-        rightArrowGeometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-        const rightArrowMaterial = new THREE.MeshBasicMaterial({ color: '#eeeeee' })
-        const rightArrowMesh = new THREE.Mesh(rightArrowGeometry, rightArrowMaterial);
-        rightArrowMesh.position.set(2.8955, 2.026, 2.55);
-        rightArrowMesh.rotation.y = THREE.MathUtils.degToRad(-90);
-        rightArrowMesh.name = 'nextReview';
-        // next 활성화 여부
-        if (this.guestReviewList.length === 6) this.nextDisabled = false;
+        (async () => {
+            // get data
+            await this.getFirestoreData();
+            // fetch success
 
-        // 방명록 prev 버튼
-        const leftArrowMesh = rightArrowMesh.clone();
-        leftArrowMesh.material.side = THREE.DoubleSide;
-        leftArrowMesh.rotation.y = THREE.MathUtils.degToRad(90);
-        leftArrowMesh.position.set(2.8955, 2.026, 1.837);
-        leftArrowMesh.name = 'prevReview';
+            // 방명록 next 버튼
+            const vertices = new Float32Array([
+                -0.03, 0.05, 0,   // 꼭지점 1 (x, y, z)
+                -0.03, -0.05, 0, // 꼭지점 2 (x, y, z)
+                0.01, 0, 0   // 꼭지점 3 (x, y, z)
+            ]);
+            const rightArrowGeometry = new THREE.BufferGeometry();
+            rightArrowGeometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+            const rightArrowMaterial = new THREE.MeshBasicMaterial({ color: '#eeeeee' })
+            const rightArrowMesh = new THREE.Mesh(rightArrowGeometry, rightArrowMaterial);
+            rightArrowMesh.position.set(2.8955, 2.026, 2.55);
+            rightArrowMesh.rotation.y = THREE.MathUtils.degToRad(-90);
+            // rightArrowMesh.material.opacity = 0;
+            // rightArrowMesh.material.transparent = true;
+            rightArrowMesh.name = 'nextReview';
 
-        // 버튼들 raycaster, scene추가
-        this.app.intersectsMeshes.push(leftArrowMesh, rightArrowMesh);
-        this.app.scene.add(rightArrowMesh, leftArrowMesh);
+            // next 활성화 여부
+            if (this.guestReviewList.length === 6) this.nextDisabled = false;
 
-        // 방명록 raycaster 감지 영역 추가
-        const areaGeometry = new THREE.PlaneGeometry(0.6,1,1,1);
-        const areaMaterial = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 });
-        const areaMesh = new Mesh(areaGeometry, areaMaterial);
-        areaMesh.position.set(2.8955, 2, 2.2);
-        areaMesh.rotation.y = THREE.MathUtils.degToRad(-90);
-        areaMesh.name = 'guestBook';
-        this.app.intersectsMeshes.push(areaMesh);
-        this.app.scene.add(areaMesh);
+            // 방명록 prev 버튼
+            const leftArrowMesh = rightArrowMesh.clone();
+            leftArrowMesh.material.side = THREE.DoubleSide;
+            leftArrowMesh.rotation.y = THREE.MathUtils.degToRad(90);
+            leftArrowMesh.position.set(2.8955, 2.026, 1.837);
+            // leftArrowMesh.material.opacity = 0;
+            // leftArrowMesh.material.transparent = true;
+            leftArrowMesh.name = 'prevReview';
 
-        // 방명록 첫 렌더링 기준으로 painting
-        this.paintGuestReview(true);
+            // 버튼들 raycaster, scene추가
+            this.app.intersectsMeshes.push(leftArrowMesh, rightArrowMesh);
+            this.app.scene.add(rightArrowMesh, leftArrowMesh);
+
+            // 방명록 raycaster 감지 영역 추가
+            const areaGeometry = new THREE.PlaneGeometry(0.6,1,1,1);
+            const areaMaterial = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 });
+            const areaMesh = new Mesh(areaGeometry, areaMaterial);
+            areaMesh.position.set(2.8955, 2, 2.2);
+            areaMesh.rotation.y = THREE.MathUtils.degToRad(-90);
+            areaMesh.name = 'guestBook';
+            this.app.intersectsMeshes.push(areaMesh);
+            this.app.scene.add(areaMesh);
+
+            // 방명록 첫 렌더링 기준으로 painting
+            this.paintGuestReview(true);
+        })()
     }
-    // todo: fetch 매서드화 해서 정리
+
     createGuestReview() {
         const name = this.guestBookName.value;
         const message = this.guestBookMessage.value;
@@ -131,24 +143,8 @@ export class GuestBook {
                 this.controlReviewModal('off');
 
                 (async () => {
-                    // 방명록 초기화
-                    this.guestReviewList = [];
-                    // 쿼리 작성
-                    const q = query(
-                        collection(db, 'guestBook'),
-                        orderBy('createAt', 'desc'),
-                        limit(this.limit),
-                    );
-                    // fetch firestore
-                    const snapshot = await getDocs(q);
-                    // get firstVisible
-                    this.firstVisible = snapshot.docs[0].data().createAt;
-                    snapshot.forEach((doc) => {
-                        const data = doc.data();
-                        console.log('방명록 작성 후 데이터',data)
-                        this.guestReviewList.push(data);
-                        this.lastVisible = data.createAt;
-                    });
+                    // get init data
+                    await this.getFirestoreData();
                     // painting
                     this.paintGuestReview();
                 })()
@@ -242,29 +238,10 @@ export class GuestBook {
 
     async nextReview() {
         if (this.nextDisabled) return;
-        // 방명록 데이터 초기화
-        this.guestReviewList = [];
-        // db 쿼리 생성
-        const q = query(
-            collection(db, 'guestBook'),
-            orderBy('createAt', 'desc'),
-            startAfter(this.lastVisible),
-            limit(this.limit),
-        );
-        // 데이터 요청
-        const snapshot = await getDocs(q);
-        // 다음 데이터가 없다면 next 비활성화
-        if (snapshot.empty) return this.nextDisabled = true;
-        // get firstVisible
-        this.firstVisible = snapshot.docs[0].data().createAt;
-        // 응답 데이터 추가
-        snapshot.forEach((doc) => {
-            const data = doc.data();
-            this.guestReviewList.push(data);
-            this.lastVisible = data.createAt;
-        });
-        // 첫 next 클릭 시 prev 활성화
-        if (this.currentPage === 1) this.prevDisabled = false;
+        // get next page data
+        await this.getFirestoreData('next');
+        // prev 비활성화 상태라면 활성화
+        if (this.prevDisabled) this.prevDisabled = false;
         // 페이지++
         this.currentPage++;
         // painting
@@ -272,74 +249,53 @@ export class GuestBook {
     }
     async prevReview() {
         if (this.prevDisabled) return;
-        // 방명록 데이터 초기화
-        this.guestReviewList = [];
-        // db 쿼리 생성
-        const q = query(
-            collection(db, 'guestBook'),
-            orderBy('createAt', 'desc'),
-            endBefore(this.firstVisible),
-            limitToLast(this.limit),
-        );
-        // 데이터 요청
-        const snapshot = await getDocs(q);
-        console.log(snapshot.size)
-        // get firstVisible
-        this.firstVisible = snapshot.docs[0].data().createAt;
-        // 응답 데이터 추가
-        snapshot.forEach((doc) => {
-            const data = doc.data();
-            console.log('prev가 가져온 데이터~',data);
-            this.guestReviewList.push(data);
-            this.lastVisible = data.createAt;
-        });
+        // next 비활성화 상태라면 활성화
+        if (this.nextDisabled) this.nextDisabled = false;
+        // get prev page data
+        await this.getFirestoreData('prev');
         // 페이지--
         this.currentPage--;
-        // // 1페이지라면 prev 비활성화
-        // if (this.currentPage === 1) this.prevDisabled = true;
-        // // 추가된 데이터가 있다면 최신화 데이터로 리로드
-        // if (this.currentPage < 1) {
-        //     // 페이지 1로 초기화
-        //     this.currentPage = 1;
-        //     // 방명록 초기화
-        //     this.guestReviewList = [];
-        //     // 쿼리 작성
-        //     const q = query(
-        //         collection(db, 'guestBook'),
-        //         orderBy('createAt', 'desc'),
-        //         limit(this.limit),
-        //     );
-        //     // fetch firestore
-        //     const snapshot = await getDocs(q);
-        //     snapshot.forEach((doc) => {
-        //         const data = doc.data();
-        //         console.log('방명록 작성 후 데이터',data)
-        //         this.guestReviewList.push(data);
-        //         this.lastVisible = data.createAt;
-        //     });
-        //     // painting
-        //     this.paintGuestReview();
-        // }
+        // 1페이지로 돌아갈 때 prev 비활성화 및 첫 페이지(최신화된 데이터) load
+        if (this.currentPage === 1) {
+            this.prevDisabled = true;
+            // get init data
+            await this.getFirestoreData();
+        }
         // painting
         this.paintGuestReview();
     }
-    async getFirestoreData() {
+    async getFirestoreData(type) {
         // 쿼리 작성
-        const q = query(
+        // next: startAfter(마지막 데이터의 createAt), limit를 사용하여 다음페이지 이동
+        // prev: endBefore(처음 받는 데이터의 createAt), limitToLast를 사용하여 이전페이지 이동
+        // undefined: 기본쿼리 orderBy, limit만을 사용 (첫 페이지를 최신화하여 렌더링)
+        const queryArr = [];
+        if (type === 'next') queryArr.push(startAfter(this.lastVisible), limit(this.limit));
+        if (type === 'prev') queryArr.push(endBefore(this.firstVisible), limitToLast(this.limit));
+        if (!type) queryArr.push(limit(this.limit));
+
+        let q = query(
             collection(db, 'guestBook'),
             orderBy('createAt', 'desc'),
-            limit(this.limit),
+            ...queryArr,
         );
+
         // fetch firestore
         const snapshot = await getDocs(q);
+        // 더이상 받아올 데이터가 없다면 isLastData = true
+        if (snapshot.empty) {
+            if (type === 'next') return this.nextDisabled = true;
+            if (type === 'prev') return this.prevDisabled = true;
+        }
+        // 새로운 데이터를 받기 위해 빈배열로 초기화
+        this.guestReviewList = [];
         // get firstVisible
         this.firstVisible = snapshot.docs[0].data().createAt;
         snapshot.forEach((doc) => {
             const data = doc.data();
             this.guestReviewList.push(data);
             this.lastVisible = data.createAt;
+            console.log(data);
         });
-        // 로드 후 초기 세팅
-        this.setGuestReviews();
     }
 }

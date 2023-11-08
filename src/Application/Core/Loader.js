@@ -56,7 +56,6 @@ export default class Loader {
                     loadedMessage.style.display = 'flex';
                 }, 1700);
             }
-            console.log(item);
         };
     }
 }
