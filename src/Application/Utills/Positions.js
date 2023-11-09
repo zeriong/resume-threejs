@@ -11,6 +11,7 @@ export default class Positions {
         this.skillsPosition = this.world.skillsPosition;
         this.posterPosition = this.world.posterPosition;
         this.aboutMePosition = this.world.aboutMePosition;
+        this.guestBookPosition = { x: 0.5, y: 2, z: 2.2 }
 
         this.fixCameraPosition = this.getFixCameraPosition();
         this.fixMonitorPosition = this.getFixMonitorCamPosition();
@@ -64,23 +65,11 @@ export default class Positions {
         return 2.5
     }
 
-    getGuestBookPosition() {
-        // origin: cam = ( 0.5 / 2 / 2.2 ) , target = ( 1 / 2 / 2.2 )
-        return {
-            cameraPosition: {
-                x: 0.5, y: 2, z: 2.2
-            },
-            controlsTarget: {
-                x: 1, y: 2, z: 2.2
-            }
-        }
-    }
-
     getContentPositions() {
         return [
             // about me 첫번째 대화
             {
-                current: 'aboutMe1', next: 'aboutMe2', prev: 'poster',
+                current: 'aboutMe1', next: 'aboutMe2', prev: 'guestBook',
                 cameraPosition: {
                     x: (this.aboutMePosition.x), y: (this.aboutMePosition.y + 0.4), z: (this.aboutMePosition.z + 2.5 + this.fixCameraPosition)
                 },
@@ -96,7 +85,7 @@ export default class Positions {
 
             // projects
             {
-                current: 'projects', next: 'history', prev: 'aboutMe1',
+                current: 'projects', next: 'skills', prev: 'aboutMe1',
                 cameraPosition: {
                     x: (this.projectsPosition.x), y: (this.projectsPosition.y), z: (this.projectsPosition.z + this.fixMonitorPosition + this.fixCameraPosition)
                 },
@@ -105,9 +94,20 @@ export default class Positions {
                 }
             },
 
+            // skills
+            {
+                current: 'skills', next: 'history', prev: 'projects',
+                cameraPosition: {
+                    x: (this.skillsPosition.x), y: (this.skillsPosition.y), z: (this.skillsPosition.z + 1.6 + this.fixSkillsPosition)
+                },
+                controlsTarget: {
+                    x: (this.skillsPosition.x), y: (this.skillsPosition.y), z: (this.skillsPosition.z)
+                }
+            },
+
             // history
             {
-                current: 'history', next: 'skills', prev: 'projects',
+                current: 'history', next: 'guestBook', prev: 'skills',
                 cameraPosition: {
                     x: (this.historyPosition.x), y: (this.historyPosition.y), z: (this.historyPosition.z + this.fixHistoryPosition)
                 },
@@ -116,22 +116,20 @@ export default class Positions {
                 }
             },
 
-            // skills
+            // guestBook
             {
-                current: 'skills', next: 'poster', prev: 'history',
+                current: 'guestBook', next: 'aboutMe1', prev: 'history',
                 cameraPosition: {
-                    x: (this.skillsPosition.x),
-                    y: (this.skillsPosition.y),
-                    z: (this.skillsPosition.z + 1.6 + this.fixSkillsPosition)
+                    x: (this.guestBookPosition.x), y: (this.guestBookPosition.y), z: (this.guestBookPosition.z)
                 },
                 controlsTarget: {
-                    x: (this.skillsPosition.x), y: (this.skillsPosition.y), z: (this.skillsPosition.z)
-                }
+                    x: (this.guestBookPosition.x + 0.5), y: (this.guestBookPosition.y), z: (this.guestBookPosition.z)
+                },
             },
 
             // poster
             {
-                current: 'poster', next: 'aboutMe1', prev: 'skills',
+                current: 'poster',
                 cameraPosition: {
                     x: (this.posterPosition.x), y: (this.posterPosition.y), z: (this.posterPosition.z + 4 + this.fixCameraPosition)
                 },

@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="style.css" type="text/css">
 	<link rel="shortcut icon" href="./images/icons/favicon.ico" type="image/x-icon">
 </head>
-<body>
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 	<div id="css3DObject"></div>
 	<div id="webgl"></div>
 
@@ -62,7 +62,6 @@
 			<img id="soundOn" src="/images/icons/sound_on.svg" alt="soundOn"/>
 			<img id="soundOff" src="/images/icons/sound_off.svg" alt="soundOff"/>
 		</button>
-
 		<!-- 사운드 버튼 툴팁 -->
 		<div id="soundToolTip">
 			사운드 On / Off 버튼
@@ -74,11 +73,11 @@
 		<p id="guestBookTitle">방명록</p>
 		<div class="inputWrap" style="align-items: center;">
 			<label id="guestBookNameTitle" for="guestBookName">이름</label>
-			<input type="text" id="guestBookName" placeholder="이름을 입력해주세요." maxlength="8"/>
+			<input type="text" id="guestBookName" placeholder="8자 이내로 작성해주세요" maxlength="8"/>
 		</div>
 		<div class="inputWrap" style="height: 100%;">
 			<label id="guestBookMessageTitle" for="guestBookMessage">메시지</label>
-			<textarea id="guestBookMessage" placeholder="메시지를 입력해주세요." maxlength="50"></textarea>
+			<textarea id="guestBookMessage" placeholder="줄바꿈 반영되지 않습니다 50자 이내로 작성해주세요" maxlength="50"></textarea>
 		</div>
 		<button id="guestBookSubmit" type="button">작성</button>
 	</form>

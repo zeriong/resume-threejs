@@ -63,15 +63,32 @@ export default class GsapAnimation {
     toContent(target, isBtn) {
         // HTML과 상호작용 불가하도록 설정
         this.webgl.style.zIndex = 0;
+
         // get instance
         const app = Application.getInstance();
-        // getContentPositions를 통해 포지션 등록
-        const contentList = app.positions.getContentPositions();
-        const currentPosition = contentList.find((val) => val.current === target);
-        // 시점 방해 대응으로 의자 투명화
-        this.convertTransparent('zoomIn');
 
+        // 첫시작 aboutMe 끝날 시 자유시점모드 버튼 이름 skip -> back 변경
+        if (app.isStart && this.currentContent === 'projects') {
+            app.isStart = false;
+            this.returnToOrbitBtn.innerHTML = 'Back';
+        }
+
+        // getContentPositions를 통해 포지션 등록
+        const currentPosition = app.positions.getContentPositions().find((val) => val.current === target);
+
+        // 의자, 방명록 next/prev 버튼 투명화
+        if (target !== 'guestBook' && !isBtn && !this.isInContent) {
+            this.convertTransparent('zoomIn', 0, undefined, 0.2, 1000);
+        } else if (target === 'guestBook' && !this.isInContent) this.convertTransparent('zoomIn');
+
+        // 방명록에서 벗어날 경우
         if (target !== 'guestBook' && this.isInGuestBook) this.isInGuestBook = false;
+        // 컨텐츠가 방명록인 경우
+        if (target === 'guestBook') {
+            this.isInGuestBook = true;
+            console.log('게스트에요')
+        }
+        console.log('isInContent: ', this.isInContent, 'isInGuestBook: ', this.isInGuestBook, 'target: ', target);
 
         gsap.to(app.camera.instance.position, {
             ...currentPosition.cameraPosition, duration: 1, ease: 'power1.inOut',
@@ -81,6 +98,18 @@ export default class GsapAnimation {
                 this.isMovingCam = true;
                 app.camera.orbitControls.enabled = false;
                 this.controlLimitBreak(app.camera.orbitControls); // down control 제한 해제
+
+                // 포스터인 경우 next/prev 버튼 x, 버튼 스케일 up
+                if (target === 'poster') {
+                    this.contentMenuBtns.style.bottom = '-80px';
+                    // transition duration 기다린 후 적용
+                    setTimeout(() => {
+                        this.nextBtn.style.display = 'none';
+                        this.prevBtn.style.display = 'none';
+                        this.contentMenuBtns.style.justifyContent = 'center';
+                        this.returnToOrbitBtn.style.scale = 1.2;
+                    }, 300);
+                }
             },
             onComplete: () => {
                 // 컨텐츠 nav menu 모바일 대응
@@ -90,10 +119,16 @@ export default class GsapAnimation {
                     this.contentMenuBtns.style.bottom = '30px';
                 }
                 // aboutMe 컨텐츠인경우 대화상자 나타남
-                if (target === 'aboutMe1') this.appearDialog();
-                else this.isMovingCam = false;
-                // HTML과 상호작용 가능하도록 zIndex 낮춤
-                this.webgl.style.zIndex = -1;
+                if (target === 'aboutMe1') return this.appearDialog();
+                // next/prev 버튼조작이 아닌 방명록 이동이면 애니메이션 끝난 후 이벤트 허용(isMovingCam)
+                else if (target === 'guestBook' && !isBtn) {
+                    return setTimeout(() => {
+                        this.isMovingCam = false;
+                    }, 1000);
+                }
+                this.isMovingCam = false;
+                // projects 컨텐츠의 경우 HTML과 상호작용 가능하도록 zIndex 낮춤
+                if (target === 'projects') this.webgl.style.zIndex = -1;
             }
         });
         gsap.to(app.camera.orbitControls.target, {
@@ -109,11 +144,6 @@ export default class GsapAnimation {
         // get instance
         const app = Application.getInstance();
 
-        // 초기화
-        this.listCount = 0;
-        this.isActivePrev = false;
-        this.isInGuestBook = false;
-
         // 방명록 setTimeout 해제
         if (app.raycaster.timeout1 !== null) {
             clearTimeout(app.raycaster.timeout1);
@@ -125,9 +155,6 @@ export default class GsapAnimation {
             app.raycaster.timeout2 = null;
             app.raycaster.controlPopup('hidden');
         }
-
-        // prev 버튼 비활성화
-        this.offPrev();
         // 의자 투명화 매서드
         this.convertTransparent('zoomOut');
         gsap.to(app.camera.instance.position, {
@@ -136,23 +163,39 @@ export default class GsapAnimation {
             ...app.positions.getReturnToOrbitPositions(),
             onStart: () => {
                 this.isMovingCam = true;
-
-                // start 모드에 따라서 버튼이름 변경
-                if (app.isStart) {
-                    app.isStart = false;
-                    this.returnToOrbitBtn.innerHTML = 'Back';
+                // 메뉴버튼 사라짐 (poster의 경우 transition 기다린 후 속성 되돌림)
+                if (this.currentContent === 'poster') {
+                    this.contentMenuBtns.style.bottom = '-80px';
+                    // 기존 속성으로
+                    setTimeout(() => {
+                        this.nextBtn.style.display = 'block';
+                        this.prevBtn.style.display = 'block';
+                        this.contentMenuBtns.style.justifyContent = 'space-between';
+                        this.returnToOrbitBtn.style.scale = 1;
+                    }, 300);
                 }
-                // 메뉴버튼 사라짐
-                this.contentMenuBtns.style.bottom = '-70px';
+                else this.contentMenuBtns.style.bottom = '-70px';
+
                 // aboutMe의 경우 대화상자 사라지는 애니메이션 적용
                 if (this.currentContent === 'aboutMe1' || 'aboutMe2' || 'aboutMe3' || 'aboutMe4') this.disappearDialog();
             },
             onComplete: () => {
+                // 버튼이름 변경
+                if (app.isStart) {
+                    app.isStart = false;
+                    this.returnToOrbitBtn.innerHTML = 'Back';
+                }
                 this.isInContent = false;
                 this.isMovingCam = false;
                 app.camera.orbitControls.enabled = true;
                 this.webgl.style.zIndex = 0;
                 this.controlLimitSet(app.camera.orbitControls); // control 제한
+
+                // 초기화
+                this.listCount = 0;
+                this.isInGuestBook = false;
+                // prev 버튼 비활성화
+                this.prevBtnSwitch();
             }
         });
         gsap.to(app.camera.orbitControls.target, {
@@ -188,7 +231,7 @@ export default class GsapAnimation {
                 app.camera.orbitControls.enabled = false;
                 app.isStart = true;
                 this.controlLimitBreak(app.camera.orbitControls); // down control 제한 해제
-                this.convertTransparent('zoomIn', 3000, 1.5);
+                this.convertTransparent('zoomIn', 3000, 1.5, 2);
             },
             onComplete: () => {
                 gsap.to(app.camera.instance.position, {
@@ -224,16 +267,9 @@ export default class GsapAnimation {
         // get position list
         const positionList = app.positions.getContentPositions();
         // list count
-        if (positionList.length > this.listCount) {
-            this.listCount++;
-            if (app.isStart) {
-                app.isStart = false;
-                this.returnToOrbitBtn.innerHTML = 'Back';
-            }
-        }
-
+        if (positionList.length - 1 > this.listCount) this.listCount++;
         // prev 버튼 활성화
-        this.onPrev();
+        this.prevBtnSwitch();
         // current content position
         const currentPosition = positionList.find(val => val.current === this.currentContent);
 
@@ -284,17 +320,11 @@ export default class GsapAnimation {
         if (this.currentContent === 'projects') this.listCount -= 3;
 
         // count가 0이고 활성화상태라면 비활성화
-        this.offPrev();
+        this.prevBtnSwitch();
         // current content position
         const currentPosition = positionList.find(val => val.current === this.currentContent);
 
-        // 이전 대화 이동 함수
-        const prevDialog = (step) => {
-            this.currentContent = currentPosition.prev;
-            this.dialogContent.textContent = '';
-            app.eventModule.typing(step);
-        }
-        // 첫번째 대화 애니메이션
+        // aboutMe에서 나가기 애니메이션
         if (this.currentContent === 'aboutMe1') {
             this.currentContent = currentPosition.prev;
             this.isMovingCam = true;
@@ -302,27 +332,30 @@ export default class GsapAnimation {
             this.disappearDialog(currentPosition.prev, true);
             return;
         }
+        // 이전 대화 이동 함수
+        const prevDialog = (step) => {
+            this.currentContent = currentPosition.prev;
+            this.dialogContent.textContent = '';
+            app.eventModule.typing(step);
+        }
         // 대화 애니메이션
         if (this.currentContent === 'aboutMe2') return prevDialog(this.dialogTextList.step1);
         if (this.currentContent === 'aboutMe3') return prevDialog(this.dialogTextList.step2);
         if (this.currentContent === 'aboutMe4') return prevDialog(this.dialogTextList.step3);
-        // 마지막대화를 제외한 애니메이션 일괄 처리
+        // aboutMe에서 나가기, 방명록에서 나가기 애니메이션을 제외한 애니메이션 일괄 처리
         this.currentContent = currentPosition.prev;
         this.toContent(currentPosition.prev, true);
     }
 
-    // prev 버튼 활성화 매서드
-    onPrev() {
-        if (!this.isActivePrev) {
+    // prev 버튼 활성화 여부 결정 매서드
+    prevBtnSwitch() {
+        if (this.listCount > 0 && !this.isActivePrev) {
+            console.log('버튼 활성')
             this.isActivePrev = true;
             this.prevBtn.style.backgroundColor = "rgb(108, 117, 125)";
             this.prevBtn.style.color = '#fff';
-        }
-    }
-
-    // prev 버튼 비활성화 매서드
-    offPrev() {
-        if (this.listCount === 0 && this.isActivePrev) {
+        } else if (this.listCount === 0 && this.isActivePrev) {
+            console.log('버튼 비활성')
             this.isActivePrev = false;
             this.prevBtn.style.backgroundColor = "rgb(185, 188, 190)";
             this.prevBtn.style.color = '#d3d3d3';
@@ -330,24 +363,29 @@ export default class GsapAnimation {
     }
 
     /** 의자 등받이, 방명록 next/prev 버튼 mesh 투명 on/off */
-    convertTransparent(type, ms = 0, duration = 2) {
+    convertTransparent(
+        type, ms = 0, chairDuration = 2,
+        buttonDuration = 1, buttonTimeout = 1500
+    ) {
         const intersectsMeshes = Application.getInstance().intersectsMeshes;
         setTimeout(() => {
             intersectsMeshes.forEach(mesh => {
                 if (type === 'zoomIn') {
                     if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
-                        gsap.to(mesh.material, {transparent: true, opacity: 0, duration});
+                        gsap.to(mesh.material, {transparent: true, opacity: 0, duration: chairDuration});
                     }
                     if (mesh.name === ('prevReview') || mesh.name === ('nextReview')) {
-                        gsap.to(mesh.material, {transparent: false, opacity: 1, duration});
+                        setTimeout(() => {
+                            gsap.to(mesh.material, {transparent: false, opacity: 1, duration: buttonDuration});
+                        }, buttonTimeout);
                     }
                 }
                 if (type === 'zoomOut') {
                     if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
-                        gsap.to(mesh.material, {transparent: false, opacity: 1, duration});
+                        gsap.to(mesh.material, {transparent: false, opacity: 1, duration: chairDuration});
                     }
                     if (mesh.name === ('prevReview') || mesh.name === ('nextReview')) {
-                        gsap.to(mesh.material, {transparent: true, opacity: 0, duration});
+                        gsap.to(mesh.material, {transparent: true, opacity: 0, duration: buttonDuration});
                     }
                 }
             });
@@ -405,37 +443,5 @@ export default class GsapAnimation {
     controlLimitBreak (controls) {
         controls.maxPolarAngle = THREE.MathUtils.degToRad(360); // 하단 시점 제한해제
         controls.minDistance = 0; // 가까워지는 최소거리 설정
-    }
-
-    // 방명록 이동 매서드
-    toGuestBook() {
-        if (this.isMovingCam) return;
-        // next/prev on
-        this.convertTransparent('zoomIn');
-        // get instance
-        const app = Application.getInstance();
-        const position = app.positions.getGuestBookPosition();
-
-        gsap.to(app.camera.instance.position, {
-            ...position.cameraPosition, duration: 1, ease: 'power1.inOut',
-            onStart: () => {
-                this.isInContent = true;
-                this.isMovingCam = true;
-                app.camera.orbitControls.enabled = false;
-                this.controlLimitBreak(app.camera.orbitControls); // down control 제한 해제
-            },
-            onComplete: () => {
-                this.isInGuestBook = true;
-                this.isMovingCam = false;
-                if (app.sizes.width <= 497) {
-                    this.contentMenuBtns.style.bottom = '10px';
-                } else {
-                    this.contentMenuBtns.style.bottom = '30px';
-                }
-            }
-        });
-        gsap.to(app.camera.orbitControls.target, {
-            ...position.controlsTarget, duration: 1, ease: 'power1.inOut',
-        });
     }
 }

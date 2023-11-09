@@ -147,7 +147,9 @@ ul {
   gap: 8px;
 }
 #optionMenu #guestBookToolTip {
-  display: none;
+  transition: opacity 200ms;
+  visibility: hidden;
+  opacity: 0;
   position: absolute;
   bottom: -90px;
   left: -180px;
@@ -172,9 +174,11 @@ ul {
   margin-top: -16px;
 }
 #optionMenu #soundToolTip {
+  transition: opacity 200ms;
+  visibility: hidden;
   position: absolute;
-  bottom: -90px;
-  left: -180px;
+  bottom: -71px;
+  left: -50px;
   border-radius: 16px;
   background-color: white;
   padding: 13px;
@@ -192,7 +196,7 @@ ul {
   border-bottom-color: white;
   border-top: 0;
   border-left: 0;
-  margin-left: -13px;
+  margin-left: -15px;
   margin-top: -16px;
 }
 #optionMenu .option-btn {
@@ -209,7 +213,7 @@ ul {
   background-color: #363636;
 }
 #optionMenu .option-btn #soundOff {
-  width: 20px;
+  width: 25px;
   display: none;
 }
 #optionMenu .option-btn #soundOn {
@@ -273,6 +277,7 @@ ul {
   width: 100%;
   font-size: 16px;
   padding: 6px;
+  resize: none;
 }
 #guestBook #guestBookMessage::-webkit-scrollbar {
   width: 14px;

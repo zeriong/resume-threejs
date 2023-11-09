@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import Application from '../Application';
 import {Mesh} from 'three';
 import {db} from '../Utills/Firebase';
-import {  collection, query, orderBy, limit, getDocs, addDoc, startAfter, endBefore, limitToLast  } from "firebase/firestore";
+import {collection, query, orderBy, limit, getDocs, addDoc, startAfter, endBefore, limitToLast} from "firebase/firestore";
 
 export class GuestBook {
     constructor() {
@@ -20,12 +20,6 @@ export class GuestBook {
         this.canvasList = []; // 이 후 선택하여 painting을 위한 배열
         this.canvasTextureList = []; // needsUpdate를 위한 textTexture를 담은 배열
         this.reviewMeshList = []; // 렌더링 될 최대 6개의 mesh를 담은 배열
-
-        this.reviewPositions = [
-            [2.8955, 2.328, 2.045], [2.8955, 2.328, 2.347],
-            [2.8955, 2.026, 2.045], [2.8955, 2.026, 2.347],
-            [2.8955, 1.724, 2.045], [2.8955, 1.724, 2.347],
-        ];
 
         this.guestBook = document.querySelector('#guestBook');
         this.guestBookName = document.querySelector('#guestBookName');
@@ -92,8 +86,8 @@ export class GuestBook {
             const rightArrowMesh = new THREE.Mesh(rightArrowGeometry, rightArrowMaterial);
             rightArrowMesh.position.set(2.8955, 2.026, 2.55);
             rightArrowMesh.rotation.y = THREE.MathUtils.degToRad(-90);
-            // rightArrowMesh.material.opacity = 0;
-            // rightArrowMesh.material.transparent = true;
+            rightArrowMesh.material.opacity = 0;
+            rightArrowMesh.material.transparent = true;
             rightArrowMesh.name = 'nextReview';
 
             // next 활성화 여부
@@ -104,8 +98,8 @@ export class GuestBook {
             leftArrowMesh.material.side = THREE.DoubleSide;
             leftArrowMesh.rotation.y = THREE.MathUtils.degToRad(90);
             leftArrowMesh.position.set(2.8955, 2.026, 1.837);
-            // leftArrowMesh.material.opacity = 0;
-            // leftArrowMesh.material.transparent = true;
+            leftArrowMesh.material.opacity = 0;
+            leftArrowMesh.material.transparent = true;
             leftArrowMesh.name = 'prevReview';
 
             // 버튼들 raycaster, scene추가
@@ -170,7 +164,7 @@ export class GuestBook {
                 const material = new THREE.MeshBasicMaterial({ map: texture });
                 const reviewMesh = new THREE.Mesh(geometry, material);
                 reviewMesh.rotation.y = THREE.MathUtils.degToRad(-90);
-                reviewMesh.position.set(...this.reviewPositions[i]);
+                reviewMesh.position.set(...this.reviewMeshPositionSets()[i]);
 
                 // review mesh 기울기 랜덤 설정
                 reviewMesh.rotation.x = THREE.MathUtils.degToRad(Math.random() * 7 - 3.5);
@@ -247,6 +241,7 @@ export class GuestBook {
         // painting
         this.paintGuestReview();
     }
+
     async prevReview() {
         if (this.prevDisabled) return;
         // next 비활성화 상태라면 활성화
@@ -264,6 +259,7 @@ export class GuestBook {
         // painting
         this.paintGuestReview();
     }
+
     async getFirestoreData(type) {
         // 쿼리 작성
         // next: startAfter(마지막 데이터의 createAt), limit를 사용하여 다음페이지 이동
@@ -297,5 +293,17 @@ export class GuestBook {
             this.lastVisible = data.createAt;
             console.log(data);
         });
+    }
+
+    reviewMeshPositionSets() {
+        const pos = { x: 2.8955, y: 2.341, z: 2.045, gap: 0.302 }
+        return [
+            [(pos.x), (pos.y), (pos.z)],
+            [(pos.x), (pos.y), (pos.z + pos.gap)],
+            [(pos.x), (pos.y - pos.gap), (pos.z)],
+            [(pos.x), (pos.y - pos.gap), (pos.z + pos.gap)],
+            [(pos.x), (pos.y - (pos.gap * 2)), (pos.z)],
+            [(pos.x), (pos.y - (pos.gap * 2)), (pos.z + pos.gap)],
+        ];
     }
 }

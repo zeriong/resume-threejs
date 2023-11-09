@@ -21,7 +21,11 @@ export default class Application {
     }
 
     constructor() {
+        // 싱글톤 패턴 적용
         Application.instance = this;
+
+        // variables
+        this.isStart = false; // 시작모드 여부 (start & skip)
 
         // Setup
         this.intersectsMeshes = [];
@@ -39,11 +43,32 @@ export default class Application {
         this.eventModule = new EventModule();
         this.guestBook = new GuestBook();
 
-        // 변수
-        this.isStart = false; // 시작모드 여부 (start & skip)
-
         this.scene.background = new THREE.Color(0x61657a);
 
+        // common events
+        const guestBookBtn = document.querySelector('#guestBookBtn');
+        const soundBtn = document.querySelector('#soundBtn');
+        const guestBookToolTip = document.querySelector('#guestBookToolTip');
+        const soundToolTip = document.querySelector('#soundToolTip');
+
+        guestBookBtn.addEventListener('mouseenter' ,() => {
+            guestBookToolTip.style.opacity = 1;
+            guestBookToolTip.style.visibility = 'visible';
+        });
+        guestBookBtn.addEventListener('mouseleave' ,() => {
+            guestBookToolTip.style.opacity = 0;
+            guestBookToolTip.style.visibility = 'hidden';
+        });
+        soundBtn.addEventListener('mouseenter' ,() => {
+            soundToolTip.style.opacity = 1;
+            soundToolTip.style.visibility = 'visible';
+        });
+        soundBtn.addEventListener('mouseleave' ,() => {
+            soundToolTip.style.opacity = 0;
+            soundToolTip.style.visibility = 'hidden';
+        });
+
+        // 매서드 실행
         this.camera.createControls();
         this.renderer.setComposer();
         this.update();
@@ -52,51 +77,53 @@ export default class Application {
         const axesHelper = new THREE.AxesHelper(10);
         this.scene.add(axesHelper);
 
-        this.test = false;
-        this.testEl = document.querySelector('#loading');
 
-        document.querySelector('#test').addEventListener('click', () => {
-            // if (!this.test) {
-            //     this.test = true;
-            //     this.testEl.style.display = 'none';
-            //     return;
-            // }
-            // this.testEl.style.display = 'flex';
-            // this.test = false;
-            console.log('얍!')
-            // this.guestBook.nextReview();
-            // this.gsap.toGuestBook();
-        });
 
-        // html 작업 시 조정
-        this.loader.loadingManager.onLoad = () => {
-            // html상호작용 가능 설정
-            // document.querySelector('#webgl').style.zIndex = -1;
+        // this.test = false;
+        // this.testEl = document.querySelector('#loading');
+        //
+        // document.querySelector('#test').addEventListener('click', () => {
+        //     // if (!this.test) {
+        //     //     this.test = true;
+        //     //     this.testEl.style.display = 'none';
+        //     //     return;
+        //     // }
+        //     // this.testEl.style.display = 'flex';
+        //     // this.test = false;
+        //     console.log('얍!')
+        //     // this.guestBook.nextReview();
+        //     // this.gsap.toGuestBook();
+        // });
 
-            // 오빗컨트롤 제한 해제
-            this.camera.orbitControls.maxPolarAngle = Math.PI; // 하단 시점 제한해제
-            this.camera.orbitControls.minDistance = 0; // 가까워지는 최소거리 설정
-            this.camera.orbitControls.minAzimuthAngle = -Infinity; // 좌측 시점 제한해제
-            this.camera.orbitControls.maxAzimuthAngle = Infinity; // 우측 시점 제한해제
-
-            // 원하는 컨텐츠로 변경
-            // this.htmlPosition = this.positions.getContentPositions();
-            // this.content = this.htmlPosition.find(val => val.current === 'projects');
-            // this.camera.instance.position.x = this.content.cameraPosition.x;
-            // this.camera.instance.position.y = this.content.cameraPosition.y;
-            // this.camera.instance.position.z = this.content.cameraPosition.z;
-            // this.camera.orbitControls.target.x = this.content.controlsTarget.x;
-            // this.camera.orbitControls.target.y = this.content.controlsTarget.y;
-            // this.camera.orbitControls.target.z = this.content.controlsTarget.z;
-
-            // 현재 방명록 시점으로 지정.
-            this.camera.instance.position.x = 0.5;
-            this.camera.instance.position.y = 2;
-            this.camera.instance.position.z = 2.2;
-            this.camera.orbitControls.target.x = 1;
-            this.camera.orbitControls.target.y = 2;
-            this.camera.orbitControls.target.z = 2.2;
-        }
+        // // html 작업 시 조정
+        // this.loader.loadingManager.onLoad = () => {
+        //     // html상호작용 가능 설정
+        //     // document.querySelector('#webgl').style.zIndex = -1;
+        //
+        //     // 오빗컨트롤 제한 해제
+        //     this.camera.orbitControls.maxPolarAngle = Math.PI; // 하단 시점 제한해제
+        //     this.camera.orbitControls.minDistance = 0; // 가까워지는 최소거리 설정
+        //     this.camera.orbitControls.minAzimuthAngle = -Infinity; // 좌측 시점 제한해제
+        //     this.camera.orbitControls.maxAzimuthAngle = Infinity; // 우측 시점 제한해제
+        //
+        //     // 원하는 컨텐츠로 변경
+        //     // this.htmlPosition = this.positions.getContentPositions();
+        //     // this.content = this.htmlPosition.find(val => val.current === 'projects');
+        //     // this.camera.instance.position.x = this.content.cameraPosition.x;
+        //     // this.camera.instance.position.y = this.content.cameraPosition.y;
+        //     // this.camera.instance.position.z = this.content.cameraPosition.z;
+        //     // this.camera.orbitControls.target.x = this.content.controlsTarget.x;
+        //     // this.camera.orbitControls.target.y = this.content.controlsTarget.y;
+        //     // this.camera.orbitControls.target.z = this.content.controlsTarget.z;
+        //
+        //     // 현재 방명록 시점으로 지정.
+        //     this.camera.instance.position.x = 0.5;
+        //     this.camera.instance.position.y = 2;
+        //     this.camera.instance.position.z = 2.2;
+        //     this.camera.orbitControls.target.x = 1;
+        //     this.camera.orbitControls.target.y = 2;
+        //     this.camera.orbitControls.target.z = 2.2;
+        // }
     }
 
     // 3D 렌더링 요소 일괄 업데이트

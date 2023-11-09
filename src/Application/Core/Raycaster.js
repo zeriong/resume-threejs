@@ -16,7 +16,6 @@ export default class Raycaster {
         this.camera = app.camera.instance;
         this.timeout1 = null;
         this.timeout2 = null;
-        this.guestBookPopup = document.querySelector('#guestBookPopup');
 
         // 마우스 드래그 시 발생하는 rayCaster 방지
         this.rendererDom.addEventListener('mousedown', (e) => {
@@ -40,57 +39,59 @@ export default class Raycaster {
     async checkIntersects() {
         // raycaster작동 시 intersectsMeshes 최신데이터를 사용
         const app = Application.getInstance()
-        const intersectsMeshes = app.intersectsMeshes;
-        const isInContent = app.gsap.isInContent;
 
-        // gsap play중이거나 드래그인 경우 이벤트 x
-        if (isInContent || this.mouseMoved) return;
-        this.raycaster.setFromCamera(this.mouse, this.camera); // 카메라 기준으로 ray 관통
+        // 카메라 기준으로 ray 관통
+        this.raycaster.setFromCamera(this.mouse, this.camera);
 
-        const intersects = this.raycaster.intersectObjects(intersectsMeshes); // rayCaster가 meshes에 담긴 mesh를 통과하면 객체에 담음
-        if (!intersects[0]) return; // intersects에 담긴 item이 없다면 return;
+        // rayCaster가 meshes에 담긴 mesh를 통과하면 객체에 담음
+        const intersects = this.raycaster.intersectObjects(app.intersectsMeshes);
+
+        // intersects에 담긴 item이 없다면 return;
+        if (!intersects[0]) return;
 
         // 기본적으로 rayCaster는 관통하는 모든 item을 담기 때문에 가장 처음 관통한 item(intersects[0])을 식별
         const target = intersects[0].object;
 
-        // 모델링 클릭 카메라 줌인 무빙 애니메이션
-        if (target.name === 'aboutMe1') this.gsap.toContent(target.name);
-        if (target.name === 'projects') this.gsap.toContent(target.name);
-        if (target.name === 'poster') this.gsap.toContent(target.name);
-        if (target.name === 'history') this.gsap.toContent(target.name);
-        if (target.name === 'skills') this.gsap.toContent(target.name);
-        if (target.name === 'guestBook') {
-            this.timeout1 = setTimeout(() => {
-                this.controlPopup('show');
+        // gsap play중이 아니거나 드래그가 아닌 경우에만 이벤트 발생
+        if (!app.gsap.isInContent && !this.mouseMoved) {
+            console.log('불가능한 조건 통과')
+            // 모델링 클릭 카메라 줌인 무빙 애니메이션
+            if (target.name === 'aboutMe1') return this.gsap.toContent(target.name);
+            if (target.name === 'projects') return this.gsap.toContent(target.name);
+            if (target.name === 'poster') return this.gsap.toContent(target.name);
+            if (target.name === 'history') return this.gsap.toContent(target.name);
+            if (target.name === 'skills') return this.gsap.toContent(target.name);
+            if (target.name === 'guestBook') {
+                this.timeout1 = setTimeout(() => {
+                    this.controlPopup('show');
 
-                this.timeout2 = setTimeout(() => {
-                    this.controlPopup('hidden');
-                },3000);
-            }, 1000);
-            this.gsap.toGuestBook();
-        }
-        if (target.name === 'nextReview') {
-            console.log('넥스트 클릭')
-            await app.guestBook.nextReview();
-        }
-        if (target.name === 'prevReview') {
-            console.log('프레브 클릭')
-            await app.guestBook.prevReview();
+                    this.timeout2 = setTimeout(() => {
+                        this.controlPopup('hidden');
+                    },3000);
+                }, 1000);
+                return this.gsap.toContent(target.name);
+            }
+
+            // 링크 메뉴 클릭 이벤트
+            if (target.name === 'github') return window.open('https://github.com/zeriong/','_blank');
+            if (target.name === 'blog') window.open('https://zeriong.tistory.com/','_blank');
         }
 
-        // 링크 메뉴 클릭 이벤트
-        if (target.name === 'github') window.open('https://github.com/zeriong/','_blank');
-        if (target.name === 'blog') window.open('https://zeriong.tistory.com/','_blank');
+        if (app.gsap.isInGuestBook) {
+            if (target.name === 'nextReview') return await app.guestBook.nextReview();
+            if (target.name === 'prevReview') await app.guestBook.prevReview();
+        }
     }
 
     /** type: hidden || show */
     controlPopup(type) {
+        const guestBookPopup = document.querySelector('#guestBookPopup');
         if (type === 'hidden') {
-            this.guestBookPopup.style.top = '-100px';
-            this.guestBookPopup.style.opacity = 0;
+            guestBookPopup.style.top = '-100px';
+            guestBookPopup.style.opacity = 0;
         } else if (type === 'show') {
-            this.guestBookPopup.style.top = '100px';
-            this.guestBookPopup.style.opacity = 1;
+            guestBookPopup.style.top = '100px';
+            guestBookPopup.style.opacity = 1;
         }
     }
 }
