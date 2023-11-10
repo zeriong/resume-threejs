@@ -1,11 +1,11 @@
 import * as THREE from 'three';
 import {FontLoader} from 'three/addons/loaders/FontLoader.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader';
-import Application from '../Application';
 
-// loadingManager 적용을 위한 loader 클래스 // todo: 로딩매니저를 통한 loading화면 개발
+// loadingManager 적용을 위한 loader 클래스
 export default class Loader {
     constructor() {
+        // 로딩매니저 & gltf, font 로더
         this.loadingManager = new THREE.LoadingManager();
         this.gltfLoader = new GLTFLoader(this.loadingManager);
         this.fontLoader = new FontLoader(this.loadingManager);
@@ -14,6 +14,7 @@ export default class Loader {
     }
 
     loading() {
+        // loading element
         const loadingItem = document.querySelector('#loadingItem');
         const progressPercent = document.querySelector('#progressPercent');
         const loadingTitle = document.querySelector('#loadingTitle');
@@ -21,7 +22,7 @@ export default class Loader {
         const loadingConsole = document.querySelector('#loadingConsole');
         const loadingContainer = document.querySelector('#loadingContainer');
         const loadedMessage = document.querySelector('#loadedMessage');
-
+        // 로딩 시 보여 줄 목록
         const itemList = [
             "dino.glb",
             "dino_option",
@@ -35,22 +36,25 @@ export default class Loader {
             "room_option",
         ]
 
+        // 모델링이 하나씩 로드 될 때마다 실행
+        // ( item: 로드중인 타겟, loaded: 로드된 개수, total: 로드 아이템 총 개수 )
         this.loadingManager.onProgress = (item, loaded, total) => {
             const itemEl = document.createElement('li');
             const progressEl = document.createElement('li');
 
+            // 로딩된 아이템의 이름, 로드 퍼센트 입력
             itemEl.innerHTML = itemList[loaded - 1];
             progressEl.innerHTML = `...  ${(loaded / total * 100).toFixed(0)}%`;
-
+            // 지정 요소에 삽입
             loadingItem.appendChild(itemEl);
             progressPercent.appendChild(progressEl);
-
+            // 로드가 완료되면 메시지 내용 변경
             if (loaded === total) {
                 loadingTitle.innerHTML = 'FINISHED LOADING RESOURCES';
                 loadingTitle.style.color = '#00FF00';
                 loadingConsole.style.display = 'none';
                 loadedConsole.style.display = 'block';
-
+                // 일정시간 지난 후 start 버튼으로 이동
                 setTimeout(() => {
                     loadingContainer.style.display = 'none';
                     loadedMessage.style.display = 'flex';

@@ -28,8 +28,8 @@ export default class Positions {
         }
     }
 
-    // Play Start 애니메이션 카메라 포지션
-    getPlayStartAnimationPositions() {
+    // Start 애니메이션 카메라 포지션
+    getStartAnimationPositions() {
         return {
             x: (this.sizes.width <= 420) ? (-18 * this.fixCameraPosition) : (0.5 * this.fixCameraPosition),
             y: (this.sizes.width <= 420) ? (14.4 * this.fixCameraPosition + 5) : (5 * this.fixCameraPosition),
@@ -37,11 +37,13 @@ export default class Positions {
         }
     }
 
+    // 브라우저 크기에 따른 카메라 포지션 보정
     getFixCameraPosition() {
         if (this.sizes.width >= 1400) return 1;
         return (1400 - this.sizes.width) * (this.sizes.width <= 420 ? 0.0003 : 0.0001) + 1;
     }
 
+    // 브라우저 크기에 따른 skills 컨텐츠 포지션 보정
     getFixSkillsPosition() {
         if (this.sizes.width >= 1400) return 0;
         if (this.sizes.width <= 420) {
@@ -52,6 +54,7 @@ export default class Positions {
         return (1400 - this.sizes.width) * 0.0007 + 0.5;
     }
 
+    // 브라우저 크기에 따른 projects 컨텐츠 포지션 보정
     getFixMonitorCamPosition() {
         if (this.sizes.width <= 530) return 4;
         if (this.sizes.width <= 740) return 3;
@@ -60,6 +63,7 @@ export default class Positions {
         return 1.3
     }
 
+    // 브라우저 크기에 따른 history 컨텐츠 포지션 보정
     getFixHistoryCamPosition() {
         if (this.sizes.width <= 740) return 3;
         return 2.5
@@ -69,7 +73,7 @@ export default class Positions {
         return [
             // about me 첫번째 대화
             {
-                current: 'aboutMe1', next: 'aboutMe2', prev: 'guestBook',
+                current: 'aboutMe', next: 'projects', prev: 'guestBook',
                 cameraPosition: {
                     x: (this.aboutMePosition.x), y: (this.aboutMePosition.y + 0.4), z: (this.aboutMePosition.z + 2.5 + this.fixCameraPosition)
                 },
@@ -78,14 +82,9 @@ export default class Positions {
                 }
             },
 
-            // about me 대화 (카메라 무빙 애니메이션 x)
-            { current: 'aboutMe2', next: 'aboutMe3', prev: 'aboutMe1' },
-            { current: 'aboutMe3', next: 'aboutMe4', prev: 'aboutMe2' },
-            { current: 'aboutMe4', next: 'projects', prev: 'aboutMe3' },
-
             // projects
             {
-                current: 'projects', next: 'skills', prev: 'aboutMe1',
+                current: 'projects', next: 'skills', prev: 'aboutMe',
                 cameraPosition: {
                     x: (this.projectsPosition.x), y: (this.projectsPosition.y), z: (this.projectsPosition.z + this.fixMonitorPosition + this.fixCameraPosition)
                 },
@@ -118,7 +117,7 @@ export default class Positions {
 
             // guestBook
             {
-                current: 'guestBook', next: 'aboutMe1', prev: 'history',
+                current: 'guestBook', next: 'aboutMe', prev: 'history',
                 cameraPosition: {
                     x: (this.guestBookPosition.x), y: (this.guestBookPosition.y), z: (this.guestBookPosition.z)
                 },
@@ -127,7 +126,7 @@ export default class Positions {
                 },
             },
 
-            // poster
+            // poster: 순회 컨텐츠에 포함 x
             {
                 current: 'poster',
                 cameraPosition: {

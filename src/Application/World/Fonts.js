@@ -5,7 +5,7 @@ import {TextGeometry} from 'three/addons/geometries/TextGeometry';
 export default class Fonts {
     constructor() {
         const app = Application.getInstance();
-        this.intersectsMeshes = app.intersectsMeshes;
+        this.intersectsMeshes = app.intersectsMeshes; // 레이캐스터 감지되는 매쉬를 담은 배열
         this.loader = app.loader;
         this.scene = app.scene;
         this.nameGroup = new THREE.Group();  // zeriong, engineer 판넬 그룹
@@ -26,7 +26,7 @@ export default class Fonts {
             // bold mesh list
             [
                 { name: 'name', y: 0.45, text: 'ZERIONG' },
-                { name: 'aboutMe1', y: 3, text: 'About Me' },
+                { name: 'aboutMe', y: 3, text: 'About Me' },
                 { name: 'projects', y: 2.5, text: 'Projects' },
                 { name: 'history', y: 2, text: 'history' },
                 { name: 'skills', y: 1.5, text: 'Skills' },

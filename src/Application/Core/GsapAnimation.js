@@ -11,26 +11,11 @@ export default class GsapAnimation {
         this.isActivePrev = false;
         this.isActiveNext = true;
         this.dialogTextList = {
-            step1: `안녕하세요, 저는 성장에 목이 마른 개발자입니다!
-            꾸준한 성장을 위해 지속적으로 목표를 수립하고
-            목표 달성하기 위해 투지를 불태우며 개발에 임하고 \n있습니다.`,
-
-            step2: `개발을 진행함에 있어 경험해보지 못한
-            까다로운 기술을 구현해야 할 땐 먼저 잘 구현되어
-            있는 레퍼런스를 찾아 발단부터 하나씩 작동 원리를
-            파악한다면 해결하지 못할 문제, 구현하지 못할
-            기술은 없다고 생각하며 개발을 하고 있습니다.`,
-
-            step3: `저는 앞으로는 사회에 기여할 수 있는 개발자가
-            되고싶습니다. 저의 꾸준한 성장을 통해 더 나은
-            내일을 만들다보면 더 나은 사회를 만드는 데에
-            기여할 수 있는 저의 모습에 가까이 다가갈 수
-            있을거라고 확신합니다!`,
-
-            step4: `사회에 기여할 수 있는 역량을 갖추는 그 날까지
-            저는 결코 스스로의 투지를 꺾지 않겠습니다!
-
-            시간내어 방문해주심에 감사드립니다!`,
+            step1: `안녕하세요, 지속적인 학습과 도전을 추구하는 프론트엔드개발자 지망생 전제룡입니다!<p></p>` +
+                `복잡한 기술적 문제를 끊임 없이 연구하고, 효과적인 인터페이스와 동적인 그래픽 개발에 강한 열정을 가지고 있습니다.<p></p>` +
+                `비즈니스 목표 달성과 팀워크 강화를 위한 커뮤니케이션 능력을 갖추고, 사회에 기여하는 개발자로서 성장하고자 합니다.<p></p>` +
+                `귀사의 도전적인 프로젝트와 목표에 기여할 준비가 되어 있으며, 함께 성장하며 더 높은 가치를 창출할 수 있는 기회를 갖고 싶습니다.<p></p>` +
+                `감사합니다.`,
         }
 
         // Elements
@@ -42,6 +27,10 @@ export default class GsapAnimation {
         this.nextBtn = document.querySelector('#nextBtn');
         this.prevBtn = document.querySelector('#prevBtn');
         this.dialogContent = document.querySelector('.dialog-content');
+
+        this.cursorWrap = document.createElement('div');
+        this.dialogCursor = document.createElement('span');
+        this.dialogCursor.id = 'dialogCursor';
 
         // addEventListeners
         this.playStart.addEventListener('click', () => this.playStartAnimation());
@@ -86,9 +75,7 @@ export default class GsapAnimation {
         // 컨텐츠가 방명록인 경우
         if (target === 'guestBook') {
             this.isInGuestBook = true;
-            console.log('게스트에요')
         }
-        console.log('isInContent: ', this.isInContent, 'isInGuestBook: ', this.isInGuestBook, 'target: ', target);
 
         gsap.to(app.camera.instance.position, {
             ...currentPosition.cameraPosition, duration: 1, ease: 'power1.inOut',
@@ -119,7 +106,7 @@ export default class GsapAnimation {
                     this.contentMenuBtns.style.bottom = '30px';
                 }
                 // aboutMe 컨텐츠인경우 대화상자 나타남
-                if (target === 'aboutMe1') return this.appearDialog();
+                if (target === 'aboutMe') return this.appearDialog();
                 // next/prev 버튼조작이 아닌 방명록 이동이면 애니메이션 끝난 후 이벤트 허용(isMovingCam)
                 else if (target === 'guestBook' && !isBtn) {
                     return setTimeout(() => {
@@ -177,7 +164,7 @@ export default class GsapAnimation {
                 else this.contentMenuBtns.style.bottom = '-70px';
 
                 // aboutMe의 경우 대화상자 사라지는 애니메이션 적용
-                if (this.currentContent === 'aboutMe1' || 'aboutMe2' || 'aboutMe3' || 'aboutMe4') this.disappearDialog();
+                if (this.currentContent === 'aboutMe') this.disappearDialog();
             },
             onComplete: () => {
                 // 버튼이름 변경
@@ -218,13 +205,13 @@ export default class GsapAnimation {
         // get instance
         const app = Application.getInstance();
         const contentList = app.positions.getContentPositions();
-        // 초기 start 눌러 시작할 경우 aboutMe1로 설정
-        this.currentContent = 'aboutMe1';
+        // start 시 aboutMe으로 설정
+        this.currentContent = 'aboutMe';
 
         gsap.to(app.camera.instance.position, {
             duration: 2, ease: 'power1.inOut',
             // set position
-            ...app.positions.getPlayStartAnimationPositions(),
+            ...app.positions.getStartAnimationPositions(),
             onStart: () => {
                 this.isMovingCam = true;
                 this.isInContent = true;
@@ -257,11 +244,8 @@ export default class GsapAnimation {
         // get instance
         const app = Application.getInstance();
         // 타이핑이 진행중일 때 타이핑 스킵
-        if (app.eventModule.typingTimout !== null) {
-            if (this.currentContent === 'aboutMe1') app.eventModule.skipTyping(this.dialogTextList.step1);
-            if (this.currentContent === 'aboutMe2') app.eventModule.skipTyping(this.dialogTextList.step2);
-            if (this.currentContent === 'aboutMe3') app.eventModule.skipTyping(this.dialogTextList.step3);
-            if (this.currentContent === 'aboutMe4') app.eventModule.skipTyping(this.dialogTextList.step4);
+        if (this.typingTimout !== null) {
+            if (this.currentContent === 'aboutMe') this.skipTyping(this.dialogTextList.step1);
             return;
         }
         // get position list
@@ -277,10 +261,10 @@ export default class GsapAnimation {
         const nextDialog = (step) => {
             this.currentContent = currentPosition.next;
             this.dialogContent.textContent = '';
-            app.eventModule.typing(step);
+            this.typing(step);
         }
         // 마지막 대화 애니메이션
-        if (this.currentContent === 'aboutMe4') {
+        if (this.currentContent === 'aboutMe') {
             this.currentContent = currentPosition.next;
             this.isMovingCam = true;
             // 말풍선 사라지는 애니메이션 끝나고 이동
@@ -288,9 +272,7 @@ export default class GsapAnimation {
             return;
         }
         // 대화 애니메이션
-        if (this.currentContent === 'aboutMe3') return nextDialog(this.dialogTextList.step4);
-        if (this.currentContent === 'aboutMe2') return nextDialog(this.dialogTextList.step3);
-        if (this.currentContent === 'aboutMe1') return nextDialog(this.dialogTextList.step2);
+        if (this.currentContent === 'aboutMe') return nextDialog(this.dialogTextList.step2);
         // 마지막대화를 제외한 애니메이션 일괄 처리
         this.currentContent = currentPosition.next;
         this.toContent(currentPosition.next, true);
@@ -304,11 +286,8 @@ export default class GsapAnimation {
         const app = Application.getInstance();
 
         // 타이핑이 진행중일 때 타이핑 스킵
-        if (app.eventModule.typingTimout !== null) {
-            if (this.currentContent === 'aboutMe1') app.eventModule.skipTyping(this.dialogTextList.step1);
-            if (this.currentContent === 'aboutMe2') app.eventModule.skipTyping(this.dialogTextList.step2);
-            if (this.currentContent === 'aboutMe3') app.eventModule.skipTyping(this.dialogTextList.step3);
-            if (this.currentContent === 'aboutMe4') app.eventModule.skipTyping(this.dialogTextList.step4);
+        if (this.typingTimout !== null) {
+            if (this.currentContent === 'aboutMe') this.skipTyping(this.dialogTextList.step1);
             return;
         }
         // get position list
@@ -316,8 +295,6 @@ export default class GsapAnimation {
 
         // list count
         if (positionList.length > this.listCount) this.listCount--;
-        // aboutMe의 경우 4가지 step이 존재하기 때문에 추가 감소
-        if (this.currentContent === 'projects') this.listCount -= 3;
 
         // count가 0이고 활성화상태라면 비활성화
         this.prevBtnSwitch();
@@ -325,7 +302,7 @@ export default class GsapAnimation {
         const currentPosition = positionList.find(val => val.current === this.currentContent);
 
         // aboutMe에서 나가기 애니메이션
-        if (this.currentContent === 'aboutMe1') {
+        if (this.currentContent === 'aboutMe') {
             this.currentContent = currentPosition.prev;
             this.isMovingCam = true;
             // 말풍선 사라지는 애니메이션 끝나고 이동
@@ -336,12 +313,8 @@ export default class GsapAnimation {
         const prevDialog = (step) => {
             this.currentContent = currentPosition.prev;
             this.dialogContent.textContent = '';
-            app.eventModule.typing(step);
+            this.typing(step);
         }
-        // 대화 애니메이션
-        if (this.currentContent === 'aboutMe2') return prevDialog(this.dialogTextList.step1);
-        if (this.currentContent === 'aboutMe3') return prevDialog(this.dialogTextList.step2);
-        if (this.currentContent === 'aboutMe4') return prevDialog(this.dialogTextList.step3);
         // aboutMe에서 나가기, 방명록에서 나가기 애니메이션을 제외한 애니메이션 일괄 처리
         this.currentContent = currentPosition.prev;
         this.toContent(currentPosition.prev, true);
@@ -396,10 +369,10 @@ export default class GsapAnimation {
     appearDialog() {
         // get instance
         const app = Application.getInstance();
-        // 대화창 등장시 대화 초기화
+        // 대화창 등장시 대화 초기화 후 등장
         this.dialogContent.textContent = '';
-        // 대화창 등장
         this.dialogBox.style.display = 'block';
+        // transition을 기다린 후 실행
         setTimeout(() => {
             this.dialogBox.style.opacity = '1';
 
@@ -407,7 +380,7 @@ export default class GsapAnimation {
                 this.isMovingCam = false;
 
                 // 대화창 생성시 반드시 step1, 타이핑이벤트 실행
-                app.eventModule.typing(this.dialogTextList.step1);
+                this.typing(this.dialogTextList.step1);
 
             }, 800);
 
@@ -421,8 +394,8 @@ export default class GsapAnimation {
         this.dialogBox.style.opacity = '0';
         // 커서 깜빡임 루프 멈춤
         setTimeout(() => {
-            clearInterval(app.eventModule.cursorInterval);
-            app.eventModule.cursorInterval = null;
+            clearInterval(this.cursorInterval);
+            this.cursorInterval = null;
 
             this.dialogBox.style.display = 'none';
 
@@ -431,6 +404,68 @@ export default class GsapAnimation {
 
             this.toContent(toWhere, isBtn);
         }, 320);
+    }
+
+    // 타이핑 실행 매서드
+    typing(text, typingSpeed = 35) {
+        let charIndex = 0;
+        let content = ''
+
+        this.cursorWrap.style.display = 'inline-block';
+        this.cursorWrap.style.position = 'relative';
+        this.cursorWrap.appendChild(this.dialogCursor);
+
+        const typing = () => {
+            // 태그 체크 문자열 추가
+            if (text[charIndex] === "<") {
+                // 태그가 끝날 때까지 루프
+                while (text[charIndex] !== ">" && charIndex < text.length) {
+                    content += text[charIndex++];
+                }
+                // 태그의 마지막 부분 추가 ('>')
+                if (charIndex < text.length) {
+                    content += text[charIndex++];
+                }
+            } else if (charIndex < text.length) {
+                // 일반 문자 추가
+                content += text[charIndex++];
+            }
+
+            this.dialogContent.innerHTML = content;
+            this.dialogContent.appendChild(this.cursorWrap);
+
+            if (this.cursorInterval !== null) {
+                clearInterval(this.cursorInterval);
+                this.cursorInterval = null;
+            }
+            if (charIndex < text.length) {
+                this.typingTimout = setTimeout(() => {
+                    typing();
+                    this.dialogContent.scrollTop = this.dialogContent.scrollHeight;
+                }, typingSpeed);
+            }
+            if (charIndex >= text.length) {
+                this.typingTimout = null;
+                this.cursorLoop();
+            }
+        }
+        typing();
+    }
+
+    // 타이핑 스킵 매서드
+    skipTyping(text) {
+        this.dialogContent.innerHTML = text.replace(/\n/g, `<br/>`);
+        this.dialogContent.appendChild(this.cursorWrap);
+        this.cursorLoop();
+        clearTimeout(this.typingTimout);
+        this.typingTimout = null;
+    }
+
+    // 커서 깜빡임 루프 매서드
+    cursorLoop() {
+        this.cursorInterval = setInterval(() => {
+            this.dialogCursor.classList.toggle('toggleCursor');
+        }, 500);
     }
 
     // 컨트롤 제한 (컨텐츠에서 zoom in 모드에서 벗어나면 다시 제한)

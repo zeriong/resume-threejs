@@ -23,13 +23,14 @@ export default class AboutMe {
             model.position.z = 0.5;
             model.rotation.y = THREE.MathUtils.degToRad(270);
 
+            // 모델링이 가진 모든 mesh를 raycaster에 감지되도록 등록
             model.children.map(mesh => {
-                mesh.name = 'aboutMe1';
+                mesh.name = 'aboutMe';
                 this.intersectsMeshes.push(mesh);
             });
 
-            model.name = 'aboutMe1';
-            model.getWorldPosition(this.position);
+            model.name = 'aboutMe';
+            model.getWorldPosition(this.position); // 모델링에서 position 추출
             this.intersectsMeshes.push(model);
             this.scene.add(model);
         });

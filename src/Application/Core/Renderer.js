@@ -18,6 +18,7 @@ export default class Renderer {
     }
 
     setInstance() {
+        // 기본 렌더러 설정
         this.instance = new THREE.WebGLRenderer({
             antialias: true,
             alpha: true,
@@ -28,14 +29,14 @@ export default class Renderer {
         this.instance.shadowMap.type = THREE.VSMShadowMap; // 그림자 맵 타입 설정
         this.instance.domElement.style.position = 'absolute';
         document.querySelector('#webgl')?.appendChild(this.instance.domElement);
-
+        // css 렌더러 설정
         this.cssInstance = new CSS3DRenderer();
         this.cssInstance.setSize(this.sizes.width, this.sizes.height);
         this.cssInstance.domElement.style.position = 'absolute';
         document.querySelector(`#css3DObject`)?.appendChild(this.cssInstance.domElement);
     }
 
-
+    // 그림자, 질감표현의 디테일을 위한 매서드
     setComposer() {
         // EffectComposer
         this.composer = new EffectComposer(this.instance);
@@ -74,7 +75,6 @@ export default class Renderer {
                 "}"
             ].join('\n')
         };
-
 
         this.customPass = new ShaderPass(this.customShader);
         this.customPass.uniforms.saturation.value = 0.9;  // 채도

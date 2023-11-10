@@ -5,7 +5,11 @@ export default class Sizes {
         this.app = Application.getInstance();
         this.width = window.innerWidth;
         this.height = window.innerHeight;
+
+        // html을 보여주는 CSS3DObject 기본 scale 비율
         this.roomInitScale = new Array(3).fill(0.001);
+
+        // html을 보여주는 CSS3DObject mesh의 크기
         this.roomSizes = {
             monitor: { width: 879, height: 550 },
             history: { width: 520, height: 743 },

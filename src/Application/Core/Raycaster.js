@@ -36,6 +36,7 @@ export default class Raycaster {
         });
     }
 
+    // 레이캐스터 작동 매서드
     async checkIntersects() {
         // raycaster작동 시 intersectsMeshes 최신데이터를 사용
         const app = Application.getInstance()
@@ -54,14 +55,14 @@ export default class Raycaster {
 
         // gsap play중이 아니거나 드래그가 아닌 경우에만 이벤트 발생
         if (!app.gsap.isInContent && !this.mouseMoved) {
-            console.log('불가능한 조건 통과')
-            // 모델링 클릭 카메라 줌인 무빙 애니메이션
-            if (target.name === 'aboutMe1') return this.gsap.toContent(target.name);
+            // 모델링 클릭 카메라 무빙 애니메이션
+            if (target.name === 'aboutMe') return this.gsap.toContent(target.name);
             if (target.name === 'projects') return this.gsap.toContent(target.name);
             if (target.name === 'poster') return this.gsap.toContent(target.name);
             if (target.name === 'history') return this.gsap.toContent(target.name);
             if (target.name === 'skills') return this.gsap.toContent(target.name);
             if (target.name === 'guestBook') {
+                // 방명록 토스트 알림 카메라 무빙 끝난 후 실행
                 this.timeout1 = setTimeout(() => {
                     this.controlPopup('show');
 
@@ -83,7 +84,7 @@ export default class Raycaster {
         }
     }
 
-    /** type: hidden || show */
+    /** @param {'hidden' || 'show'} type */
     controlPopup(type) {
         const guestBookPopup = document.querySelector('#guestBookPopup');
         if (type === 'hidden') {

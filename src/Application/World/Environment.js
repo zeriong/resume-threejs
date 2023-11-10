@@ -6,14 +6,17 @@ export default class Environment {
         this.application = Application.getInstance();
         this.scene = this.application.scene;
 
+        // 바닥 매쉬
         this.floorGeometry = new THREE.PlaneGeometry(120, 120, 120, 120);
         this.floorMaterial = new THREE.MeshPhysicalMaterial({ color: 0x9AB8CE, clearcoat: 0.6, clearcoatRoughness: 0.4, metalness: 0.8 });
         this.floorMesh = new THREE.Mesh(this.floorGeometry, this.floorMaterial);
 
+        // 문 반투명 매쉬
         this.doorCoverGeometry = new THREE.BoxGeometry(100, 0.2, 460);
         this.doorCoverMaterial = new THREE.MeshBasicMaterial({ color: 0xffEEDD, transparent: true, opacity: 0.5, side: THREE.DoubleSide });
         this.doorCoverMesh = new THREE.Mesh(this.doorCoverGeometry, this.doorCoverMaterial);
 
+        // light particle(빛가루) 매쉬
         this.lightParticleGeometry = new THREE.BufferGeometry();
         this.lightParticleMaterial = new THREE.PointsMaterial({ size: 0.05, blending: THREE.AdditiveBlending, transparent: true, color: 0xffff00 });
         this.lightParticleCount = 60;
@@ -48,6 +51,7 @@ export default class Environment {
         this.scene.add(this.floorMesh, this.doorCoverMesh, this.lightParticleMesh);
     }
 
+    // 빛가루 내리는 애니메이션 렌더링 매서드
     update() {
         const runLightPositions = this.lightParticleGeometry.attributes.position.array;
 

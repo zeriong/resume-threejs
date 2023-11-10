@@ -8,7 +8,6 @@ import Raycaster from './Core/Raycaster';
 import Lights from './World/Lights';
 import GsapAnimation from './Core/GsapAnimation';
 import Positions from './Utills/Positions';
-import EventModule from './Utills/EventModule';
 import {GuestBook} from './World/GuestBook';
 
 export default class Application {
@@ -26,6 +25,7 @@ export default class Application {
 
         // variables
         this.isStart = false; // 시작모드 여부 (start & skip)
+        this.onSound = true; // sound on/off 여부
 
         // Setup
         this.intersectsMeshes = [];
@@ -39,8 +39,7 @@ export default class Application {
         this.world = new World();
         this.positions = new Positions();
         this.gsap = new GsapAnimation();
-        this.raycaster = new Raycaster()
-        this.eventModule = new EventModule();
+        this.raycaster = new Raycaster();
         this.guestBook = new GuestBook();
 
         this.scene.background = new THREE.Color(0x61657a);
@@ -50,7 +49,10 @@ export default class Application {
         const soundBtn = document.querySelector('#soundBtn');
         const guestBookToolTip = document.querySelector('#guestBookToolTip');
         const soundToolTip = document.querySelector('#soundToolTip');
+        const soundOn = document.querySelector('#soundOn');
+        const soundOff = document.querySelector('#soundOff');
 
+        // 방명록, 사운드 버튼 툴팁 이벤트
         guestBookBtn.addEventListener('mouseenter' ,() => {
             guestBookToolTip.style.opacity = 1;
             guestBookToolTip.style.visibility = 'visible';
@@ -66,6 +68,18 @@ export default class Application {
         soundBtn.addEventListener('mouseleave' ,() => {
             soundToolTip.style.opacity = 0;
             soundToolTip.style.visibility = 'hidden';
+        });
+        // 사운드버튼 클릭 시 아이콘 토글 이벤트
+        soundBtn.addEventListener('click', () => {
+            if (this.onSound) {
+                this.onSound = false;
+                soundOff.style.display = 'block';
+                soundOn.style.display = 'none';
+            } else {
+                this.onSound = true;
+                soundOff.style.display = 'none';
+                soundOn.style.display = 'block';
+            }
         });
 
         // 매서드 실행
