@@ -7,7 +7,7 @@ export default class Environment {
         this.scene = this.application.scene;
 
         // 바닥 매쉬
-        this.floorGeometry = new THREE.PlaneGeometry(120, 120, 120, 120);
+        this.floorGeometry = new THREE.PlaneGeometry(100, 100, 1, 1);
         this.floorMaterial = new THREE.MeshPhysicalMaterial({ color: 0x9AB8CE, clearcoat: 0.6, clearcoatRoughness: 0.4, metalness: 0.8 });
         this.floorMesh = new THREE.Mesh(this.floorGeometry, this.floorMaterial);
 
@@ -18,7 +18,7 @@ export default class Environment {
 
         // light particle(빛가루) 매쉬
         this.lightParticleGeometry = new THREE.BufferGeometry();
-        this.lightParticleMaterial = new THREE.PointsMaterial({ size: 0.05, blending: THREE.AdditiveBlending, transparent: true, color: 0xffff00 });
+        this.lightParticleMaterial = new THREE.PointsMaterial({ size: 0.05, blending: THREE.AdditiveBlending, transparent: false, color: 0xffff00 });
         this.lightParticleCount = 60;
         this.lightParticlePostions = new Float32Array(this.lightParticleCount * 3);
 

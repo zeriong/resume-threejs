@@ -3,8 +3,8 @@ import Application from '../Application';
 
 export default class Lights {
     constructor() {
-        this.application = Application.getInstance();
-        this.scene = this.application.scene;
+        this.app = Application.getInstance();
+        this.scene = this.app.scene;
         this.setLights();
     }
 

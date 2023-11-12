@@ -7,9 +7,9 @@ export default class Room {
         const app = Application.getInstance();
         this.sizes = app.sizes;
         this.contentSizes = this.sizes.roomSizes;
-        this.initScale = this.sizes.roomInitScale;
+        this.initScale = this.sizes.roomInitScale; // html 삽입된 mesh의 규격 scale
         this.loader = app.loader;
-        this.intersectsMeshes = app.intersectsMeshes;
+        this.intersectsMeshes = app.intersectsMeshes; // raycaster 감지 배열
         this.scene = app.scene;
         this.cssScene = app.cssScene;
 
@@ -195,36 +195,6 @@ export default class Room {
                         this.scene.add(mesh);
 
                         child.name = 'skills';
-                    }
-
-                    // 거울
-                    if (child.name === 'Plane219_1') {
-                        // const pos = new THREE.Vector3();
-                        // const scale = new THREE.Vector3();
-                        // node.getWorldPosition(pos);
-                        // node.getWorldScale(scale);
-                        //
-                        // node.material.opacity = 0;
-                        //
-                        // // geometry 생성
-                        // const mirrorGeometry = new THREE.PlaneGeometry(0.7, 0.7);
-                        //
-                        // // Reflector를 만들고 설정
-                        // const mirror = new Reflector(mirrorGeometry, {
-                        //     textureWidth: window.innerWidth * window.devicePixelRatio,
-                        //     textureHeight: window.innerHeight * window.devicePixelRatio,
-                        //     clipBias: 0.003,
-                        //     color: 0x777777
-                        // });
-                        // mirror.rotation.z = THREE.MathUtils.degToRad(-90);
-                        // mirror.rotation.y = THREE.MathUtils.degToRad(-90);
-                        // // mirror.rotation.x = THREE.MathUtils.degToRad(90);
-                        // mirror.position.set(pos.x - 0.027, pos.y, pos.z);
-                        // mirror.scale.set(scale.x, scale.y, scale.z);
-                        //
-                        // scene.add(mirror);
-
-                        child.name = 'mirror';
                     }
 
                     // 후면 허리 받침 기둥

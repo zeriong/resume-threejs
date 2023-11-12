@@ -4,7 +4,7 @@ import Application from '../Application';
 export default class AboutMe {
     constructor() {
         const app = Application.getInstance();
-        this.intersectsMeshes = app.intersectsMeshes;
+        this.intersectsMeshes = app.intersectsMeshes; // raycaster 감지 배열
         this.scene = app.scene;
         this.loader = app.loader;
         this.position = new THREE.Vector3();

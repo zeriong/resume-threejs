@@ -8,14 +8,14 @@ export class GuestBook {
     constructor() {
         this.app = Application.getInstance();
 
-        this.limit = 6;
-        this.currentPage =  1;
-        this.firstVisible = null;
-        this.lastVisible = null;
-        this.nextDisabled = true;
-        this.prevDisabled = true;
+        this.limit = 6; // 페이지당 limit 지정
+        this.currentPage =  1; // 페이지 지정
+        this.firstVisible = null; // 이전페이지 페이징을 위한 첫번째 방명록의 createAt
+        this.lastVisible = null; // 다음페이지 페이징을 위한 마지막 방명록의 createAt
+        this.nextDisabled = true; // next버튼 비활성화 여부
+        this.prevDisabled = true; // prev버튼 비활성화 여부
 
-        this.isShowModal = false;
+        this.isShowModal = false; // 모달이 show 여부
         this.guestReviewList = [];
         this.canvasList = []; // 이 후 선택하여 painting을 위한 배열
         this.canvasTextureList = []; // needsUpdate를 위한 textTexture를 담은 배열
@@ -68,13 +68,14 @@ export class GuestBook {
         this.setGuestReviews()
     }
 
+    // 방명록 세팅 매서드
     setGuestReviews() {
         (async () => {
             // get data
             await this.getFirestoreData();
             // fetch success
 
-            // 방명록 next 버튼
+            // 방명록 next 버튼 생성
             const vertices = new Float32Array([
                 -0.03, 0.05, 0,   // 꼭지점 1 (x, y, z)
                 -0.03, -0.05, 0, // 꼭지점 2 (x, y, z)
@@ -93,7 +94,7 @@ export class GuestBook {
             // next 활성화 여부
             if (this.guestReviewList.length === 6) this.nextDisabled = false;
 
-            // 방명록 prev 버튼
+            // 방명록 prev 버튼 생성
             const leftArrowMesh = rightArrowMesh.clone();
             leftArrowMesh.material.side = THREE.DoubleSide;
             leftArrowMesh.rotation.y = THREE.MathUtils.degToRad(90);
@@ -121,10 +122,11 @@ export class GuestBook {
         })()
     }
 
+    // 방명록 생성 매서드
     createGuestReview() {
         const name = this.guestBookName.value;
         const message = this.guestBookMessage.value;
-        // if (name.length < 2 && message.length < 2) alert('이름과 메시지는 2글자 이상으로 입력해주세요.');
+        if (name.length < 2 && message.length < 2) alert('이름과 메시지는 2글자 이상으로 입력해주세요.');
 
         addDoc(collection(db, 'guestBook'), {
             createAt: new Date().toISOString(),
@@ -149,6 +151,7 @@ export class GuestBook {
     /** isFirstLoad: 첫 데이터인 경우 true 삽입하여 초기세팅 */
     paintGuestReview(isFirstLoad) {
         let geometry;
+        // 첫 로드인 경우만 geometry 생성하여 세팅
         if (isFirstLoad) geometry = new THREE.PlaneGeometry(0.23, 0.23, 1, 1);
 
         for (let i = 0; i < 6; i ++) {
@@ -216,6 +219,10 @@ export class GuestBook {
         }
     }
 
+    /**
+     * @param type {'on' || 'off'}
+     * @param timeout { number }
+     * @description 방명록 작성 모달 컨트롤 매서드*/
     controlReviewModal(type, timeout = 320) {
         if (type === 'on') {
             this.isShowModal = true;
@@ -224,12 +231,14 @@ export class GuestBook {
         } else if (type === 'off') {
             this.isShowModal = false;
             this.guestBook.style.opacity = 0;
+            // transition 이후 사라짐
             setTimeout(() => {
                 this.guestBook.style.display = 'none';
             },320);
         }
     }
 
+    // 방명록 next 페이지 매서드
     async nextReview() {
         if (this.nextDisabled) return;
         // get next page data
@@ -242,6 +251,7 @@ export class GuestBook {
         this.paintGuestReview();
     }
 
+    // 방명록 prev 페이지 매서드
     async prevReview() {
         if (this.prevDisabled) return;
         // next 비활성화 상태라면 활성화
@@ -260,6 +270,9 @@ export class GuestBook {
         this.paintGuestReview();
     }
 
+    /**
+     * @param type { 'next' || 'prev' || undefined }
+     * @description firestore 데이터 fetch 매서드 */
     async getFirestoreData(type) {
         // 쿼리 작성
         // next: startAfter(마지막 데이터의 createAt), limit를 사용하여 다음페이지 이동
@@ -295,6 +308,7 @@ export class GuestBook {
         });
     }
 
+    // 방명록 mesh 포지션 세팅 매서드
     reviewMeshPositionSets() {
         const pos = { x: 2.8955, y: 2.341, z: 2.045, gap: 0.302 }
         return [
