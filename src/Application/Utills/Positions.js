@@ -21,11 +21,16 @@ export default class Positions {
 
     // OrbitControls default 시점
     getReturnToOrbitPositions() {
-        return {
-            x: (this.sizes.width <= 420) ? (-2.96 * this.fixCameraPosition) : (-18 * this.fixCameraPosition),
-            y: (this.sizes.width <= 420) ? (10.63 * this.fixCameraPosition) : (14.4 * this.fixCameraPosition),
-            z: (this.sizes.width <= 420) ? (30.98 * this.fixCameraPosition) : (19.2 * this.fixCameraPosition),
-        }
+        let fixer;
+        const calc = 1200 - this.sizes.width;
+
+        if (this.sizes.width >= 1200) fixer = 1;
+        else if (this.sizes.width >= 800) fixer = calc * 0.001 + 1;
+        else if (this.sizes.width >= 600) fixer = calc * 0.0015 + 1;
+        else if (this.sizes.width > 450) fixer = calc * 0.002 + 1;
+        else  fixer = calc * 0.0013 + 1;
+
+        return { x: -11.95 * fixer, y: 9.35 * fixer, z: 14.4 * fixer }
     }
 
     // Start 애니메이션 카메라 포지션

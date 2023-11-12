@@ -54,7 +54,7 @@ export default class Camera {
         this.orbitControls.maxPolarAngle = THREE.MathUtils.degToRad(80); // 바닥 아래를 볼 수 없도록 제한
         this.orbitControls.minAzimuthAngle = -THREE.MathUtils.degToRad(90); // 좌측 시점 제한
         this.orbitControls.maxAzimuthAngle = THREE.MathUtils.degToRad(0); // 우측 시점 제한
-        this.orbitControls.target.set(1,1,2);
+        this.orbitControls.target.set(1, 1.5, 2);
         this.orbitControls.update();
     }
 

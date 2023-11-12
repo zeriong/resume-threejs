@@ -182,7 +182,7 @@ export default class GsapAnimation {
             }
         });
         gsap.to(app.camera.orbitControls.target, {
-            x: 1, y: 1, z: 2, duration: 1, ease: 'power1.inOut',
+            x: 1, y: 1.5, z: 2, duration: 1, ease: 'power1.inOut',
         });
     }
 
