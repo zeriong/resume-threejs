@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import Application from '../Application';
 import * as THREE from 'three';
+import {dialogText} from '../Utills/Constants';
 
 export default class GsapAnimation {
     constructor() {
@@ -10,13 +11,7 @@ export default class GsapAnimation {
         this.listCount = 0;
         this.isActivePrev = false;
         this.isActiveNext = true;
-        this.dialogTextList = {
-            step1: `안녕하세요, 지속적인 학습과 도전을 추구하는 프론트엔드개발자 지망생 전제룡입니다!<p></p>` +
-                `복잡한 기술적 문제를 끊임 없이 연구하고, 효과적인 인터페이스와 동적인 그래픽 개발에 강한 열정을 가지고 있습니다.<p></p>` +
-                `비즈니스 목표 달성과 팀워크 강화를 위한 커뮤니케이션 능력을 갖추고, 사회에 기여하는 개발자로서 성장하고자 합니다.<p></p>` +
-                `귀사의 도전적인 프로젝트와 목표에 기여할 준비가 되어 있으며, 함께 성장하며 더 높은 가치를 창출할 수 있는 기회를 갖고 싶습니다.<p></p>` +
-                `감사합니다.`,
-        }
+        this.typingTimout = null;
 
         // Elements
         this.webgl = document.querySelector('#webgl');
@@ -131,17 +126,18 @@ export default class GsapAnimation {
         // get instance
         const app = Application.getInstance();
 
-        // 방명록 setTimeout 해제
-        if (app.raycaster.timeout1 !== null) {
-            clearTimeout(app.raycaster.timeout1);
-            app.raycaster.timeout1 = null;
-            app.raycaster.controlPopup('hidden');
+        // 방명록, 타이핑 setTimeout 해제 함수
+        const breakTimeout = (timeout, func) => {
+            if (timeout !== null) {
+                clearTimeout(timeout);
+                timeout = null;
+            }
+            func();
         }
-        if (app.raycaster.timeout2 !== null) {
-            clearTimeout(app.raycaster.timeout2);
-            app.raycaster.timeout2 = null;
-            app.raycaster.controlPopup('hidden');
-        }
+        breakTimeout(app.raycaster.timeout1, () => app.raycaster.controlPopup('hidden'));
+        breakTimeout(app.raycaster.timeout2, () => app.raycaster.controlPopup('hidden'));
+        breakTimeout(this.typingTimout, () => setTimeout(() => this.dialogContent.innerHTML = '', 1000));
+
         // 의자 투명화 매서드
         this.convertTransparent('zoomOut');
         gsap.to(app.camera.instance.position, {
@@ -245,7 +241,7 @@ export default class GsapAnimation {
         const app = Application.getInstance();
         // 타이핑이 진행중일 때 타이핑 스킵
         if (this.typingTimout !== null) {
-            if (this.currentContent === 'aboutMe') this.skipTyping(this.dialogTextList.step1);
+            if (this.currentContent === 'aboutMe') this.skipTyping(dialogText);
             return;
         }
         // get position list
@@ -256,14 +252,7 @@ export default class GsapAnimation {
         this.prevBtnSwitch();
         // current content position
         const currentPosition = positionList.find(val => val.current === this.currentContent);
-
-        // 다음 대화 이동 함수
-        const nextDialog = (step) => {
-            this.currentContent = currentPosition.next;
-            this.dialogContent.textContent = '';
-            this.typing(step);
-        }
-        // 마지막 대화 애니메이션
+        // aboutMe -> projects 넘어갈 때
         if (this.currentContent === 'aboutMe') {
             this.currentContent = currentPosition.next;
             this.isMovingCam = true;
@@ -271,8 +260,6 @@ export default class GsapAnimation {
             this.disappearDialog(currentPosition.next, true);
             return;
         }
-        // 대화 애니메이션
-        if (this.currentContent === 'aboutMe') return nextDialog(this.dialogTextList.step2);
         // 마지막대화를 제외한 애니메이션 일괄 처리
         this.currentContent = currentPosition.next;
         this.toContent(currentPosition.next, true);
@@ -287,7 +274,7 @@ export default class GsapAnimation {
 
         // 타이핑이 진행중일 때 타이핑 스킵
         if (this.typingTimout !== null) {
-            if (this.currentContent === 'aboutMe') this.skipTyping(this.dialogTextList.step1);
+            if (this.currentContent === 'aboutMe') this.skipTyping(dialogText);
             return;
         }
         // get position list
@@ -345,20 +332,20 @@ export default class GsapAnimation {
             intersectsMeshes.forEach(mesh => {
                 if (type === 'zoomIn') {
                     if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
-                        gsap.to(mesh.material, {transparent: true, opacity: 0, duration: chairDuration});
+                        gsap.to(mesh.material, { opacity: 0, duration: chairDuration });
                     }
                     if (mesh.name === ('prevReview') || mesh.name === ('nextReview')) {
                         setTimeout(() => {
-                            gsap.to(mesh.material, {transparent: false, opacity: 1, duration: buttonDuration});
+                            gsap.to(mesh.material, { opacity: 1, duration: buttonDuration });
                         }, buttonTimeout);
                     }
                 }
                 if (type === 'zoomOut') {
                     if (mesh.name === ('chair1') || mesh.name === ('chair2') || mesh.name === ('chair3')) {
-                        gsap.to(mesh.material, {transparent: false, opacity: 1, duration: chairDuration});
+                        gsap.to(mesh.material, { opacity: 1, duration: chairDuration });
                     }
                     if (mesh.name === ('prevReview') || mesh.name === ('nextReview')) {
-                        gsap.to(mesh.material, {transparent: true, opacity: 0, duration: buttonDuration});
+                        gsap.to(mesh.material, { opacity: 0, duration: buttonDuration });
                     }
                 }
             });
@@ -380,8 +367,7 @@ export default class GsapAnimation {
                 this.isMovingCam = false;
 
                 // 대화창 생성시 반드시 step1, 타이핑이벤트 실행
-                this.typing(this.dialogTextList.step1);
-
+                this.typing(dialogText);
             }, 800);
 
         }, 300);
@@ -454,7 +440,7 @@ export default class GsapAnimation {
 
     // 타이핑 스킵 매서드
     skipTyping(text) {
-        this.dialogContent.innerHTML = text.replace(/\n/g, `<br/>`);
+        this.dialogContent.innerHTML = text;
         this.dialogContent.appendChild(this.cursorWrap);
         this.cursorLoop();
         clearTimeout(this.typingTimout);

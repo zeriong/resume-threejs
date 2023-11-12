@@ -200,22 +200,23 @@ export default class Room {
                     // 후면 허리 받침 기둥
                     if (child.name === 'Plane193') {
                         child.name = 'chair1';
+                        child.material.transparent = true;
+                        child.material.opacity = 1;
                         this.intersectsMeshes.push(child);
                     }
                     // 등받이 테두리
                     if (child.name === 'Plane207_1') {
                         child.name = 'chair2';
+                        child.material.transparent = true;
+                        child.material.opacity = 1;
                         this.intersectsMeshes.push(child);
                     }
                     // 등받이 + 팔걸이 밑단
                     if (child.name === 'Plane207_2') {
                         child.name = 'chair3';
+                        child.material.transparent = true;
+                        child.material.opacity = 1;
                         this.intersectsMeshes.push(child);
-                    }
-                    // 팔걸이
-                    if (child.name === 'Plane210') {
-                        const position = new THREE.Vector3();
-                        child.getWorldPosition(position);
                     }
 
                     child.material = new THREE.MeshPhysicalMaterial({

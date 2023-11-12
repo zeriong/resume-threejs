@@ -38,13 +38,18 @@ export default class Loader {
 
         // 모델링이 하나씩 로드 될 때마다 실행
         // ( item: 로드중인 타겟, loaded: 로드된 개수, total: 로드 아이템 총 개수 )
-        this.loadingManager.onProgress = (item, loaded, total) => {
+        this.loadingManager.onProgress = (item, loaded) => {
+            // 지연로드로 인한 total변경 가능성으로 itemList length로 total 선언
+            const total = itemList.length;
             const itemEl = document.createElement('li');
             const progressEl = document.createElement('li');
 
             // 로딩된 아이템의 이름, 로드 퍼센트 입력
+            const random = Math.floor(Math.abs(Math.random() * 10 - 1));
+            const percent = Math.floor(loaded / total * 100);
+            const progress = (random + percent) > 100 ? 100 : (random + percent);
             itemEl.innerHTML = itemList[loaded - 1];
-            progressEl.innerHTML = `...  ${(loaded / total * 100).toFixed(0)}%`;
+            progressEl.innerHTML = `...  ${progress}%`;
             // 지정 요소에 삽입
             loadingItem.appendChild(itemEl);
             progressPercent.appendChild(progressEl);

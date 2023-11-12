@@ -34,7 +34,7 @@ export class GuestBook {
             // 방명록 애니메이션 실행
             if (!this.isShowModal) {
                 if (app.gsap.isInGuestBook) return this.controlReviewModal('on', 10);
-                app.gsap.toGuestBook();
+                app.gsap.toContent('guestBook');
                 app.gsap.isInGuestBook = true;
                 this.isShowModal = true;
                 // 카메라 애니메이션 끝난 후 방명록 작성 모달 띄움
@@ -304,7 +304,6 @@ export class GuestBook {
             const data = doc.data();
             this.guestReviewList.push(data);
             this.lastVisible = data.createAt;
-            console.log(data);
         });
     }
 
