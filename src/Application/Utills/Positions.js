@@ -56,7 +56,7 @@ export default class Positions {
             if (value > 1.32) return 1.32;
             return value;
         }
-        return (1400 - this.sizes.width) * 0.0007 + 0.5;
+        return (1400 - this.sizes.width) * 0.0007 + 0.7;
     }
 
     // 브라우저 크기에 따른 projects 컨텐츠 포지션 보정

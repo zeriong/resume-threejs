@@ -62,15 +62,9 @@ export default class Raycaster {
             if (target.name === 'history') return this.gsap.toContent(target.name);
             if (target.name === 'skills') return this.gsap.toContent(target.name);
             if (target.name === 'guestBook') {
-                // 방명록 토스트 알림 카메라 무빙 끝난 후 실행
-                this.timeout1 = setTimeout(() => {
-                    this.controlPopup('show');
-
-                    this.timeout2 = setTimeout(() => {
-                        this.controlPopup('hidden');
-                    },3000);
-                }, 1000);
-                return this.gsap.toContent(target.name);
+                // 방명록 토스트 알림 실행
+                this.playGuestBookToast()
+                return this.gsap.toContent('guestBook');
             }
 
             // 링크 메뉴 클릭 이벤트
@@ -94,5 +88,17 @@ export default class Raycaster {
             guestBookPopup.style.top = '100px';
             guestBookPopup.style.opacity = 1;
         }
+    }
+
+    // 방명록 토스트 알림 실행 매서드
+    playGuestBookToast() {
+        // 방명록 토스트 알림 카메라 무빙 끝난 후 실행
+        this.timeout1 = setTimeout(() => {
+            this.controlPopup('show');
+
+            this.timeout2 = setTimeout(() => {
+                this.controlPopup('hidden');
+            },3000);
+        }, 1000);
     }
 }

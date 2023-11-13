@@ -126,17 +126,9 @@ export default class GsapAnimation {
         // get instance
         const app = Application.getInstance();
 
-        // 방명록, 타이핑 setTimeout 해제 함수
-        const breakTimeout = (timeout, func) => {
-            if (timeout !== null) {
-                clearTimeout(timeout);
-                timeout = null;
-            }
-            func();
-        }
-        breakTimeout(app.raycaster.timeout1, () => app.raycaster.controlPopup('hidden'));
-        breakTimeout(app.raycaster.timeout2, () => app.raycaster.controlPopup('hidden'));
-        breakTimeout(this.typingTimout, () => setTimeout(() => this.dialogContent.innerHTML = '', 1000));
+        this.breakTimeout(app.raycaster.timeout1, () => app.raycaster.controlPopup('hidden'));
+        this.breakTimeout(app.raycaster.timeout2, () => app.raycaster.controlPopup('hidden'));
+        this.breakTimeout(this.typingTimout, () => setTimeout(() => this.dialogContent.innerHTML = '', 1000));
 
         // 의자 투명화 매서드
         this.convertTransparent('zoomOut');
@@ -246,6 +238,9 @@ export default class GsapAnimation {
         }
         // get position list
         const positionList = app.positions.getContentPositions();
+        // get raycaster
+        const raycaster = app.raycaster;
+
         // list count
         if (positionList.length - 1 > this.listCount) this.listCount++;
         // prev 버튼 활성화
@@ -259,6 +254,13 @@ export default class GsapAnimation {
             // 말풍선 사라지는 애니메이션 끝나고 이동
             this.disappearDialog(currentPosition.next, true);
             return;
+        }
+        // guestBook toast alarm control
+        if (currentPosition.next === 'guestBook') {
+            raycaster.playGuestBookToast();
+        } else if (raycaster.timeout1 !== null || raycaster.timeout2 !== null) {
+            this.breakTimeout(raycaster.timeout1, () => raycaster.controlPopup('hidden'));
+            this.breakTimeout(raycaster.timeout2, () => raycaster.controlPopup('hidden'));
         }
         // 마지막대화를 제외한 애니메이션 일괄 처리
         this.currentContent = currentPosition.next;
@@ -279,6 +281,8 @@ export default class GsapAnimation {
         }
         // get position list
         const positionList = app.positions.getContentPositions();
+        // get raycaster
+        const raycaster = app.raycaster;
 
         // list count
         if (positionList.length > this.listCount) this.listCount--;
@@ -288,6 +292,13 @@ export default class GsapAnimation {
         // current content position
         const currentPosition = positionList.find(val => val.current === this.currentContent);
 
+        // guestBook toast alarm control
+        if (currentPosition.prev === 'guestBook') {
+            raycaster.playGuestBookToast();
+        } else if (raycaster.timeout1 !== null || raycaster.timeout2 !== null) {
+            this.breakTimeout(raycaster.timeout1, () => raycaster.controlPopup('hidden'));
+            this.breakTimeout(raycaster.timeout2, () => raycaster.controlPopup('hidden'));
+        }
         // aboutMe에서 나가기 애니메이션
         if (this.currentContent === 'aboutMe') {
             this.currentContent = currentPosition.prev;
@@ -296,12 +307,7 @@ export default class GsapAnimation {
             this.disappearDialog(currentPosition.prev, true);
             return;
         }
-        // 이전 대화 이동 함수
-        const prevDialog = (step) => {
-            this.currentContent = currentPosition.prev;
-            this.dialogContent.textContent = '';
-            this.typing(step);
-        }
+
         // aboutMe에서 나가기, 방명록에서 나가기 애니메이션을 제외한 애니메이션 일괄 처리
         this.currentContent = currentPosition.prev;
         this.toContent(currentPosition.prev, true);
@@ -464,5 +470,13 @@ export default class GsapAnimation {
     controlLimitBreak (controls) {
         controls.maxPolarAngle = THREE.MathUtils.degToRad(360); // 하단 시점 제한해제
         controls.minDistance = 0; // 가까워지는 최소거리 설정
+    }
+    // 방명록, 타이핑 setTimeout 해제 매서드
+    breakTimeout(timeout, func) {
+        if (timeout !== null) {
+            clearTimeout(timeout);
+            timeout = null;
+        }
+        func();
     }
 }
