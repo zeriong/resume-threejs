@@ -71,8 +71,8 @@ export default class Lights {
         setLightOption(innerLight);
 
         this.scene.add(
-            // windowToBedDirectLight, windowToBedDirectLightTarget, aboveWindowToBedDirectLight, aboveWindowToBedDirectLightTarget,
-            // topRightSpotLight, topRightSpotLight.target, upToFloorSpotLight, upToFloorSpotLight.target,
+            windowToBedDirectLight, windowToBedDirectLightTarget, aboveWindowToBedDirectLight, aboveWindowToBedDirectLightTarget,
+            topRightSpotLight, topRightSpotLight.target, upToFloorSpotLight, upToFloorSpotLight.target,
             windowRectAreaLight, doorRectAreaLight, innerLight
         );
     }
