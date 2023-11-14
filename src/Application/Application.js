@@ -84,7 +84,7 @@ export default class Application {
 
         // 매서드 실행
         this.camera.createControls();
-        this.renderer.setComposer();
+        // this.renderer.setComposer();
         this.update();
 
         // test
