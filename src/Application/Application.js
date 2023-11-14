@@ -52,23 +52,29 @@ export default class Application {
         const soundOn = document.querySelector('#soundOn');
         const soundOff = document.querySelector('#soundOff');
 
-        // 방명록, 사운드 버튼 툴팁 이벤트
-        guestBookBtn.addEventListener('mouseenter' ,() => {
-            guestBookToolTip.style.opacity = 1;
-            guestBookToolTip.style.visibility = 'visible';
-        });
-        guestBookBtn.addEventListener('mouseleave' ,() => {
-            guestBookToolTip.style.opacity = 0;
-            guestBookToolTip.style.visibility = 'hidden';
-        });
-        soundBtn.addEventListener('mouseenter' ,() => {
-            soundToolTip.style.opacity = 1;
-            soundToolTip.style.visibility = 'visible';
-        });
-        soundBtn.addEventListener('mouseleave' ,() => {
-            soundToolTip.style.opacity = 0;
-            soundToolTip.style.visibility = 'hidden';
-        });
+        // 모바일이 아닌 경우만 방명록 & 사운드 버튼 툴팁, hover 이벤트
+        if (this.sizes.width > 497) {
+            guestBookBtn.addEventListener('mouseenter' ,() => {
+                guestBookBtn.style.backgroundColor = '#363636';
+                guestBookToolTip.style.opacity = 1;
+                guestBookToolTip.style.visibility = 'visible';
+            });
+            guestBookBtn.addEventListener('mouseleave' ,() => {
+                guestBookBtn.style.backgroundColor = '#252525';
+                guestBookToolTip.style.opacity = 0;
+                guestBookToolTip.style.visibility = 'hidden';
+            });
+            soundBtn.addEventListener('mouseenter' ,() => {
+                soundBtn.style.backgroundColor = '#363636';
+                soundToolTip.style.opacity = 1;
+                soundToolTip.style.visibility = 'visible';
+            });
+            soundBtn.addEventListener('mouseleave' ,() => {
+                soundBtn.style.backgroundColor = '#252525';
+                soundToolTip.style.opacity = 0;
+                soundToolTip.style.visibility = 'hidden';
+            });
+        }
         // 사운드버튼 클릭 시 아이콘 토글 이벤트
         soundBtn.addEventListener('click', () => {
             if (this.onSound) {
@@ -84,7 +90,7 @@ export default class Application {
 
         // 매서드 실행
         this.camera.createControls();
-        this.renderer.setComposer();
+        // this.renderer.setComposer();
         this.update();
 
         // test

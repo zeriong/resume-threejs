@@ -81,11 +81,16 @@ export default class Raycaster {
     /** @param {'hidden' || 'show'} type */
     controlPopup(type) {
         const guestBookPopup = document.querySelector('#guestBookPopup');
+        const sizes = Application.getInstance().sizes;
         if (type === 'hidden') {
-            guestBookPopup.style.top = '-100px';
+            // 모바일 대응 추가
+            if (sizes.width <= 497) guestBookPopup.style.top = '-80px';
+            else guestBookPopup.style.top = '-100px';
             guestBookPopup.style.opacity = 0;
         } else if (type === 'show') {
-            guestBookPopup.style.top = '100px';
+            // 모바일 대응 추가
+            if (sizes.width <= 497) guestBookPopup.style.top = '80px';
+            else guestBookPopup.style.top = '100px';
             guestBookPopup.style.opacity = 1;
         }
     }

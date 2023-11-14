@@ -12,8 +12,8 @@
 	<div id="css3DObject"></div>
 	<div id="webgl"></div>
 
-<!--	<div id="loading" style="display: none;">-->
-	 <div id="loading">
+	<div id="loading" style="display: none;">
+<!--	 <div id="loading">-->
 		<!-- 로딩중 -->
 		<div id="loadingContainer">
 			<p id="loadingTitle" class="jetbrain-font">LOADING RESOURCES&nbsp;<span id="loadingProgress"></span></p>
@@ -25,7 +25,7 @@
 			</div>
 
 			<!-- loading consoles -->
-			<div style="position: absolute; bottom: 20px;">
+			<div id="loadConsoleWrap">
 				<div id="loadedConsole" class="jetbrain-font">
 					All Content Loaded, launching <span class="jetbrain-font" style="font-weight: 700; color: #00FF00;">'Zeriong Portfolio Showcase'</span> V1.0
 				</div>
@@ -86,14 +86,15 @@
 	<div id="guestBookPopup">
 		우측 상단 &nbsp;
 		<span>
-			<img src="/images/icons/guest_book.svg" alt="guest_icon" style="width: 22px;">
+			<img src="/images/icons/guest_book.svg" alt="guest_icon">
 		</span>
 		버튼을 누르시면<br/>
 		방명록을 작성할 수 있습니다!
 	</div>
 
 	<!-- 테스트 -->
-	<button id="test">test</button>
+	<button id="test" style="display: none;">test</button>
+<!--	<button id="test">test</button>-->
 
 	<div id="dialogBox">
 		<div class="dialog-name">

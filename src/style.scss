@@ -62,6 +62,7 @@ p {
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 #webgl, #css3DObject {
@@ -102,6 +103,9 @@ ul {
     #inProgressWrap {
       display: flex;
       white-space: nowrap;
+      padding-left: 20px;
+      margin: 16px 0;
+
       #progressPercent {
         color: $system-yellow;
         font-family: 'JetBrains Mono', monospace;
@@ -111,13 +115,16 @@ ul {
       }
       #loadingItem {
         color: $system-green;
-        padding-left: 20px;
         text-align: start;
         width: 260px;
         & > li {
           font-family: 'JetBrains Mono', monospace;
         }
       }
+    }
+    #loadConsoleWrap {
+      position: absolute;
+      bottom: 20px;
     }
     #loadedConsole {
       display: none;
@@ -242,10 +249,6 @@ ul {
     height: 50px;
     z-index: 10;
 
-    &:hover {
-      background-color: #363636;
-    }
-
     #soundOff {
       width: 25px;
       display: none;
@@ -348,19 +351,24 @@ ul {
 
 
 #guestBookPopup {
+  white-space: nowrap;
+  line-height: 1.4;
   transition: ease-in-out 500ms;
   position: fixed;
   background-color: #252525;
   color: white;
   left: 50%;
-  top: -100px;
-  transform: translate(-50%, -50%);
+  top: 100px;
+  transform: translateX(-50%);
   z-index: 20;
   padding: 24px 30px;
   border-radius: 20px;
   font-size: 22px;
   font-weight: 500;
   opacity: 0;
+  & > span > img {
+    width: 22px;
+  }
 }
 
 // test
@@ -408,6 +416,7 @@ ul {
     margin-top: -40px;
   }
   .dialog-name {
+    flex: 1 1 20%;
     font-size: 30px;
     padding: 20px 20px 16px 20px;
     .dialog-position {
@@ -415,14 +424,14 @@ ul {
     }
   }
   .dialog-content {
-    height: calc(100% - 92px);
+    flex: 1 1 80%;
     font-size: 18px;
     font-weight: 600;
     line-height: 1.5;
     color: $gray-800;
     overflow-y: scroll;
     overflow-x: hidden;
-    margin: 0 6px 0 20px;
+    margin: 0 6px 20px 20px;
 
     p {
       margin-bottom: 16px;
@@ -924,18 +933,50 @@ ul {
 
         }
       }
-
   }
-
-
 }
 
 // 미디어 쿼리
+
+// 일반적인 모바일 대응
 @media screen and (max-width: 497px){
+  // 로딩
+  #loading {
+    #loadingContainer {
+      width: calc(100% - 30px);
+      height: 279px;
+      padding: 16px;
+
+      #inProgressWrap {
+        padding-left: 10px;
+        margin: 8px 0;
+        font-size: 13px;
+        #loadingItem {
+          width: 204px;
+        }
+      }
+      #loadConsoleWrap {
+        font-size: 14px;
+        bottom: 16px;
+      }
+    }
+
+    #loadedMessage {
+      width: calc(100% - 30px);
+      padding: 18px;
+      font-size: 15px;
+
+      #playStart {
+        font-size: 15px;
+      }
+    }
+  }
+
+  // about me
   #dialogBox {
     bottom: 68px;
     width: calc(100% - 20px);
-    height: 230px; // org 300px
+    height: 230px; // origin: 300px
     padding: 14px;
 
     // 말풍선 꼬리
@@ -946,38 +987,118 @@ ul {
       right: 30%;
       width: 0;
       height: 0;
-      border: 36px solid transparent;
+      border: 30px solid transparent;
       border-bottom-color: #fff;
       border-top: 0;
       border-left: 0;
       margin-left: -20px;
-      margin-top: -36px;
+      margin-top: -28px;
     }
     .dialog-name {
+      flex: 1 1 10%;
+      padding: 4px 4px 2px;
+      margin: 0;
       font-size: 22px;
       margin-bottom: 8px;
       .dialog-position {
-        font-size: 17px;
+        font-size: 16px;
       }
     }
     .dialog-content {
+      flex: 1 1 90%;
       font-size: 15px;
+      padding-left: 4px;
+      margin: 0;
+      height: 100%;
+      #dialogCursor {
+        width: 4px;
+        height: 18px;
+
+      }
     }
   }
 
   #contentMenuBtns {
-    bottom: 10px;
     width: 100%;
     padding: 0 10px;
+    gap: 10px;
     .dialog-btns-style {
-      font-size: 14px;
-      font-weight: 700;
-      padding: 16px 40px;
+      flex: 1 1 30%;
+      font-size: 16px;
       border-radius: 16px;
+      padding: 14px 0;
+    }
+  }
+
+  #guestBookPopup {
+    top: -80px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    font-size: 16px;
+
+    & > span > img {
+      width: 14px;
     }
   }
 }
 
+// Galaxy Fold 대응
+@media screen and (max-width: 300px){
+  // 로딩
+  #loading {
+    #loadingContainer {
+      height: 244px;
+      #inProgressWrap {
+        padding-left: 4px;
+        margin: 8px 0;
+        font-size: 10px;
+        #loadingItem {
+          width: 204px;
+        }
+      }
+      #loadConsoleWrap {
+        font-size: 14px;
+        bottom: 16px;
+      }
+    }
+
+    #loadedMessage {
+      width: calc(100% - 30px);
+      padding: 18px;
+      font-size: 15px;
+
+      #playStart {
+        font-size: 15px;
+      }
+    }
+  }
+
+  // about me
+  #dialogBox {
+
+    // 말풍선 꼬리
+    &:after {
+      content: '';
+      position: fixed;
+      top: 0;
+      right: 30%;
+      width: 0;
+      height: 0;
+      border: 24px solid transparent;
+      border-bottom-color: #fff;
+      border-top: 0;
+      border-left: 0;
+      margin-left: -20px;
+      margin-top: -23px;
+    }
+    .dialog-name {
+      font-size: 18px;
+      .dialog-position {
+        font-size: 14px;
+      }
+    }
+  }
+}
 
 @keyframes blink {
   0%, 100% {
@@ -987,7 +1108,6 @@ ul {
     background-color: white;
   }
 }
-
 
 
 

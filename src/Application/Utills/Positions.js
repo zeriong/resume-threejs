@@ -11,12 +11,13 @@ export default class Positions {
         this.skillsPosition = this.world.skillsPosition;
         this.posterPosition = this.world.posterPosition;
         this.aboutMePosition = this.world.aboutMePosition;
-        this.guestBookPosition = { x: 0.5, y: 2, z: 2.2 }
+        this.guestBookPosition = { x: 0.5, y: 2, z: 2.194 }
 
         this.fixCameraPosition = this.getFixCameraPosition();
         this.fixMonitorPosition = this.getFixMonitorCamPosition();
         this.fixSkillsPosition = this.getFixSkillsPosition();
         this.fixHistoryPosition = this.getFixHistoryCamPosition();
+        this.fixGuestBookPosition = this.getFixGuestBookPosition();
     }
 
     // OrbitControls default 시점
@@ -74,6 +75,16 @@ export default class Positions {
         return 2.5
     }
 
+    // 브라우저 크기에 따른 방명록 컨텐츠 포지션 보정
+    getFixGuestBookPosition() {
+        if (this.sizes.width <= 300) return 2;
+        if (this.sizes.width <= 420) return 1.5;
+        if (this.sizes.width <= 500) return 2;
+        if (this.sizes.width <= 700) return 1.8;
+        if (this.sizes.width <= 1000) return 0.8;
+        else return 0
+    }
+
     getContentPositions() {
         return [
             // about me 첫번째 대화
@@ -124,7 +135,7 @@ export default class Positions {
             {
                 current: 'guestBook', next: 'aboutMe', prev: 'history',
                 cameraPosition: {
-                    x: (this.guestBookPosition.x), y: (this.guestBookPosition.y), z: (this.guestBookPosition.z)
+                    x: (this.guestBookPosition.x - this.fixGuestBookPosition), y: (this.guestBookPosition.y), z: (this.guestBookPosition.z)
                 },
                 controlsTarget: {
                     x: (this.guestBookPosition.x + 0.5), y: (this.guestBookPosition.y), z: (this.guestBookPosition.z)

@@ -29,16 +29,28 @@ export class GuestBook {
         document.querySelector('#guestBookBtn').addEventListener('click', (e) => {
             e.stopPropagation();
             const app = Application.getInstance();
+            const gsap = app.gsap;
             // 카메라 애니메이션중인 경우 캔슬
-            if (app.gsap.isMovingCam) return;
+            if (gsap.isMovingCam) return;
             // 방명록 애니메이션 실행
             if (!this.isShowModal) {
-                if (app.gsap.isInGuestBook) return this.controlReviewModal('on', 10);
-                app.gsap.toContent('guestBook');
-                app.gsap.isInGuestBook = true;
+                // 이미 방명록컨텐츠인 경우 모달만 띄움(Gsap 실행 x)
+                if (gsap.isInGuestBook) return this.controlReviewModal('on', 10);
+
+                // 현재 컨텐츠가 aboutMe인 경우 대화창 사라진 후 이동
+                if (gsap.currentContent === 'aboutMe') {
+                    this.isMovingCam = true;
+                    // 말풍선 사라지는 애니메이션 끝나고 이동
+                    gsap.disappearDialog('guestBook', false);
+                    // 말풍선 사라지는 애니메이션 끝난 후 방명록 작성 모달 띄움
+                    setTimeout(() => this.controlReviewModal('on'), 1350);
+                } else {
+                    gsap.toContent('guestBook');
+                    // 카메라 애니메이션 끝난 후 방명록 작성 모달 띄움
+                    setTimeout(() => this.controlReviewModal('on'), 1000);
+                }
+                gsap.isInGuestBook = true;
                 this.isShowModal = true;
-                // 카메라 애니메이션 끝난 후 방명록 작성 모달 띄움
-                setTimeout(() => this.controlReviewModal('on'), 1000);
             }
         });
         // 리뷰모달 클릭 시 모달 취소 캔슬

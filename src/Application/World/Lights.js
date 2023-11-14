@@ -52,18 +52,18 @@ export default class Lights {
         upToFloorSpotLight.decay = 1.8; // 빛의 감쇠율 (일반적으로 2 사용)
         setLightOption(upToFloorSpotLight);
 
-        // 창문 사각
-        const windowRectAreaLight = new THREE.RectAreaLight(0xffffff, 4, 1.4, 2);
+        // 창문 사각 (origin intensity: 4)
+        const windowRectAreaLight = new THREE.RectAreaLight(0xffffff, 3, 1.4, 2);
         windowRectAreaLight.position.set(3.1, 2.1, 1.15); // 빛의 위치 설정
         windowRectAreaLight.lookAt(-5, 2, 1);
 
-        // 문쪽 사각
-        const doorRectAreaLight = new THREE.RectAreaLight(0xffffff, 2, 1.4, 3);
+        // 문쪽 사각 (origin intensity: 2)
+        const doorRectAreaLight = new THREE.RectAreaLight(0xffffff, 0.4, 1.4, 3);
         doorRectAreaLight.position.set(3.1, 1.7, 3.2); // 빛의 위치 설정
         doorRectAreaLight.lookAt(-5, 1.7, 3.2)
 
-        // 내부
-        const innerLight = new THREE.PointLight(0xFFDD99, 8, 8);
+        // 내부 (origin intensity: 8)
+        const innerLight = new THREE.PointLight(0xFFDD99, 7, 8);
         innerLight.position.set(1, 2, 2); // 빛의 위치 설정
         innerLight.angle = Math.PI / 8; // 원뿔의 최대 각도 (라디안)
         innerLight.distance = 0; // 빛의 최대 거리 (0은 무제한)
@@ -73,7 +73,9 @@ export default class Lights {
         this.scene.add(
             // windowToBedDirectLight, windowToBedDirectLightTarget, aboveWindowToBedDirectLight, aboveWindowToBedDirectLightTarget,
             // topRightSpotLight, topRightSpotLight.target, upToFloorSpotLight, upToFloorSpotLight.target,
-            windowRectAreaLight, doorRectAreaLight, innerLight
+            windowRectAreaLight,
+            doorRectAreaLight,
+            innerLight
         );
     }
 }

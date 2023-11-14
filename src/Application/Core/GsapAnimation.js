@@ -212,9 +212,13 @@ export default class GsapAnimation {
                 gsap.to(app.camera.instance.position, {
                     ...contentList[0].cameraPosition, duration: 1.5, ease: 'power1.inOut',
                     onComplete: () => {
-                        this.isMovingCam = false;
-                        this.contentMenuBtns.style.bottom = '30px';
-                        this.dialogBox.style.display = 'block';
+                        // 컨텐츠 nav menu 모바일 대응
+                        if (app.sizes.width <= 497) {
+                            this.contentMenuBtns.style.bottom = '10px';
+                        } else {
+                            this.contentMenuBtns.style.bottom = '30px';
+                        }
+                        this.dialogBox.style.display = 'flex';
                         this.appearDialog();
                     }
                 });
@@ -362,7 +366,7 @@ export default class GsapAnimation {
         const app = Application.getInstance();
         // 대화창 등장시 대화 초기화 후 등장
         this.dialogContent.textContent = '';
-        this.dialogBox.style.display = 'block';
+        this.dialogBox.style.display = 'flex';
         // transition을 기다린 후 실행
         setTimeout(() => {
             this.dialogBox.style.opacity = '1';
