@@ -316,12 +316,10 @@ export default class GsapAnimation {
     // prev 버튼 활성화 여부 결정 매서드
     prevBtnSwitch() {
         if (this.listCount > 0 && !this.isActivePrev) {
-            console.log('버튼 활성')
             this.isActivePrev = true;
             this.prevBtn.style.backgroundColor = "rgb(108, 117, 125)";
             this.prevBtn.style.color = '#fff';
         } else if (this.listCount === 0 && this.isActivePrev) {
-            console.log('버튼 비활성')
             this.isActivePrev = false;
             this.prevBtn.style.backgroundColor = "rgb(185, 188, 190)";
             this.prevBtn.style.color = '#d3d3d3';

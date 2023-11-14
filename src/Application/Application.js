@@ -104,7 +104,6 @@ export default class Application {
         //     // }
         //     // this.testEl.style.display = 'flex';
         //     // this.test = false;
-        //     console.log('얍!')
         //     // this.guestBook.nextReview();
         //     // this.gsap.toGuestBook();
         // });
