@@ -850,6 +850,35 @@ ul {
   color: rgb(107, 114, 128);
 }
 
+@media screen and (max-width: 650px) {
+  #loading #loadingContainer {
+    width: calc(100% - 30px);
+    max-width: 350px;
+    height: 279px;
+    padding: 16px;
+  }
+  #loading #loadingContainer #inProgressWrap {
+    padding-left: 10px;
+    margin: 8px 0;
+    font-size: 13px;
+  }
+  #loading #loadingContainer #inProgressWrap #loadingItem {
+    width: 204px;
+  }
+  #loading #loadingContainer #loadConsoleWrap {
+    font-size: 14px;
+    bottom: 16px;
+  }
+  #loading #loadedMessage {
+    width: calc(100% - 30px);
+    max-width: 350px;
+    padding: 18px;
+    font-size: 15px;
+  }
+  #loading #loadedMessage #playStart {
+    font-size: 15px;
+  }
+}
 @media screen and (max-width: 497px) {
   #loading #loadingContainer {
     width: calc(100% - 30px);

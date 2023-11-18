@@ -938,6 +938,43 @@ ul {
 
 // 미디어 쿼리
 
+// 로딩 모달
+@media screen and (max-width: 650px){
+  // 로딩
+  #loading {
+    #loadingContainer {
+      width: calc(100% - 30px);
+      max-width: 350px;
+      height: 279px;
+      padding: 16px;
+
+      #inProgressWrap {
+        padding-left: 10px;
+        margin: 8px 0;
+        font-size: 13px;
+        #loadingItem {
+          width: 204px;
+        }
+      }
+      #loadConsoleWrap {
+        font-size: 14px;
+        bottom: 16px;
+      }
+    }
+
+    #loadedMessage {
+      width: calc(100% - 30px);
+      max-width: 350px;
+      padding: 18px;
+      font-size: 15px;
+
+      #playStart {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
 // 일반적인 모바일 대응
 @media screen and (max-width: 497px){
   // 로딩

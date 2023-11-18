@@ -72,7 +72,7 @@ export default class Lights {
 
         this.scene.add(
             // windowToBedDirectLight, windowToBedDirectLightTarget, aboveWindowToBedDirectLight, aboveWindowToBedDirectLightTarget,
-            // topRightSpotLight, topRightSpotLight.target, upToFloorSpotLight, upToFloorSpotLight.target, doorRectAreaLight
+            // topRightSpotLight, topRightSpotLight.target, upToFloorSpotLight, upToFloorSpotLight.target, doorRectAreaLight,
             windowRectAreaLight, innerLight
         );
     }
