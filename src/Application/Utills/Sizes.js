@@ -11,7 +11,7 @@ export default class Sizes {
 
         // html을 보여주는 CSS3DObject mesh의 크기
         this.roomSizes = {
-            monitor: { width: 879, height: 550 },
+            monitor: { width: 877, height: 545 },
             history: { width: 520, height: 743 },
             skills: { width: 553, height: 480 },
             poster: { width: 986, height: 1500 },

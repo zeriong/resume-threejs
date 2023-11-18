@@ -18,7 +18,7 @@ export default class Environment {
 
         // light particle(빛가루) 매쉬
         this.lightParticleGeometry = new THREE.BufferGeometry();
-        this.lightParticleMaterial = new THREE.PointsMaterial({ size: 0.05, blending: THREE.AdditiveBlending, transparent: false, color: 0xffff00 });
+        this.lightParticleMaterial = new THREE.PointsMaterial({ size: 0.05, blending: THREE.AdditiveBlending, color: 0xffff00 });
         this.lightParticleCount = 60;
         this.lightParticlePostions = new Float32Array(this.lightParticleCount * 3);
 

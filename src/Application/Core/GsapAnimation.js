@@ -114,6 +114,11 @@ export default class GsapAnimation {
         gsap.to(app.camera.orbitControls.target, {
             ...currentPosition.controlsTarget, duration: 1, ease: 'power1.inOut',
         });
+        // 빛가루 투명화
+        gsap.to(app.world.environment.lightParticleMaterial, {
+            duration: 1, ease: 'power1.inOut', opacity: 0,
+            onStart: () => app.world.environment.lightParticleMaterial.transparent = true
+        });
     }
 
     // orbitControls 모드로 전환
@@ -174,8 +179,14 @@ export default class GsapAnimation {
                 this.prevBtnSwitch();
             }
         });
+        // 카메라 타겟 변경
         gsap.to(app.camera.orbitControls.target, {
             x: 1, y: 1.5, z: 2, duration: 1, ease: 'power1.inOut',
+        });
+        // 빛가루 투명화 해제
+        gsap.to(app.world.environment.lightParticleMaterial, {
+            duration: 1, ease: 'power1.inOut', opacity: 1,
+            onStart: () => app.world.environment.lightParticleMaterial.transparent = false
         });
     }
 
@@ -196,7 +207,7 @@ export default class GsapAnimation {
         const contentList = app.positions.getContentPositions();
         // start 시 aboutMe으로 설정
         this.currentContent = 'aboutMe';
-
+        // 크게 도는 애니메이션
         gsap.to(app.camera.instance.position, {
             duration: 2, ease: 'power1.inOut',
             // set position
@@ -210,6 +221,7 @@ export default class GsapAnimation {
                 this.convertTransparent('zoomIn', 3000, 1.5, 2);
             },
             onComplete: () => {
+                // aboutMe로 줌인 애니메이션
                 gsap.to(app.camera.instance.position, {
                     ...contentList[0].cameraPosition, duration: 1.5, ease: 'power1.inOut',
                     onComplete: () => {
@@ -225,6 +237,11 @@ export default class GsapAnimation {
                 });
                 gsap.to(app.camera.orbitControls.target, {
                     ...contentList[0].controlsTarget, duration: 1.5, ease: 'power1.inOut',
+                });
+                // 빛가루 투명화
+                gsap.to(app.world.environment.lightParticleMaterial, {
+                    duration: 1.5, ease: 'power1.inOut', opacity: 0,
+                    onStart: () => app.world.environment.lightParticleMaterial.transparent = true
                 });
             }
         });
@@ -415,7 +432,7 @@ export default class GsapAnimation {
         this.cursorWrap.appendChild(this.dialogCursor);
 
         const typing = () => {
-            // 태그 체크 문자열 추가
+            // 태그 체크 후 일괄적으로 문자열 추가
             if (text[charIndex] === "<") {
                 // 태그가 끝날 때까지 루프
                 while (text[charIndex] !== ">" && charIndex < text.length) {
@@ -430,19 +447,23 @@ export default class GsapAnimation {
                 content += text[charIndex++];
             }
 
+            // html에 문자열 삽입
             this.dialogContent.innerHTML = content;
             this.dialogContent.appendChild(this.cursorWrap);
 
+            // 타이핑중일 땐 커서 루프 정지
             if (this.cursorInterval !== null) {
                 clearInterval(this.cursorInterval);
                 this.cursorInterval = null;
             }
+            // 문자열을 모두 html에 삽입할 때까지 타이핑 반복
             if (charIndex < text.length) {
                 this.typingTimeout = setTimeout(() => {
                     typing();
                     this.dialogContent.scrollTop = this.dialogContent.scrollHeight;
                 }, typingSpeed);
             }
+            // 모두 삽입되었을때 커서깜빡임 루프 작동
             if (charIndex >= text.length) {
                 this.typingTimeout = null;
                 this.cursorLoop();

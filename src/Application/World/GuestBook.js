@@ -110,7 +110,7 @@ export class GuestBook {
             const leftArrowMesh = rightArrowMesh.clone();
             leftArrowMesh.material.side = THREE.DoubleSide;
             leftArrowMesh.rotation.y = THREE.MathUtils.degToRad(90);
-            leftArrowMesh.position.set(2.8955, 2.026, 1.837);
+            leftArrowMesh.position.set(2.8955, 2.026, 1.838);
             leftArrowMesh.material.opacity = 0;
             leftArrowMesh.material.transparent = true;
             leftArrowMesh.name = 'prevReview';
@@ -186,6 +186,7 @@ export class GuestBook {
 
                 // 이 후 선택하여 painting을 위한 배열
                 this.canvasList.push(canvas);
+                // 방명록을 그려 줄 때 needsUpdate속성에 접근하기 위한 배열에 추가
                 this.canvasTextureList.push(texture);
                 // 데이터 개수에 따라 mesh를 보여주기 위한 배열
                 this.reviewMeshList.push(reviewMesh);
@@ -194,6 +195,8 @@ export class GuestBook {
             // 리뷰가 존재한다면 리뷰 추가
             const review = this.guestReviewList[i];
             if (review) {
+                // 방명록 각도 변경
+                this.reviewMeshList[i].rotation.x = THREE.MathUtils.degToRad(Math.random() * 7 - 3.5);
                 // canvas painting
                 const context = this.canvasList[i].getContext('2d');
                 const title = this.guestReviewList[i].name;

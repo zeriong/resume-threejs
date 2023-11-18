@@ -87,7 +87,7 @@ export default class Room {
                         const mesh = new THREE.Mesh(geometry, material);
                         mesh.position.x = this.projectsPosition.x;
                         mesh.position.y = this.projectsPosition.y + 0.115;
-                        mesh.position.z = this.projectsPosition.z + 0.026;
+                        mesh.position.z = this.projectsPosition.z + 0.027;
                         mesh.scale.set(...this.initScale);
                         mesh.name = 'projects';
                         this.scene.add(mesh);
