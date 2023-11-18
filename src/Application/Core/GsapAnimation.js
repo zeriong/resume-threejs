@@ -10,8 +10,7 @@ export default class GsapAnimation {
         this.currentContent = '';
         this.listCount = 0;
         this.isActivePrev = false;
-        this.isActiveNext = true;
-        this.typingTimout = null;
+        this.typingTimeout = null;
 
         // Elements
         this.webgl = document.querySelector('#webgl');
@@ -47,7 +46,6 @@ export default class GsapAnimation {
     toContent(target, isBtn) {
         // HTML과 상호작용 불가하도록 설정
         this.webgl.style.zIndex = 0;
-
         // get instance
         const app = Application.getInstance();
 
@@ -127,8 +125,11 @@ export default class GsapAnimation {
         const app = Application.getInstance();
 
         this.breakTimeout(app.raycaster.timeout1, () => app.raycaster.controlPopup('hidden'));
+        app.raycaster.timeout1 = null;
         this.breakTimeout(app.raycaster.timeout2, () => app.raycaster.controlPopup('hidden'));
-        this.breakTimeout(this.typingTimout, () => setTimeout(() => this.dialogContent.innerHTML = '', 1000));
+        app.raycaster.timeout2 = null;
+        this.breakTimeout(this.typingTimeout, () => setTimeout(() => this.dialogContent.innerHTML = '', 1000));
+        this.typingTimeout = null;
 
         // 의자 투명화 매서드
         this.convertTransparent('zoomOut');
@@ -232,11 +233,11 @@ export default class GsapAnimation {
     // Next 버튼 클릭 매서드
     toNext() {
         // 카메라 무빙 애니메이션 진행중일 때 캔슬
-        if (!this.isActiveNext || this.isMovingCam) return;
+        if (this.isMovingCam) return;
         // get instance
         const app = Application.getInstance();
         // 타이핑이 진행중일 때 타이핑 스킵
-        if (this.typingTimout !== null) {
+        if (this.typingTimeout !== null) {
             if (this.currentContent === 'aboutMe') this.skipTyping(dialogText);
             return;
         }
@@ -264,7 +265,9 @@ export default class GsapAnimation {
             raycaster.playGuestBookToast();
         } else if (raycaster.timeout1 !== null || raycaster.timeout2 !== null) {
             this.breakTimeout(raycaster.timeout1, () => raycaster.controlPopup('hidden'));
+            raycaster.timeout1 = null;
             this.breakTimeout(raycaster.timeout2, () => raycaster.controlPopup('hidden'));
+            raycaster.timeout2 = null;
         }
         // 마지막대화를 제외한 애니메이션 일괄 처리
         this.currentContent = currentPosition.next;
@@ -279,7 +282,7 @@ export default class GsapAnimation {
         const app = Application.getInstance();
 
         // 타이핑이 진행중일 때 타이핑 스킵
-        if (this.typingTimout !== null) {
+        if (this.typingTimeout !== null) {
             if (this.currentContent === 'aboutMe') this.skipTyping(dialogText);
             return;
         }
@@ -301,7 +304,9 @@ export default class GsapAnimation {
             raycaster.playGuestBookToast();
         } else if (raycaster.timeout1 !== null || raycaster.timeout2 !== null) {
             this.breakTimeout(raycaster.timeout1, () => raycaster.controlPopup('hidden'));
+            raycaster.timeout1 = null;
             this.breakTimeout(raycaster.timeout2, () => raycaster.controlPopup('hidden'));
+            raycaster.timeout2 = null;
         }
         // aboutMe에서 나가기 애니메이션
         if (this.currentContent === 'aboutMe') {
@@ -433,13 +438,13 @@ export default class GsapAnimation {
                 this.cursorInterval = null;
             }
             if (charIndex < text.length) {
-                this.typingTimout = setTimeout(() => {
+                this.typingTimeout = setTimeout(() => {
                     typing();
                     this.dialogContent.scrollTop = this.dialogContent.scrollHeight;
                 }, typingSpeed);
             }
             if (charIndex >= text.length) {
-                this.typingTimout = null;
+                this.typingTimeout = null;
                 this.cursorLoop();
             }
         }
@@ -451,8 +456,8 @@ export default class GsapAnimation {
         this.dialogContent.innerHTML = text;
         this.dialogContent.appendChild(this.cursorWrap);
         this.cursorLoop();
-        clearTimeout(this.typingTimout);
-        this.typingTimout = null;
+        clearTimeout(this.typingTimeout);
+        this.typingTimeout = null;
     }
 
     // 커서 깜빡임 루프 매서드
@@ -475,10 +480,7 @@ export default class GsapAnimation {
     }
     // 방명록, 타이핑 setTimeout 해제 매서드
     breakTimeout(timeout, func) {
-        if (timeout !== null) {
-            clearTimeout(timeout);
-            timeout = null;
-        }
+        if (timeout !== null) clearTimeout(timeout);
         func();
     }
 }
