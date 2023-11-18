@@ -258,12 +258,15 @@ export class GuestBook {
         if (this.nextDisabled) return;
         // get next page data
         await this.getFirestoreData('next');
-        // prev 비활성화 상태라면 활성화
-        if (this.prevDisabled) this.prevDisabled = false;
-        // 페이지++
-        this.currentPage++;
-        // painting
-        this.paintGuestReview();
+        // fetch 후 다음 데이터가 더 있는 경우만
+        if (!this.nextDisabled) {
+            // prev 비활성화 상태라면 활성화
+            if (this.prevDisabled) this.prevDisabled = false;
+            // 페이지++
+            this.currentPage++;
+            // painting
+            this.paintGuestReview();
+        }
     }
 
     // 방명록 prev 페이지 매서드
@@ -273,16 +276,20 @@ export class GuestBook {
         if (this.nextDisabled) this.nextDisabled = false;
         // get prev page data
         await this.getFirestoreData('prev');
-        // 페이지--
-        this.currentPage--;
-        // 1페이지로 돌아갈 때 prev 비활성화 및 첫 페이지(최신화된 데이터) load
-        if (this.currentPage === 1) {
-            this.prevDisabled = true;
-            // get init data
-            await this.getFirestoreData();
+        // fetch 후 이전 데이터가 더 있는 경우만
+        if (!this.prevDisabled) {
+            // 페이지--
+            this.currentPage--;
+            // 1페이지로 돌아갈 때 prev 비활성화 및 첫 페이지(최신화된 데이터) load
+            if (this.currentPage === 1) {
+                this.prevDisabled = true;
+                // get init data
+                await this.getFirestoreData();
+            }
+            // painting
+            this.paintGuestReview();
         }
-        // painting
-        this.paintGuestReview();
+
     }
 
     /**
@@ -324,7 +331,7 @@ export class GuestBook {
 
     // 방명록 mesh 포지션 세팅 매서드
     reviewMeshPositionSets() {
-        const pos = { x: 2.8955, y: 2.341, z: 2.045, gap: 0.302 }
+        const pos = { x: 2.896, y: 2.341, z: 2.045, gap: 0.302 }
         return [
             [(pos.x), (pos.y), (pos.z)],
             [(pos.x), (pos.y), (pos.z + pos.gap)],

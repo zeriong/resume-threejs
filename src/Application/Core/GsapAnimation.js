@@ -218,7 +218,7 @@ export default class GsapAnimation {
                 app.camera.orbitControls.enabled = false;
                 app.isStart = true;
                 this.controlLimitBreak(app.camera.orbitControls); // down control 제한 해제
-                this.convertTransparent('zoomIn', 3000, 1.5, 2);
+                this.convertTransparent('zoomIn', 1900, 1.5, 1.5);
             },
             onComplete: () => {
                 // aboutMe로 줌인 애니메이션

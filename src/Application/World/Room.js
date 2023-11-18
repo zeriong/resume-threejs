@@ -47,15 +47,9 @@ export default class Room {
                     if (child.name === 'Plane202_3') {
                         child.getWorldPosition(this.projectsPosition);
 
-                        // html의 바탕이 될 container
-                        const container = document.createElement('div');
-                        container.style.width = this.contentSizes.monitor.width + 'px';
-                        container.style.height = this.contentSizes.monitor.height + 'px';
-                        container.style.opacity = '1';
-
                         // iframe 생성
                         const iframe = document.createElement('iframe');
-                        iframe.src = './htmls/projects.html';
+                        iframe.src = './pages/projects.html';
                         iframe.style.width = this.contentSizes.monitor.width + 'px';
                         iframe.style.height = this.contentSizes.monitor.height + 'px';
                         iframe.style.boxSizing = 'border-box';
@@ -72,7 +66,6 @@ export default class Room {
                         // HTML 상호작용을 위한 element이며 반드시 카메라가 앞면을 마주보고 있어야 상호작용 가능
                         // const htmlActionDom = cssDomEl.querySelector('div > div > div').children[0];
 
-                        container.appendChild(iframe);
                         this.cssScene.add(cssObj);
 
                         // CSS3DObject를 표현하기 위한 Mesh
@@ -87,7 +80,7 @@ export default class Room {
                         const mesh = new THREE.Mesh(geometry, material);
                         mesh.position.x = this.projectsPosition.x;
                         mesh.position.y = this.projectsPosition.y + 0.115;
-                        mesh.position.z = this.projectsPosition.z + 0.027;
+                        mesh.position.z = this.projectsPosition.z + 0.028;
                         mesh.scale.set(...this.initScale);
                         mesh.name = 'projects';
                         this.scene.add(mesh);
@@ -123,7 +116,7 @@ export default class Room {
 
                         // htmls 생성
                         const historyEl = document.createElement('iframe');
-                        historyEl.src = './htmls/history.html'
+                        historyEl.src = './pages/history.html'
                         historyEl.style.width = this.contentSizes.history.width + 'px';
                         historyEl.style.height = this.contentSizes.history.height + 'px';
                         historyEl.style.overflow = 'scroll';
@@ -165,7 +158,7 @@ export default class Room {
 
                         // htmls 생성
                         const skillsEl = document.createElement('iframe');
-                        skillsEl.src = './htmls/skills.html';
+                        skillsEl.src = './pages/skills.html';
                         skillsEl.style.width = this.contentSizes.skills.width + 'px';
                         skillsEl.style.height = this.contentSizes.skills.height + 'px';
                         skillsEl.style.overflow = 'scroll';
