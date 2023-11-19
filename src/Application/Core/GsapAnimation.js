@@ -186,7 +186,7 @@ export default class GsapAnimation {
         // 빛가루 투명화 해제
         gsap.to(app.world.environment.lightParticleMaterial, {
             duration: 1, ease: 'power1.inOut', opacity: 1,
-            onStart: () => app.world.environment.lightParticleMaterial.transparent = false
+            onComplete: () => app.world.environment.lightParticleMaterial.transparent = false
         });
     }
 
@@ -194,7 +194,6 @@ export default class GsapAnimation {
     playStartAnimation() {
         // 카메라 무빙 애니메이션 진행중일 때 캔슬
         if (this.isMovingCam) return;
-        
         // 로딩창 사라짐
         const loadingEl = document.querySelector('#loading');
         loadingEl.style.opacity = 0;
@@ -207,6 +206,8 @@ export default class GsapAnimation {
         const contentList = app.positions.getContentPositions();
         // start 시 aboutMe으로 설정
         this.currentContent = 'aboutMe';
+        // 첫 시작 오디오 재생 todo: 배포시 주석 해제
+        setTimeout(() => app.audio.sound.play(),100);
         // 크게 도는 애니메이션
         gsap.to(app.camera.instance.position, {
             duration: 2, ease: 'power1.inOut',

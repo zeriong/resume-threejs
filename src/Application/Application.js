@@ -9,6 +9,7 @@ import Lights from './World/Lights';
 import GsapAnimation from './Core/GsapAnimation';
 import Positions from './Utills/Positions';
 import {GuestBook} from './World/GuestBook';
+import Audio from './Audio/Audio';
 
 export default class Application {
 
@@ -41,6 +42,7 @@ export default class Application {
         this.gsap = new GsapAnimation();
         this.raycaster = new Raycaster();
         this.guestBook = new GuestBook();
+        this.audio = new Audio();
 
         this.scene.background = new THREE.Color(0x61657a);
 
@@ -79,10 +81,12 @@ export default class Application {
         soundBtn.addEventListener('click', () => {
             if (this.onSound) {
                 this.onSound = false;
+                this.audio.sound.pause();
                 soundOff.style.display = 'block';
                 soundOn.style.display = 'none';
             } else {
                 this.onSound = true;
+                this.audio.sound.play();
                 soundOff.style.display = 'none';
                 soundOn.style.display = 'block';
             }

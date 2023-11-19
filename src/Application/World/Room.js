@@ -22,7 +22,7 @@ export default class Room {
     }
 
     loadRoom() {
-        this.loader.gltfLoader.load('/models/room.glb', (glb) => {
+        this.loader.gltfLoader.load('/assets/models/room.glb', (glb) => {
             const model = glb.scene;
             model.castShadow = true;
             model.rotation.y = THREE.MathUtils.degToRad(-90);
@@ -96,7 +96,7 @@ export default class Room {
 
                         // texture img
                         const textureLoad = new THREE.TextureLoader();
-                        const texture = textureLoad.load('/images/dragonBall.png');
+                        const texture = textureLoad.load('/assets/images/dragonBall.png');
                         const geometry = new THREE.PlaneGeometry(this.contentSizes.poster.width, this.contentSizes.poster.height);
                         const material = new THREE.MeshBasicMaterial({ map: texture });
                         const mesh = new THREE.Mesh(geometry, material);

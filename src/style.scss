@@ -36,7 +36,6 @@ $system-yellow: #FFFA00;
   background-color: transparent;
   border-radius: 10px;
 }
-
 * {
   box-sizing: border-box;
   font-family: 'Pretendard';
@@ -90,7 +89,7 @@ ul {
     color: white;
     position: relative;
     width: 650px;
-    height: 328px;
+    height: 349px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -947,7 +946,7 @@ ul {
     #loadingContainer {
       width: calc(100% - 30px);
       max-width: 350px;
-      height: 279px;
+      height: 300px;
       padding: 16px;
 
       #inProgressWrap {
@@ -979,38 +978,6 @@ ul {
 
 // 일반적인 모바일 대응
 @media screen and (max-width: 497px){
-  // 로딩
-  #loading {
-    #loadingContainer {
-      width: calc(100% - 30px);
-      height: 279px;
-      padding: 16px;
-
-      #inProgressWrap {
-        padding-left: 10px;
-        margin: 8px 0;
-        font-size: 13px;
-        #loadingItem {
-          width: 204px;
-        }
-      }
-      #loadConsoleWrap {
-        font-size: 14px;
-        bottom: 16px;
-      }
-    }
-
-    #loadedMessage {
-      width: calc(100% - 30px);
-      padding: 18px;
-      font-size: 15px;
-
-      #playStart {
-        font-size: 15px;
-      }
-    }
-  }
-
   // about me
   #dialogBox {
     bottom: 68px;

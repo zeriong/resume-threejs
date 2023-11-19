@@ -9,6 +9,7 @@ export default class Loader {
         this.loadingManager = new THREE.LoadingManager();
         this.gltfLoader = new GLTFLoader(this.loadingManager);
         this.fontLoader = new FontLoader(this.loadingManager);
+        this.audioLoader = new THREE.AudioLoader(this.loadingManager);
 
         this.loading();
     }
@@ -25,6 +26,7 @@ export default class Loader {
         // 로딩 시 보여 줄 목록
         const itemList = [
             "dino.glb",
+            "bgm.mp3",
             "dino_option",
             "Pretendard_Bold.json",
             "Pretendard_Regular.json",
@@ -34,7 +36,7 @@ export default class Loader {
             "blob:b48b850c-71e3...",
             "room.glb",
             "room_option",
-        ]
+        ];
 
         // 모델링이 하나씩 로드 될 때마다 실행
         // ( item: 로드중인 타겟, loaded: 로드된 개수, total: 로드 아이템 총 개수 )
@@ -43,7 +45,7 @@ export default class Loader {
             const total = itemList.length;
             const itemEl = document.createElement('li');
             const progressEl = document.createElement('li');
-
+            console.log(item)
             // 로딩된 아이템의 이름, 로드 퍼센트 입력
             const random = Math.floor(Math.abs(Math.random() * 10 - 1));
             const percent = Math.floor(loaded / total * 100);

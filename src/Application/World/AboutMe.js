@@ -13,7 +13,7 @@ export default class AboutMe {
     }
 
     aboutMeLoad() {
-        this.loader.gltfLoader.load('/models/dino.glb', (glb) => {
+        this.loader.gltfLoader.load('/assets/models/dino.glb', (glb) => {
             const model = glb.scene;
             model.scale.set(0.1, 0.1, 0.1);
             model.castShadow = true;
