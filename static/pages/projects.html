@@ -7,32 +7,15 @@
     <link rel="stylesheet" href="../style.css">
     <title>Skills</title>
 </head>
-<style>
-    ::-webkit-scrollbar {
-        width: 14px;
-        background-color: transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-        border: 4px solid transparent;
-        border-radius: 7px;
-        background-clip: padding-box;
-        background-color: hsla(0,0%,59%,.5);
-    }
-    ::-webkit-scrollbar-track {
-        padding: 6px;
-        background-color: transparent;
-        border-radius: 10px;
-    }
-</style>
 <body id="projects-body">
 
     <nav id="navbar" class="navbar">
         <div class="inner">
-            <button href="#projects" data-target="projects">
+            <button id="toProjects" href="#projects" data-target="projects" class="active">
                 Projects
                 <div></div>
             </button>
-            <button href="#learning" data-target="learning">
+            <button id="toLearning" href="#learning" data-target="learning">
                 Learning
                 <div></div>
             </button>
@@ -99,31 +82,23 @@
                         </p>
                     </div>
                     <ul class="bullet-list">
-                        <li>기존에 사용하던 Redux와 다른 타입의 상태 관리에 대한 경험을 위해 상태관리 라이브러리를 ReactQuery, Zustand 조합으로 컨버팅</li>
+<!--                        <li>기존에 사용하던 Redux와 다른 타입의 상태 관리에 대한 경험을 위해 상태관리 라이브러리를 ReactQuery, Zustand 조합으로 컨버팅</li>-->
+<!--                        <li>다소 아쉬웠던 일부 코드 리팩토링</li>-->
+<!--                        <li>서비스 환경에 대한 이해도를 높이기 위해 우분투 리눅스를 통한 서비스 환경구축, 오픈소스 SSL 인증서 적용</li>-->
+<!--                        <li>PM2를 통한 서비스 관리 및 무중단 서비스 이해</li>-->
+
+                        <li>ReactQuery, Zustand 조합으로 컨버팅하여 Redux와 다른 타입의 상태관리 경험</li>
                         <li>다소 아쉬웠던 일부 코드 리팩토링</li>
-                        <li>서비스 환경에 대한 이해도를 높이기 위해 우분투 리눅스를 통한 서비스 환경구축, 오픈소스 SSL 인증서 적용</li>
+                        <li>우분투 리눅스를 통한 서비스 환경구축, 오픈소스 SSL 인증서 적용</li>
                         <li>PM2를 통한 서비스 관리 및 무중단 서비스 이해</li>
                     </ul>
                     <div>
-                        <p class="etc-list-title">Review</p>
-                        <p class="etc-list-content">
-                            ReactQuery와 Zustand의 조합으로 상태를 관리함으로서 기존의 복잡했던<br/>
-                            BoilerPlate의 구조가 개선되어 코드의 가독성이 좋아지고 잦은 통신으로 인한<br/>
-                            과부화에 ReactQuery가 가진 캐싱기능으로 언제든 확장하여 최적화할 수 있는 구조를<br/>
-                            설계할 수 있었습니다. <br/><br/>
-
-                            우분투 리눅스를 처음 접하였을 땐 분명 친숙하지 않아 불편하다고 생각했지만<br/>
-                            학습을 하며 명령어를 통해 서버 환경을 구성해보니 git-bash, 개발툴의 terminal,<br/>
-                            PowerShell과 비슷하여 낯설지않게 느껴졌습니다.<br/><br/>
-
-
-                            Window OS와 다르게 명령어를 통해단순화된 컴퓨터 친화적인 환경이 구성되어 있었고 서버를 운영하기<br/>
-                            위해 리눅스같은 유닉스 기반의 OS 사용하는 이유에 대해서도 이해할 수 있는 계기가<br/>
-                            되었습니다.<br/><br/>
-
-                            또한, 기존 코드를 리팩토링하며 최근에 만든 코드와 비교했을 때 가독성, 코드 재사용<br/>
-                            면에서 많은 부분이 개선 되었다는 것을 느꼈습니다.
-                        </p>
+                        <p class="etc-list-title">성과 및 배운점</p>
+                        <ul class="bullet-list">
+                            <li>condegen과 reactQuery의 시너지로 통신 관련 코드의 자동 생성 수준 향상</li>
+                            <li>reactQuery, Zustand의 조합으로 상태관리 복잡도 감소</li>
+                            <li>리눅스 환경에 서버를 구축하고 직접 운영하며 웹서비스의 전반적인 이해도 향상</li>
+                        </ul>
                     </div>
                     <div>
                         <p class="etc-list-title">Used Stack</p>
@@ -158,30 +133,20 @@
                     <ul class="bullet-list">
                         <li>기존 사용하던 메모 서비스를 벤치하여 발전시키고 AI를 접목시켜 서비스 기획</li>
                         <li>NestJS와 MariaDB를 기반으로 백엔드 설계 및 기능 개발</li>
-                        <li>React를 기반으로 프론트엔드의 메모, 카테고리, 태그에 대한 CRUD 인터페이스 개발</li>
+<!--                        <li>React를 기반으로 프론트엔드의 메모, 카테고리, 태그에 대한 CRUD 인터페이스 개발</li>-->
+                        <li>React기반의 메모, 카테고리, 태그에 대한 CRUD 인터페이스 개발</li>
                         <li>Openai ChatGpt3.5 를 연동하여 채팅형식의 정보 검색과 요약 메모기능 개발</li>
                         <li>
-                            Openapi Generator 의 templates 기능을 통해 axios 통신 타입 파일을 <br/>커스텀하여 생성
+                            Openapi Generator의 templates 기능을 통해 axios 통신 타입 파일을 <br/>커스텀하여 생성
                             <span style="color: rgb(156 163 175); margin-left: 2px;">(생산성 증가)</span>
                         </li>
                     </ul>
                     <div>
-                        <p class="etc-list-title">Review</p>
-                        <p class="etc-list-content">
-                            Chat GPT의 Prompt설정에 따라서 다양하고 많은 기능을 구현할 수 있다는 것을<br/>
-                            학습할 수 있었으며 인공지능 기술에도 관심이 생긴 계기가 되었습니다.<br/><br/>
-
-                            핵심 기능의 서버 아키텍처를 구성하여 의도한 결과를 얻을 수 있도록 설계하는 과정이<br/>
-                            생각보다 복잡하고 어렵다는 것을 느꼈습니다. 하지만 발단부터 절차적인 검증을 통해<br/>
-                            문제를 해결할 수 있었고 이에 대한 이해도를 높일 수 있었습니다.<br/><br/>
-
-                            이러한 과정을 통해 프론트, 서버, 데이터베이스가 맞물려 작동되는 웹 서비스의<br/>
-                            흐름을 심도깊게 이해할 수 있었습니다.<br/><br/>
-
-                            또한, Openapi Generator의 templates을 수정하여 원하는 코드가 자동 생성되도록<br/>
-                            설계하는 과정에서 개발 생산성에 대해 지속적으로 고민하고, 개선하고자 하는 노력의<br/>
-                            필요성을 깨닫게 해주었습니다.
-                        </p>
+                        <p class="etc-list-title">성과 및 배운점</p>
+                        <ul class="bullet-list">
+                            <li>Chat GPT 프롬프트 설정에 따른 다양한 결과의 가능성 학습</li>
+                            <li>templates의 mustache를 수정하여 의도한 결과를 자동화하고 생산성을 향상시킨 경험을 통하여 더 나은 개발환경에 대한 아이디어를 획득</li>
+                        </ul>
                     </div>
                     <div>
                         <p class="etc-list-title">Used Stack</p>
@@ -230,24 +195,37 @@
                         <li>React Slick 라이브러리를 사용하여 컨텐츠 슬라이더 구현</li>
                         <li>
                             Youtube ProgressBar 와 동기화된 Custom ProgressBar를 구현하고 챕터
-                            단위 인터페이스와 재생을 지원하고 챕터의 변화에 따라 슬라이더의 동적인 애니메이션 <br/>구현
+                            단위 인터페이스와 재생을 지원하고 챕터 변화에 따른 슬라이더의 동적 애니메이션 구현
                         </li>
                     </ul>
                     <div>
-                        <p class="etc-list-title">Review</p>
-                        <p class="etc-list-content">
-                            프로젝트 초기에 과한 열정으로 일정 대비 너무 많은 작업량을 맡거나 문제를 혼자서만<br/>
-                            해결하려 하다 팀 일정에 차질을 주어 문제를 겪은적이 있습니다.<br/><br/>
+                        <p class="etc-list-title">성과 및 배운점</p>
+                        <ul class="bullet-list">
+                            <li>서비스의 메인 컨텐츠 영역을 개발하며 UX/UI에 대한 이해도 향상</li>
+                            <li>
+                                유튜브 플레이어를 커스텀하는 기획안에서 저작권 문제를 파악하여 의논하고 기획을<br/>
+                                변경하여 프로젝트 방향성에 크게 기여
+                            </li>
+                            <li>
+                                일정을 실현 가능하게 하기 위한 작업분배의 중요성과 문제 발생 시 상황을 빠르게<br/>
+                                공유하고 지속적인 커뮤니케이션을 통하여 개인의 단점을 보완할 수 있으며 개개인의<br/>
+                                강점이 시너지를 내어 큰 성과를 얻을 수 있다는 것을 알게됨
+                            </li>
+                        </ul>
+<!--                        <p class="etc-list-title">협업 후기</p>-->
+<!--                        <p class="etc-list-content">-->
+<!--                            프로젝트 초기에 과한 열정으로 일정 대비 너무 많은 작업량을 맡거나 문제를 혼자서만<br/>-->
+<!--                            해결하려 하다 팀 일정에 차질을 주어 문제를 겪은적이 있습니다.<br/><br/>-->
 
-                            이때 커뮤니케이션의 중요성과 함께 일을 한다는 의미를 좀 더 깊게 깨닫게 되었고<br/>
-                            적극적인 소통을 통해 작업을 분배하고 실현 가능한 일정을 계획하여 팀 작업 일정을<br/>
-                            앞당겨 문제를 개선한 경험이 있습니다. 이후로 상황과 생각을 공유하고 보완하는<br/>
-                            자세로 임하려 노력하고 있습니다.<br/><br/>
+<!--                            이때 커뮤니케이션의 중요성과 함께 일을 한다는 의미를 좀 더 깊게 깨닫게 되었고<br/>-->
+<!--                            적극적인 소통을 통해 작업을 분배하고 실현 가능한 일정을 계획하여 팀 작업 일정을<br/>-->
+<!--                            앞당겨 문제를 개선한 경험이 있습니다. 이후로 상황과 생각을 공유하고 보완하는<br/>-->
+<!--                            자세로 임하려 노력하고 있습니다.<br/><br/>-->
 
-                            또한, 주요 기획에 해당하는 유튜브 플레이어 커스텀에 대한 저작권 문제의 여지를<br/>
-                            파악하여 검증된 자료를 찾아 공유하고 기술적으로 해결할 수 있는 더 나은 수단들을<br/>
-                            제안하여 프로젝트 방향성에 크게 기여하였습니다.
-                        </p>
+<!--                            또한, 주요 기획에 해당하는 유튜브 플레이어 커스텀에 대한 저작권 문제의 여지를<br/>-->
+<!--                            파악하여 검증된 자료를 찾아 공유하고 기술적으로 해결할 수 있는 더 나은 수단들을<br/>-->
+<!--                            제안하여 프로젝트 방향성에 크게 기여하였습니다.-->
+<!--                        </p>-->
                     </div>
                     <div>
                         <p class="etc-list-title">Collaboration Tools</p>
@@ -316,15 +294,23 @@
                         <li>프론트엔드 기준에서 openapi-generator-cli 를 통해 백엔드의 yaml 양식으로 작성된 api 문서를 읽어 api 통신 타입과 axios 통신 함수 생성 개발</li>
                     </ul>
                     <div>
-                        <p class="etc-list-title">Review</p>
-                        <p class="etc-list-content">
-                            협업을 하게 된다면 openapi-generator-cli와 같은 자동화 시스템을 활용하여<br/>
-                            개발의 생산성을 높이고 타입 불일치로 인한 에러도 미리 방지할 수 있는 개발 환경을<br/>
-                            구성할 수 있도록 개발자 팀원들과 논의해보면 좋을 것 같다고 생각하였습니다.<br/><br/>
+                        <p class="etc-list-title">성과 및 배운점</p>
+                        <ul class="bullet-list">
+                            <li>코드 생성 자동화 환경을 구축하여 생산성 향상과 통신 시 타입 불일치 에러를 방지</li>
+                            <li>
+                                Swagger를 통한 api문서 명세를 학습, 구현하며 프론트엔드, 백엔드 두 포지션<br/>
+                                간에 효율적인 커뮤니케이션에도 도움을 줄 수 있다는 것을 느낌
+                            </li>
+                        </ul>
+<!--                        <p class="etc-list-title">Review</p>-->
+<!--                        <p class="etc-list-content">-->
+<!--                            협업을 하게 된다면 openapi-generator-cli와 같은 자동화 시스템을 활용하여<br/>-->
+<!--                            개발의 생산성을 높이고 타입 불일치로 인한 에러도 미리 방지할 수 있는 개발 환경을<br/>-->
+<!--                            구성할 수 있도록 개발자 팀원들과 논의해보면 좋을 것 같다고 생각하였습니다.<br/><br/>-->
 
-                            또한, 자동화 시스템을 최대한 활용하고 커스텀하여 원하는 자동화 시스템을 직접 구현해<br/>
-                            보는 것도 좋은 경험일 것이라 생각하였고 추 후 직접 적용할 계획을 세웠습니다.<br/>
-                        </p>
+<!--                            또한, 자동화 시스템을 최대한 활용하고 커스텀하여 원하는 자동화 시스템을 직접 구현해<br/>-->
+<!--                            보는 것도 좋은 경험일 것이라 생각하였고 추 후 직접 적용할 계획을 세웠습니다.<br/>-->
+<!--                        </p>-->
                     </div>
                     <div>
                         <p class="etc-list-title">Used Stack</p>
@@ -359,18 +345,29 @@
                         <li>NestJS를 활용한 api 서버 환경 구축</li>
                         <li>MariaDB와 TypeORM을 통한 서비스 데이터 구조 설계 및 관리</li>
                         <li>React를 활용해 회원가입, 로그인 등에 필요한 UI 개발</li>
-                        <li>JWT를 활용하여 권한 인증과 유지를 구현, AccessToken 과 RefreshToken 를 활용하여 토큰 탈취에 대한 보안 위험에 대비</li>
+                        <li>
+                            JWT를 활용하여 권한 인증과 유지를 구현, AccessToken과 RefreshToken을<br/>
+                            활용하여 토큰 탈취에 대한 보안 위험에 대비
+                        </li>
                     </ul>
                     <div>
-                        <p class="etc-list-title">Review</p>
-                        <p class="etc-list-content">
-                            CRUD를 설계하고 서버를 구성하며 REST 통신방식에 대한 이해도를 높일 수 있었고<br/>
-                            JWT의 AccessToken, RefreshToken의 개념을 통해 브라우저가 가진 토큰의 유무로<br/>
-                            계정에 권한을 부여하고 이를 유지할 수 있는 시스템에 대해서 이해할 수 있었습니다.<br/><br/>
+                        <p class="etc-list-title">성과 및 배운점</p>
+                        <ul class="bullet-list">
+                            <li>CRUD를 설계하고 서버를 구성하며 REST 통신방식의 전반적인 이해도 향상</li>
+                            <li>
+                                JWT의 전반적인 개념을 이해하고 통신 시 헤더를 통해서 AccessToken과<br/>
+                                RefreshToken으로 권한을 검증하는 개념을 학습
+                            </li>
+                            <li></li>
+                        </ul>
+<!--                        <p class="etc-list-content">-->
+<!--                            CRUD를 설계하고 서버를 구성하며 REST 통신방식에 대한 이해도를 높일 수 있었고<br/>-->
+<!--                            JWT의 AccessToken, RefreshToken의 개념을 통해 브라우저가 가진 토큰의 유무로<br/>-->
+<!--                            계정에 권한을 부여하고 이를 유지할 수 있는 시스템에 대해서 이해할 수 있었습니다.<br/><br/>-->
 
-                            이러한 개념 학습하고 구현을 함으로서 프론트엔드 설계에 대해서 더 깊은 고민을<br/>
-                            할 수 있게 되었고 점진적으로 서비스 배포까지 완성할 계획을 세웠습니다.
-                        </p>
+<!--                            이러한 개념 학습하고 구현을 함으로서 프론트엔드 설계에 대해서 더 깊은 고민을<br/>-->
+<!--                            할 수 있게 되었고 점진적으로 서비스 배포까지 완성할 계획을 세웠습니다.-->
+<!--                        </p>-->
                     </div>
                     <div>
                         <p class="etc-list-title">Used Stack</p>
@@ -382,163 +379,283 @@
                 </div>
             </div>
         </div>
-
-
         <p class="projects-braces" style="margin-left: 0; margin-top: 4px; padding-bottom: 36px;">
             }
         </p>
     </section>
 
+    <!-- Learning 컨텐츠 -->
     <section id="learning">
         <div class="content-name-wrap">
             <p class="content-name">
                 Learning<span class="projects-braces">{</span>
-            </p>
-            <p class="content-comment">
-                // 약 1년 6개월
             </p>
         </div>
         <p class="content-desc">
             다양한 사이트의 클론 코딩을 통해 레이아웃 및 UI 개발에 대한 숙련도를 높이고 온라인 강좌를 통해 웹 서비스의 기초를 익힌 과정입니다.
         </p>
 
-        <!-- 임시 -->
+        <!-- 노마드코더 강의 코스 -->
         <div class="project-container is-first">
             <div class="project-title-header">
-                <p class="title">임시</p>
+                <p class="title">노마드코더 강의 코스</p>
                 <p class='project-type'>개인</p>
-                <a href="https://zete.zeriong.com/?type=demo&modal=sign-in" target="_blank" class="demo">
-                    데모
-                    <i class="arrow-right"></i>
-                </a>
             </div>
 
             <p class="project-intro-desc">
-                사용성을 극대화 하여 편리한 메모 기능과, AI(Chat GPT) 를 연동하여 검색 결과를 메모에 요약 반영 시킬 수 있는<br/>
-                서비스입니다.
+                개인적으로 진행하던 학습 방식에서 한계를 느껴 시작하게 된 노마드코더 강사님의 기초 강의 학습 목록과 결과물입니다.
             </p>
 
-            <!-- ReactQuery, Zustand 적용, 리팩토링 및 배포 -->
             <div class="project-detail-main">
                 <div class="preview-container">
                     <div class="preview-img-wrap">
-                        <img src="/assets/images/preview/zete.jpg" alt="preview"/>
+                        <img src="/assets/images/preview/nomad.jpg" alt="preview"/>
                     </div>
-                    <p class="dev-part">
-                        Frontend/Backend<br/>
-                        Engineer
-                    </p>
-                    <p class="dev-date-range">2023.03 ~ 2023.09</p>
+                    <p class="dev-date-range">2022.10 ~ 2022.12</p>
                     <div class="dev-period">
-                        6개월
+                        2개월
                     </div>
                 </div>
-                <div class="content-container">
-                    <div>
-                        <div class="content-title-area">
-                            <p class="content-title">
-                                ReactQuery, Zustand 적용, 리팩토링 및 배포
-                            </p>
 
-                            <a href="https://github.com/zeriong/zete-zustand-reactQuery"
-                               target="_blank"
-                               class="github-icon">
-                                <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                <i class="arrow-right"></i>
-                            </a>
+                <div class="nomad-content-container">
+
+                    <!-- NestJS practice -->
+                    <div>
+                        <div class="nomad-content">
+                            <div class="nomad-title">
+                                <p style="font-weight: 700;">
+                                    NestJS로 API 만들기
+                                </p>
+                                <p style="color: rgb(75 85 99);">
+                                    (TypeScript, NestJS)
+                                </p>
+                            </div>
+                            <div class="title-badges">
+                                <a href="https://github.com/zeriong/nest-intro"
+                                   target="_blank"
+                                   class="github-icon">
+                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
+                                    <i class="arrow-right"></i>
+                                </a>
+                            </div>
                         </div>
-                        <p class="dev-range">
-                            2023.08 ~ 2023.09
-                        </p>
+                        <ul class="bullet-list" style="margin-top: 2px;">
+                            <li>모듈형식의 아키텍처를 제공하는 NodeJS기반의 백엔드 프레임워크 학습</li>
+                        </ul>
                     </div>
-                    <ul class="bullet-list">
-                        <li>기존에 사용하던 Redux와 다른 타입의 상태 관리에 대한 경험을 위해 상태관리 라이브러리를 ReactQuery, Zustand 조합으로 컨버팅</li>
-                        <li>다소 아쉬웠던 일부 코드 리팩토링</li>
-                        <li>서비스 환경에 대한 이해도를 높이기 위해 우분투 리눅스를 통한 서비스 환경구축, 오픈소스 SSL 인증서 적용</li>
-                        <li>PM2를 통한 서비스 관리 및 무중단 서비스 이해</li>
-                    </ul>
-                    <div>
-                        <p class="etc-list-title">Review</p>
-                        <p class="etc-list-content">
-                            기존 코드를 리팩토링하며 최근에 만든 코드와 비교했을 때 가독성, 코드 재사용면에서<br/>
-                            많은 부분이 개선 되었다는 것을 느꼈습니다.<br/><br/>
 
-                            또한 서비스 환경을 구성하는 과정에서 SSH를 통해 패키지를 설치하고 필요한 설정을<br/>
-                            UI 없이 적용하면서 UX와 UI의 소중함을 깨닫고 프론트엔드 개발자로서 인터페이스를<br/>
-                            개발한다는 것은 "사용자의 편의"가 핵심이고 절대 망각해선 안되는 요소임을 한번 더<br/>
-                            깨닫는 계기가 되었습니다.<br/><br/>
-
-                            서비스를 원활하게 운영하기 위해서 Node.js런타임과 보편적으로 쓰이는 PM2를 <br/>
-                            접하면서 패키지 없이 서버를 관리하는 것은 생각보다 더 까다롭다는 것을 느꼈고<br/>
-                            PM2같은 패키지를 사용하고 있는 나는 개발하기 좋은 시대에 살고 있다는 생각을<br/>
-                            하게되었습니다.
-                        </p>
-                    </div>
+                    <!-- NextJS practice -->
                     <div>
-                        <p class="etc-list-title">Used Stack</p>
-                        <p class="etc-list-content">
-                            ReactQuery, Zustand, Ubuntu Linux, PM2
-                        </p>
+                        <div class="nomad-content">
+                            <div class="nomad-title">
+                                <p style="font-weight: 700;">
+                                    NextJS 시작하기
+                                </p>
+                                <p style="color: rgb(75 85 99);">
+                                    (NextJS)
+                                </p>
+                            </div>
+                            <div class="title-badges">
+                                <a href="https://github.com/zeriong/nextjs-intro"
+                                   target="_blank"
+                                   class="github-icon">
+                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
+                                    <i class="arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="bullet-list" style="margin-top: 2px;">
+                            <li>SSR와 SEO의 개념을 이해하고 NextJS프레임워크의 작동 방식 학습</li>
+                        </ul>
                     </div>
+
+                    <!-- Zwitter practice -->
+                    <div>
+                        <div class="nomad-content">
+                            <div class="nomad-title">
+                                <p style="font-weight: 700;">
+                                    트위터 클론코딩
+                                </p>
+                                <p style="color: rgb(75 85 99);">
+                                    (React, Firebase)
+                                </p>
+                            </div>
+                            <div class="title-badges">
+                                <a href="https://zeriong.github.io/zwitter/" target="_blank" class="demo">
+                                    데모
+                                    <i class="arrow-right"></i>
+                                </a>
+                                <a href="https://github.com/zeriong/zwitter"
+                                   target="_blank"
+                                   class="github-icon">
+                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
+                                    <i class="arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="bullet-list" style="margin-top: 2px;">
+                            <li>React 심화 학습과 서버리스의 개념, 실시간 업데이트, OAuth2.0 등 핵심 기능 학습</li>
+                        </ul>
+                    </div>
+
+
+                    <!-- Redux practice -->
+                    <div>
+                        <div class="nomad-content">
+                            <div class="nomad-title">
+                                <p style="font-weight: 700;">
+                                    초보자를 위한 리덕스 101
+                                </p>
+                                <p style="color: rgb(75 85 99);">
+                                    (React, Redux, Redux-Toolkit)
+                                </p>
+                            </div>
+                            <div class="title-badges">
+                                <a href="https://github.com/zeriong/vanilla-react-redux"
+                                   target="_blank"
+                                   class="github-icon">
+                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
+                                    <i class="arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="bullet-list" style="margin-top: 2px;">
+                            <li>상태관리에 대한 개념과 Redux의 작동 방식 학습</li>
+                        </ul>
+                    </div>
+
+                    <!-- Hooks practice -->
+                    <div>
+                        <div class="nomad-content">
+                            <div class="nomad-title">
+                                <p style="font-weight: 700;">
+                                    실전형 리액트 Hooks
+                                </p>
+                                <p style="color: rgb(75 85 99);">
+                                    (React Hook)
+                                </p>
+                            </div>
+                            <div class="title-badges">
+                                <a href="https://github.com/zeriong/Hooks"
+                                   target="_blank"
+                                   class="github-icon">
+                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
+                                    <i class="arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="bullet-list" style="margin-top: 2px;">
+                            <li>기본적인 React Hooks에 대한 개념을 이해하고 Custom Hooks를 만들며 학습</li>
+                        </ul>
+                    </div>
+
+                    <!-- React MovieApp practice -->
+                    <div>
+                        <div class="nomad-content">
+                            <div class="nomad-title">
+                                <p style="font-weight: 700;">
+                                    React로 영화 웹 서비스 만들기
+                                </p>
+                                <p style="color: rgb(75 85 99);">
+                                    (React, gh-pages)
+                                </p>
+                            </div>
+                            <div class="title-badges">
+                                <a href="https://zeriong.github.io/movie_app/" target="_blank" class="demo">
+                                    데모
+                                    <i class="arrow-right"></i>
+                                </a>
+                                <a href="https://github.com/zeriong/movie_app"
+                                   target="_blank"
+                                   class="github-icon">
+                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
+                                    <i class="arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="bullet-list" style="margin-top: 2px;">
+                            <li>React의 기본적인 작동 방식과 Github의 gh-pages로 배포를 경험하며 학습</li>
+                        </ul>
+                    </div>
+
+
+                    <!-- VanillaJS PaintApp practice -->
+                    <div>
+                        <div class="nomad-content">
+                            <div class="nomad-title">
+                                <p style="font-weight: 700;">
+                                    바닐라 JS로 그림앱 만들기
+                                </p>
+                                <p style="color: rgb(75 85 99);">
+                                    (Vanilla JS, CSS)
+                                </p>
+                            </div>
+                            <div class="title-badges">
+                                <a href="https://github.com/zeriong/paint-app"
+                                   target="_blank"
+                                   class="github-icon">
+                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
+                                    <i class="arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="bullet-list" style="margin-top: 2px;">
+                            <li>canvas의 기초적인 기능 구현을 통해 Vanilla JS 기초 학습</li>
+                        </ul>
+                    </div>
+
+                    <!-- ChromeApp practice -->
+                    <div>
+                        <div class="nomad-content">
+                            <div class="nomad-title">
+                                <p style="font-weight: 700;">
+                                    바닐라 JS로 크롬 앱 만들기
+                                </p>
+                                <p style="color: rgb(75 85 99);">
+                                    (Vanilla JS)
+                                </p>
+                            </div>
+                            <div class="title-badges">
+                                <a href="https://github.com/zeriong/nest-intro"
+                                   target="_blank"
+                                   class="github-icon">
+                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
+                                    <i class="arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="bullet-list" style="margin-top: 2px;">
+                            <li>if문, Local Storage, Fetch를 통한 API사용법 등 Vanilla JS 기본기 심화 학습</li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
+        </div>
 
-            <!-- AI 메모서비스 기획 및 기능 개발 적용 -->
+        <!-- 웹개발 기초 학습 -->
+        <div class="project-container">
+            <div class="project-title-header">
+                <p class="title">웹개발 기초 학습</p>
+                <p class='project-type'>개인</p>
+            </div>
+
+            <p class="project-intro-desc">
+                개발에 관심을 가지고 시작하였던 기초 학습 과정입니다. 학습 과정에서 복잡한 코드를 통해 시각적인 결과가 만들어지는 개발에 재미를 느꼈고 목표와 진로를 결정하게 된 중요한 계기가 되었습니다.
+            </p>
+
             <div class="project-detail-main">
-                <div class="preview-container"></div>
-                <div class="content-container">
-                    <div>
-                        <div class="content-title-area">
-                            <p class="content-title">
-                                AI 메모서비스 기획 및 기능 개발
-                            </p>
-
-                            <a href="https://github.com/zeriong/zete"
-                               target="_blank"
-                               class="github-icon">
-                                <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                <i class="arrow-right"></i>
-                            </a>
-                        </div>
-                        <p class="dev-range">
-                            2023.03 ~ 2023.08
-                        </p>
+                <div class="preview-container">
+                    <div class="preview-img-wrap">
+                        <img src="/assets/images/preview/practice.jpg" alt="preview"/>
                     </div>
-                    <ul class="bullet-list">
-                        <li>기존 사용하던 메모 서비스를 벤치하여 발전시키고 AI를 접목시켜 서비스 기획</li>
-                        <li>NestJS와 MariaDB를 기반으로 백엔드 설계 및 기능 개발</li>
-                        <li>React를 기반으로 프론트엔드의 메모, 카테고리, 태그에 대한 CRUD 인터페이스 개발</li>
-                        <li>Openai ChatGpt3.5 를 연동하여 채팅형식의 정보 검색과 요약 메모기능 개발</li>
-                        <li>
-                            Openapi Generator 의 templates 기능을 통해 axios 통신 타입 파일을 <br/>커스텀하여 생성
-                            <span style="color: rgb(156 163 175); margin-left: 2px;">(생산성 증가)</span>
-                        </li>
-                    </ul>
-                    <div>
-                        <p class="etc-list-title">Review</p>
-                        <p class="etc-list-content">
-                            Chat GPT의 Prompt설정에 따라서 다양하고 많은 기능을 구현할 수 있다는 것을<br/>
-                            깨달았고 인공지능 기술에도 관심이 생긴 계기가 되었습니다.<br/><br/>
-
-                            본격적인 CRUD 설계를 통해 프론트와 백엔드가 리소스를 어떻게 주고받는지에 대한<br/>
-                            이해도를 높일 수 있었고 Openapi Generator를 통해 통신 타입 파일을 커스텀해본<br/>
-                            경험은 개발 생산성에 대해 지속적으로 고민하고 개선할 필요성을 느끼게 해주었습니다.<br/><br/>
-
-                            프론트엔드와 백엔드를 직접 구성하고 서버 아키텍처를 고민하며, 의도한대로 설계해본<br/>
-                            경험이 웹개발에 대한 전체적인 이해도를 높이는 데에 크게 기여하였습니다.<br/><br/>
-
-                            디자인, 기획, 서버를 단독으로 설계하고 개발하였기 때문에 한 프로젝트를 길게 작업<br/>
-                            하게 되었지만 이러한 경험이 각 분야의 전문가들과 협업하게 되었을 때 분야별 의견에<br/>
-                            공감할 수 있고 긍정적인 커뮤니케이션을 할 수 있는 역량을 다져주었다고 생각했습니다.<br/>
-                        </p>
+                    <p class="dev-date-range">2022.06 ~ 2022.10</p>
+                    <div class="dev-period">
+                        4개월
                     </div>
-                    <div>
-                        <p class="etc-list-title">Used Stack</p>
-                        <p class="etc-list-content">
-                            TypeScript, NestJS, TypeORM, JWT, Swagger, MariaDB,<br/>
-                            React, Redux Toolkit, Openapi Generator, Tailwind CSS
-                        </p>
-                    </div>
+                </div>
+                <div class="practice-container">
+
                 </div>
             </div>
         </div>
@@ -553,9 +670,30 @@
         // 버튼 섹션 연결
         const navbarLinks = document.querySelectorAll('#navbar button');
 
-        navbarLinks.forEach(link => {
+        // 네비게이션 노출 컨트롤
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+        let clicked = false;
+        let scrollTimeout = null;
+
+        // 클릭 이벤트 등록
+        navbarLinks.forEach(link => clickNavSection(link));
+        // 스크롤 이벤트 등록
+        window.addEventListener('scroll', scrollNavSection);
+
+        // navbarLinks elements의 적용할 이벤트 등록 함수
+        function clickNavSection(link) {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
+                if (e.target.id === 'toLearning') {
+                    e.target.classList.add('active');
+                    document.querySelector('#toProjects').classList.remove('active');
+                } else if (e.target.id === 'toProjects') {
+                    e.target.classList.add('active');
+                    document.querySelector('#toLearning').classList.remove('active');
+                }
+                console.log(e.target.id)
+                clicked = true;
                 const targetId = e.target.getAttribute('data-target');
                 const targetElement = document.getElementById(targetId);
                 window.scrollTo({
@@ -563,13 +701,21 @@
                     behavior: 'smooth'
                 });
             });
-        });
+        }
 
-        // 네비게이션 노출 컨트롤
-        let lastScrollTop = 0;
-        const navbar = document.getElementById('navbar');
-
-        window.addEventListener('scroll', () => {
+        // 스크롤 시 nav section 노출 컨트롤 함수
+        function scrollNavSection() {
+            // timeout을 재귀적으로 호출하여 클릭 이동 시 스크롤링 체크
+            if (clicked) {
+                if (scrollTimeout !== null) {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = null;
+                }
+                scrollTimeout = setTimeout(() => {
+                    clicked = false;
+                }, 50);
+                return;
+            }
             // 노출 컨트롤
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             if (scrollTop > lastScrollTop && scrollTop > 100) {
@@ -592,7 +738,7 @@
                     link.classList.remove('active');
                 }
             });
-        });
+        }
     </script>
 </body>
 </html>

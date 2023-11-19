@@ -66,10 +66,9 @@ export default class GsapAnimation {
         // 방명록에서 벗어날 경우
         if (target !== 'guestBook' && this.isInGuestBook) this.isInGuestBook = false;
         // 컨텐츠가 방명록인 경우
-        if (target === 'guestBook') {
-            this.isInGuestBook = true;
-        }
-
+        if (target === 'guestBook') this.isInGuestBook = true;
+        // 카메라 무빙 애니메이션
+        console.log('포지션\n',app.positions.historyPosition)
         gsap.to(app.camera.instance.position, {
             ...currentPosition.cameraPosition, duration: 1, ease: 'power1.inOut',
             onStart: () => {
@@ -94,7 +93,7 @@ export default class GsapAnimation {
             onComplete: () => {
                 // 컨텐츠 nav menu 모바일 대응
                 if (app.sizes.width <= 497) {
-                    this.contentMenuBtns.style.bottom = '10px';
+                    this.contentMenuBtns.style.bottom = '4px';
                 } else {
                     this.contentMenuBtns.style.bottom = '30px';
                 }
@@ -207,7 +206,7 @@ export default class GsapAnimation {
         // start 시 aboutMe으로 설정
         this.currentContent = 'aboutMe';
         // 첫 시작 오디오 재생 todo: 배포시 주석 해제
-        setTimeout(() => app.audio.sound.play(),100);
+        // setTimeout(() => app.audio.sound.play(),100);
         // 크게 도는 애니메이션
         gsap.to(app.camera.instance.position, {
             duration: 2, ease: 'power1.inOut',

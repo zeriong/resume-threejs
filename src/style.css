@@ -748,13 +748,67 @@ ul {
 #projects-body .project-container .project-detail-main .content-container .etc-list-title {
   color: rgb(55, 65, 81);
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   padding-bottom: 4px;
 }
 #projects-body .project-container .project-detail-main .content-container .etc-list-content {
   color: rgb(55, 65, 81);
   margin-top: 4px;
   margin-bottom: 10px;
+}
+#projects-body .project-container .project-detail-main .nomad-content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content {
+  display: flex;
+  align-items: start;
+  gap: 4px;
+}
+#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .nomad-title {
+  display: flex;
+  align-items: start;
+  gap: 4px;
+}
+#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges {
+  position: relative;
+  top: 0;
+  display: flex;
+  align-items: center;
+  padding-top: 2px;
+  gap: 4px;
+}
+#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges .github-icon {
+  display: flex;
+  align-items: center;
+  min-width: 36px;
+  height: 20px;
+  font-size: 12px;
+  color: #fff;
+  background-color: rgba(75, 85, 99, 0.9);
+  border-radius: 100px;
+  padding-left: 4px;
+  padding-right: 6px;
+}
+#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges .github-icon > img {
+  width: 15px;
+}
+#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges .github-icon > i {
+  margin-left: 2px;
+}
+#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges .demo {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: rgb(59, 130, 246);
+  border-radius: 100px;
+  padding: 0 8px;
+  height: 20px;
+}
+#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges .demo i {
+  margin-left: 2px;
 }
 
 #history-body {
