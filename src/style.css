@@ -756,22 +756,22 @@ ul {
   margin-top: 4px;
   margin-bottom: 10px;
 }
-#projects-body .project-container .project-detail-main .nomad-content-container {
+#projects-body .project-container .project-detail-main .learning-content-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content {
+#projects-body .project-container .project-detail-main .learning-content-container .nomad-content {
   display: flex;
   align-items: start;
   gap: 4px;
 }
-#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .nomad-title {
+#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .nomad-title {
   display: flex;
   align-items: start;
   gap: 4px;
 }
-#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges {
+#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges {
   position: relative;
   top: 0;
   display: flex;
@@ -779,7 +779,7 @@ ul {
   padding-top: 2px;
   gap: 4px;
 }
-#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges .github-icon {
+#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .github-icon {
   display: flex;
   align-items: center;
   min-width: 36px;
@@ -791,13 +791,13 @@ ul {
   padding-left: 4px;
   padding-right: 6px;
 }
-#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges .github-icon > img {
+#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .github-icon > img {
   width: 15px;
 }
-#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges .github-icon > i {
+#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .github-icon > i {
   margin-left: 2px;
 }
-#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges .demo {
+#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .demo {
   display: flex;
   align-items: center;
   font-size: 12px;
@@ -807,8 +807,13 @@ ul {
   padding: 0 8px;
   height: 20px;
 }
-#projects-body .project-container .project-detail-main .nomad-content-container .nomad-content .title-badges .demo i {
+#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .demo i {
   margin-left: 2px;
+}
+#projects-body .project-container .project-detail-main .practice-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 #history-body {

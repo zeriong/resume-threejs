@@ -821,7 +821,7 @@ ul {
         }
       }
 
-      .nomad-content-container {
+      .learning-content-container {
         display: flex;
         flex-direction: column;
         gap: 16px;
@@ -879,6 +879,11 @@ ul {
             }
           }
         }
+      }
+      .practice-container{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
       }
     }
   }
