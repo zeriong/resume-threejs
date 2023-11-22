@@ -883,12 +883,13 @@ ul {
         .practice-container {
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: 24px;
 
           .practice-title {
               display: flex;
               align-items: center;
               gap: 8px;
+            margin-bottom: 8px;
 
               .practice-text {
                 font-weight: 700;
@@ -926,6 +927,7 @@ ul {
             .desc-title {
               color: $gray-700;
               font-weight: 700;
+              margin-bottom: 4px;
             }
             .desc-content {
               color: $gray-600;

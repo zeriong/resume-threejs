@@ -813,12 +813,13 @@ ul {
 #projects-body .project-container .project-detail-main .practice-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 #projects-body .project-container .project-detail-main .practice-container .practice-title {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 8px;
 }
 #projects-body .project-container .project-detail-main .practice-container .practice-title .practice-text {
   font-weight: 700;
@@ -855,6 +856,7 @@ ul {
 #projects-body .project-container .project-detail-main .practice-container .desc-container .desc-title {
   color: rgb(55, 65, 81);
   font-weight: 700;
+  margin-bottom: 4px;
 }
 #projects-body .project-container .project-detail-main .practice-container .desc-container .desc-content {
   color: rgb(75, 85, 99);
