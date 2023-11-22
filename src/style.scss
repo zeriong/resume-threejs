@@ -880,11 +880,60 @@ ul {
           }
         }
       }
-      .practice-container{
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
+        .practice-container {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+
+          .practice-title {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+
+              .practice-text {
+                font-weight: 700;
+                font-size: 18px;
+              }
+              .github-icon {
+                display: flex;
+                align-items: center;
+                min-width: 28px;
+                height: 20px;
+                color: white;
+                background-color: rgba(75, 85, 99, 0.9);
+                border-radius: 100px;
+                padding-left: 6px;
+                padding-right: 8px;
+                & > i {
+                  margin-left: 4px;
+                }
+                & > img {
+                  width: 14px;
+                }
+              }
+          }
+
+          .practice-desc {
+            color: $gray-600;
+          }
+          .desc-container {
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid rgba(209, 213, 219, 0.9);
+            padding-left: 18px;
+            margin-top: 18px;
+            gap: 12px;
+            .desc-title {
+              color: $gray-700;
+              font-weight: 700;
+            }
+            .desc-content {
+              color: $gray-600;
+            }
+          }
+
+        }
+
     }
   }
 }
