@@ -73,6 +73,22 @@ ul {
 .jetbrain-font {
   font-family: 'JetBrains Mono', monospace;
 }
+.github-icon {
+  display: flex;
+  align-items: center;
+  min-width: 40px;
+  height: 24px;
+  font-size: 14px;
+  color: #fff;
+  background-color: rgba(75, 85, 99, 0.9);
+  border-radius: 100px;
+  padding-left: 6px;
+  padding-right: 8px;
+  & > img {
+    width: 17px;
+    margin-right: 4px;
+  }
+}
 
 // 로딩화면
 #loading {
@@ -788,22 +804,6 @@ ul {
             color: $gray-700;
             font-weight: 600;
           }
-          .github-icon {
-            display: flex;
-            align-items: center;
-            min-width: 40px;
-            height: 24px;
-            font-size: 14px;
-            color: #fff;
-            background-color: rgba(75, 85, 99, 0.9);
-            border-radius: 100px;
-            padding-left: 6px;
-            padding-right: 8px;
-            & > img {
-              width: 17px;
-              margin-right: 4px;
-            }
-          }
         }
         .dev-range {
           color: $gray-600;
@@ -846,21 +846,16 @@ ul {
             gap: 4px;
 
             .github-icon {
-              display: flex;
-              align-items: center;
               min-width: 36px;
               height: 20px;
               font-size: 12px;
-              color: #fff;
-              background-color: rgba(75, 85, 99, 0.9);
-              border-radius: 100px;
               padding-left: 4px;
               padding-right: 6px;
               & > img {
                 width: 15px;
               }
               & > i {
-                margin-left: 2px;
+                margin-left: 0;
               }
             }
 
@@ -896,17 +891,12 @@ ul {
                 font-size: 18px;
               }
               .github-icon {
-                display: flex;
-                align-items: center;
                 min-width: 28px;
                 height: 20px;
-                color: white;
-                background-color: rgba(75, 85, 99, 0.9);
-                border-radius: 100px;
                 padding-left: 6px;
                 padding-right: 8px;
                 & > i {
-                  margin-left: 4px;
+                  margin-left: 0;
                 }
                 & > img {
                   width: 14px;
