@@ -1,3 +1,3 @@
-import Application from './Application/Application';
+import Application from './app/Application';
 
 const App = Application.getInstance();

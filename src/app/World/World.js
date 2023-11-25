@@ -1,4 +1,4 @@
-import AboutMe from './AboutMe';
+import Doll from './Doll';
 import Room from './Room';
 import Fonts from './Fonts';
 import Environment from './Environment';
@@ -12,7 +12,7 @@ export default class World {
         this.skillsPosition = this.room.skillsPosition;
         this.posterPosition = this.room.posterPosition;
 
-        this.aboutMe = new AboutMe();
+        this.aboutMe = new Doll();
         this.aboutMePosition = this.aboutMe.position;
 
         this.fonts = new Fonts();

@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import Application from '../Application';
 
-export default class AboutMe {
+export default class Doll {
     constructor() {
         const app = Application.getInstance();
         this.intersectsMeshes = app.intersectsMeshes; // raycaster 감지 배열

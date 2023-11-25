@@ -9,7 +9,7 @@ import Lights from './World/Lights';
 import GsapAnimation from './Core/GsapAnimation';
 import Positions from './Utills/Positions';
 import {GuestBook} from './World/GuestBook';
-import Audio from './Audio/Audio';
+import Audio from './Core/Audio';
 
 export default class Application {
 
