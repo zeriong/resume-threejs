@@ -131,7 +131,7 @@ export default class Application {
 
             // 원하는 컨텐츠로 변경
             this.htmlPosition = this.positions.getContentPositions();
-            this.content = this.htmlPosition.find(val => val.current === 'projects');
+            this.content = this.htmlPosition.find(val => val.current === 'roadMap');
             this.camera.instance.position.x = this.content.cameraPosition.x;
             this.camera.instance.position.y = this.content.cameraPosition.y;
             this.camera.instance.position.z = this.content.cameraPosition.z;

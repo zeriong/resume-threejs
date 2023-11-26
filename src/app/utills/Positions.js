@@ -9,7 +9,7 @@ export default class Positions {
             aboutMe: { x: 1, y: 1, z: 0.5 },
             projects: { x: 1.682, y: 1.6, z: 0.223 },
             skills: { x: 1.918, y: 2.451, z: 0.103 },
-            history: { x: 1.226, y: 2.451, z: 0.103 },
+            roadMap: { x: 1.226, y: 2.451, z: 0.103 },
             guestBook: { x: 0.5, y: 2, z: 2.194 },
             poster: { x: -0.138, y: 2.312, z: 0.13 },
         };
@@ -17,7 +17,7 @@ export default class Positions {
         this.fixCameraPosition = this.getFixCameraPosition();
         this.fixMonitorPosition = this.getFixMonitorCamPosition();
         this.fixSkillsPosition = this.getFixSkillsPosition();
-        this.fixHistoryPosition = this.getFixHistoryCamPosition();
+        this.fixRoadMapPosition = this.getFixRoadMapCamPosition();
         this.fixGuestBookPosition = this.getFixGuestBookPosition();
     }
 
@@ -70,8 +70,8 @@ export default class Positions {
         return 1.3
     }
 
-    // 브라우저 크기에 따른 history 컨텐츠 포지션 보정
-    getFixHistoryCamPosition() {
+    // 브라우저 크기에 따른 roadMap 컨텐츠 포지션 보정
+    getFixRoadMapCamPosition() {
         if (this.sizes.width <= 740) return 3;
         return 2.5
     }
@@ -113,7 +113,7 @@ export default class Positions {
 
             // skills
             {
-                current: 'skills', next: 'history', prev: 'projects',
+                current: 'skills', next: 'roadMap', prev: 'projects',
                 cameraPosition: {
                     x: (positions.skills.x), y: (positions.skills.y), z: (positions.skills.z + 1.6 + this.fixSkillsPosition)
                 },
@@ -122,20 +122,20 @@ export default class Positions {
                 }
             },
 
-            // history
+            // roadMap
             {
-                current: 'history', next: 'guestBook', prev: 'skills',
+                current: 'roadMap', next: 'guestBook', prev: 'skills',
                 cameraPosition: {
-                    x: (positions.history.x), y: (positions.history.y), z: (positions.history.z + this.fixHistoryPosition)
+                    x: (positions.roadMap.x), y: (positions.roadMap.y), z: (positions.roadMap.z + this.fixRoadMapPosition)
                 },
                 controlsTarget: {
-                    x: (positions.history.x), y: (positions.history.y), z: (positions.history.z)
+                    x: (positions.roadMap.x), y: (positions.roadMap.y), z: (positions.roadMap.z)
                 }
             },
 
             // guestBook
             {
-                current: 'guestBook', next: 'aboutMe', prev: 'history',
+                current: 'guestBook', next: 'aboutMe', prev: 'roadMap',
                 cameraPosition: {
                     x: (positions.guestBook.x - this.fixGuestBookPosition), y: (positions.guestBook.y), z: (positions.guestBook.z)
                 },

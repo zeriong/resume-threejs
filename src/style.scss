@@ -930,117 +930,56 @@ ul {
   }
 }
 
-// history
-#history-body {
+// 로드 맵
+#roadmap {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  //background-color: white;
   background-color: $content-bg;
-  padding: 30px;
   width: 100%;
   height: 100%;
+  padding: 24px 28px;
+  overflow: hidden;
   box-sizing: border-box;
-
-  .history-title {
-    color: $gray-800;
+  header {
     font-size: 32px;
     font-weight: 800;
+    line-height: 1;
+    border-bottom: 1px solid $gray-400;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    color: $gray-800;
   }
-
-  .history-container {
+  main {
     display: flex;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    border-left: 1.5px solid $gray-400;
-    align-items: center;
-    padding: 0 20px 0 30px;
-    margin: 20px 0 0 10px;
-
-
-      .content-list {
-        width: 100%;
-        display: grid;
-        gap: 20px;
-
+    flex-direction: column;
+    row-gap: 14px;
+    .plan-group {
+      .plan-title {
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 8px;
+        color: $gray-700;
+      }
+      ul {
+        margin-top: 4px;
         li {
-          position: relative;
-
-          .circle {
-            position: absolute;
-            top: 11px;
-            left: -33px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            //background-color: $blue-500;
-            background-color: $gray-700;
-            border-radius: 100%;
-            width: 6px;
-            height: 6px;
-            z-index: 2;
-
-            &:before {
-              position: absolute;
-              z-index: 1;
-              content:'';
-              width: 12px;
-              height: 12px;
-              //background-color: $blue-500;
-              background-color: $gray-700;
-              opacity: 0.2;
-              border-radius: 100%;
-            }
-          }
-
-          .title-year {
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 12px;
-            //color: $blue-500;
-            color: $gray-700;
-            border-bottom: 1px solid $gray-400;
-            padding-bottom: 4px;
-          }
-
-          .list-item {
-            display: grid;
-            gap: 12px;
-
-            .list-area {
-              display: flex;
-
-              .list-year {
-                font-weight: 600;
-                font-size: 16px;
-                color: $gray-700;
-                margin-right: 10px;
-              }
-              .contents {
-                display: grid;
-                gap: 6px;
-              }
-              .content {
-                position: relative;
-                padding-left: 14px;
-                font-weight: 400;
-                font-size: 14px;
-
-                &:before {
-                  position: absolute;
-                  left: 0;
-                  display: inline-block;
-                  content: "•";
-                  color: $gray-500;
-                }
-
-              }
-            }
-          }
-
+          line-height: 1.4;
+          margin-top: 4px;
         }
       }
+      .plan-items {
+        padding-left: 22px;
+        .sub-title {
+          color: $gray-700;
+          font-weight: 600;
+        }
+      }
+      .plan-detiles {
+        list-style: disc;
+        font-size: 15px;
+        padding-left: 36px;
+      }
+    }
   }
 }
 
@@ -1221,25 +1160,3 @@ ul {
     background-color: white;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
