@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import Sizes from './utills/Sizes';
+import WindowSizes from './utills/WindowSizes';
 import Camera from './core/Camera';
 import Renderer from './core/Renderer';
 import World from './world/World';
@@ -30,7 +30,7 @@ export default class Application {
 
         // Setup
         this.intersectsMeshes = [];
-        this.sizes = new Sizes();
+        this.sizes = new WindowSizes();
         this.scene = new THREE.Scene();
         this.cssScene = new THREE.Scene();
         this.camera = new Camera();
