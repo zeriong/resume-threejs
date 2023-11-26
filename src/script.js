@@ -1,3 +1,3 @@
 import Application from './app/Application';
 
-const App = Application.getInstance();
+const App = Application.getInstance().init();
