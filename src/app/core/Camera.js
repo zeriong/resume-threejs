@@ -10,11 +10,11 @@ export default class Camera {
         this.renderer = app.renderer;
 
         this.setCameraPosition();
-        this.setInstance();
+        this.init();
     }
 
     // 카메라 생성
-    setInstance() {
+    init() {
         this.instance = new THREE.PerspectiveCamera(24, this.sizes.width / this.sizes.height, 0.1, 1000);
         this.instance.position.set(...this.cameraPosition);
 
