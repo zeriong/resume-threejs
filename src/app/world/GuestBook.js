@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 import Application from '../Application';
 import {Mesh} from 'three';
-import {db} from '../common/Firebase';
+import {db} from '../common/firebase';
 import {collection, query, orderBy, limit, getDocs, addDoc, startAfter, endBefore, limitToLast} from "firebase/firestore";
 
-export class GuestBook {
+export default class GuestBook {
     constructor() {
         this.app = Application.getInstance();
 
@@ -29,27 +29,27 @@ export class GuestBook {
         document.querySelector('#guestBookBtn').addEventListener('click', (e) => {
             e.stopPropagation();
             const app = Application.getInstance();
-            const gsap = app.gsap;
+            const contentsController = app.contentsController;
             // 카메라 애니메이션중인 경우 캔슬
-            if (gsap.isMovingCam) return;
+            if (contentsController.isMovingCam) return;
             // 방명록 애니메이션 실행
             if (!this.isShowModal) {
                 // 이미 방명록컨텐츠인 경우 모달만 띄움(Gsap 실행 x)
-                if (gsap.isInGuestBook) return this.controlReviewModal('on', 10);
+                if (contentsController.isInGuestBook) return this.controlReviewModal('on', 10);
 
                 // 현재 컨텐츠가 aboutMe인 경우 대화창 사라진 후 이동
-                if (gsap.currentContent === 'aboutMe') {
+                if (contentsController.currentContent?.name === 'aboutMe') {
                     this.isMovingCam = true;
                     // 말풍선 사라지는 애니메이션 끝나고 이동
-                    gsap.disappearDialog('guestBook', false);
+                    contentsController.hideDialog('guestBook', false);
                     // 말풍선 사라지는 애니메이션 끝난 후 방명록 작성 모달 띄움
                     setTimeout(() => this.controlReviewModal('on'), 1350);
                 } else {
-                    gsap.toContent('guestBook');
+                    contentsController.toContent('guestBook');
                     // 카메라 애니메이션 끝난 후 방명록 작성 모달 띄움
                     setTimeout(() => this.controlReviewModal('on'), 1000);
                 }
-                gsap.isInGuestBook = true;
+                contentsController.isInGuestBook = true;
                 this.isShowModal = true;
             }
         });
@@ -57,7 +57,6 @@ export class GuestBook {
         this.guestBook.addEventListener('click', e => e.stopPropagation());
         this.guestBook.addEventListener('submit', e => {
             e.preventDefault();
-            // todo: 글쓰기 성공시 창내리고 리스트 업데이트 + 초기화면 돌리기  // 실패 시 실패 팝업 위에서 아래로
         });
         // 리뷰모달 취소
         window.addEventListener('click', (e) => {
@@ -83,6 +82,9 @@ export class GuestBook {
     // 방명록 세팅 매서드
     setGuestReviews() {
         (async () => {
+            const app = Application.getInstance()
+            const raycaster = app.raycaster;
+
             // get data
             await this.getFirestoreData();
             // fetch success
@@ -116,8 +118,8 @@ export class GuestBook {
             leftArrowMesh.name = 'prevReview';
 
             // 버튼들 raycaster, scene추가
-            this.app.intersectsMeshes.push(leftArrowMesh, rightArrowMesh);
-            this.app.scene.add(rightArrowMesh, leftArrowMesh);
+            raycaster.targetMeshes.push(leftArrowMesh, rightArrowMesh);
+            app.scene.add(rightArrowMesh, leftArrowMesh);
 
             // 방명록 raycaster 감지 영역 추가
             const areaGeometry = new THREE.PlaneGeometry(0.6,1,1,1);
@@ -126,8 +128,9 @@ export class GuestBook {
             areaMesh.position.set(2.8955, 2, 2.2);
             areaMesh.rotation.y = THREE.MathUtils.degToRad(-90);
             areaMesh.name = 'guestBook';
-            this.app.intersectsMeshes.push(areaMesh);
-            this.app.scene.add(areaMesh);
+
+            raycaster.targetMeshes.push(areaMesh);
+            app.scene.add(areaMesh);
 
             // 방명록 첫 렌더링 기준으로 painting
             this.paintGuestReview(true);

@@ -8,8 +8,8 @@ export default class Fonts {
     }
 
     init() {
-        const app = Application.getInstance()
-        const raycaster = app.raycaster
+        const app = Application.getInstance();
+        const raycaster = app.raycaster;
         const loader = app.loader;
 
         const authorGroup = new THREE.Group();  // zeriong, engineer 판넬 그룹

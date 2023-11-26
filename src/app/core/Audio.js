@@ -7,7 +7,7 @@ export default class Audio {
 
         // 오디오 리스너 생성
         const listner = new THREE.AudioListener();
-        app.camera.instance.add(this.listner);
+        app.camera.instance.add(listner);
 
         // 오디오 전역 생성
         this.sound = new THREE.Audio(listner);

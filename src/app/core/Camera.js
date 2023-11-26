@@ -5,7 +5,7 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls';
 export default class Camera {
     constructor() {
         const app = Application.getInstance();
-        this.sizes = app.sizes;
+        this.windowSizes = app.windowSizes;
         this.scene = app.scene;
         this.renderer = app.renderer;
 
@@ -15,7 +15,7 @@ export default class Camera {
 
     // 카메라 생성
     init() {
-        this.instance = new THREE.PerspectiveCamera(24, this.sizes.width / this.sizes.height, 0.1, 1000);
+        this.instance = new THREE.PerspectiveCamera(24, this.windowSizes.width / this.windowSizes.height, 0.1, 1000);
         this.instance.position.set(...this.cameraPosition);
 
         this.scene.add(this.instance);
@@ -23,20 +23,20 @@ export default class Camera {
 
     // 카메라 리사이즈 처리
     resize() {
-        this.instance.aspect = this.sizes.width / this.sizes.height;
+        this.instance.aspect = this.windowSizes.width / this.windowSizes.height;
         this.instance.updateProjectionMatrix();
     }
 
     // set 카메라 포지션
     setCameraPosition() {
         const fixCamPosition = () => {
-            if (this.sizes.width >= 1400) return 1;
-            return (1400 - this.sizes.width) * (this.sizes.width <= 420 ? 0.0003 : 0.0007) + 1;
+            if (this.windowSizes.width >= 1400) return 1;
+            return (1400 - this.windowSizes.width) * (this.windowSizes.width <= 420 ? 0.0003 : 0.0007) + 1;
         }
         this.cameraPosition = [
-            (this.sizes.width <= 420) ? (-2.96 * fixCamPosition()) : (-24 * fixCamPosition()),
-            (this.sizes.width <= 420) ? (10.63 * fixCamPosition()) : (14.4 * fixCamPosition()),
-            (this.sizes.width <= 420) ? (30.98 * fixCamPosition()) : (14 * fixCamPosition()),
+            (this.windowSizes.width <= 420) ? (-2.96 * fixCamPosition()) : (-24 * fixCamPosition()),
+            (this.windowSizes.width <= 420) ? (10.63 * fixCamPosition()) : (14.4 * fixCamPosition()),
+            (this.windowSizes.width <= 420) ? (30.98 * fixCamPosition()) : (14 * fixCamPosition()),
         ]
     }
 
@@ -48,7 +48,7 @@ export default class Camera {
         this.orbitControls = new OrbitControls(this.instance, this.renderer.instance.domElement);
         this.orbitControls.enablePan = false;
         this.orbitControls.enableDamping = true; // 카메라 컨트롤 시 smooth 적용 (draw 함수에 controls.update() 를 넣어야 함)
-        this.orbitControls.maxDistance = 100; // 멀어지는 최대거리를 설정
+        this.orbitControls.maxDistance = 50; // 멀어지는 최대거리를 설정
         this.orbitControls.minDistance = 5; // 가까워지는 최소거리 설정
         this.orbitControls.mouseButtons.RIGHT = null; // 마우스 오른쪽 드래그로 중심 축 변경 잠금
         this.orbitControls.maxPolarAngle = THREE.MathUtils.degToRad(80); // 바닥 아래를 볼 수 없도록 제한
