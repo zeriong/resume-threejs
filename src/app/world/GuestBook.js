@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import Application from '../Application';
 import {Mesh} from 'three';
-import {db} from '../Utills/Firebase';
+import {db} from '../common/Firebase';
 import {collection, query, orderBy, limit, getDocs, addDoc, startAfter, endBefore, limitToLast} from "firebase/firestore";
 
 export class GuestBook {

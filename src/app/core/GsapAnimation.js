@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 import Application from '../Application';
 import * as THREE from 'three';
-import {dialogText} from '../Utills/Constants';
+import {dialogText} from '../common/Constants';
 
 export default class GsapAnimation {
     constructor() {

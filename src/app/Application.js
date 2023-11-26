@@ -1,15 +1,15 @@
 import * as THREE from 'three';
-import Sizes from './Utills/Sizes';
-import Camera from './Core/Camera';
-import Renderer from './Core/Renderer';
-import World from './World/World';
-import Loader from './Core/Loader';
-import Raycaster from './Core/Raycaster';
-import Lights from './World/Lights';
-import GsapAnimation from './Core/GsapAnimation';
-import Positions from './Utills/Positions';
-import {GuestBook} from './World/GuestBook';
-import Audio from './Core/Audio';
+import Sizes from './utills/Sizes';
+import Camera from './core/Camera';
+import Renderer from './core/Renderer';
+import World from './world/World';
+import Loader from './core/Loader';
+import Raycaster from './core/Raycaster';
+import Lights from './world/Lights';
+import GsapAnimation from './core/GsapAnimation';
+import Positions from './utills/Positions';
+import {GuestBook} from './world/GuestBook';
+import Audio from './core/Audio';
 
 export default class Application {
 

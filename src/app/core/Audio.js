@@ -4,7 +4,7 @@ import Application from '../Application';
 export default class Audio {
     constructor() {
         this.app = Application.getInstance();
-        this.listner = new THREE.AudioListener(); // 오디오 리스터 생성
+        this.listner = new THREE.AudioListener(); // 오디오 리스너 생성
         this.app.camera.instance.add(this.listner); // 카메라에 오디오 추가
         this.sound = new THREE.Audio(this.listner); // 오디오 전역 생성
 

@@ -14,7 +14,7 @@ export default class Room {
         this.cssScene = app.cssScene;
 
         this.projectsPosition = new THREE.Vector3();
-        this.historyPosition = new THREE.Vector3();
+        this.roadMapPosition = new THREE.Vector3();
         this.skillsPosition = new THREE.Vector3();
         this.posterPosition = new THREE.Vector3();
 
@@ -108,30 +108,30 @@ export default class Room {
                         child.name = 'poster';
                     }
 
-                    // "history" 액자
+                    // "roadMap" 액자
                     if (child.name === 'Plane218_1') {
-                        child.getWorldPosition(this.historyPosition);
+                        child.getWorldPosition(this.roadMapPosition);
 
-                        const setPosition = [this.historyPosition.x, this.historyPosition.y, this.historyPosition.z + 0.02];
+                        const setPosition = [this.roadMapPosition.x, this.roadMapPosition.y, this.roadMapPosition.z + 0.02];
 
                         // htmls 생성
-                        const historyEl = document.createElement('iframe');
-                        historyEl.src = './pages/history.html'
-                        historyEl.style.width = this.contentSizes.history.width + 'px';
-                        historyEl.style.height = this.contentSizes.history.height + 'px';
-                        historyEl.style.overflow = 'scroll';
-                        historyEl.style.boxSizing = 'border-box';
-                        historyEl.style.opacity = '1';
+                        const roadMapEl = document.createElement('iframe');
+                        roadMapEl.src = './pages/roadMap.html'
+                        roadMapEl.style.width = this.contentSizes.roadMap.width + 'px';
+                        roadMapEl.style.height = this.contentSizes.roadMap.height + 'px';
+                        roadMapEl.style.overflow = 'scroll';
+                        roadMapEl.style.boxSizing = 'border-box';
+                        roadMapEl.style.opacity = '1';
 
                         // CSS3DObject 생성
-                        const cssObj = new CSS3DObject(historyEl);
-                        cssObj.name = 'history';
+                        const cssObj = new CSS3DObject(roadMapEl);
+                        cssObj.name = 'roadMap';
                         cssObj.position.set(...setPosition);
                         cssObj.scale.set(...this.initScale);
                         this.cssScene.add(cssObj);
 
                         // CSS3DObject를 표현하기 위한 Mesh
-                        const geometry = new THREE.PlaneGeometry(this.contentSizes.history.width, this.contentSizes.history.height);
+                        const geometry = new THREE.PlaneGeometry(this.contentSizes.roadMap.width, this.contentSizes.roadMap.height);
                         const material = new THREE.MeshLambertMaterial();
                         material.side = THREE.DoubleSide;
                         material.opacity = 0;
@@ -142,10 +142,10 @@ export default class Room {
                         const mesh = new THREE.Mesh(geometry, material);
                         mesh.position.set(...setPosition);
                         mesh.scale.set(...this.initScale);
-                        mesh.name = 'history';
+                        mesh.name = 'roadMap';
                         this.scene.add(mesh);
 
-                        child.name = 'history';
+                        child.name = 'roadMap';
                     }
 
                     // "Skills" 액자
