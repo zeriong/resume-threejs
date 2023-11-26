@@ -53,14 +53,14 @@ export default class Room {
                     // 모니터 스크린
                     if (child.name === 'polySurface575') {
                         // iframe 생성
-                        const iframe = _this.createWebviewIframe('./pages/projects.html', MODEL_ROOM_OBJECT_SIZES.MONITOR)
+                        const iframe = _this.createWebviewIframe('./pages/projects.html', MODEL_ROOM_OBJECT_SIZES.MONITOR);
 
                         // CSS3DObject 생성
-                        const cssObj = _this.createCSS3DObject('monitor', iframe, MODEL_ROOM_OBJECT_POSITIONS.MONITOR)
+                        const cssObj = _this.createCSS3DObject('monitor', iframe, MODEL_ROOM_OBJECT_POSITIONS.MONITOR);
                         app.cssScene.add(cssObj);
 
                         // CSS3DObject를 표현하기 위한 Mesh
-                        const mesh = _this.createWebviewMesh('monitor', MODEL_ROOM_OBJECT_SIZES.MONITOR, MODEL_ROOM_OBJECT_POSITIONS.MONITOR )
+                        const mesh = _this.createWebviewMesh('monitor', MODEL_ROOM_OBJECT_SIZES.MONITOR, MODEL_ROOM_OBJECT_POSITIONS.MONITOR );
                         app.scene.add(mesh);
 
                         child.name = 'monitor';
@@ -85,7 +85,7 @@ export default class Room {
 
                         child.name = 'poster';
 
-                        raycaster.targetMeshes.push(child)
+                        raycaster.targetMeshes.push(child);
                     }
 
                     // 세로 액자
