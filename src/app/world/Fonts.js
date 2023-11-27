@@ -45,7 +45,6 @@ export default class Fonts {
                     const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
                     const mesh = new THREE.Mesh(geometry, material);
                     mesh.position.y = val.y;
-                    mesh.castShadow = true;
 
                     // 메뉴가 아닌 mesh는 그룹추가 후 foreach를 빠져나옴 (추가할 이벤트 따로 x)
                     if (val.objName === 'name') return authorGroup.add(mesh);
@@ -68,7 +67,6 @@ export default class Fonts {
                 const mesh = new THREE.Mesh(geometry, material);
 
                 mesh.position.y = 0.2;
-                mesh.castShadow = true;
                 authorGroup.add(mesh);
             });
         });
