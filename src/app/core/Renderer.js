@@ -24,7 +24,8 @@ export default class Renderer {
             alpha: true,
             //powerPreference: 'high-performance',
         });
-        this.instance.setSize(this.windowSizes.width, this.windowSizes.height);
+        this.instance.setSize(this.windowSizes.width, this.windowSizes.height)
+        this.instance.setPixelRatio(this.windowSizes.pixelRatio);
         //this.instance.shadowMap.enabled = true; // 그림자 설정
         //this.instance.shadowMap.type = THREE.VSMShadowMap; // 그림자 맵 타입 설정
         //this.instance.toneMapping = THREE.ACESFilmicToneMapping
@@ -42,7 +43,7 @@ export default class Renderer {
 
     resize() {
         this.instance.setSize(this.windowSizes.width, this.windowSizes.height);
-        this.instance.setPixelRatio(Math.min(Number(window.devicePixelRatio), 2));
+        this.instance.setPixelRatio(this.windowSizes.pixelRatio);
 
         this.cssInstance.setSize(this.windowSizes.width, this.windowSizes.height);
 
