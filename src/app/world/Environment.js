@@ -13,7 +13,7 @@ export default class Environment {
     init() {
         const app = Application.getInstance();
 
-        const floorGeometry = new THREE.CircleGeometry(80, 50);
+        const floorGeometry = new THREE.PlaneGeometry(80, 80);
         const floorMaterial = new THREE.MeshPhysicalMaterial({ color: 0x9AB8CE, clearcoat: 0.6, clearcoatRoughness: 0.4, metalness: 0.8 });
         const floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
         floorMesh.rotation.x = THREE.MathUtils.degToRad(-90);
