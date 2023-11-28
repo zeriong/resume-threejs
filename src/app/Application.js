@@ -43,8 +43,8 @@ export default class Application {
 
         this.world = World.getInstance().init();
 
-        this.scene.background = new THREE.Color(0x222222); // 0x61657a
-        this.scene.fog = new THREE.Fog(0x222222, 10, 100);
+        this.scene.background = new THREE.Color(0x13191D); // 0x61657a
+        this.scene.fog = new THREE.Fog(0x13191D, 50, 70);
 
         // 매서드 실행
         this.camera.createControls();
