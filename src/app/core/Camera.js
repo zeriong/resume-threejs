@@ -31,12 +31,12 @@ export default class Camera {
     setCameraPosition() {
         const fixCamPosition = () => {
             if (this.windowSizes.width >= 1400) return 1;
-            return (1400 - this.windowSizes.width) * (this.windowSizes.width <= 420 ? 0.0003 : 0.0007) + 1;
+            return (1400 - this.windowSizes.width) * (this.windowSizes.width <= 497 ? 0.0003 : 0.0007) + 1;
         }
         this.cameraPosition = [
-            (this.windowSizes.width <= 420) ? (-2.96 * fixCamPosition()) : (-24 * fixCamPosition()),
-            (this.windowSizes.width <= 420) ? (10.63 * fixCamPosition()) : (14.4 * fixCamPosition()),
-            (this.windowSizes.width <= 420) ? (30.98 * fixCamPosition()) : (14 * fixCamPosition()),
+            (this.windowSizes.width <= 497) ? (-2.96 * fixCamPosition()) : (-24 * fixCamPosition()),
+            (this.windowSizes.width <= 497) ? (10.63 * fixCamPosition()) : (14.4 * fixCamPosition()),
+            (this.windowSizes.width <= 497) ? (30.98 * fixCamPosition()) : (14 * fixCamPosition()),
         ]
     }
 

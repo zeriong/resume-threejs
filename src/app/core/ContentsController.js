@@ -160,8 +160,7 @@ export default class ContentsController {
         // 콘텐츠 변화에 따른 처리
         if (nextContent.name === 'guestBook') {
             raycaster.showGuestBookToast();
-        }
-        if (raycaster.timeout1 !== null || raycaster.timeout2 !== null) {
+        } else if (raycaster.timeout1 !== null || raycaster.timeout2 !== null) {
             this.#breakTimeoutk(raycaster.timeout1, () => raycaster.controlPopup('hidden'));
             raycaster.timeout1 = null;
             this.#breakTimeoutk(raycaster.timeout2, () => raycaster.controlPopup('hidden'));
@@ -208,8 +207,7 @@ export default class ContentsController {
         // 콘텐츠 변화에 따른 처리
         if (prevContent.name === 'guestBook') {
             raycaster.showGuestBookToast();
-        }
-        if (raycaster.timeout1 !== null || raycaster.timeout2 !== null) {
+        } else if (raycaster.timeout1 !== null || raycaster.timeout2 !== null) {
             this.#breakTimeoutk(raycaster.timeout1, () => raycaster.controlPopup('hidden'));
             raycaster.timeout1 = null;
             this.#breakTimeoutk(raycaster.timeout2, () => raycaster.controlPopup('hidden'));

@@ -16,7 +16,7 @@ export default class Contents {
         else if (this.windowSizes.width >= 800) fixer = calc * 0.001 + 1;
         else if (this.windowSizes.width >= 600) fixer = calc * 0.0015 + 1;
         else if (this.windowSizes.width > 450) fixer = calc * 0.002 + 1;
-        else  fixer = calc * 0.0013 + 1;
+        else  fixer = calc * 0.0009 + 1;
 
         return { x: -11.95 * fixer, y: 9.35 * fixer, z: 14.4 * fixer }
     }
@@ -24,22 +24,22 @@ export default class Contents {
     // Start 애니메이션 카메라 포지션
     getStartPositions() {
         return {
-            x: (this.windowSizes.width <= 420) ? (-18 * this.getFixCameraPosition()) : (0.5 * this.getFixCameraPosition()),
-            y: (this.windowSizes.width <= 420) ? (14.4 * this.getFixCameraPosition() + 5) : (5 * this.getFixCameraPosition()),
-            z: (this.windowSizes.width <= 420) ? (19.2 * this.getFixCameraPosition()) : (27 * this.getFixCameraPosition()),
+            x: (this.windowSizes.width <= 497) ? (-18 * this.getFixCameraPosition()) : (0.5 * this.getFixCameraPosition()),
+            y: (this.windowSizes.width <= 497) ? (14.4 * this.getFixCameraPosition() + 5) : (5 * this.getFixCameraPosition()),
+            z: (this.windowSizes.width <= 497) ? (19.2 * this.getFixCameraPosition()) : (27 * this.getFixCameraPosition()),
         }
     }
 
     // 브라우저 크기에 따른 카메라 포지션 보정
     getFixCameraPosition() {
         if (this.windowSizes.width >= 1400) return 1;
-        return (1400 - this.windowSizes.width) * (this.windowSizes.width <= 420 ? 0.0003 : 0.0001) + 1;
+        return (1400 - this.windowSizes.width) * (this.windowSizes.width <= 497 ? 0.0003 : 0.0001) + 1;
     }
 
     // 브라우저 크기에 따른 skills 컨텐츠 포지션 보정
     getFixSkillsPosition() {
         if (this.windowSizes.width >= 1400) return 0;
-        if (this.windowSizes.width <= 420) {
+        if (this.windowSizes.width <= 497) {
             const value = (1400 - this.windowSizes.width) * 0.0003 + 1;
             if (value > 1.32) return 1.32;
             return value;
@@ -56,8 +56,8 @@ export default class Contents {
         return 1.3
     }
 
-    // 브라우저 크기에 따른 history 컨텐츠 포지션 보정
-    getFixHistoryCamPosition() {
+    // 브라우저 크기에 따른 roadmap 컨텐츠 포지션 보정
+    getFixRoadmapCamPosition() {
         if (this.windowSizes.width <= 740) return 3;
         return 2.5
     }
@@ -65,7 +65,7 @@ export default class Contents {
     // 브라우저 크기에 따른 방명록 컨텐츠 포지션 보정
     getFixGuestBookPosition() {
         if (this.windowSizes.width <= 300) return 2;
-        if (this.windowSizes.width <= 420) return 1.5;
+        if (this.windowSizes.width <= 497) return 1.5;
         if (this.windowSizes.width <= 500) return 2;
         if (this.windowSizes.width <= 700) return 1.8;
         if (this.windowSizes.width <= 1000) return 0.8;
@@ -97,11 +97,11 @@ export default class Contents {
                 }
             },
 
-            // history
+            // roadmap
             {
                 name: 'roadmap', objNames: ['frame1', 'roadmap_menu'],
                 cameraPosition: {
-                    x: (positions.FRAME1.x), y: (positions.FRAME1.y), z: (positions.FRAME1.z + this.getFixHistoryCamPosition())
+                    x: (positions.FRAME1.x), y: (positions.FRAME1.y), z: (positions.FRAME1.z + this.getFixRoadmapCamPosition())
                 },
                 controlsTarget: {
                     x: (positions.FRAME1.x), y: (positions.FRAME1.y), z: (positions.FRAME1.z)

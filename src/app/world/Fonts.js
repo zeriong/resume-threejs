@@ -34,6 +34,9 @@ export default class Fonts {
                 { text: 'Blog', objName: 'blog_menu', y: 0.5 },
             ]
                 .forEach((val) => {
+                    // 모바일에서 mesh 메뉴 추가 안함 (nav 메뉴로 변경)
+                    if (app.windowSizes.width <= 497 && val.objName !== 'name') return;
+
                     const position = new THREE.Vector3();
                     const geometry = new TextGeometry(val.text, {
                         font: font,
@@ -46,7 +49,7 @@ export default class Fonts {
                     const mesh = new THREE.Mesh(geometry, material);
                     mesh.position.y = val.y;
 
-                    // 메뉴가 아닌 mesh는 그룹추가 후 foreach를 빠져나옴 (추가할 이벤트 따로 x)
+                    // 메뉴가 아닌 mesh는 그룹 추가 후 foreach를 빠져나옴 (추가할 이벤트 따로 x)
                     if (val.objName === 'name') return authorGroup.add(mesh);
 
                     mesh.name = val.objName;

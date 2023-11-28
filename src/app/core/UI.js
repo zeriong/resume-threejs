@@ -2,15 +2,16 @@ import Application from '../Application';
 
 export default class UI {
     #isPlay;
+    #removeNavOpen;
 
     constructor() {
-        this.#isPlay = true
+        this.#isPlay = true;
 
-        this.init();
+        this.#init();
     }
 
-    init() {
-        const app = Application.getInstance()
+    #init() {
+        const app = Application.getInstance();
 
         const guestBookBtn = document.querySelector('#guestBookBtn');
         const soundBtn = document.querySelector('#soundBtn');
@@ -18,6 +19,37 @@ export default class UI {
         const soundToolTip = document.querySelector('#soundToolTip');
         const soundOn = document.querySelector('#soundOn');
         const soundOff = document.querySelector('#soundOff');
+
+        // 모바일인 경우 nav 메뉴 추가
+        if (app.windowSizes.width <= 497) {
+            const navMenuBtn = document.querySelector('#navMenuBtn');
+            const navMenuBack = document.querySelector('#navMenuBack');
+            const navMenu = document.querySelector('#navMenu');
+
+            // 모바일인 경우 버튼 활성화
+            navMenuBtn.style.display = 'flex';
+
+            // nav메뉴 Open 클래스 toggle 함수
+            const toggleNavOpen = () => {
+                navMenuBack.classList.toggle('navOpen');
+                navMenu.classList.toggle('navOpen');
+            }
+            // nav메뉴 Open 클래스 remove 매서드
+            this.#removeNavOpen = () => {
+                navMenuBack.classList.remove('navOpen');
+                navMenu.classList.remove('navOpen');
+            }
+
+            // 이벤트 등록
+            navMenuBtn.addEventListener('click', toggleNavOpen);
+            navMenuBack.addEventListener('click', () => {
+                if (navMenu.classList.contains('navOpen') && navMenuBack.classList.contains('navOpen')) this.#removeNavOpen();
+            });
+            // 메뉴 클릭 시 이벤트 등록
+            document.querySelector('#navAboutMe').addEventListener('click', () => {
+                this.#awaitDuration(() => app.contentsController.toContent('aboutMe'));
+            })
+        }
 
         // 모바일이 아닌 경우만 방명록 & 사운드 버튼 툴팁, hover 이벤트
         if (app.windowSizes.width > 497) {
@@ -57,5 +89,10 @@ export default class UI {
                 soundOn.style.display = 'block';
             }
         });
+    }
+
+    #awaitDuration(func) {
+        this.#removeNavOpen();
+        setTimeout(() => func(), 200);
     }
 }

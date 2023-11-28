@@ -25,6 +25,8 @@
 }
 
 body, html {
+  width: 100vw;
+  height: 100vh;
   margin: 0;
 }
 
@@ -239,6 +241,8 @@ ul {
   justify-content: center;
   align-items: center;
   background-color: #252525;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   width: 50px;
   height: 50px;
   z-index: 10;
@@ -252,6 +256,63 @@ ul {
 }
 #optionMenu .option-btn #guestIcon {
   width: 20px;
+}
+
+#navMenuBtn {
+  transition: ease-in-out 200ms;
+  position: fixed;
+  left: 16px;
+  top: 16px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: #252525;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  width: 50px;
+  height: 50px;
+  z-index: 10;
+}
+#navMenuBtn #navMenuIcon {
+  width: 32px;
+}
+
+#navMenu {
+  transition: ease-in-out 200ms;
+  z-index: 15;
+  position: fixed;
+  top: 0;
+  left: -220px;
+  height: 100%;
+  width: 220px;
+  background-color: #252525;
+}
+#navMenu.navOpen {
+  left: 0;
+}
+#navMenu > ul {
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+#navMenu > ul li {
+  padding: 20px;
+}
+
+#navMenuBack {
+  visibility: hidden;
+  transition: ease-in-out 200ms;
+  z-index: 14;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(0px);
+}
+#navMenuBack.navOpen {
+  visibility: visible;
+  backdrop-filter: blur(10px);
 }
 
 #guestBook {
