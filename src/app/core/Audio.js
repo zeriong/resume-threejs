@@ -20,7 +20,7 @@ export default class Audio {
         app.loader.audioLoader.load('/assets/audio/bgm.mp3', (buffer) => {
             this.sound.setBuffer(buffer);
             this.sound.setLoop(true);
-            this.sound.setVolume(0.2);
+            this.sound.setVolume(0.15);
         });
     }
 }

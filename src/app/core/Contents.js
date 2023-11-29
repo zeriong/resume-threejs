@@ -49,7 +49,7 @@ export default class Contents {
 
     // 브라우저 크기에 따른 projects 컨텐츠 포지션 보정
     getFixMonitorCamPosition() {
-        if (this.windowSizes.width <= 530) return 4;
+        if (this.windowSizes.width <= 530) return 3.1;
         if (this.windowSizes.width <= 740) return 3;
         if (this.windowSizes.width <= 1400) return 1.9;
         if (this.windowSizes.width <= 1920) return 1.3;
@@ -77,7 +77,7 @@ export default class Contents {
         return [
             // about me 첫번째 대화
             {
-                name: 'aboutMe', objNames: ['doll', 'aboutMe_menu'],
+                name: 'aboutMe', objNames: ['doll', 'aboutMe_menu'], navMenuId: 'navAboutMe',
                 cameraPosition: {
                     x: (positions.DOLL.x), y: (positions.DOLL.y + 0.4), z: (positions.DOLL.z + 2.5 + this.getFixCameraPosition())
                 },
@@ -88,7 +88,7 @@ export default class Contents {
 
             // projects
             {
-                name: 'projects', objNames: ['monitor', 'projects_menu'],
+                name: 'projects', objNames: ['monitor', 'projects_menu'], navMenuId: 'navProjects',
                 cameraPosition: {
                     x: (positions.MONITOR.x), y: (positions.MONITOR.y), z: (positions.MONITOR.z + this.getFixMonitorCamPosition() + this.getFixCameraPosition())
                 },
@@ -99,7 +99,7 @@ export default class Contents {
 
             // roadmap
             {
-                name: 'roadmap', objNames: ['frame1', 'roadmap_menu'],
+                name: 'roadmap', objNames: ['frame1', 'roadmap_menu'], navMenuId: 'navRoadmap',
                 cameraPosition: {
                     x: (positions.FRAME1.x), y: (positions.FRAME1.y), z: (positions.FRAME1.z + this.getFixRoadmapCamPosition())
                 },
@@ -110,7 +110,7 @@ export default class Contents {
 
             // skills
             {
-                name: 'skills', objNames: ['frame2', 'skills_menu'],
+                name: 'skills', objNames: ['frame2', 'skills_menu'], navMenuId: 'navSkills',
                 cameraPosition: {
                     x: (positions.FRAME2.x), y: (positions.FRAME2.y), z: (positions.FRAME2.z + 1.6 + this.getFixSkillsPosition())
                 },
@@ -130,11 +130,10 @@ export default class Contents {
                 },
             },
 
-            // poster: 순회 컨텐츠에 포함 x
+            // poster
             {
                 name: 'poster', objNames: ['poster'],
                 cameraPosition: {
-                    // x: (this.posterPosition.x), y: (this.posterPosition.y), z: (this.posterPosition.z + 4 + this.getFixCameraPosition())
                     x: (positions.POSTER.x), y: (positions.POSTER.y), z: (positions.POSTER.z + 4 + this.getFixCameraPosition())
                 },
                 controlsTarget: {

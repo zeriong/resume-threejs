@@ -284,7 +284,7 @@ ul {
 
 // 모바일환경 nav button
 #navMenuBtn {
-  transition: ease-in-out 200ms;
+  transition: ease-in-out 500ms;
   position: fixed;
   left: 16px;
   top: 16px;
@@ -639,7 +639,7 @@ ul {
 }
 
 // -------------- projects ---------------
-#projects-body {
+#projectsBody {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;

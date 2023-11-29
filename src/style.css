@@ -259,7 +259,7 @@ ul {
 }
 
 #navMenuBtn {
-  transition: ease-in-out 200ms;
+  transition: ease-in-out 500ms;
   position: fixed;
   left: 16px;
   top: 16px;
@@ -585,13 +585,13 @@ ul {
   line-height: 1.5;
 }
 
-#projects-body {
+#projectsBody {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   padding: 61px 40px 36px 40px;
 }
-#projects-body .navbar {
+#projectsBody .navbar {
   position: fixed;
   z-index: 1;
   top: 0;
@@ -600,7 +600,7 @@ ul {
   padding: 0 39px;
   transition: top 0.3s;
 }
-#projects-body .navbar .inner {
+#projectsBody .navbar .inner {
   display: flex;
   position: relative;
   width: 100%;
@@ -608,7 +608,7 @@ ul {
   background-color: #fff;
   border-bottom: 1px solid rgba(169, 169, 169, 0.9);
 }
-#projects-body .navbar .inner button {
+#projectsBody .navbar .inner button {
   position: relative;
   flex-grow: 1;
   height: 100%;
@@ -617,10 +617,10 @@ ul {
   font-weight: 500;
   cursor: pointer;
 }
-#projects-body .navbar .inner button.active {
+#projectsBody .navbar .inner button.active {
   font-weight: 600;
 }
-#projects-body .navbar .inner button.active div {
+#projectsBody .navbar .inner button.active div {
   position: absolute;
   bottom: -1px;
   left: 25%;
@@ -628,22 +628,22 @@ ul {
   height: 3px;
   background: #404040;
 }
-#projects-body section {
+#projectsBody section {
   padding-top: 58px;
 }
-#projects-body ul.bullet-list > li {
+#projectsBody ul.bullet-list > li {
   position: relative;
   padding: 4px 0 4px 16px;
   box-sizing: border-box;
 }
-#projects-body ul.bullet-list > li:before {
+#projectsBody ul.bullet-list > li:before {
   position: absolute;
   left: 0;
   display: inline-block;
   content: "•";
   color: rgb(59, 130, 246);
 }
-#projects-body .arrow-right {
+#projectsBody .arrow-right {
   border: solid white;
   border-width: 0 2px 2px 0;
   display: inline-block;
@@ -651,47 +651,47 @@ ul {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
 }
-#projects-body .projects-braces {
+#projectsBody .projects-braces {
   color: rgba(156, 163, 175, 0.8);
   margin-left: 8px;
   font-size: 36px;
   font-weight: 600;
 }
-#projects-body .content-name-wrap {
+#projectsBody .content-name-wrap {
   position: relative;
   display: flex;
   align-items: center;
 }
-#projects-body .content-name-wrap .content-name {
+#projectsBody .content-name-wrap .content-name {
   font-size: 36px;
   color: rgb(59, 130, 246);
   font-weight: 600;
   line-height: 1;
 }
-#projects-body .content-name-wrap .content-comment {
+#projectsBody .content-name-wrap .content-comment {
   font-size: 16px;
   color: rgb(31, 41, 55);
   margin-left: 12px;
   margin-top: 4px;
   white-space: nowrap;
 }
-#projects-body .content-desc {
+#projectsBody .content-desc {
   font-size: 18px;
   line-height: 1.4;
   color: rgb(55, 65, 81);
   margin: 16px 0 20px;
 }
-#projects-body .project-container {
+#projectsBody .project-container {
   border-left: 1px solid rgba(209, 213, 219, 0.9);
   margin-top: 0;
   padding-top: 40px;
   padding-left: 32px;
 }
-#projects-body .project-container.is-first {
+#projectsBody .project-container.is-first {
   margin-top: 32px;
   padding-top: 12px;
 }
-#projects-body .project-container .project-title-header {
+#projectsBody .project-container .project-title-header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -700,20 +700,20 @@ ul {
   gap: 8px;
   padding-bottom: 6px;
 }
-#projects-body .project-container .project-title-header .title {
+#projectsBody .project-container .project-title-header .title {
   font-size: 26px;
   color: rgb(55, 65, 81);
   font-weight: 700;
   margin-right: 2px;
 }
-#projects-body .project-container .project-title-header .project-type {
+#projectsBody .project-container .project-title-header .project-type {
   font-size: 14px;
   color: #ffffff;
   border-radius: 100px;
   padding: 4px 12px;
   background-color: rgba(22, 163, 74, 0.8);
 }
-#projects-body .project-container .project-title-header .demo {
+#projectsBody .project-container .project-title-header .demo {
   display: flex;
   align-items: center;
   font-size: 14px;
@@ -722,10 +722,10 @@ ul {
   border-radius: 100px;
   padding: 4px 10px;
 }
-#projects-body .project-container .project-title-header .demo i {
+#projectsBody .project-container .project-title-header .demo i {
   margin-left: 2px;
 }
-#projects-body .project-container .project-title-header .git {
+#projectsBody .project-container .project-title-header .git {
   display: flex;
   align-items: center;
   min-width: 40px;
@@ -737,31 +737,31 @@ ul {
   padding-left: 4px;
   padding-right: 8px;
 }
-#projects-body .project-container .project-title-header .git img {
+#projectsBody .project-container .project-title-header .git img {
   width: 16px;
 }
-#projects-body .project-container .project-title-header .git i {
+#projectsBody .project-container .project-title-header .git i {
   margin-left: 2px;
 }
-#projects-body .project-container .project-intro-desc {
+#projectsBody .project-container .project-intro-desc {
   width: 100%;
   font-size: 16px;
   color: rgb(75, 85, 99);
   padding-top: 12px;
 }
-#projects-body .project-container .project-detail-main {
+#projectsBody .project-container .project-detail-main {
   display: flex;
   gap: 52px;
   margin-top: 32px;
 }
-#projects-body .project-container .project-detail-main .preview-container {
+#projectsBody .project-container .project-detail-main .preview-container {
   display: flex;
   flex-direction: column;
   min-width: 150px;
   gap: 12px;
   padding-top: 4px;
 }
-#projects-body .project-container .project-detail-main .preview-container .preview-img-wrap {
+#projectsBody .project-container .project-detail-main .preview-container .preview-img-wrap {
   position: relative;
   width: 150px;
   height: 150px;
@@ -770,17 +770,17 @@ ul {
   overflow: hidden;
   margin-bottom: 8px;
 }
-#projects-body .project-container .project-detail-main .preview-container .preview-img-wrap img {
+#projectsBody .project-container .project-detail-main .preview-container .preview-img-wrap img {
   width: 100%;
 }
-#projects-body .project-container .project-detail-main .preview-container .dev-part {
+#projectsBody .project-container .project-detail-main .preview-container .dev-part {
   color: rgb(75, 85, 99);
 }
-#projects-body .project-container .project-detail-main .preview-container .dev-date-range {
+#projectsBody .project-container .project-detail-main .preview-container .dev-date-range {
   color: rgb(17, 24, 39);
   font-weight: 500;
 }
-#projects-body .project-container .project-detail-main .preview-container .dev-period {
+#projectsBody .project-container .project-detail-main .preview-container .dev-period {
   display: flex;
   justify-content: center;
   width: 60px;
@@ -789,51 +789,51 @@ ul {
   border-radius: 4px;
   padding: 4px;
 }
-#projects-body .project-container .project-detail-main .content-container {
+#projectsBody .project-container .project-detail-main .content-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-#projects-body .project-container .project-detail-main .content-container .content-title-area {
+#projectsBody .project-container .project-detail-main .content-container .content-title-area {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-#projects-body .project-container .project-detail-main .content-container .content-title-area .content-title {
+#projectsBody .project-container .project-detail-main .content-container .content-title-area .content-title {
   font-size: 24px;
   color: rgb(55, 65, 81);
   font-weight: 600;
 }
-#projects-body .project-container .project-detail-main .content-container .dev-range {
+#projectsBody .project-container .project-detail-main .content-container .dev-range {
   color: rgb(75, 85, 99);
 }
-#projects-body .project-container .project-detail-main .content-container .etc-list-title {
+#projectsBody .project-container .project-detail-main .content-container .etc-list-title {
   color: rgb(55, 65, 81);
   font-size: 18px;
   font-weight: 700;
   padding-bottom: 4px;
 }
-#projects-body .project-container .project-detail-main .content-container .etc-list-content {
+#projectsBody .project-container .project-detail-main .content-container .etc-list-content {
   color: rgb(55, 65, 81);
   margin-top: 4px;
   margin-bottom: 10px;
 }
-#projects-body .project-container .project-detail-main .learning-content-container {
+#projectsBody .project-container .project-detail-main .learning-content-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-#projects-body .project-container .project-detail-main .learning-content-container .nomad-content {
+#projectsBody .project-container .project-detail-main .learning-content-container .nomad-content {
   display: flex;
   align-items: start;
   gap: 4px;
 }
-#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .nomad-title {
+#projectsBody .project-container .project-detail-main .learning-content-container .nomad-content .nomad-title {
   display: flex;
   align-items: start;
   gap: 4px;
 }
-#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges {
+#projectsBody .project-container .project-detail-main .learning-content-container .nomad-content .title-badges {
   position: relative;
   top: 0;
   display: flex;
@@ -841,20 +841,20 @@ ul {
   padding-top: 2px;
   gap: 4px;
 }
-#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .github-icon {
+#projectsBody .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .github-icon {
   min-width: 36px;
   height: 20px;
   font-size: 12px;
   padding-left: 4px;
   padding-right: 6px;
 }
-#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .github-icon > img {
+#projectsBody .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .github-icon > img {
   width: 15px;
 }
-#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .github-icon > i {
+#projectsBody .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .github-icon > i {
   margin-left: 0;
 }
-#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .demo {
+#projectsBody .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .demo {
   display: flex;
   align-items: center;
   font-size: 12px;
@@ -864,40 +864,40 @@ ul {
   padding: 0 8px;
   height: 20px;
 }
-#projects-body .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .demo i {
+#projectsBody .project-container .project-detail-main .learning-content-container .nomad-content .title-badges .demo i {
   margin-left: 2px;
 }
-#projects-body .project-container .project-detail-main .practice-container {
+#projectsBody .project-container .project-detail-main .practice-container {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
-#projects-body .project-container .project-detail-main .practice-container .practice-title {
+#projectsBody .project-container .project-detail-main .practice-container .practice-title {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 8px;
 }
-#projects-body .project-container .project-detail-main .practice-container .practice-title .practice-text {
+#projectsBody .project-container .project-detail-main .practice-container .practice-title .practice-text {
   font-weight: 700;
   font-size: 18px;
 }
-#projects-body .project-container .project-detail-main .practice-container .practice-title .github-icon {
+#projectsBody .project-container .project-detail-main .practice-container .practice-title .github-icon {
   min-width: 28px;
   height: 20px;
   padding-left: 6px;
   padding-right: 8px;
 }
-#projects-body .project-container .project-detail-main .practice-container .practice-title .github-icon > i {
+#projectsBody .project-container .project-detail-main .practice-container .practice-title .github-icon > i {
   margin-left: 0;
 }
-#projects-body .project-container .project-detail-main .practice-container .practice-title .github-icon > img {
+#projectsBody .project-container .project-detail-main .practice-container .practice-title .github-icon > img {
   width: 14px;
 }
-#projects-body .project-container .project-detail-main .practice-container .practice-desc {
+#projectsBody .project-container .project-detail-main .practice-container .practice-desc {
   color: rgb(75, 85, 99);
 }
-#projects-body .project-container .project-detail-main .practice-container .desc-container {
+#projectsBody .project-container .project-detail-main .practice-container .desc-container {
   display: flex;
   flex-direction: column;
   border-left: 1px solid rgba(209, 213, 219, 0.9);
@@ -905,12 +905,12 @@ ul {
   margin-top: 18px;
   gap: 12px;
 }
-#projects-body .project-container .project-detail-main .practice-container .desc-container .desc-title {
+#projectsBody .project-container .project-detail-main .practice-container .desc-container .desc-title {
   color: rgb(55, 65, 81);
   font-weight: 700;
   margin-bottom: 4px;
 }
-#projects-body .project-container .project-detail-main .practice-container .desc-container .desc-content {
+#projectsBody .project-container .project-detail-main .practice-container .desc-container .desc-content {
   color: rgb(75, 85, 99);
 }
 

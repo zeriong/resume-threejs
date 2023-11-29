@@ -65,6 +65,11 @@ export default class ContentsController {
         const app = Application.getInstance();
         const world = World.getInstance();
 
+        // 모바일인 경우 nav 메뉴 사라짐
+        if (app.windowSizes.width <= 497) {
+            document.querySelector('#navMenuBtn').style.left = '-50px';
+        }
+
         // content 전달 값이 문자열이라면 콘텐츠 오브젝트로 변환
         if (typeof content === "string") {
             content = app.contents.getList().find(item => item.name === content);
@@ -247,6 +252,11 @@ export default class ContentsController {
         // get instance
         const app = Application.getInstance();
         const world = World.getInstance();
+
+        // 모바일인 경우 nav 메뉴 사라짐
+        if (app.windowSizes.width <= 497) {
+            document.querySelector('#navMenuBtn').style.left = '16px';
+        }
 
         this.#breakTimeoutk(app.raycaster.timeout1, () => app.raycaster.controlPopup('hidden'));
         app.raycaster.timeout1 = null;
