@@ -334,7 +334,7 @@ export default class GuestBook {
 
     // 방명록 mesh 포지션 세팅 매서드
     #reviewMeshPositionSets() {
-        const pos = { x: 2.896, y: 2.341, z: 2.045, gap: 0.302 }
+        const pos = { x: 2.88, y: 2.341, z: 2.045, gap: 0.302 }
         return [
             [(pos.x), (pos.y), (pos.z)],
             [(pos.x), (pos.y), (pos.z + pos.gap)],
