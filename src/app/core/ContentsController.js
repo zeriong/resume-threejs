@@ -335,6 +335,11 @@ export default class ContentsController {
         const contents = app.contents.getList();
         const world = World.getInstance();
 
+        // 모바일인 경우 nav 메뉴 사라짐
+        if (app.windowSizes.width <= 497) {
+            document.querySelector('#navMenuBtn').style.left = '-50px';
+        }
+
         // start 시 aboutMe으로 설정
         this.currentContent = contents[0];
 

@@ -326,8 +326,8 @@ export default class GuestBook {
         this.#firstVisible = snapshot.docs[0].data().createAt;
         snapshot.forEach((doc) => {
             const data = doc.data();
-            // this.#ids.push(doc._key.path.segments[6]); // 랜덤 문서이름을 id로 지정
-            this.#guestReviewList.push(data);
+            // 데이터와 랜덤 문서이름을 id로 지정
+            this.#guestReviewList.push({ ...data, id: doc._key.path.segments[6]});
             this.#lastVisible = data.createAt;
         });
     }
