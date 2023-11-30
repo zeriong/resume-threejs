@@ -42,8 +42,10 @@ $system-yellow: #FFFA00;
   font-family: 'Pretendard';
 }
 body, html {
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
   margin: 0;
 }
 button, h1 {
@@ -69,8 +71,8 @@ ul {
   position: absolute;
   left: 0;
   top: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 .jetbrain-font {
   font-family: 'JetBrains Mono', monospace;
