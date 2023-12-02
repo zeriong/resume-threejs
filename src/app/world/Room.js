@@ -188,7 +188,6 @@ export default class Room {
     createWebviewMesh(name, sizes, positions) {
         // CSS3DObject를 표현하기 위한 Mesh
         const geometry = new THREE.PlaneGeometry(sizes.w, sizes.h);
-
         const material = new THREE.MeshLambertMaterial;
         material.side = THREE.DoubleSide;
         material.opacity = 0;

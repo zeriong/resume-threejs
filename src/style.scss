@@ -643,6 +643,7 @@ ul {
 // -------------- projects ---------------
 #projectsBody {
   overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   padding: 61px 40px 36px 40px;
