@@ -205,12 +205,40 @@ export default class GuestBook {
                 const createAt = date.getFullYear().toString() + '-' +
                     (date.getMonth() + 1).toString().padStart(2, '0') + '-' +
                     date.getDate().toString().padStart(2, '0');
+
                 // content 가공
                 const contentTxt = this.#guestReviewList[i].message.replace(/\n/g, '')
                 const contentArr = [];
-                for (let i = 0; i < contentTxt.length; i += 10) {
-                    contentArr.push(contentTxt.slice(i, i + 10));
+                let txt = '';
+                let cnt = 0;
+
+                // 글자를 순회하며 byte단위로 줄바꿈
+                for (let k = 0; k < contentTxt.length; k++) {
+                    // 순회중 현재 글자의 char code
+                    const char = contentTxt.charCodeAt(k);
+
+                    // 문자열 누적 덧셈
+                    txt += contentTxt[k];
+
+                    // char code로 한글 식별
+                    if (char >= 0xAC00 && char <= 0xD7AF) cnt += 2;
+                    else cnt++;
+
+                    // 20byte가 넘는다면 push
+                    if (cnt >= 20) {
+                        contentArr.push(txt);
+                        cnt = 0;
+                        txt = '';
+                    }
                 }
+
+                // 순회를 빠져나오고 남은 글자 push
+                if (txt !== '' && cnt !== 0) {
+                    contentArr.push(txt);
+                    cnt = 0;
+                    txt = '';
+                }
+
                 // fill background
                 context.fillStyle = '#FFFB6A';
                 context.fillRect(0,0,500,500);
@@ -221,10 +249,12 @@ export default class GuestBook {
                 context.font = 'normal 30px Pretendard';
                 context.fillText(createAt, 55, 160);
                 context.font = 'normal 40px Pretendard';
+                // content 배열을 순회하며 줄바꿈처럼 페인트
                 contentArr.map((txt, idx) => {
                     const y = ( idx + 1 ) * 50 + 180; // default 230
                     context.fillText(txt, 55, y);
                 });
+
                 // 첫 로드가 아닌 경우 texture 업데이트 트리거
                 if (!isFirstLoad) this.#canvasTextureList[i].needsUpdate = true;
 
