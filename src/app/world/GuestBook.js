@@ -80,7 +80,7 @@ export default class GuestBook {
     // 방명록 세팅 매서드
     #setGuestReviews() {
         (async () => {
-            const app = Application.getInstance()
+            const app = Application.getInstance();
             const raycaster = app.raycaster;
 
             // get data
@@ -94,7 +94,7 @@ export default class GuestBook {
             ]);
             const rightArrowGeometry = new THREE.BufferGeometry();
             rightArrowGeometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-            const rightArrowMaterial = new THREE.MeshBasicMaterial({ color: '#eeeeee' })
+            const rightArrowMaterial = new THREE.MeshBasicMaterial({ color: '#eeeeee' });
             const rightArrowMesh = new THREE.Mesh(rightArrowGeometry, rightArrowMaterial);
             rightArrowMesh.position.set(2.8955, 2.026, 2.55);
             rightArrowMesh.rotation.y = THREE.MathUtils.degToRad(-90);
@@ -207,7 +207,7 @@ export default class GuestBook {
                     date.getDate().toString().padStart(2, '0');
 
                 // content 가공
-                const contentTxt = this.#guestReviewList[i].message.replace(/\n/g, '')
+                const contentTxt = this.#guestReviewList[i].message.replace(/\n/g, '');
                 const contentArr = [];
                 let txt = '';
                 let cnt = 0;

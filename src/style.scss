@@ -42,8 +42,6 @@ $system-yellow: #FFFA00;
   font-family: 'Pretendard';
 }
 body, html {
-  position: fixed;
-  overflow: hidden;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -752,247 +750,238 @@ ul {
       margin-top: 32px;
       padding-top: 12px;
     }
+  }
+}
+// projects common component
+.project-title-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(169, 169, 169, 0.9);
+  gap: 8px;
+  padding-bottom: 6px;
 
-    .project-title-header {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      width: 100%;
-      border-bottom: 1px solid rgba(169, 169, 169, 0.9);
-      gap: 8px;
-      padding-bottom: 6px;
-
-      .title {
-        font-size: 26px;
-        color: $gray-700;
-        font-weight: 700;
-        margin-right: 2px;
-      }
-      .project-type {
-        font-size: 14px;
-        color: #ffffff;
-        border-radius: 100px;
-        padding: 4px 12px;
-        background-color: rgb(22, 163, 74, 0.8);
-      }
-      .demo {
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-        color: #ffffff;
-        background-color: $blue-500;
-        border-radius: 100px;
-        padding: 4px 10px;
-        i {
-          margin-left: 2px;
-        }
-      }
-      .git {
-        display: flex;
-        align-items: center;
-        min-width: 40px;
-        height: 22px;
-        font-size: 16px;
-        color: #ffffff;
-        background-color: rgba(75, 85, 99, 0.9);
-        border-radius: 100px;
-        padding-left: 4px;
-        padding-right: 8px;
-        img {
-          width: 16px;
-        }
-        i {
-          margin-left: 2px;
-        }
-      }
-    }
-
-    .project-intro-desc {
-      width: 100%;
-      font-size: 16px;
-      color: $gray-600;
-      padding-top: 12px;
-    }
-
-    .project-detail-main {
-      display: flex;
-      gap: 52px;
-      margin-top: 32px;
-
-      .preview-container {
-        display: flex;
-        flex-direction: column;
-        min-width: 150px;
-        gap: 12px;
-        padding-top: 4px;
-
-        .preview-img-wrap {
-          position: relative;
-          width: 150px;
-          height: 150px;
-          border: 1px solid $gray-300;
-          border-radius: 6px;
-          overflow: hidden;
-          margin-bottom: 8px;
-          img {
-            width: 100%;
-          }
-        }
-        .dev-part {
-          color: $gray-600;
-        }
-        .dev-date-range {
-          color: $gray-900;
-          font-weight: 500;
-        }
-        .dev-period {
-          display: flex;
-          justify-content: center;
-          width: 60px;
-          font-size: 13px;
-          background-color: $gray-200;
-          border-radius: 4px;
-          padding: 4px;
-        }
-      }
-
-      .content-container {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        .content-title-area {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          .content-title {
-            font-size: 24px;
-            color: $gray-700;
-            font-weight: 600;
-          }
-        }
-        .dev-range {
-          color: $gray-600;
-        }
-        .etc-list-title {
-          color: $gray-700;
-          font-size: 18px;
-          font-weight: 700;
-          padding-bottom: 4px;
-        }
-        .etc-list-content {
-          color: $gray-700;
-          margin-top: 4px;
-          margin-bottom: 10px;
-        }
-      }
-
-      .learning-content-container {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-
-        .nomad-content {
-          display: flex;
-          align-items: start;
-          gap: 4px;
-
-          .nomad-title {
-            display: flex;
-            align-items: start;
-            gap: 4px;
-          }
-
-          .title-badges {
-            position: relative;
-            top: 0;
-            display: flex;
-            align-items: center;
-            padding-top: 2px;
-            gap: 4px;
-
-            .github-icon {
-              min-width: 36px;
-              height: 20px;
-              font-size: 12px;
-              padding-left: 4px;
-              padding-right: 6px;
-              & > img {
-                width: 15px;
-              }
-              & > i {
-                margin-left: 0;
-              }
-            }
-
-            .demo {
-              display: flex;
-              align-items: center;
-              font-size: 12px;
-              color: #ffffff;
-              background-color: $blue-500;
-              border-radius: 100px;
-              padding: 0 8px;
-              height: 20px;
-              i {
-                margin-left: 2px;
-              }
-            }
-          }
-        }
-      }
-        .practice-container {
-          display: flex;
-          flex-direction: column;
-          gap: 24px;
-
-          .practice-title {
-              display: flex;
-              align-items: center;
-              gap: 8px;
-            margin-bottom: 8px;
-
-              .practice-text {
-                font-weight: 700;
-                font-size: 18px;
-              }
-              .github-icon {
-                min-width: 28px;
-                height: 20px;
-                padding-left: 6px;
-                padding-right: 8px;
-                & > i {
-                  margin-left: 0;
-                }
-                & > img {
-                  width: 14px;
-                }
-              }
-          }
-
-          .practice-desc {
-            color: $gray-600;
-          }
-          .desc-container {
-            display: flex;
-            flex-direction: column;
-            border-left: 1px solid rgba(209, 213, 219, 0.9);
-            padding-left: 18px;
-            margin-top: 18px;
-            gap: 12px;
-            .desc-title {
-              color: $gray-700;
-              font-weight: 700;
-              margin-bottom: 4px;
-            }
-            .desc-content {
-              color: $gray-600;
-            }
-          }
-
-        }
-
+  .title {
+    font-size: 26px;
+    color: $gray-700;
+    font-weight: 700;
+    margin-right: 2px;
+  }
+  .project-type {
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 100px;
+    padding: 4px 12px;
+    background-color: rgb(22, 163, 74, 0.8);
+  }
+  .demo {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: $blue-500;
+    border-radius: 100px;
+    padding: 4px 10px;
+    i {
+      margin-left: 2px;
     }
   }
+  .git {
+    display: flex;
+    align-items: center;
+    min-width: 40px;
+    height: 22px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: rgba(75, 85, 99, 0.9);
+    border-radius: 100px;
+    padding-left: 4px;
+    padding-right: 8px;
+    img {
+      width: 16px;
+    }
+    i {
+      margin-left: 2px;
+    }
+  }
+}
+
+.project-intro-desc {
+  width: 100%;
+  font-size: 16px;
+  color: $gray-600;
+  padding-top: 12px;
+}
+
+.project-detail-main {
+  display: flex;
+  gap: 52px;
+  margin-top: 32px;
+
+  .preview-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    gap: 12px;
+    padding-top: 4px;
+
+    .preview-img-wrap {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border: 1px solid $gray-300;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 8px;
+      img {
+        width: 100%;
+      }
+    }
+    .dev-part {
+      color: $gray-600;
+    }
+    .dev-date-range {
+      color: $gray-900;
+      font-weight: 500;
+    }
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .content-title-area {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      .content-title {
+        font-size: 24px;
+        color: $gray-700;
+        font-weight: 600;
+      }
+    }
+    .dev-range {
+      color: $gray-600;
+    }
+    .etc-list-title {
+      color: $gray-700;
+      font-size: 18px;
+      font-weight: 700;
+      padding-bottom: 4px;
+    }
+    .etc-list-content {
+      color: $gray-700;
+      margin-top: 4px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .learning-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .nomad-content {
+      display: flex;
+      align-items: start;
+      gap: 4px;
+
+      .nomad-title {
+        display: flex;
+        align-items: start;
+        gap: 4px;
+      }
+
+      .title-badges {
+        position: relative;
+        top: 0;
+        display: flex;
+        align-items: center;
+        padding-top: 2px;
+        gap: 4px;
+
+        .github-icon {
+          min-width: 36px;
+          height: 20px;
+          font-size: 12px;
+          padding-left: 4px;
+          padding-right: 6px;
+          & > img {
+            width: 15px;
+          }
+          & > i {
+            margin-left: 0;
+          }
+        }
+
+        .demo {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          color: #ffffff;
+          background-color: $blue-500;
+          border-radius: 100px;
+          padding: 0 8px;
+          height: 20px;
+          i {
+            margin-left: 2px;
+          }
+        }
+      }
+    }
+  }
+  .practice-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .practice-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+
+      .practice-text {
+        font-weight: 700;
+        font-size: 18px;
+      }
+      .github-icon {
+        min-width: 28px;
+        height: 20px;
+        padding-left: 6px;
+        padding-right: 8px;
+        & > i {
+          margin-left: 0;
+        }
+        & > img {
+          width: 14px;
+        }
+      }
+    }
+
+    .practice-desc {
+      color: $gray-600;
+    }
+    .desc-container {
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid rgba(209, 213, 219, 0.9);
+      padding-left: 18px;
+      margin-top: 18px;
+      gap: 12px;
+      .desc-title {
+        color: $gray-700;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .desc-content {
+        color: $gray-600;
+      }
+    }
+
+  }
+
 }
 
 // 로드 맵
