@@ -163,9 +163,14 @@ export default class GuestBook {
     /** isFirstLoad: 첫 데이터인 경우 매개변수에 true 삽입하여 초기세팅 */
     #paintGuestReview(isFirstLoad) {
         const app = Application.getInstance();
-        let geometry;
+        let reviewGeometry;
+        let deleteGeometry;
+
         // 첫 로드인 경우만 geometry 생성하여 세팅
-        if (isFirstLoad) geometry = new THREE.PlaneGeometry(0.23, 0.23, 1, 1);
+        if (isFirstLoad) {
+            reviewGeometry = new THREE.PlaneGeometry(0.23, 0.23, 1, 1);
+            deleteGeometry = new THREE.PlaneGeometry(0.03, 0.1, 1, 1);
+        }
 
         for (let i = 0; i < 6; i ++) {
             // 데이터 첫 로드 시 기본 세팅
@@ -178,9 +183,15 @@ export default class GuestBook {
                 // create mesh  / 배경색 : '#FFFB6A'
                 const texture = new THREE.CanvasTexture(canvas);
                 const material = new THREE.MeshBasicMaterial({ map: texture });
-                const reviewMesh = new THREE.Mesh(geometry, material);
+                const reviewMesh = new THREE.Mesh(reviewGeometry, material);
                 reviewMesh.rotation.y = THREE.MathUtils.degToRad(-90);
                 reviewMesh.position.set(...this.#reviewMeshPositionSets()[i]);
+
+                const deleteMaterial = new THREE.MeshBasicMaterial({ color: '#000' });
+                const deleteMesh1 = new THREE.Mesh(deleteGeometry,deleteMaterial);
+                const deleteMesh2 = new THREE.Mesh(deleteGeometry,deleteMaterial);
+                deleteMesh1.rotation.x = THREE.MathUtils.degToRad(45);
+                deleteMesh2.rotation.x = THREE.MathUtils.degToRad(-45);
 
                 // review mesh 기울기 랜덤 설정
                 reviewMesh.rotation.x = THREE.MathUtils.degToRad(Math.random() * 7 - 3.5);
