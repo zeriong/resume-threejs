@@ -310,7 +310,7 @@ export default class ContentsController {
         })
         // 카메라 타겟 변경
         gsap.to(app.camera.orbitControls.target, {
-            x: 1, y: 1.5, z: 2, duration: 1, ease: 'power1.inOut',
+            x: 0, y: 150, z: 0, duration: 1, ease: 'power1.inOut',
         })
         // 빛가루 투명화 해제
         gsap.to(world.environment.lightParticleMaterial, {

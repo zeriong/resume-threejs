@@ -88,15 +88,15 @@ export default class GuestBook {
 
             // 방명록 next 버튼 생성
             const vertices = new Float32Array([
-                -0.03, 0.05, 0,   // 꼭지점 1 (x, y, z)
-                -0.03, -0.05, 0, // 꼭지점 2 (x, y, z)
-                0.01, 0, 0   // 꼭지점 3 (x, y, z)
+                -3, 5, 0,   // 꼭지점 1 (x, y, z)
+                -3, -5, 0, // 꼭지점 2 (x, y, z)
+                1, 0, 0   // 꼭지점 3 (x, y, z)
             ]);
             const rightArrowGeometry = new THREE.BufferGeometry();
             rightArrowGeometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
             const rightArrowMaterial = new THREE.MeshBasicMaterial({ color: '#eeeeee' });
             const rightArrowMesh = new THREE.Mesh(rightArrowGeometry, rightArrowMaterial);
-            rightArrowMesh.position.set(289.55, 202.6, 255);
+            rightArrowMesh.position.set(189.55, 202.6, 55);
             rightArrowMesh.rotation.y = THREE.MathUtils.degToRad(-90);
             rightArrowMesh.material.opacity = 0;
             rightArrowMesh.material.transparent = true;
@@ -109,7 +109,7 @@ export default class GuestBook {
             const leftArrowMesh = rightArrowMesh.clone();
             leftArrowMesh.material.side = THREE.DoubleSide;
             leftArrowMesh.rotation.y = THREE.MathUtils.degToRad(90);
-            leftArrowMesh.position.set(289.55, 202.6, 183.8);
+            leftArrowMesh.position.set(189.55, 202.6, -16.2);
             leftArrowMesh.material.opacity = 0;
             leftArrowMesh.material.transparent = true;
             leftArrowMesh.name = 'prevReview';
@@ -119,10 +119,10 @@ export default class GuestBook {
             app.scene.add(rightArrowMesh, leftArrowMesh);
 
             // 방명록 raycaster 감지 영역 추가
-            const areaGeometry = new THREE.PlaneGeometry(0.6,1,1,1);
+            const areaGeometry = new THREE.PlaneGeometry(60,100,1,1);
             const areaMaterial = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 });
             const areaMesh = new Mesh(areaGeometry, areaMaterial);
-            areaMesh.position.set(289.55, 200, 220);
+            areaMesh.position.set(189.55, 200, 20);
             areaMesh.rotation.y = THREE.MathUtils.degToRad(-90);
             areaMesh.name = 'guestBook';
 
@@ -168,8 +168,8 @@ export default class GuestBook {
 
         // 첫 로드인 경우만 geometry 생성하여 세팅
         if (isFirstLoad) {
-            reviewGeometry = new THREE.PlaneGeometry(0.23, 0.23, 1, 1);
-            deleteGeometry = new THREE.PlaneGeometry(0.03, 0.1, 1, 1);
+            reviewGeometry = new THREE.PlaneGeometry(23, 23, 1, 1);
+            deleteGeometry = new THREE.PlaneGeometry(3, 10, 1, 1);
         }
 
         for (let i = 0; i < 6; i ++) {
@@ -375,7 +375,7 @@ export default class GuestBook {
 
     // 방명록 mesh 포지션 세팅 매서드
     #reviewMeshPositionSets() {
-        const pos = { x: 288, y: 234.1, z: 204.5, gap: 30.2 }
+        const pos = { x: 188, y: 234.1, z: 4.5, gap: 30.2 }
         return [
             [(pos.x), (pos.y), (pos.z)],
             [(pos.x), (pos.y), (pos.z + pos.gap)],

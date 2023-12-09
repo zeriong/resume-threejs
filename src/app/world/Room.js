@@ -115,30 +115,6 @@ export default class Room {
 
             app.scene.add(model);
         })
-
-        // // 문 가림용 반투명 매쉬
-        // const doorCoverGeometry = new THREE.BoxGeometry(100, 0.2, 260);
-        // const doorCoverMaterial = new THREE.MeshBasicMaterial({ color: 0xfff9f0, transparent: true, opacity: 0.8, side: THREE.DoubleSide });
-        // const doorCoverMesh = new THREE.Mesh(doorCoverGeometry, doorCoverMaterial);
-        // doorCoverMesh.rotation.x = THREE.MathUtils.degToRad(-90);
-        // doorCoverMesh.rotation.z = THREE.MathUtils.degToRad(90);
-        // doorCoverMesh.position.x = 2.9;
-        // doorCoverMesh.position.y = 1.5;
-        // doorCoverMesh.position.z = 3.3;
-        // doorCoverMesh.scale.set(0.01, 0.01, 0.01);
-        // app.scene.add(doorCoverMesh);
-        //
-        // // 창문 가림용 반투명 매쉬
-        // const windowCoverGeometry = new THREE.BoxGeometry(150, 0.2, 200);
-        // const windowCoverMaterial = new THREE.MeshBasicMaterial({ color: 0xfff9f0, transparent: true, opacity: 1.0, side: THREE.DoubleSide });
-        // const windowCoverMesh = new THREE.Mesh(windowCoverGeometry, windowCoverMaterial);
-        // windowCoverMesh.rotation.x = THREE.MathUtils.degToRad(-90);
-        // windowCoverMesh.rotation.z = THREE.MathUtils.degToRad(90);
-        // windowCoverMesh.position.x = 3;
-        // windowCoverMesh.position.y = 2.1;
-        // windowCoverMesh.position.z = 1.1;
-        // windowCoverMesh.scale.set(0.01, 0.01, 0.01);
-        // app.scene.add(windowCoverMesh);
     }
 
     createWebview(name, src, sizes, positions) {
@@ -157,6 +133,11 @@ export default class Room {
     }
 
     createWebviewIframe(src, sizes) {
+        // html 영역을 고정하기 위함 (다른 html 영역으로 이탈 방지)
+        const div = document.createElement('div');
+        div.style.width = (sizes.w) + 'px';
+        div.style.height = (sizes.h) + 'px';
+
         const iframe = document.createElement('iframe');
         iframe.style.width = (sizes.w) + 'px';
         iframe.style.height = (sizes.h) + 'px';
@@ -166,11 +147,14 @@ export default class Room {
         iframe.style.opacity = '1';
         iframe.src = src;
 
-        return iframe;
+        div.appendChild(iframe);
+
+        return div;
     }
 
     createCSS3DObject(name, el, positions) {
         const cssObj = new CSS3DObject(el);
+        cssObj.color = new THREE.Color('transparent')
         cssObj.name = name;
         cssObj.position.x = positions.x;
         cssObj.position.y = positions.y;

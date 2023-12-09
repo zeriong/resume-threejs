@@ -51,8 +51,8 @@ export default class Application {
         this.update();
 
         // test
-        // const axesHelper = new THREE.AxesHelper(10);
-        // this.scene.add(axesHelper);
+        const axesHelper = new THREE.AxesHelper(1000);
+        this.scene.add(axesHelper);
 
         // 테스트시 주석 해제
         // const loadingEl = document.querySelector('#loading');

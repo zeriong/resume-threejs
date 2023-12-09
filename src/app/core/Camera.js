@@ -16,7 +16,7 @@ export default class Camera {
     // 카메라 생성
     init() {
         const app = Application.getInstance();
-        this.instance = new THREE.PerspectiveCamera(24, this.windowSizes.width / this.windowSizes.height, 0.1 * 100, 1000 * 100);
+        this.instance = new THREE.PerspectiveCamera(24, this.windowSizes.width / this.windowSizes.height, 10, 100000);
         this.instance.position.set(...this.cameraPosition);
 
         app.scene.add(this.instance);
