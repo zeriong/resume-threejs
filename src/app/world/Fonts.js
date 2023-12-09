@@ -16,22 +16,22 @@ export default class Fonts {
         const menuGroup = new THREE.Group();  // 메뉴 판넬 그룹
         const totalGroup = new THREE.Group();  // 전체 그룹
 
-        const fixPos = { y: 0.089, x: 0.55 } // position: (y = +), (z = -)
+        const fixPos = { y: 8.9, x: 55 } // position: (y = +), (z = -)
 
-        const clickAreaGeometry = new THREE.PlaneGeometry(1.3, 0.3, 1, 1);
+        const clickAreaGeometry = new THREE.PlaneGeometry(130, 30, 1, 1);
         const clickAreaMaterial = new THREE.MeshBasicMaterial({ opacity: 0, transparent: true });
 
         // load bold font
         loader.fontLoader.load('/assets/fontJson/Pretendard_Bold.json', (font) => {
             // bold mesh list
             [
-                { text: 'ZERIONG', objName: 'name', y: 0.45 },
-                { text: 'About Me', objName: 'aboutMe_menu', y: 3 },
-                { text: 'Projects', objName: 'projects_menu', y: 2.5 },
-                { text: 'Skills', objName: 'skills_menu', y: 2 },
-                { text: 'Roadmap', objName: 'roadmap_menu', y: 1.5 },
-                { text: 'Github', objName: 'github_menu', y: 1 },
-                { text: 'Blog', objName: 'blog_menu', y: 0.5 },
+                { text: 'ZERIONG', objName: 'name', y: 45 },
+                { text: 'About Me', objName: 'aboutMe_menu', y: 300 },
+                { text: 'Projects', objName: 'projects_menu', y: 250 },
+                { text: 'Skills', objName: 'skills_menu', y: 200 },
+                { text: 'Roadmap', objName: 'roadmap_menu', y: 150 },
+                { text: 'Github', objName: 'github_menu', y: 100 },
+                { text: 'Blog', objName: 'blog_menu', y: 50 },
             ]
                 .forEach((val) => {
                     // 모바일에서 mesh 메뉴 추가 안함 (nav 메뉴로 변경)
@@ -40,8 +40,8 @@ export default class Fonts {
                     const position = new THREE.Vector3();
                     const geometry = new TextGeometry(val.text, {
                         font: font,
-                        size: val.objName !== 'name' ? 0.18 : 0.32,
-                        height: 0.001,
+                        size: val.objName !== 'name' ? 18 : 32,
+                        height: 0.1,
                         curveSegments: 5,
                         bevelSegments: 5,
                     });
@@ -65,25 +65,21 @@ export default class Fonts {
 
             // load regular font
             loader.fontLoader.load('/assets/fontJson/Pretendard_Regular.json', (font) => {
-                const geometry = new TextGeometry('Frontend Engineer', { font: font, size: 0.165, height: 0.001, curveSegments: 5, bevelSegments: 5 })
+                const geometry = new TextGeometry('Frontend Engineer', { font: font, size: 16.5, height: 0.1, curveSegments: 5, bevelSegments: 5 })
                 const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
                 const mesh = new THREE.Mesh(geometry, material);
 
-                mesh.position.y = 0.2;
+                mesh.position.y = 20;
                 authorGroup.add(mesh);
             });
         });
 
         // 그룹 단위로 포지션 지정
-        authorGroup.position.z = 2.75;
+        authorGroup.position.z = 275;
 
-        menuGroup.position.x = -3.4;
-        menuGroup.position.z = -1.9;
+        menuGroup.position.x = -340;
+        menuGroup.position.z = -190;
 
-        totalGroup.add(menuGroup, authorGroup);
-        totalGroup.position.x = 1;
-        totalGroup.position.z = 2;
-
-        app.scene.add(totalGroup);
+        app.scene.add(menuGroup, authorGroup);
     }
 }

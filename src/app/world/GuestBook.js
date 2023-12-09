@@ -96,7 +96,7 @@ export default class GuestBook {
             rightArrowGeometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
             const rightArrowMaterial = new THREE.MeshBasicMaterial({ color: '#eeeeee' });
             const rightArrowMesh = new THREE.Mesh(rightArrowGeometry, rightArrowMaterial);
-            rightArrowMesh.position.set(2.8955, 2.026, 2.55);
+            rightArrowMesh.position.set(289.55, 202.6, 255);
             rightArrowMesh.rotation.y = THREE.MathUtils.degToRad(-90);
             rightArrowMesh.material.opacity = 0;
             rightArrowMesh.material.transparent = true;
@@ -109,7 +109,7 @@ export default class GuestBook {
             const leftArrowMesh = rightArrowMesh.clone();
             leftArrowMesh.material.side = THREE.DoubleSide;
             leftArrowMesh.rotation.y = THREE.MathUtils.degToRad(90);
-            leftArrowMesh.position.set(2.8955, 2.026, 1.838);
+            leftArrowMesh.position.set(289.55, 202.6, 183.8);
             leftArrowMesh.material.opacity = 0;
             leftArrowMesh.material.transparent = true;
             leftArrowMesh.name = 'prevReview';
@@ -122,7 +122,7 @@ export default class GuestBook {
             const areaGeometry = new THREE.PlaneGeometry(0.6,1,1,1);
             const areaMaterial = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 });
             const areaMesh = new Mesh(areaGeometry, areaMaterial);
-            areaMesh.position.set(2.8955, 2, 2.2);
+            areaMesh.position.set(289.55, 200, 220);
             areaMesh.rotation.y = THREE.MathUtils.degToRad(-90);
             areaMesh.name = 'guestBook';
 
@@ -375,7 +375,7 @@ export default class GuestBook {
 
     // 방명록 mesh 포지션 세팅 매서드
     #reviewMeshPositionSets() {
-        const pos = { x: 2.88, y: 2.341, z: 2.045, gap: 0.302 }
+        const pos = { x: 288, y: 234.1, z: 204.5, gap: 30.2 }
         return [
             [(pos.x), (pos.y), (pos.z)],
             [(pos.x), (pos.y), (pos.z + pos.gap)],

@@ -15,10 +15,10 @@ export default class Room {
         const _this = this;
         app.loader.fbxLoader.load('/assets/models/room.fbx',function(model){
             model.rotation.y = THREE.MathUtils.degToRad(-90);
-            model.position.z = 2;
-            model.position.x = 1;
+            model.position.x = 0;
             model.position.y = 0;
-            model.scale.set(0.01, 0.01, 0.01);
+            model.position.z = 0;
+            //model.scale.set(0.01, 0.01, 0.01);
 
             model.traverse((child) => {
                 if (child.isMesh) {
@@ -52,16 +52,9 @@ export default class Room {
 
                     // 모니터 스크린
                     if (child.name === 'polySurface575') {
-                        // iframe 생성
-                        const iframe = _this.createWebviewIframe('./pages/projects.html', MODEL_ROOM_OBJECT_SIZES.MONITOR);
 
-                        // CSS3DObject 생성
-                        const cssObj = _this.createCSS3DObject('monitor', iframe, MODEL_ROOM_OBJECT_POSITIONS.MONITOR);
-                        app.cssScene.add(cssObj);
-
-                        // CSS3DObject를 표현하기 위한 Mesh
-                        const mesh = _this.createWebviewMesh('monitor', MODEL_ROOM_OBJECT_SIZES.MONITOR, MODEL_ROOM_OBJECT_POSITIONS.MONITOR );
-                        app.scene.add(mesh);
+                        // 웹뷰 생성
+                        _this.createWebview('monitor', './pages/projects.html', MODEL_ROOM_OBJECT_SIZES.MONITOR, MODEL_ROOM_OBJECT_POSITIONS.MONITOR)
 
                         child.name = 'monitor';
 
@@ -90,16 +83,9 @@ export default class Room {
 
                     // 세로 액자
                     if (child.name === 'polySurface584') {
-                        // iframe 생성
-                        const iframe = _this.createWebviewIframe('./pages/roadmap.html', MODEL_ROOM_OBJECT_SIZES.FRAME1);
 
-                        // CSS3DObject 생성
-                        const cssObj = _this.createCSS3DObject('frame1', iframe, MODEL_ROOM_OBJECT_POSITIONS.FRAME1);
-                        app.cssScene.add(cssObj);
-
-                        // CSS3DObject를 표현하기 위한 Mesh
-                        const mesh = _this.createWebviewMesh('frame1', MODEL_ROOM_OBJECT_SIZES.FRAME1, MODEL_ROOM_OBJECT_POSITIONS.FRAME1 );
-                        app.scene.add(mesh);
+                        // 웹뷰 생성
+                        _this.createWebview('frame1', './pages/roadmap.html', MODEL_ROOM_OBJECT_SIZES.FRAME1, MODEL_ROOM_OBJECT_POSITIONS.FRAME1)
 
                         child.name = 'frame1';
 
@@ -108,16 +94,9 @@ export default class Room {
 
                     // 가로 액자
                     if (child.name === 'polySurface576') {
-                        // iframe 생성
-                        const iframe = _this.createWebviewIframe('./pages/skills.html', MODEL_ROOM_OBJECT_SIZES.FRAME2);
 
-                        // CSS3DObject 생성
-                        const cssObj = _this.createCSS3DObject('frame2', iframe, MODEL_ROOM_OBJECT_POSITIONS.FRAME2);
-                        app.cssScene.add(cssObj);
-
-                        // CSS3DObject를 표현하기 위한 Mesh
-                        const mesh = _this.createWebviewMesh('frame2', MODEL_ROOM_OBJECT_SIZES.FRAME2, MODEL_ROOM_OBJECT_POSITIONS.FRAME2 );
-                        app.scene.add(mesh);
+                        // 웹뷰 생성
+                        _this.createWebview('frame2', './pages/skills.html', MODEL_ROOM_OBJECT_SIZES.FRAME2, MODEL_ROOM_OBJECT_POSITIONS.FRAME2)
 
                         child.name = 'frame2';
 
@@ -137,39 +116,55 @@ export default class Room {
             app.scene.add(model);
         })
 
-        // 문 가림용 반투명 매쉬
-        const doorCoverGeometry = new THREE.BoxGeometry(100, 0.2, 260);
-        const doorCoverMaterial = new THREE.MeshBasicMaterial({ color: 0xfff9f0, transparent: true, opacity: 0.8, side: THREE.DoubleSide });
-        const doorCoverMesh = new THREE.Mesh(doorCoverGeometry, doorCoverMaterial);
-        doorCoverMesh.rotation.x = THREE.MathUtils.degToRad(-90);
-        doorCoverMesh.rotation.z = THREE.MathUtils.degToRad(90);
-        doorCoverMesh.position.x = 2.9;
-        doorCoverMesh.position.y = 1.5;
-        doorCoverMesh.position.z = 3.3;
-        doorCoverMesh.scale.set(0.01, 0.01, 0.01);
-        app.scene.add(doorCoverMesh);
+        // // 문 가림용 반투명 매쉬
+        // const doorCoverGeometry = new THREE.BoxGeometry(100, 0.2, 260);
+        // const doorCoverMaterial = new THREE.MeshBasicMaterial({ color: 0xfff9f0, transparent: true, opacity: 0.8, side: THREE.DoubleSide });
+        // const doorCoverMesh = new THREE.Mesh(doorCoverGeometry, doorCoverMaterial);
+        // doorCoverMesh.rotation.x = THREE.MathUtils.degToRad(-90);
+        // doorCoverMesh.rotation.z = THREE.MathUtils.degToRad(90);
+        // doorCoverMesh.position.x = 2.9;
+        // doorCoverMesh.position.y = 1.5;
+        // doorCoverMesh.position.z = 3.3;
+        // doorCoverMesh.scale.set(0.01, 0.01, 0.01);
+        // app.scene.add(doorCoverMesh);
+        //
+        // // 창문 가림용 반투명 매쉬
+        // const windowCoverGeometry = new THREE.BoxGeometry(150, 0.2, 200);
+        // const windowCoverMaterial = new THREE.MeshBasicMaterial({ color: 0xfff9f0, transparent: true, opacity: 1.0, side: THREE.DoubleSide });
+        // const windowCoverMesh = new THREE.Mesh(windowCoverGeometry, windowCoverMaterial);
+        // windowCoverMesh.rotation.x = THREE.MathUtils.degToRad(-90);
+        // windowCoverMesh.rotation.z = THREE.MathUtils.degToRad(90);
+        // windowCoverMesh.position.x = 3;
+        // windowCoverMesh.position.y = 2.1;
+        // windowCoverMesh.position.z = 1.1;
+        // windowCoverMesh.scale.set(0.01, 0.01, 0.01);
+        // app.scene.add(windowCoverMesh);
+    }
 
-        // 창문 가림용 반투명 매쉬
-        const windowCoverGeometry = new THREE.BoxGeometry(150, 0.2, 200);
-        const windowCoverMaterial = new THREE.MeshBasicMaterial({ color: 0xfff9f0, transparent: true, opacity: 1.0, side: THREE.DoubleSide });
-        const windowCoverMesh = new THREE.Mesh(windowCoverGeometry, windowCoverMaterial);
-        windowCoverMesh.rotation.x = THREE.MathUtils.degToRad(-90);
-        windowCoverMesh.rotation.z = THREE.MathUtils.degToRad(90);
-        windowCoverMesh.position.x = 3;
-        windowCoverMesh.position.y = 2.1;
-        windowCoverMesh.position.z = 1.1;
-        windowCoverMesh.scale.set(0.01, 0.01, 0.01);
-        app.scene.add(windowCoverMesh);
+    createWebview(name, src, sizes, positions) {
+        const app = Application.getInstance();
+
+        // iframe 생성
+        const iframe = this.createWebviewIframe(src, sizes);
+
+        // CSS3DObject 생성
+        const cssObj = this.createCSS3DObject(name, iframe, positions);
+        app.cssScene.add(cssObj);
+
+        // CSS3DObject를 표현하기 위한 Mesh 생성, 반환
+        const mesh = this.createWebviewMesh(name, sizes, positions );
+        app.scene.add(mesh);
     }
 
     createWebviewIframe(src, sizes) {
         const iframe = document.createElement('iframe');
-        iframe.src = src;
-        iframe.style.width = sizes.w + 'px';
-        iframe.style.height = sizes.h + 'px';
+        iframe.style.width = (sizes.w) + 'px';
+        iframe.style.height = (sizes.h) + 'px';
+        iframe.style.border = '0px';
         iframe.style.overflow = 'scroll';
         iframe.style.boxSizing = 'border-box';
         iframe.style.opacity = '1';
+        iframe.src = src;
 
         return iframe;
     }

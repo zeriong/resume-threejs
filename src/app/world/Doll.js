@@ -14,12 +14,12 @@ export default class Doll {
 
         app.loader.gltfLoader.load('/assets/models/dino.glb', (glb) => {
             const model = glb.scene;
-            model.scale.set(0.1, 0.1, 0.1);
+            model.scale.set(10, 10, 10);
             //model.castShadow = true;
             model.receiveShadow = true;
-            model.position.x = 1;
-            model.position.y = 1;
-            model.position.z = 0.5;
+            model.position.x = 0;
+            model.position.y = 100;
+            model.position.z = -150;
             model.rotation.y = THREE.MathUtils.degToRad(270);
 
             // 모델링이 가진 모든 mesh를 raycaster에 감지되도록 등록

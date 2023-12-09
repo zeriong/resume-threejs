@@ -5,19 +5,19 @@ export const DIALOG_TEXT = `안녕하세요, 지속적인 성장과 도전을 �
     감사합니다.`;
 
 export const MODEL_ROOM_OBJECT_POSITIONS = {
-    DOLL: { x: 1, y: 1, z: 0.5 },
-    MONITOR: { x: 1.682, y: 1.6 + 0.115, z: 0.223 + 0.028 },
-    POSTER: { x: -0.138, y: 2.312, z: 0.13 + 0.049 },
-    FRAME1: { x: 1.226, y: 2.451, z: 0.103 + 0.02 },
-    FRAME2: { x: 1.918, y: 2.451, z: 0.103 + 0.02 },
-    GUESTBOOK_AREA: { x: 0.5, y: 2, z: 2.194 },
+    DOLL: { x: 0, y: 100, z: -150 },
+    MONITOR: { x: 68.2, y: 171.6, z: -174.8 },
+    POSTER: { x: -113.8, y: 231.2, z: -182.1 },
+    FRAME1: { x: 22.6, y: 245.2, z: -187.6 }, // { x: 1.226, y: 2.451, z: 0.123 },
+    FRAME2: { x: 91.8, y: 245.2, z: -187.6 }, // { x: 1.918, y: 2.451, z: 0.123 },
+    GUESTBOOK_AREA: { x: -50, y: 200, z: 19.4 },
 }
 
 export const MODEL_ROOM_OBJECT_SIZES = {
-    MONITOR: { w: 877, h: 545 },
+    MONITOR: { w: 876, h: 547 },
     POSTER: { w: 986, h: 1500 },
-    FRAME1: { w: 520, h: 743 },
-    FRAME2: { w: 553, h: 480 },
+    FRAME1: { w: 520, h: 745 },
+    FRAME2: { w: 554, h: 477 },
 }
 
-export const MODEL_ROOM_OBJECT_SCALE = new Array(3).fill(0.001);
+export const MODEL_ROOM_OBJECT_SCALE = new Array(3).fill(0.1);

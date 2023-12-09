@@ -12,11 +12,11 @@ export default class Contents {
         let fixer;
         const calc = 1200 - this.windowSizes.width;
 
-        if (this.windowSizes.width >= 1200) fixer = 1;
-        else if (this.windowSizes.width >= 800) fixer = calc * 0.001 + 1;
-        else if (this.windowSizes.width >= 600) fixer = calc * 0.0015 + 1;
-        else if (this.windowSizes.width > 450) fixer = calc * 0.002 + 1;
-        else  fixer = calc * 0.0009 + 1;
+        if (this.windowSizes.width >= 1200) fixer = 100;
+        else if (this.windowSizes.width >= 800) fixer = calc * 0.1 + 100;
+        else if (this.windowSizes.width >= 600) fixer = calc * 0.15 + 100;
+        else if (this.windowSizes.width > 450) fixer = calc * 0.2 + 100;
+        else  fixer = calc * 0.09 + 100;
 
         return { x: -11.95 * fixer, y: 9.35 * fixer, z: 14.4 * fixer }
     }
@@ -24,51 +24,51 @@ export default class Contents {
     // Start 애니메이션 카메라 포지션
     getStartPositions() {
         return {
-            x: (this.windowSizes.width <= 497) ? (-18 * this.getFixCameraPosition()) : (0.5 * this.getFixCameraPosition()),
-            y: (this.windowSizes.width <= 497) ? (14.4 * this.getFixCameraPosition() + 5) : (5 * this.getFixCameraPosition()),
-            z: (this.windowSizes.width <= 497) ? (19.2 * this.getFixCameraPosition()) : (27 * this.getFixCameraPosition()),
+            x: (this.windowSizes.width <= 497) ? (-1800 * this.getFixCameraPosition()) : (50 * this.getFixCameraPosition()),
+            y: (this.windowSizes.width <= 497) ? (1440 * this.getFixCameraPosition() + 500) : (500 * this.getFixCameraPosition()),
+            z: (this.windowSizes.width <= 497) ? (1920 * this.getFixCameraPosition()) : (2700 * this.getFixCameraPosition()),
         }
     }
 
     // 브라우저 크기에 따른 카메라 포지션 보정
     getFixCameraPosition() {
-        if (this.windowSizes.width >= 1400) return 1;
-        return (1400 - this.windowSizes.width) * (this.windowSizes.width <= 497 ? 0.0003 : 0.0001) + 1;
+        if (this.windowSizes.width >= 1400) return 100;
+        return (1400 - this.windowSizes.width) * (this.windowSizes.width <= 497 ? 0.0003 : 0.0001) + 100;
     }
 
     // 브라우저 크기에 따른 skills 컨텐츠 포지션 보정
     getFixSkillsPosition() {
         if (this.windowSizes.width >= 1400) return 0;
         if (this.windowSizes.width <= 497) {
-            const value = (1400 - this.windowSizes.width) * 0.0003 + 1;
-            if (value > 1.32) return 1.32;
+            const value = (1400 - this.windowSizes.width) * 0.0003 + 100;
+            if (value > 132) return 132;
             return value;
         }
-        return (1400 - this.windowSizes.width) * 0.0007 + 0.7;
+        return (1400 - this.windowSizes.width) * 0.0007 + 70;
     }
 
     // 브라우저 크기에 따른 projects 컨텐츠 포지션 보정
     getFixMonitorCamPosition() {
-        if (this.windowSizes.width <= 530) return 3.1;
-        if (this.windowSizes.width <= 740) return 3;
-        if (this.windowSizes.width <= 1400) return 1.9;
-        if (this.windowSizes.width <= 1920) return 1.3;
-        return 1.3
+        if (this.windowSizes.width <= 530) return 310;
+        if (this.windowSizes.width <= 740) return 300;
+        if (this.windowSizes.width <= 1400) return 190;
+        if (this.windowSizes.width <= 1920) return 130;
+        return 130
     }
 
     // 브라우저 크기에 따른 roadmap 컨텐츠 포지션 보정
     getFixRoadmapCamPosition() {
-        if (this.windowSizes.width <= 740) return 3;
-        return 2.5
+        if (this.windowSizes.width <= 740) return 300;
+        return 250
     }
 
     // 브라우저 크기에 따른 방명록 컨텐츠 포지션 보정
     getFixGuestBookPosition() {
-        if (this.windowSizes.width <= 300) return 2;
-        if (this.windowSizes.width <= 497) return 1.5;
-        if (this.windowSizes.width <= 500) return 2;
-        if (this.windowSizes.width <= 700) return 1.8;
-        if (this.windowSizes.width <= 1000) return 0.8;
+        if (this.windowSizes.width <= 300) return 200;
+        if (this.windowSizes.width <= 497) return 150;
+        if (this.windowSizes.width <= 500) return 200;
+        if (this.windowSizes.width <= 700) return 180;
+        if (this.windowSizes.width <= 1000) return 80;
         else return 0
     }
 
@@ -79,10 +79,10 @@ export default class Contents {
             {
                 name: 'aboutMe', objNames: ['doll', 'aboutMe_menu'], navMenuId: 'navAboutMe',
                 cameraPosition: {
-                    x: (positions.DOLL.x), y: (positions.DOLL.y + 0.4), z: (positions.DOLL.z + 2.5 + this.getFixCameraPosition())
+                    x: (positions.DOLL.x), y: (positions.DOLL.y + 40), z: (positions.DOLL.z + 250 + this.getFixCameraPosition())
                 },
                 controlsTarget: {
-                    x: (positions.DOLL.x), y: (positions.DOLL.y + 0.2), z: (positions.DOLL.z)
+                    x: (positions.DOLL.x), y: (positions.DOLL.y + 20), z: (positions.DOLL.z)
                 }
             },
 
@@ -112,7 +112,7 @@ export default class Contents {
             {
                 name: 'skills', objNames: ['frame2', 'skills_menu'], navMenuId: 'navSkills',
                 cameraPosition: {
-                    x: (positions.FRAME2.x), y: (positions.FRAME2.y), z: (positions.FRAME2.z + 1.6 + this.getFixSkillsPosition())
+                    x: (positions.FRAME2.x), y: (positions.FRAME2.y), z: (positions.FRAME2.z + 160 + this.getFixSkillsPosition())
                 },
                 controlsTarget: {
                     x: (positions.FRAME2.x), y: (positions.FRAME2.y), z: (positions.FRAME2.z)
@@ -126,7 +126,7 @@ export default class Contents {
                     x: (positions.GUESTBOOK_AREA.x - this.getFixGuestBookPosition()), y: (positions.GUESTBOOK_AREA.y), z: (positions.GUESTBOOK_AREA.z)
                 },
                 controlsTarget: {
-                    x: (positions.GUESTBOOK_AREA.x + 0.5), y: (positions.GUESTBOOK_AREA.y), z: (positions.GUESTBOOK_AREA.z)
+                    x: (positions.GUESTBOOK_AREA.x + 50), y: (positions.GUESTBOOK_AREA.y), z: (positions.GUESTBOOK_AREA.z)
                 },
             },
 
@@ -134,7 +134,7 @@ export default class Contents {
             {
                 name: 'poster', objNames: ['poster'],
                 cameraPosition: {
-                    x: (positions.POSTER.x), y: (positions.POSTER.y), z: (positions.POSTER.z + 4 + this.getFixCameraPosition())
+                    x: (positions.POSTER.x), y: (positions.POSTER.y), z: (positions.POSTER.z + 400 + this.getFixCameraPosition())
                 },
                 controlsTarget: {
                     x: (positions.POSTER.x), y: (positions.POSTER.y), z: (positions.POSTER.z)
