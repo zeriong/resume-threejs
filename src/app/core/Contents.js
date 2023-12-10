@@ -24,16 +24,16 @@ export default class Contents {
     // Start 애니메이션 카메라 포지션
     getStartPositions() {
         return {
-            x: (this.windowSizes.width <= 497) ? (-1800 * this.getFixCameraPosition()) : (50 * this.getFixCameraPosition()),
-            y: (this.windowSizes.width <= 497) ? (1440 * this.getFixCameraPosition() + 500) : (500 * this.getFixCameraPosition()),
-            z: (this.windowSizes.width <= 497) ? (1920 * this.getFixCameraPosition()) : (2700 * this.getFixCameraPosition()),
+            x: (this.windowSizes.width <= 497) ? (-1800 * this.getFixCameraPosition()) : (0.5 * this.getFixCameraPosition()),
+            y: (this.windowSizes.width <= 497) ? (1440 * this.getFixCameraPosition() + 5) : (5 * this.getFixCameraPosition()),
+            z: (this.windowSizes.width <= 497) ? (1920 * this.getFixCameraPosition()) : (27 * this.getFixCameraPosition()),
         }
     }
 
     // 브라우저 크기에 따른 카메라 포지션 보정
     getFixCameraPosition() {
         if (this.windowSizes.width >= 1400) return 100;
-        return (1400 - this.windowSizes.width) * (this.windowSizes.width <= 497 ? 0.0003 : 0.0001) + 100;
+        return (1400 - this.windowSizes.width) * (this.windowSizes.width <= 497 ? 0.0003 : 0.0001) + (this.windowSizes.width <= 497 ? 1 : 100);
     }
 
     // 브라우저 크기에 따른 skills 컨텐츠 포지션 보정

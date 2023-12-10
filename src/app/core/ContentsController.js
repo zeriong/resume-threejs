@@ -319,7 +319,7 @@ export default class ContentsController {
         })
     }
 
-    // Start로 시작
+    // Start 매서드
     #playStartAnimation() {
         // 카메라 무빙 애니메이션 진행중일 때 캔슬
         if (this.isMovingCam) return;
