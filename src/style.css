@@ -24,6 +24,13 @@
   font-family: "Pretendard";
 }
 
+html {
+  -webkit-text-size-adjust: none; /*Chrome, Safari, newer versions of Opera*/
+  -moz-text-size-adjust: none; /*Firefox*/
+  -ms-text-size-adjust: none; /*Ie*/
+  -o-text-size-adjust: none; /*old versions of Opera*/
+}
+
 body, html {
   background-color: transparent;
   width: 100%;
@@ -437,7 +444,8 @@ ul {
   transform: translateX(-50%);
   bottom: 130px;
   width: 460px;
-  height: 300px;
+  height: 27%;
+  max-height: 300px;
   font-weight: 700;
   background-color: #fff;
   color: black;

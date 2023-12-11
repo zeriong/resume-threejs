@@ -49,7 +49,7 @@ export default class Contents {
 
     // 브라우저 크기에 따른 projects 컨텐츠 포지션 보정
     getFixMonitorCamPosition() {
-        if (this.windowSizes.width <= 530) return 310;
+        if (this.windowSizes.width <= 530) return 450;
         if (this.windowSizes.width <= 740) return 300;
         if (this.windowSizes.width <= 1400) return 190;
         if (this.windowSizes.width <= 1920) return 130;
@@ -134,7 +134,7 @@ export default class Contents {
             {
                 name: 'poster', objNames: ['poster'],
                 cameraPosition: {
-                    x: (positions.POSTER.x), y: (positions.POSTER.y), z: (positions.POSTER.z + 400 + this.getFixCameraPosition())
+                    x: (positions.POSTER.x), y: (positions.POSTER.y), z: (positions.POSTER.z + 500 + this.getFixCameraPosition())
                 },
                 controlsTarget: {
                     x: (positions.POSTER.x), y: (positions.POSTER.y), z: (positions.POSTER.z)

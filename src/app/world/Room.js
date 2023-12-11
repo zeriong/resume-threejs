@@ -65,7 +65,6 @@ export default class Room {
                     if (child.name === 'polySurface602') {
                         // texture img
                         const texture = app.loader.textureLoader.load('/assets/images/poster.jpg');
-                        texture.encoding = THREE.sRGBEncoding;
                         const geometry = new THREE.PlaneGeometry(MODEL_ROOM_OBJECT_SIZES.POSTER.w, MODEL_ROOM_OBJECT_SIZES.POSTER.h);
                         const material = new THREE.MeshBasicMaterial({ map: texture });
                         const mesh = new THREE.Mesh(geometry, material);
@@ -154,7 +153,6 @@ export default class Room {
 
     createCSS3DObject(name, el, positions) {
         const cssObj = new CSS3DObject(el);
-        cssObj.color = new THREE.Color('transparent')
         cssObj.name = name;
         cssObj.position.x = positions.x;
         cssObj.position.y = positions.y;
