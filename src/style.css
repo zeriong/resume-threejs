@@ -968,6 +968,55 @@ ul {
   padding-left: 36px;
 }
 
+#portfolio {
+  width: 100%;
+  max-width: 860px;
+  height: 100%;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  padding: 26px 0;
+}
+#portfolio .title {
+  text-align: center;
+  margin-bottom: 26px;
+  font-weight: 800;
+  color: #0E0E0E;
+}
+#portfolio header {
+  display: flex;
+  border-radius: 15px;
+  padding: 8px;
+  margin-bottom: 18px;
+  background-color: #424345;
+  gap: 8px;
+}
+#portfolio header #videoButton, #portfolio header #detailButton, #portfolio header #resumeButton {
+  text-align: center;
+  font-size: 16px;
+  width: 50%;
+  padding: 20px 0;
+  color: #FEFEFE;
+  border-radius: 8px;
+  font-weight: 500;
+}
+#portfolio header #videoButton.active, #portfolio header #detailButton.active, #portfolio header #resumeButton.active {
+  background-color: #5c5c60;
+}
+#portfolio main {
+  background-color: #efefef;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  padding: 24px;
+}
+#portfolio main .container {
+  padding: 18px;
+}
+#portfolio main .container > iframe {
+  border: none;
+  border-radius: 15px;
+}
 @media screen and (max-width: 650px) {
   #loading #loadingContainer {
     width: calc(100% - 30px);

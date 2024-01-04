@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zeriong Portfolio</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body id="portfolio">
+<h1 class="title">Zeriong Portfolio</h1>
+<header>
+    <button id="videoButton" class="active" type="button">프로젝트 데모</button>
+    <button id="detailButton" type="button">프로젝트 상세보기</button>
+    <button id="resumeButton" type="button">3D 웹 포트폴리오 바로가기</button>
+</header>
+<main>
+    <section id="demoSection">
+        <div class="container">
+            <iframe
+                    width="100%" height="400"
+                    src="https://www.youtube.com/embed/pqggXfTT4-k"
+                    allow="accelerometer; autoplay; clipboard-write;
+                    encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+    <section id="detailSection"></section>
+</main>
+<div>
+
+</div>
+
+<script>
+    const demoBtn = document.getElementById('videoButton');
+    const detailBtn = document.getElementById('detailButton');
+    const tabBtnList = [demoBtn, detailBtn];
+
+    function removeActive() {
+        tabBtnList.map(dom => dom.classList.remove("active"));
+    }
+
+    tabBtnList.map(dom => {
+        dom.addEventListener('click', () => {
+            removeActive();
+            dom.classList.add('active');
+        });
+    });
+
+    const threeResumeBtn = document.getElementById('resumeButton');
+
+    threeResumeBtn.addEventListener('click', () => {
+        window.open('https://resume.zeriong.com/','_blank');
+    });
+
+</script>
+</body>
+</html>
