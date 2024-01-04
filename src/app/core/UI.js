@@ -20,6 +20,10 @@ export default class UI {
         const soundOn = document.querySelector('#soundOn');
         const soundOff = document.querySelector('#soundOff');
 
+        // 일반 포트폴리오 버튼 이벤트 추가
+        const linkPortfolio = () => window.open('https://resume.zeriong.com/pages/portfolio.html');
+        document.querySelector('#portfolioBtn').addEventListener('click', linkPortfolio);
+
         // 모바일인 경우 nav 메뉴 추가
         if (app.windowSizes.width <= 497) {
             const contentsController = app.contentsController;
@@ -69,6 +73,7 @@ export default class UI {
             // 링크메뉴 이벤트 등록
             document.querySelector('#navGithub').addEventListener('click', linkGithub);
             document.querySelector('#navBlog').addEventListener('click', linkBlog);
+            document.querySelector('#portfolioSideBtn').addEventListener('click', linkPortfolio);
         }
 
         // 모바일이 아닌 경우만 방명록 & 사운드 버튼 툴팁, hover 이벤트
