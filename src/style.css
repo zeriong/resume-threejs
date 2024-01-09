@@ -989,7 +989,7 @@ ul {
 
 #portfolio {
   width: 100%;
-  max-width: 860px;
+  max-width: 910px;
   display: flex;
   margin: 0 auto 24px;
   flex-direction: column;
@@ -1001,7 +1001,7 @@ ul {
   font-weight: 800;
   color: #0E0E0E;
 }
-#portfolio header {
+#portfolio nav {
   display: flex;
   border-radius: 15px;
   padding: 8px;
@@ -1009,7 +1009,8 @@ ul {
   background-color: #424345;
   gap: 8px;
 }
-#portfolio header #videoButton, #portfolio header #detailButton, #portfolio header #resumeButton {
+#portfolio nav #videoButton, #portfolio nav #detailButton, #portfolio nav #resumeButton {
+  cursor: pointer;
   text-align: center;
   font-size: 16px;
   width: 50%;
@@ -1018,7 +1019,7 @@ ul {
   border-radius: 8px;
   font-weight: 500;
 }
-#portfolio header #videoButton.active, #portfolio header #detailButton.active, #portfolio header #resumeButton.active {
+#portfolio nav #videoButton.active, #portfolio nav #detailButton.active, #portfolio nav #resumeButton.active {
   background-color: #5c5c60;
 }
 #portfolio main {

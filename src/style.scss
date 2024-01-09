@@ -1067,7 +1067,7 @@ ul {
 // 포트폴리오 html
 #portfolio {
   width: 100%;
-  max-width: 860px;
+  max-width: 910px;
   display: flex;
   margin: 0 auto 24px;
   flex-direction: column;
@@ -1078,7 +1078,7 @@ ul {
     font-weight: 800;
     color: #0E0E0E;
   }
-  header {
+  nav {
     display: flex;
     border-radius: 15px;
     padding: 8px;
@@ -1089,6 +1089,7 @@ ul {
       &.active {
         background-color: #5c5c60;
       }
+      cursor: pointer;
       text-align: center;
       font-size: 16px;
       width: 50%;
