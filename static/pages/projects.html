@@ -880,15 +880,16 @@
         window.addEventListener('scroll', scrollNavSection);
 
         /** 포트폴리오 아이프레임 대응 메세지 전송 */
+        // 문서 높이 계산
+        function sendHeight() {
+            const height = document.getElementById('projectsBody').offsetHeight //document.documentElement.scrollHeight || document.body.scrollHeight;
+            window.parent.postMessage('height:' + height); // 부모 페이지에 높이 전송
+        }
         // 로드 시 높이 전송
         window.onload = sendHeight;
         // 창 크기 변경시 높이 다시 전송
         window.onresize = sendHeight;
-        // 문서 높이 계산
-        function sendHeight() {
-            var height = document.getElementById('projectsBody').offsetHeight //document.documentElement.scrollHeight || document.body.scrollHeight;
-            window.parent.postMessage('height:' + height); // 부모 페이지에 높이 전송
-        }
+
         // 프로젝트 클릭 메세지 전송
         function sendClickProjects() {
             window.parent.postMessage('click:projects'); // 부모 페이지에 높이 전송

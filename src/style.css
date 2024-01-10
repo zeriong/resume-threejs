@@ -1100,6 +1100,7 @@ ul {
   flex-direction: column;
 }
 #portfolio main #detailSection {
+  position: relative;
   display: none;
   background-color: white;
   width: 100%;

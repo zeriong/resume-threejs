@@ -164,7 +164,19 @@
     </section>
 
     <section id="detailSection">
-        <iframe id="projects_iframe" src="projects.html">
+        <nav id="navbar" class="navbar">
+            <div class="inner">
+                <button id="toProjects" href="#projects" data-target="projects" class="active">
+                    Projects
+                    <div></div>
+                </button>
+                <button id="toLearning" href="#learning" data-target="learning">
+                    Learning
+                    <div></div>
+                </button>
+            </div>
+        </nav>
+        <iframe id="projectsIframe" src="projects.html">
         </iframe>
     </section>
 </main>
@@ -202,32 +214,38 @@
 
     // 부모 페이지에서 메시지 수신 리스너
     window.addEventListener('message', function(event) {
-        var msg = event.data; // 높이 값 수신
+        const msg = event.data; // 높이 값 수신
         if (msg.startsWith('height:')) {
-            const height = msg.split('height:')[1]
+            // projects 로드 시 높이 계산하며 navbar 삭제
+            const iframe = document.getElementById('projectsIframe'); // 아이프레임 ID
+            const innerDoc = iframe.contentDocument || iframe.contentWindow.document; // 아이프레임의 문서 객체
+            const navbar = innerDoc.getElementById('navbar');
+            if (navbar.style.display !== 'none') navbar.style.display = 'none';
+
+            const height = msg.split('height:')[1];
             if (height && height > 0) {
-                document.getElementById('projects_iframe').style.height = height + 'px'; // 아이프레임 높이 조정
+                document.getElementById('projectsIframe').style.height = height + 'px'; // 아이프레임 높이 조정
+
             }
         } else if (msg.startsWith('click:projects')) {
-            var iframe = document.getElementById('projects_iframe'); // 아이프레임 ID
-            var innerDoc = iframe.contentDocument || iframe.contentWindow.document; // 아이프레임의 문서 객체
-            var targetElement = innerDoc.getElementById('projects'); // 자식 요소 ID
+            const iframe = document.getElementById('projectsIframe'); // 아이프레임 ID
+            const innerDoc = iframe.contentDocument || iframe.contentWindow.document; // 아이프레임의 문서 객체
+            const targetElement = innerDoc.getElementById('projects'); // 자식 요소 ID
             if (targetElement) {
-                var position = targetElement.offsetTop; // 자식 요소의 상단 위치
+                const position = targetElement.offsetTop; // 자식 요소의 상단 위치
                 window.scrollTo(0, position); // 부모 창 스크롤 조정
             }
         } else if (msg.startsWith('click:learning')) {
-            var iframe = document.getElementById('projects_iframe'); // 아이프레임 ID
-            var innerDoc = iframe.contentDocument || iframe.contentWindow.document; // 아이프레임의 문서 객체
-            var targetElement = innerDoc.getElementById('learning'); // 자식 요소 ID
+            const iframe = document.getElementById('projectsIframe'); // 아이프레임 ID
+            const innerDoc = iframe.contentDocument || iframe.contentWindow.document; // 아이프레임의 문서 객체
+            const targetElement = innerDoc.getElementById('learning'); // 자식 요소 ID
             if(targetElement) {
-                var position = targetElement.offsetTop; // 자식 요소의 상단 위치
+                const position = targetElement.offsetTop; // 자식 요소의 상단 위치
                 window.scrollTo(0, position); // 부모 창 스크롤 조정
             }
         }
         //console.log('메시지 수신: ', msg)
     }, false);
-
 </script>
 </body>
 </html>
