@@ -212,11 +212,11 @@
     window.addEventListener('message', function(event) {
         const msg = event.data; // 높이 값 수신
         if (msg.startsWith('height:')) {
-            // // projects 로드 시 높이 계산하며 navbar 삭제
-            // const iframe = document.getElementById('projectsIframe'); // 아이프레임 ID
-            // const innerDoc = iframe.contentDocument || iframe.contentWindow.document; // 아이프레임의 문서 객체
-            // const navbar = innerDoc.getElementById('navbar');
-            // if (navbar.style.display !== 'none') navbar.style.display = 'none';
+            // projects 로드 시 높이 계산하며 navbar 삭제
+            const iframe = document.getElementById('projectsIframe'); // 아이프레임 ID
+            const innerDoc = iframe.contentDocument || iframe.contentWindow.document; // 아이프레임의 문서 객체
+            const navbar = innerDoc.getElementById('navbar');
+            if (navbar.style.display !== 'none') navbar.style.display = 'none';
 
             const height = msg.split('height:')[1];
             if (height && height > 0) {
