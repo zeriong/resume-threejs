@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body id="portfolio">
-<h1 class="title">Zeriong Portfolio</h1>
-<nav id="mainNavbar">
-    <button id="videoButton" class="active">프로젝트 데모</button>
-    <button id="detailButton">프로젝트 상세보기</button>
-    <button id="resumeButton">3D 웹 포트폴리오 바로가기</button>
-</nav>
+<header id="headerSection">
+    <h1 class="title">Zeriong Portfolio</h1>
+    <nav id="mainNavbar">
+        <button id="videoButton" class="active">프로젝트 데모</button>
+        <button id="detailButton">프로젝트 상세보기</button>
+        <button id="resumeButton">3D 웹 포트폴리오 바로가기</button>
+    </nav>
+</header>
 <main>
     <section id="demoSection">
 
@@ -164,9 +166,9 @@
     </section>
 
     <section id="detailSection">
-        <nav id="portfolioNavbar" class="navbar">
+        <nav id="portfolioNavbar">
             <div class="inner">
-                <button id="toProjects">
+                <button id="toProjects" class="active">
                     Projects
                     <div></div>
                 </button>
@@ -208,43 +210,117 @@
         window.open('https://resume.zeriong.com/','_blank');
     });
 
+    // 버튼 섹션 연결
+    const navbarLinks = document.querySelectorAll('#portfolioNavbar button');
+    const iframe = document.getElementById('projectsIframe');
+
+    let learningTopPosition;
+    let clicked = false;
+    let scrollTimeout = null;
+
+    // 클릭 이벤트 등록
+    navbarLinks.forEach(link => clickNavSection(link));
+
     // 부모 페이지에서 메시지 수신 리스너
-    window.addEventListener('message', function(event) {
+    window.addEventListener('message', (event) => {
         const msg = event.data; // 높이 값 수신
         if (msg.startsWith('height:')) {
             // projects 로드 시 높이 계산하며 navbar 삭제
-            const iframe = document.getElementById('projectsIframe'); // 아이프레임 ID
-            const innerDoc = iframe.contentDocument || iframe.contentWindow.document; // 아이프레임의 문서 객체
+            const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
             const navbar = innerDoc.getElementById('navbar');
-            if (navbar.style.display !== 'none') navbar.style.display = 'none';
+
+            // iframe 로드시 기존 navbar 삭제
+            if (navbar.style.display !== 'none') {
+                navbar.style.display = 'none';
+                innerDoc.getElementById('projects').style.paddingTop = '0';
+            }
+            // learning position을 할당
+            const learningOffsetTop = innerDoc.getElementById('learning').offsetTop;
+            if (learningOffsetTop) {
+                const headerOffsetHeight = document.getElementById('headerSection').offsetHeight;
+                const navbarOffsetHeight = document.getElementById('portfolioNavbar').offsetHeight;
+                learningTopPosition =  learningOffsetTop + headerOffsetHeight + navbarOffsetHeight;
+            }
 
             const height = msg.split('height:')[1];
             if (height && height > 0) {
-                document.getElementById('projectsIframe').style.height = height + 'px'; // 아이프레임 높이 조정
-
-            }
-        } else if (msg.startsWith('click:projects')) {
-            const iframe = document.getElementById('projectsIframe'); // 아이프레임 ID
-            const innerDoc = iframe.contentDocument || iframe.contentWindow.document; // 아이프레임의 문서 객체
-            const targetElement = innerDoc.getElementById('projects'); // 자식 요소 ID
-            if (targetElement) {
-                const position = targetElement.offsetTop; // 자식 요소의 상단 위치
-                window.scrollTo(0, position); // 부모 창 스크롤 조정
-            }
-        } else if (msg.startsWith('click:learning')) {
-            const iframe = document.getElementById('projectsIframe'); // 아이프레임 ID
-            const innerDoc = iframe.contentDocument || iframe.contentWindow.document; // 아이프레임의 문서 객체
-            const targetElement = innerDoc.getElementById('learning'); // 자식 요소 ID
-            if(targetElement) {
-                const position = targetElement.offsetTop; // 자식 요소의 상단 위치
-                window.scrollTo(0, position); // 부모 창 스크롤 조정
+                document.getElementById('projectsIframe').style.height = height + 'px'; // iframe 높이 조정
             }
         }
         //console.log('메시지 수신: ', msg)
     }, false);
 
+    // projects navbar 스크롤 이벤트
+    window.addEventListener('scroll', scrollNavSection);
+
+
+    // navbarLinks elements의 적용할 이벤트 등록 함수
+    function clickNavSection(link) {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const innerDoc = iframe.contentDocument || iframe.contentWindow.document; // iframe 문서 객체
+
+            if (e.target.id === 'toLearning') {
+                // 클래스 핸들
+                handleNavSection('toLearning');
+                // 지정된 위치로 이동
+                const targetElement = innerDoc.getElementById('learning'); // 자식 요소 ID
+                if(targetElement) {
+                    clickScrollMove(learningTopPosition); // 클릭 스크롤 이동 함수
+                }
+            } else if (e.target.id === 'toProjects') {
+                // 클래스 핸들
+                handleNavSection('toProjects');
+                // 지정된 위치로 이동
+                const targetElement = innerDoc.getElementById('toProjects'); // 자식 요소 ID
+                if(targetElement) {
+                    const position = targetElement.offsetTop; // 자식 요소의 상단 위치
+                    clickScrollMove(position); // 클릭 스크롤 이동 함수
+                }
+            }
+        });
+    }
+    // projects navbar active 클래스 핸들
+    function handleNavSection(category) {
+        navbarLinks.forEach(el => {
+            const id = el.id
+            if (category === 'toLearning') {
+                if (id === 'toLearning') el.classList.add('active');
+                if (id === 'toProjects') el.classList.remove('active');
+            } else if (category === "toProjects") {
+                if (id === 'toProjects') el.classList.add('active');
+                if (id === 'toLearning') el.classList.remove('active');
+            }
+        });
+    }
+    // 스크롤 섹션 영역 체크 함수
+    function scrollNavSection() {
+        // timeout을 재귀적으로 호출하여 클릭 이동 시 스크롤링 체크
+        if (clicked) {
+            if (scrollTimeout !== null) {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = null;
+            }
+            scrollTimeout = setTimeout(() => {
+                clicked = false;
+            }, 50);
+            return;
+        }
+        // active 클래스 변경
+        if (window.scrollY < learningTopPosition) handleNavSection('toProjects');
+        else if (window.scrollY >= learningTopPosition) handleNavSection('toLearning');
+    }
+    // active 클래스 삭제 함수
     function removeActive() {
-        tabBtnList.map(dom => dom.classList.remove("active"));
+        tabBtnList.map(el => el.classList.remove("active"));
+    }
+    // 스크롤 이동 함수
+    function clickScrollMove(position) {
+        clicked = true;
+        window.scrollTo({
+            top: position,
+            behavior: 'smooth'
+        });
     }
 </script>
 </body>

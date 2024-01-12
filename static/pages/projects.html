@@ -882,7 +882,8 @@
         /** 포트폴리오 아이프레임 대응 메세지 전송 */
         // 문서 높이 계산
         function sendHeight() {
-            const height = document.getElementById('projectsBody').offsetHeight //document.documentElement.scrollHeight || document.body.scrollHeight;
+            const height = document.getElementById('projectsBody').offsetHeight
+            console.log('내부 콘솔')
             window.parent.postMessage('height:' + height); // 부모 페이지에 높이 전송
         }
         // 로드 시 높이 전송
@@ -898,9 +899,6 @@
         function sendClickLearning() {
             window.parent.postMessage('click:learning'); // 부모 페이지에 높이 전송
         }
-
-
-
         // navbarLinks elements의 적용할 이벤트 등록 함수
         function clickNavSection(link) {
             link.addEventListener('click', (e) => {
