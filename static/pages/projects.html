@@ -140,7 +140,7 @@
                             서비스 환경에 대한 이해도를 높이기 위해 우분투 리눅스를 통한 서비스 환경구축,<br/>
                             오픈소스 SSL 인증서 적용
                         </li>
-                        <li>PM2를 통한 서비스 관리 및 무중단 서비스 이해</li>
+                        <li>PM2를 통한 배포 및 모니터링</li>
                         <li>다소 아쉬웠던 일부 코드 리팩토링</li>
                     </ul>
                     <div>
@@ -150,7 +150,7 @@
                                 query타입의 상태관리와 condegen 커스텀을 통한 캐시 대상 통신함수<br/>
                                 자동 생성으로 극단적인 생산성 향상 경험
                             </li>
-                            <li>리눅스 환경 이해 및 배포 경험, pm2를 통한 서비스 관리</li>
+                            <li>리눅스 환경 이해 및 배포 경험, pm2를 이용한 무중단 배포 및 관리 이해</li>
                         </ul>
                     </div>
                     <div>
@@ -415,8 +415,70 @@
             이에 대한 숙련도를 높이고 온라인 강좌를 통해 웹 서비스의 기초를 익힌 과정입니다.
         </p>
 
-        <!-- 레이아웃 갤러리 -->
+        <!-- ReactNative FoodDeliveryApp -->
         <div class="project-container is-first">
+            <div class="project-title-header">
+                <p class="title">배달 라이더 앱 클론 코딩 (Android)</p>
+                <p class='project-type'>개인</p>
+                <a href="https://github.com/zeriong/react-native-deliveryApp"
+                   target="_blank"
+                   class="github-icon">
+                    <img src="/assets/images/icons/git-symbol.svg" alt="git" style="position: relative; top: 100px;"/>
+                    <i class="arrow-right"></i>
+                </a>
+            </div>
+            <p class="project-intro-desc">
+                React-Native를 사용한 모바일 앱 개발에 대한 전반적인 이해도 향상을 목적으로 모바일 배달 라이더
+                앱을 클론 코딩하는 강의를 통해 학습한 결과물입니다.
+            </p>
+            <div class="project-detail-main">
+                <div class="preview-container">
+                    <div class="preview-img-wrap">
+                        <img src="/assets/images/preview/reactNative.png" alt="preview"/>
+                    </div>
+                    <p class="dev-part">
+                        Frontend Engineer
+                    </p>
+                    <p class="dev-date-range">2024.01 ~ 2024.02</p>
+                </div>
+                <div class="content-container">
+                    <ul class="bullet-list">
+                        <li>AndroidManifest에 필요 권한을 명시하고 권한 획득 커스텀 훅을 생성</li>
+                        <li>patch-package를 통해 [ npm install ] 실행 시 커스텀된 라이브러리가 적용되도록 자동화</li>
+                        <li>Firebase - Messaging을 활용한 푸쉬알림 구현</li>
+                        <li>커스텀된 NMap 라이브러리를 통해 네이버지도 연동</li>
+                        <li>TMap API를 통해 내비게이션을 연동하고 커스텀 모듈을 생성하고 패키지에 추가</li>
+                        <li>웹소켓을 훅으로 활용하여 실시간 오더 조회 기능 구현</li>
+                        <li>즉시 배포 가능한 aab, apk 파일 생성 명령어 추가</li>
+                        <li>출시 기준의 keyStore파일 생성하여 앱 개발자 식별 및 앱 보안 강화</li>
+                    </ul>
+                    <div>
+                        <p class="etc-list-title">성과 및 경험</p>
+                        <ul class="bullet-list">
+                            <li>
+                                강의 기준 버전(0.66)에서 개발당시 최신버전(0.73)으로 개발을 진행하며 변경된 규칙과<br/>
+                                호환되는 파일이 변경(java -> kotlin)되어 발생하는 문제들을 직접 부딪히며 해결하고<br/>
+                                최신 버전 React-Native의 방향성과 전반적인 React-Native의 플로우를 이해할 수 있는<br/>
+                                계기가 되었습니다.
+                            </li>
+                            <li>스플래시 스크린을 통해 로딩 시 스크린을 띄워 사용자 경험을 향상</li>
+                            <li>코드푸쉬를 활용하여 신속한 버그 fix 및 버전업에 있어 개발자 경험 향상</li>
+                            <li>React-Native의 폴더 구조에 대한 이해도 향상과 작동방식, 기존 웹에서의 React와 차이점 등을 학습</li>
+                            <li>patch-package 사용 경험과 라이브러리 커스텀을 통해 커스텀 접근 방식에 대한 이해도 향상</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="etc-list-title">사용 기술</p>
+                        <p class="etc-list-content">
+                            TypeScript, React, Redux Toolkit, Tailwind CSS
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 레이아웃 갤러리 -->
+        <div class="project-container">
             <div class="project-title-header">
                 <p class="title">레이아웃 갤러리</p>
                 <p class='project-type'>개인</p>
