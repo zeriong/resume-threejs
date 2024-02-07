@@ -16,6 +16,9 @@
     </nav>
 </header>
 <main>
+    <button class="upArrow">
+        <img src="/assets/images/icons/upArrow.svg" alt="move scroll top">
+    </button>
     <section id="demoSection">
 
         <!-- 배달 라이더앱 클론 코딩 -->
@@ -31,15 +34,14 @@
                     </a>
                 </div>
             </div>
-
-            <p class="desc">React-Native를 사용한 앱 개발에 대한 이해도를 목적으로, 강의를 통해 배달 라이더앱을 클론 코딩하며 학습한 결과물입니다.
+            <p class="desc">ReactNative를 사용한 앱 개발에 대한 이해도를 목적으로, 강의를 통해 배달 라이더앱을 클론 코딩하며 학습한 결과물입니다.</p>
             <iframe
                     width="100%" height="470"
                     src="https://www.youtube.com/embed/eibTcbzWgi4"
                     allow="accelerometer; autoplay; clipboard-write;
                     encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
             </iframe>
-            <p class="stacks"><span style="font-weight: 600;">사용된 기술 스택:</span> React-Native, Firebase-Messaging, patch-package, codePush</p>
+            <p class="stacks"><span style="font-weight: 600;">사용된 기술 스택:</span> ReactNative, patch-package, Firebase-Messaging, codePush, WebSocket, Redux</p>
         </div>
 
         <!-- threeJS resume -->
@@ -106,6 +108,7 @@
             <div class="project-header">
                 <h1 class="project-title">유튜브 요약 서비스
                     <span>[ 팀 프로젝트 ]</span>
+                    <span style="margin-left: 4px; color: #777777; font-size: 17px; font-weight: bold;">기여도: 20% ( 데모 기준 100% )</span>
                 </h1>
                 <div class="button-section">
                     <a href="https://side.zeriong.com/" target="_blank" class="demo">
@@ -213,6 +216,10 @@
 
     const detailSection = document.getElementById('detailSection');
     const demoSection = document.getElementById('demoSection');
+
+    document.querySelector('.upArrow').addEventListener('click', () => {
+      window.scrollTo({top: 0});
+    });
 
     tabBtnList.map(dom => {
         dom.addEventListener('click', (e) => {
