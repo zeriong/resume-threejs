@@ -31,13 +31,15 @@ html {
   -o-text-size-adjust: none; /*old versions of Opera*/
 }
 
-body, html {
+body,
+html {
   background-color: transparent;
   width: 100%;
   margin: 0;
 }
 
-button, h1 {
+button,
+h1 {
   background: transparent;
   border: none;
   padding: 0;
@@ -59,7 +61,8 @@ ul {
   margin: 0;
 }
 
-#webgl, #css3DObject {
+#webgl,
+#css3DObject {
   position: absolute;
   left: 0;
   top: 0;
@@ -129,14 +132,14 @@ ul {
   margin: 16px 0;
 }
 #loading #loadingContainer #inProgressWrap #progressPercent {
-  color: #FFFA00;
+  color: #fffa00;
   font-family: "JetBrains Mono", monospace;
 }
 #loading #loadingContainer #inProgressWrap #progressPercent > li {
   font-family: "JetBrains Mono", monospace;
 }
 #loading #loadingContainer #inProgressWrap #loadingItem {
-  color: #00FF00;
+  color: #00ff00;
   text-align: start;
   width: 260px;
 }
@@ -165,19 +168,21 @@ ul {
   padding: 24px;
   border: 2px solid white;
 }
-#loading #loadedMessage .text1, #loading #loadedMessage .text2 {
+#loading #loadedMessage .text1,
+#loading #loadedMessage .text2 {
   font-family: "JetBrains Mono", monospace;
   display: flex;
   align-items: flex-end;
   width: 100%;
 }
-#loading #loadedMessage .text1 .blinking-cursor, #loading #loadedMessage .text2 .blinking-cursor {
+#loading #loadedMessage .text1 .blinking-cursor,
+#loading #loadedMessage .text2 .blinking-cursor {
   animation: 650ms blink step-end infinite;
   width: 11px;
   height: 2px;
 }
 #loading #loadedMessage .text2 {
-  color: #00FF00;
+  color: #00ff00;
   margin-bottom: 24px;
 }
 #loading #loadedMessage #playStart {
@@ -185,7 +190,7 @@ ul {
   position: relative;
   background-color: black;
   width: fit-content;
-  color: #FFFA00;
+  color: #fffa00;
   font-size: 15px;
   padding: 10px 14px;
   border: 2px solid white;
@@ -864,20 +869,38 @@ ul {
   padding-top: 2px;
   gap: 4px;
 }
-.project-detail-main .learning-content-container .nomad-content .title-badges .github-icon {
+.project-detail-main
+  .learning-content-container
+  .nomad-content
+  .title-badges
+  .github-icon {
   min-width: 36px;
   height: 20px;
   font-size: 12px;
   padding-left: 4px;
   padding-right: 6px;
 }
-.project-detail-main .learning-content-container .nomad-content .title-badges .github-icon > img {
+.project-detail-main
+  .learning-content-container
+  .nomad-content
+  .title-badges
+  .github-icon
+  > img {
   width: 15px;
 }
-.project-detail-main .learning-content-container .nomad-content .title-badges .github-icon > i {
+.project-detail-main
+  .learning-content-container
+  .nomad-content
+  .title-badges
+  .github-icon
+  > i {
   margin-left: 0;
 }
-.project-detail-main .learning-content-container .nomad-content .title-badges .demo {
+.project-detail-main
+  .learning-content-container
+  .nomad-content
+  .title-badges
+  .demo {
   display: flex;
   align-items: center;
   font-size: 12px;
@@ -887,7 +910,12 @@ ul {
   padding: 0 8px;
   height: 20px;
 }
-.project-detail-main .learning-content-container .nomad-content .title-badges .demo i {
+.project-detail-main
+  .learning-content-container
+  .nomad-content
+  .title-badges
+  .demo
+  i {
   margin-left: 2px;
 }
 .project-detail-main .practice-container {
@@ -999,7 +1027,7 @@ ul {
   text-align: center;
   margin-bottom: 26px;
   font-weight: 800;
-  color: #0E0E0E;
+  color: #0e0e0e;
 }
 #portfolio #mainNavbar {
   display: flex;
@@ -1009,17 +1037,21 @@ ul {
   background-color: #424345;
   gap: 8px;
 }
-#portfolio #mainNavbar #videoButton, #portfolio #mainNavbar #detailButton, #portfolio #mainNavbar #resumeButton {
+#portfolio #mainNavbar #videoButton,
+#portfolio #mainNavbar #detailButton,
+#portfolio #mainNavbar #resumeButton {
   cursor: pointer;
   text-align: center;
   font-size: 16px;
   width: 50%;
   padding: 20px 0;
-  color: #FEFEFE;
+  color: #fefefe;
   border-radius: 8px;
   font-weight: 500;
 }
-#portfolio #mainNavbar #videoButton.active, #portfolio #mainNavbar #detailButton.active, #portfolio #mainNavbar #resumeButton.active {
+#portfolio #mainNavbar #videoButton.active,
+#portfolio #mainNavbar #detailButton.active,
+#portfolio #mainNavbar #resumeButton.active {
   background-color: #5c5c60;
 }
 #portfolio main {
@@ -1096,7 +1128,14 @@ ul {
   display: flex;
   align-items: center;
 }
-#portfolio main #demoSection .container .project-header .button-section > a > i {
+#portfolio
+  main
+  #demoSection
+  .container
+  .project-header
+  .button-section
+  > a
+  > i {
   margin-left: 2px;
 }
 #portfolio main #demoSection .container .project-header .button-section .demo {
@@ -1153,6 +1192,19 @@ ul {
 #portfolio main #detailSection > iframe {
   width: 100%;
   border: none;
+}
+
+.last-updated {
+  position: fixed;
+  font-size: 14px;
+  color: #ffffff;
+  opacity: 0.7;
+  text-align: center;
+  margin-top: 20px;
+  bottom: 16px;
+  right: 16px;
+  z-index: 20;
+  transition: opacity 0.3s ease-in-out;
 }
 
 @media screen and (max-width: 650px) {
@@ -1296,7 +1348,8 @@ ul {
   }
 }
 @keyframes blink {
-  0%, 100% {
+  0%,
+  100% {
     background-color: transparent;
   }
   50% {
