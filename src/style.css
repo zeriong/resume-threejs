@@ -629,6 +629,7 @@ ul {
 #projectsBody {
   overflow-x: hidden;
   overflow-y: auto;
+  scrollbar-gutter: stable; /* 스크롤바 유무에 관계없이 공간 확보 - 무한루프 방지 */
   display: flex;
   flex-direction: column;
   padding: 61px 40px 36px 40px;

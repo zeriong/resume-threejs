@@ -354,6 +354,8 @@
       navbarLinks.forEach((link) => clickNavSection(link));
 
       // 부모 페이지에서 메시지 수신 리스너
+      let lastReceivedHeight = 0;
+
       window.addEventListener(
         "message",
         (event) => {
@@ -381,8 +383,11 @@
                 learningOffsetTop + headerOffsetHeight + navbarOffsetHeight;
             }
 
-            const height = msg.split("height:")[1];
-            if (height && height > 0) {
+            const height = parseInt(msg.split("height:")[1]);
+
+            // 높이 변화가 유의미할 때만 적용 (5px 이상)
+            if (height > 0 && Math.abs(height - lastReceivedHeight) > 5) {
+              lastReceivedHeight = height;
               document.getElementById("projectsIframe").style.height =
                 height + "px"; // iframe 높이 조정
             }

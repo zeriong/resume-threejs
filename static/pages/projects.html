@@ -1067,27 +1067,31 @@
       /** 포트폴리오 아이프레임 대응 메세지 전송 */
       let lastHeight = 0; // 이전 높이를 저장
       let resizeTimeout = null; // 디바운스를 위한 타임아웃
+      const HEIGHT_BUFFER = 10; // 스크롤바 방지를 위한 여유 공간
 
       // 문서 높이 계산
       function sendHeight() {
-        const height = document.getElementById("projectsBody").offsetHeight;
+        const height = document.getElementById("projectsBody").scrollHeight; // offsetHeight 대신 scrollHeight 사용
+        const adjustedHeight = height + HEIGHT_BUFFER; // 여유 공간 추가
 
-        // 높이가 실제로 변경되었을 때만 메시지 전송
-        if (height !== lastHeight) {
-          console.log("내부 콘솔", height);
-          lastHeight = height;
-          window.parent.postMessage("height:" + height);
+        // 높이 변화가 충분히 클 때만 메시지 전송 (5px 이상 차이)
+        if (Math.abs(adjustedHeight - lastHeight) > 5) {
+          console.log("높이 전송:", adjustedHeight);
+          lastHeight = adjustedHeight;
+          window.parent.postMessage("height:" + adjustedHeight);
         }
       }
-      // 로드 시 높이 전송
-      window.onload = sendHeight;
+      // 로드 시 높이 전송 (DOM 완전 렌더링 대기)
+      window.onload = function () {
+        setTimeout(sendHeight, 100);
+      };
 
       // 창 크기 변경시 디바운스 적용하여 높이 다시 전송
       window.onresize = function () {
         if (resizeTimeout) {
           clearTimeout(resizeTimeout);
         }
-        resizeTimeout = setTimeout(sendHeight, 150);
+        resizeTimeout = setTimeout(sendHeight, 300); // 300ms로 증가
       };
 
       // 프로젝트 클릭 메세지 전송
