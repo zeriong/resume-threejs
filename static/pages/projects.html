@@ -1,1028 +1,1165 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
     <title>Skills</title>
-</head>
-<body id="projectsBody">
-
+  </head>
+  <body id="projectsBody">
     <nav id="navbar" class="navbar">
-        <div class="inner">
-            <button id="toProjects" href="#projects" data-target="projects" class="active">
-                Projects
-                <div></div>
-            </button>
-            <button id="toLearning" href="#learning" data-target="learning">
-                Learning
-                <div></div>
-            </button>
-        </div>
+      <div class="inner">
+        <button
+          id="toProjects"
+          href="#projects"
+          data-target="projects"
+          class="active"
+        >
+          Projects
+          <div></div>
+        </button>
+        <button id="toLearning" href="#learning" data-target="learning">
+          Learning
+          <div></div>
+        </button>
+      </div>
     </nav>
 
     <section id="projects">
-        <div class="content-name-wrap">
-            <p class="content-name">
-                Projects<span class="projects-braces">{</span>
-            </p>
+      <div class="content-name-wrap">
+        <p class="content-name">
+          Projects<span class="projects-braces">{</span>
+        </p>
+      </div>
+      <p class="content-desc">
+        전체 학습 과정의 결과물인 주요 프로젝트입니다. 프론트엔드, 백엔드, 배포
+        등의 개발 경험을 거치며 웹 서비스 전반에 대한 이해와 설계 능력 향상을
+        목표로 노력하였습니다.
+      </p>
+
+      <!-- threejs resume -->
+      <div class="project-container is-first">
+        <div class="project-title-header">
+          <p class="title">ThreeJS Resume</p>
+          <p class="project-type">개인</p>
+          <a
+            href="https://github.com/zeriong/resume-threejs"
+            target="_blank"
+            class="github-icon"
+          >
+            <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+            <i class="arrow-right"></i>
+          </a>
         </div>
-        <p class="content-desc">
-            전체 학습 과정의 결과물인 주요 프로젝트입니다. 프론트엔드, 백엔드, 배포 등의 개발 경험을 거치며 웹 서비스 전반에 대한 이해와 설계 능력 향상을 목표로 노력하였습니다.
+        <p class="project-intro-desc">
+          동적이고 상호작용 가능한 3D 공간에서 “나”에 대해 재미있게 표현하고
+          전달하고자 만들게 된 프로젝트입니다.
+        </p>
+        <div class="project-detail-main">
+          <div class="preview-container">
+            <div class="preview-img-wrap">
+              <img
+                src="/assets/images/preview/threejs.jpg"
+                alt="preview"
+                style="height: 100%"
+              />
+            </div>
+            <p class="dev-part">Frontend Engineer</p>
+            <p class="dev-date-range">2023.10 ~ 2023.12</p>
+          </div>
+          <div class="content-container">
+            <ul class="bullet-list">
+              <li>객체지향 프로그래밍 기반으로 설계</li>
+              <li>
+                특정 3D오브젝트에 HTML을 삽입하고 상호작용 가능하도록 구현
+              </li>
+              <li>
+                3D 렌더링 환경에서도 디바이스 너비에 대응하도록 반응형 웹으로
+                개발
+              </li>
+              <li>LoadingManager를 활용한 로딩화면 구현</li>
+              <li>Firebase를 연동하여 페이지네이션과 방명록 기능 구현</li>
+              <li>Gsap 라이브러리를 사용하여 애니메이션 구현</li>
+              <li>배경음악을 추가하고 버튼을 통해 컨트롤 가능하도록 구현</li>
+            </ul>
+            <div>
+              <p class="etc-list-title">성과 및 경험</p>
+              <ul class="bullet-list">
+                <li>객체지향 프로그래밍, webpack의 이해 및 경험</li>
+                <li>
+                  3D 그래픽 개발 경험과 canvas 내에 상호작용 가능한 페이지 삽입
+                  기술 경험
+                </li>
+                <li>
+                  webgl의 성능적 한계와 이를 해결하기 위한 모델링 텍스처
+                  베이크로 최적화 경험
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p class="etc-list-title">사용 기술</p>
+              <p class="etc-list-content">
+                ThreeJS, Webpack, Firebase, SCSS, VanillaJS
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI 메모서비스 ZETE -->
+      <div class="project-container">
+        <div class="project-title-header">
+          <p class="title">ZETE AI 메모서비스</p>
+          <p class="project-type">개인</p>
+          <a
+            href="https://zete.zeriong.com/?type=demo&modal=sign-in"
+            target="_blank"
+            class="demo"
+          >
+            데모
+            <i class="arrow-right"></i>
+          </a>
+        </div>
+
+        <p class="project-intro-desc">
+          사용성을 극대화 하여 편리한 메모 기능과, Chat GPT 를 연동하여 검색
+          결과를 메모에 요약 반영 시킬 수 있는<br />
+          서비스입니다.
         </p>
 
-        <!-- threejs resume -->
-        <div class="project-container is-first">
-            <div class="project-title-header">
-                <p class="title">ThreeJS Resume</p>
-                <p class='project-type'>개인</p>
-                <a href="https://github.com/zeriong/resume-threejs"
-                   target="_blank"
-                   class="github-icon">
-                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                    <i class="arrow-right"></i>
-                </a>
+        <!-- ReactQuery, Zustand 적용, 리팩토링 및 배포 -->
+        <div class="project-detail-main">
+          <div class="preview-container">
+            <div class="preview-img-wrap">
+              <img src="/assets/images/preview/zete.jpg" alt="preview" />
             </div>
-            <p class="project-intro-desc">
-                동적이고 상호작용 가능한 3D 공간에서 “나”에 대해 재미있게 표현하고 전달하고자 만들게 된  프로젝트입니다.
+            <p class="dev-part">
+              Frontend/Backend<br />
+              Engineer
             </p>
-            <div class="project-detail-main">
-                <div class="preview-container">
-                    <div class="preview-img-wrap">
-                        <img src="/assets/images/preview/threejs.jpg" alt="preview" style="height: 100%;"/>
-                    </div>
-                    <p class="dev-part">
-                        Frontend Engineer
-                    </p>
-                    <p class="dev-date-range">2023.10 ~ 2023.12</p>
-                </div>
-                <div class="content-container">
-                    <ul class="bullet-list">
-                        <li>객체지향 프로그래밍 기반으로 설계</li>
-                        <li>특정 3D오브젝트에 HTML을 삽입하고 상호작용 가능하도록 구현</li>
-                        <li>3D 렌더링 환경에서도 디바이스 너비에 대응하도록 반응형 웹으로 개발</li>
-                        <li>LoadingManager를 활용한 로딩화면 구현</li>
-                        <li>Firebase를 연동하여 페이지네이션과 방명록 기능 구현</li>
-                        <li>Gsap 라이브러리를 사용하여 애니메이션 구현</li>
-                        <li>배경음악을 추가하고 버튼을 통해 컨트롤 가능하도록 구현</li>
-                    </ul>
-                    <div>
-                        <p class="etc-list-title">성과 및 경험</p>
-                        <ul class="bullet-list">
-                            <li>객체지향 프로그래밍, webpack의 이해 및 경험</li>
-                            <li>3D 그래픽 개발 경험과 canvas 내에 상호작용 가능한 페이지 삽입 기술 경험</li>
-                            <li>webgl의 성능적 한계와 이를 해결하기 위한 모델링 텍스처 베이크로 최적화 경험</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="etc-list-title">사용 기술</p>
-                        <p class="etc-list-content">
-                            ThreeJS, Webpack, Firebase, SCSS, VanillaJS
-                        </p>
-                    </div>
-                </div>
+            <p class="dev-date-range">2023.03 ~ 2023.09</p>
+          </div>
+          <div class="content-container">
+            <div>
+              <div class="content-title-area">
+                <p class="content-title">
+                  ReactQuery, Zustand 적용, 리팩토링 및 배포
+                </p>
+
+                <a
+                  href="https://github.com/zeriong/zete-zustand-reactQuery"
+                  target="_blank"
+                  class="github-icon"
+                >
+                  <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                  <i class="arrow-right"></i>
+                </a>
+              </div>
+              <p class="dev-range">2023.08 ~ 2023.09</p>
             </div>
+            <ul class="bullet-list">
+              <li>
+                기존에 사용하던 Redux와 다른 타입의 상태 관리에 대한 경험을 위해
+                상태관리<br />
+                라이브러리를 ReactQuery, Zustand 조합으로 컨버팅
+              </li>
+              <li>
+                서비스 환경에 대한 이해도를 높이기 위해 우분투 리눅스를 통한
+                서비스 환경구축,<br />
+                오픈소스 SSL 인증서 적용
+              </li>
+              <li>PM2를 통한 배포 및 모니터링</li>
+              <li>다소 아쉬웠던 일부 코드 리팩토링</li>
+            </ul>
+            <div>
+              <p class="etc-list-title">성과 및 경험</p>
+              <ul class="bullet-list">
+                <li>
+                  query타입의 상태관리와 condegen 커스텀을 통한 캐시 대상
+                  통신함수<br />
+                  자동 생성으로 극단적인 생산성 향상 경험
+                </li>
+                <li>
+                  리눅스 환경 이해 및 배포 경험, pm2를 이용한 무중단 배포 및
+                  관리 이해
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p class="etc-list-title">사용 기술</p>
+              <p class="etc-list-content">
+                ReactQuery, Zustand, Ubuntu Linux, PM2
+              </p>
+            </div>
+          </div>
         </div>
 
-        <!-- AI 메모서비스 ZETE -->
-        <div class="project-container">
-            <div class="project-title-header">
-                <p class="title">ZETE AI 메모서비스</p>
-                <p class='project-type'>개인</p>
-                <a href="https://zete.zeriong.com/?type=demo&modal=sign-in" target="_blank" class="demo">
-                    데모
-                    <i class="arrow-right"></i>
+        <!-- AI 메모서비스 기획 및 기능 개발 적용 -->
+        <div class="project-detail-main">
+          <div class="preview-container"></div>
+          <div class="content-container">
+            <div>
+              <div class="content-title-area">
+                <p class="content-title">AI 메모서비스 기획 및 기능 개발</p>
+                <a
+                  href="https://github.com/zeriong/zete"
+                  target="_blank"
+                  class="github-icon"
+                >
+                  <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                  <i class="arrow-right"></i>
                 </a>
+              </div>
+              <p class="dev-range">2023.03 ~ 2023.08</p>
             </div>
-
-            <p class="project-intro-desc">
-                사용성을 극대화 하여 편리한 메모 기능과, Chat GPT 를 연동하여 검색 결과를 메모에 요약 반영 시킬 수 있는<br/>
-                서비스입니다.
-            </p>
-
-            <!-- ReactQuery, Zustand 적용, 리팩토링 및 배포 -->
-            <div class="project-detail-main">
-                <div class="preview-container">
-                    <div class="preview-img-wrap">
-                        <img src="/assets/images/preview/zete.jpg" alt="preview"/>
-                    </div>
-                    <p class="dev-part">
-                        Frontend/Backend<br/>
-                        Engineer
-                    </p>
-                    <p class="dev-date-range">2023.03 ~ 2023.09</p>
-                </div>
-                <div class="content-container">
-                    <div>
-                        <div class="content-title-area">
-                            <p class="content-title">
-                                ReactQuery, Zustand 적용, 리팩토링 및 배포
-                            </p>
-
-                            <a href="https://github.com/zeriong/zete-zustand-reactQuery"
-                               target="_blank"
-                               class="github-icon">
-                                <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                <i class="arrow-right"></i>
-                            </a>
-                        </div>
-                        <p class="dev-range">
-                            2023.08 ~ 2023.09
-                        </p>
-                    </div>
-                    <ul class="bullet-list">
-                        <li>
-                            기존에 사용하던 Redux와 다른 타입의 상태 관리에 대한 경험을 위해 상태관리<br/>
-                            라이브러리를 ReactQuery, Zustand 조합으로 컨버팅
-                        </li>
-                        <li>
-                            서비스 환경에 대한 이해도를 높이기 위해 우분투 리눅스를 통한 서비스 환경구축,<br/>
-                            오픈소스 SSL 인증서 적용
-                        </li>
-                        <li>PM2를 통한 배포 및 모니터링</li>
-                        <li>다소 아쉬웠던 일부 코드 리팩토링</li>
-                    </ul>
-                    <div>
-                        <p class="etc-list-title">성과 및 경험</p>
-                        <ul class="bullet-list">
-                            <li>
-                                query타입의 상태관리와 condegen 커스텀을 통한 캐시 대상 통신함수<br/>
-                                자동 생성으로 극단적인 생산성 향상 경험
-                            </li>
-                            <li>리눅스 환경 이해 및 배포 경험, pm2를 이용한 무중단 배포 및 관리 이해</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="etc-list-title">사용 기술</p>
-                        <p class="etc-list-content">
-                            ReactQuery, Zustand, Ubuntu Linux, PM2
-                        </p>
-                    </div>
-                </div>
+            <ul class="bullet-list">
+              <li>
+                기존 사용하던 메모 서비스를 벤치하여 발전시키고 AI를 접목시켜
+                서비스 기획
+              </li>
+              <li>NestJS와 MariaDB를 기반으로 백엔드 설계 및 기능 개발</li>
+              <li>
+                React기반의 메모, 카테고리, 태그에 대한 CRUD 인터페이스 개발
+              </li>
+              <li>
+                Openai ChatGpt3.5 를 연동하여 채팅형식의 정보 검색과 요약
+                메모기능 개발
+              </li>
+              <li>
+                Openapi Generator의 templates 기능을 통해 axios 통신 타입 파일을
+                <br />커스텀하여 생성
+              </li>
+            </ul>
+            <div>
+              <p class="etc-list-title">성과 및 경험</p>
+              <ul class="bullet-list">
+                <li>
+                  Chat GPT API의 프롬프트 커스텀을 통해 다양한 결과의 가능성
+                  학습
+                </li>
+                <li>
+                  Openapi Generator의 templates 내부 mustache 수정을 통한 코드
+                  생성 자동화
+                </li>
+                <li>
+                  서비스 설계와 구현에 있어 메모, 태그 ,카테고리 관계와 기능
+                  개발에 높은 난이도를<br />
+                  느꼈으나, 그 만큼 많은 것을 배우고 서비스 하나가 완성되기
+                  까지의 과정을 이해하고<br />
+                  아키텍처와 클린코드에 대해 깊게 고민해 볼 수 있는 기회가
+                  되었습니다.
+                </li>
+              </ul>
             </div>
-
-            <!-- AI 메모서비스 기획 및 기능 개발 적용 -->
-            <div class="project-detail-main">
-                <div class="preview-container"></div>
-                <div class="content-container">
-                    <div>
-                        <div class="content-title-area">
-                            <p class="content-title">
-                                AI 메모서비스 기획 및 기능 개발
-                            </p>
-                            <a href="https://github.com/zeriong/zete"
-                               target="_blank"
-                               class="github-icon">
-                                <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                <i class="arrow-right"></i>
-                            </a>
-                        </div>
-                        <p class="dev-range">
-                            2023.03 ~ 2023.08
-                        </p>
-                    </div>
-                    <ul class="bullet-list">
-                        <li>기존 사용하던 메모 서비스를 벤치하여 발전시키고 AI를 접목시켜 서비스 기획</li>
-                        <li>NestJS와 MariaDB를 기반으로 백엔드 설계 및 기능 개발</li>
-                        <li>React기반의 메모, 카테고리, 태그에 대한 CRUD 인터페이스 개발</li>
-                        <li>Openai ChatGpt3.5 를 연동하여 채팅형식의 정보 검색과 요약 메모기능 개발</li>
-                        <li>
-                            Openapi Generator의 templates 기능을 통해 axios 통신 타입 파일을 <br/>커스텀하여 생성
-                        </li>
-                    </ul>
-                    <div>
-                        <p class="etc-list-title">성과 및 경험</p>
-                        <ul class="bullet-list">
-                            <li>Chat GPT API의 프롬프트 커스텀을 통해 다양한 결과의 가능성 학습</li>
-                            <li>Openapi Generator의 templates 내부 mustache 수정을 통한 코드 생성 자동화</li>
-                            <li>
-                                서비스 설계와 구현에 있어 메모, 태그 ,카테고리 관계와 기능 개발에 높은 난이도를<br/>
-                                느꼈으나, 그 만큼 많은 것을 배우고 서비스 하나가 완성되기 까지의 과정을 이해하고<br/>
-                                아키텍처와 클린코드에 대해 깊게 고민해 볼 수 있는 기회가 되었습니다.
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="etc-list-title">사용 기술</p>
-                        <p class="etc-list-content">
-                            TypeScript, NestJS, TypeORM, JWT, Swagger, MariaDB,<br/>
-                            React, Redux Toolkit, Openapi Generator, Tailwind CSS
-                        </p>
-                    </div>
-                </div>
+            <div>
+              <p class="etc-list-title">사용 기술</p>
+              <p class="etc-list-content">
+                TypeScript, NestJS, TypeORM, JWT, Swagger, MariaDB,<br />
+                React, Redux Toolkit, Openapi Generator, Tailwind CSS
+              </p>
             </div>
+          </div>
         </div>
+      </div>
 
-
-        <!-- 유튜브 요약 서비스 -->
-        <div class="project-container">
-            <div class="project-title-header">
-                <p class="title">유튜브 요약 서비스</p>
-                <p class='project-type' style="background-color: rgb(249 115 22);">협업</p>
-                <a href="https://side.zeriong.com/" target="_blank" class="demo">
-                    데모
-                    <i class="arrow-right"></i>
-                </a>
-                <a href="https://github.com/zeriong/side-project"
-                   target="_blank"
-                   class="github-icon">
-                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                    <i class="arrow-right"></i>
-                </a>
-                <p style="color: #777777; font-weight: bold; margin-left: 8px;">[ 기여도: 20% ( 데모 기준 100% ) ]</p>
-            </div>
-            <p class="project-intro-desc">
-                유튜브 영상의 내용을 텍스트로 요약해 주는 서비스를 개발하는 6인 규모의 팀프로젝트에 참여하여 서비스 영역의<br/>
-                프론트엔드 개발을 담당하였고 PL의 동의하에 본인이 개발한 파트만 분리하여 게재하였습니다.
-            </p>
-            <div class="project-detail-main">
-                <div class="preview-container">
-                    <div class="preview-img-wrap">
-                        <img src="/assets/images/preview/side.jpg" alt="preview"/>
-                    </div>
-                    <p class="dev-part">
-                        Frontend Engineer
-                    </p>
-                    <p class="dev-date-range">2023.03 ~ 2023.04</p>
-                </div>
-                <div class="content-container">
-                    <ul class="bullet-list">
-                        <li>NextJS를 활용한 기본적인 SSR 구조 개발</li>
-                        <li>Figma로 작성된 디자인 시안에 따라 서비스 영역 개발</li>
-                        <li>Youtube api를 통하여 영상의 세부정보 연동</li>
-                        <li>React Slick 라이브러리를 사용하여 컨텐츠 슬라이더 구현</li>
-                        <li>
-                            Youtube ProgressBar 와 동기화된 Custom ProgressBar를 구현하고 챕터
-                            단위 인터페이스와 재생을 지원하고 챕터 변화에 따른 슬라이더의 동적 애니메이션 구현
-                        </li>
-                    </ul>
-                    <div>
-                        <p class="etc-list-title">성과 및 경험</p>
-                        <ul class="bullet-list">
-                            <li>
-                                기획안에서 유튜브 플레이어를 커스텀하는 기술적 문제와 저작권 문제를 파악하여<br/>
-                                해결방안을 제시하고 기획을 변경하여 프로젝트 방향성에 크게 기여
-                            </li>
-                            <li>
-                                커뮤니케이션에 있어 가지고 있던 약점을 깨닿고 보완하게된 중요한 계기로 이후<br/>
-                                지속적인 소통과 상황 공유를 통해 팀원간 능력을 보완하고 수준 높은 성과를 경험
-                            </li>
-                            <li>NextJS 도큐먼트 정독 및 원리 이해</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="etc-list-title">Collaboration Tools</p>
-                        <p class="etc-list-content">
-                            Google Meet, Google Chat, Google Docs, Notion, Figma, Zeplin
-                        </p>
-                    </div>
-                    <div>
-                        <p class="etc-list-title">사용 기술</p>
-                        <p class="etc-list-content">
-                            NextJS, React, Firebase, Redux Toolkit, Tailwind CSS
-                        </p>
-                    </div>
-                </div>
-            </div>
+      <!-- 유튜브 요약 서비스 -->
+      <div class="project-container">
+        <div class="project-title-header">
+          <p class="title">유튜브 요약 서비스</p>
+          <p class="project-type" style="background-color: rgb(249 115 22)">
+            협업
+          </p>
+          <a href="https://side.zeriong.com/" target="_blank" class="demo">
+            데모
+            <i class="arrow-right"></i>
+          </a>
+          <a
+            href="https://github.com/zeriong/side-project"
+            target="_blank"
+            class="github-icon"
+          >
+            <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+            <i class="arrow-right"></i>
+          </a>
+          <p style="color: #777777; font-weight: bold; margin-left: 8px">
+            [ 기여도: 20% ( 데모 기준 100% ) ]
+          </p>
         </div>
-
-        <!-- 회원가입, 로그인 서비스 -->
-        <div class="project-container">
-            <div class="project-title-header">
-                <p class="title">React-NestJS-Boilerplate</p>
-                <p class='project-type'>개인</p>
-            </div>
-
-            <p class="project-intro-desc">
-                NestJS를 활용해 백엔드 개발을 경험하고 기본적인 CRUD 구현을 통해 서비스의 기본 구조를 개발한 프로젝트입니다.
-            </p>
-
-            <!-- API 명세, 통신 함수와 객체 타입 생성 자동화 -->
-            <div class="project-detail-main">
-                <div class="preview-container">
-                    <div class="preview-img-wrap">
-                        <img src="/assets/images/preview/login.jpg" alt="preview"/>
-                    </div>
-                    <p class="dev-part">
-                        Frontend/Backend<br/>
-                        Engineer
-                    </p>
-                    <p class="dev-date-range">2022.12 ~ 2023.03</p>
-                </div>
-                <div class="content-container">
-                    <div>
-                        <div class="content-title-area">
-                            <p class="content-title">
-                                API 명세, 통신 함수와 객체 타입 생성 자동화
-                            </p>
-
-                            <a href="https://github.com/zeriong/react-nestjs-swagger-codegen"
-                               target="_blank"
-                               class="github-icon">
-                                <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                <i class="arrow-right"></i>
-                            </a>
-                        </div>
-                        <p class="dev-range">
-                            2023.02 ~ 2023.03
-                        </p>
-                    </div>
-                    <ul class="bullet-list">
-                        <li>백엔드의 api 엔드포인트와 통신 객체에 Swagger 타입을 명시</li>
-                        <li>Swagger를 통해 api 문서 url 생성</li>
-                        <li>백엔드 기준에서 Openapi Tools를 활용해 프론트에 api 통신 타입과 <br/>axios 통신 함수 생성</li>
-                        <li>프론트엔드 기준에서 openapi-generator-cli 를 통해 백엔드의 yaml 양식으로<br/> 작성된 api 문서를 읽어 api 통신 타입과 axios 통신 함수 생성</li>
-                    </ul>
-                    <div>
-                        <p class="etc-list-title">성과 및 경험</p>
-                        <ul class="bullet-list">
-                            <li>코드 생성 자동화 환경 구축을 통한 생산성 향상, 통신 타입 불일치 에러 방지</li>
-                            <li>Swagger를 통한 api문서 명세를 학습</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="etc-list-title">사용 기술</p>
-                        <p class="etc-list-content">
-                            Swagger, Openapi Generator
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!-- NestJS 서버 개발, JWT 로그인 구현 -->
-            <div class="project-detail-main">
-                <div class="preview-container"></div>
-                <div class="content-container">
-                    <div>
-                        <div class="content-title-area">
-                            <p class="content-title">
-                                NestJS 서버 개발, JWT 로그인 구현
-                            </p>
-
-                            <a href="https://github.com/zeriong/react-nestjs-jwt"
-                               target="_blank"
-                               class="github-icon">
-                                <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                <i class="arrow-right"></i>
-                            </a>
-                        </div>
-                        <p class="dev-range">
-                            2022.12 ~ 2023.02
-                        </p>
-                    </div>
-                    <ul class="bullet-list">
-                        <li>NestJS를 활용한 api 서버 환경 구축</li>
-                        <li>MariaDB와 TypeORM을 통한 서비스 데이터 구조 설계 및 관리</li>
-                        <li>React를 활용해 회원가입, 로그인 등에 필요한 UI 개발</li>
-                        <li>
-                            JWT를 활용하여 권한 인증과 유지를 구현, AccessToken과 RefreshToken을<br/>
-                            활용하여 토큰 탈취에 대한 보안 위험에 대비
-                        </li>
-                    </ul>
-                    <div>
-                        <p class="etc-list-title">성과 및 경험</p>
-                        <ul class="bullet-list">
-                            <li>NestJS와 MariaDB를 통한 백엔드 및 데이터베이스 이해</li>
-                            <li>RESTful API에 대한 이해와 CRUD 설계</li>
-                            <li>JWT의 토큰을 활용한 로그인 인증 및 유지 이해</li>
-                            <li>React 및 Redux 상태관리 심화 학습</li>
-                            <li>Typescript의 이해와 숙련</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="etc-list-title">사용 기술</p>
-                        <p class="etc-list-content">
-                            TypeScript, NestJS, TypeORM, JWT, MariaDB,<br/>
-                            React, Redux Toolkit, Tailwind CSS
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <p class="projects-braces" style="margin-left: 0; margin-top: 4px; padding-bottom: 36px;">
-            }
+        <p class="project-intro-desc">
+          유튜브 영상의 내용을 텍스트로 요약해 주는 서비스를 개발하는 6인 규모의
+          팀프로젝트에 참여하여 서비스 영역의<br />
+          프론트엔드 개발을 담당하였고 PL의 동의하에 본인이 개발한 파트만
+          분리하여 게재하였습니다.
         </p>
+        <div class="project-detail-main">
+          <div class="preview-container">
+            <div class="preview-img-wrap">
+              <img src="/assets/images/preview/side.jpg" alt="preview" />
+            </div>
+            <p class="dev-part">Frontend Engineer</p>
+            <p class="dev-date-range">2023.03 ~ 2023.04</p>
+          </div>
+          <div class="content-container">
+            <ul class="bullet-list">
+              <li>NextJS를 활용한 기본적인 SSR 구조 개발</li>
+              <li>Figma로 작성된 디자인 시안에 따라 서비스 영역 개발</li>
+              <li>Youtube api를 통하여 영상의 세부정보 연동</li>
+              <li>React Slick 라이브러리를 사용하여 컨텐츠 슬라이더 구현</li>
+              <li>
+                Youtube ProgressBar 와 동기화된 Custom ProgressBar를 구현하고
+                챕터 단위 인터페이스와 재생을 지원하고 챕터 변화에 따른
+                슬라이더의 동적 애니메이션 구현
+              </li>
+            </ul>
+            <div>
+              <p class="etc-list-title">성과 및 경험</p>
+              <ul class="bullet-list">
+                <li>
+                  기획안에서 유튜브 플레이어를 커스텀하는 기술적 문제와 저작권
+                  문제를 파악하여<br />
+                  해결방안을 제시하고 기획을 변경하여 프로젝트 방향성에 크게
+                  기여
+                </li>
+                <li>
+                  커뮤니케이션에 있어 가지고 있던 약점을 깨닿고 보완하게된
+                  중요한 계기로 이후<br />
+                  지속적인 소통과 상황 공유를 통해 팀원간 능력을 보완하고 수준
+                  높은 성과를 경험
+                </li>
+                <li>NextJS 도큐먼트 정독 및 원리 이해</li>
+              </ul>
+            </div>
+            <div>
+              <p class="etc-list-title">Collaboration Tools</p>
+              <p class="etc-list-content">
+                Google Meet, Google Chat, Google Docs, Notion, Figma, Zeplin
+              </p>
+            </div>
+            <div>
+              <p class="etc-list-title">사용 기술</p>
+              <p class="etc-list-content">
+                NextJS, React, Firebase, Redux Toolkit, Tailwind CSS
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 회원가입, 로그인 서비스 -->
+      <div class="project-container">
+        <div class="project-title-header">
+          <p class="title">React-NestJS-Boilerplate</p>
+          <p class="project-type">개인</p>
+        </div>
+
+        <p class="project-intro-desc">
+          NestJS를 활용해 백엔드 개발을 경험하고 기본적인 CRUD 구현을 통해
+          서비스의 기본 구조를 개발한 프로젝트입니다.
+        </p>
+
+        <!-- API 명세, 통신 함수와 객체 타입 생성 자동화 -->
+        <div class="project-detail-main">
+          <div class="preview-container">
+            <div class="preview-img-wrap">
+              <img src="/assets/images/preview/login.jpg" alt="preview" />
+            </div>
+            <p class="dev-part">
+              Frontend/Backend<br />
+              Engineer
+            </p>
+            <p class="dev-date-range">2022.12 ~ 2023.03</p>
+          </div>
+          <div class="content-container">
+            <div>
+              <div class="content-title-area">
+                <p class="content-title">
+                  API 명세, 통신 함수와 객체 타입 생성 자동화
+                </p>
+
+                <a
+                  href="https://github.com/zeriong/react-nestjs-swagger-codegen"
+                  target="_blank"
+                  class="github-icon"
+                >
+                  <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                  <i class="arrow-right"></i>
+                </a>
+              </div>
+              <p class="dev-range">2023.02 ~ 2023.03</p>
+            </div>
+            <ul class="bullet-list">
+              <li>백엔드의 api 엔드포인트와 통신 객체에 Swagger 타입을 명시</li>
+              <li>Swagger를 통해 api 문서 url 생성</li>
+              <li>
+                백엔드 기준에서 Openapi Tools를 활용해 프론트에 api 통신 타입과
+                <br />axios 통신 함수 생성
+              </li>
+              <li>
+                프론트엔드 기준에서 openapi-generator-cli 를 통해 백엔드의 yaml
+                양식으로<br />
+                작성된 api 문서를 읽어 api 통신 타입과 axios 통신 함수 생성
+              </li>
+            </ul>
+            <div>
+              <p class="etc-list-title">성과 및 경험</p>
+              <ul class="bullet-list">
+                <li>
+                  코드 생성 자동화 환경 구축을 통한 생산성 향상, 통신 타입
+                  불일치 에러 방지
+                </li>
+                <li>Swagger를 통한 api문서 명세를 학습</li>
+              </ul>
+            </div>
+            <div>
+              <p class="etc-list-title">사용 기술</p>
+              <p class="etc-list-content">Swagger, Openapi Generator</p>
+            </div>
+          </div>
+        </div>
+        <!-- NestJS 서버 개발, JWT 로그인 구현 -->
+        <div class="project-detail-main">
+          <div class="preview-container"></div>
+          <div class="content-container">
+            <div>
+              <div class="content-title-area">
+                <p class="content-title">NestJS 서버 개발, JWT 로그인 구현</p>
+
+                <a
+                  href="https://github.com/zeriong/react-nestjs-jwt"
+                  target="_blank"
+                  class="github-icon"
+                >
+                  <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                  <i class="arrow-right"></i>
+                </a>
+              </div>
+              <p class="dev-range">2022.12 ~ 2023.02</p>
+            </div>
+            <ul class="bullet-list">
+              <li>NestJS를 활용한 api 서버 환경 구축</li>
+              <li>MariaDB와 TypeORM을 통한 서비스 데이터 구조 설계 및 관리</li>
+              <li>React를 활용해 회원가입, 로그인 등에 필요한 UI 개발</li>
+              <li>
+                JWT를 활용하여 권한 인증과 유지를 구현, AccessToken과
+                RefreshToken을<br />
+                활용하여 토큰 탈취에 대한 보안 위험에 대비
+              </li>
+            </ul>
+            <div>
+              <p class="etc-list-title">성과 및 경험</p>
+              <ul class="bullet-list">
+                <li>NestJS와 MariaDB를 통한 백엔드 및 데이터베이스 이해</li>
+                <li>RESTful API에 대한 이해와 CRUD 설계</li>
+                <li>JWT의 토큰을 활용한 로그인 인증 및 유지 이해</li>
+                <li>React 및 Redux 상태관리 심화 학습</li>
+                <li>Typescript의 이해와 숙련</li>
+              </ul>
+            </div>
+            <div>
+              <p class="etc-list-title">사용 기술</p>
+              <p class="etc-list-content">
+                TypeScript, NestJS, TypeORM, JWT, MariaDB,<br />
+                React, Redux Toolkit, Tailwind CSS
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p
+        class="projects-braces"
+        style="margin-left: 0; margin-top: 4px; padding-bottom: 36px"
+      >
+        }
+      </p>
     </section>
 
     <!-- Learning 컨텐츠 -->
     <section id="learning">
-        <div class="content-name-wrap">
-            <p class="content-name">
-                Learning<span class="projects-braces">{</span>
-            </p>
+      <div class="content-name-wrap">
+        <p class="content-name">
+          Learning<span class="projects-braces">{</span>
+        </p>
+      </div>
+      <p class="content-desc">
+        다양한 사이트의 클론 코딩과 Figma와 Zeplin을 활용한 디자인 시안 바탕의
+        레이아웃 및 UI 개발을 진행하며<br />
+        이에 대한 숙련도를 높이고 온라인 강좌를 통해 웹 서비스의 기초를 익힌
+        과정입니다.
+      </p>
+
+      <!-- ReactNative FoodDeliveryApp -->
+      <div class="project-container is-first">
+        <div class="project-title-header">
+          <p class="title">배달 라이더 앱 클론 코딩 (Android)</p>
+          <p class="project-type">개인</p>
+          <a
+            href="https://github.com/zeriong/react-native-deliveryApp"
+            target="_blank"
+            class="github-icon"
+          >
+            <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+            <i class="arrow-right"></i>
+          </a>
         </div>
-        <p class="content-desc">
-            다양한 사이트의 클론 코딩과 Figma와 Zeplin을 활용한 디자인 시안 바탕의 레이아웃 및 UI 개발을 진행하며<br/>
-            이에 대한 숙련도를 높이고 온라인 강좌를 통해 웹 서비스의 기초를 익힌 과정입니다.
+        <p class="project-intro-desc">
+          ReactNative를 사용한 모바일 앱 개발에 대한 전반적인 이해도 향상을
+          목적으로 모바일 배달 라이더 앱을 클론 코딩하는 강의를 통해 학습한
+          결과물입니다.
+        </p>
+        <div class="project-detail-main">
+          <div class="preview-container">
+            <div class="preview-img-wrap">
+              <img src="/assets/images/preview/reactNative.png" alt="preview" />
+            </div>
+            <p class="dev-part">Frontend Engineer</p>
+            <p class="dev-date-range">2024.01 ~ 2024.02</p>
+          </div>
+          <div class="content-container">
+            <ul class="bullet-list">
+              <li>
+                AndroidManifest에 필요 권한을 명시하고 권한 획득 커스텀 훅을
+                생성
+              </li>
+              <li>
+                patch-package를 통해 [ npm install ] 실행 시 커스텀된
+                라이브러리가 적용되도록 자동화
+              </li>
+              <li>Firebase - Messaging을 활용한 푸쉬알림 구현</li>
+              <li>커스텀된 NMap 라이브러리를 통해 네이버지도 연동</li>
+              <li>
+                TMap API를 통해 내비게이션을 연동하고 커스텀 모듈을 생성하고
+                패키지에 추가
+              </li>
+              <li>웹소켓을 훅으로 활용하여 실시간 오더 조회 기능 구현</li>
+              <li>즉시 배포 가능한 aab, apk 파일 생성 명령어 추가</li>
+              <li>
+                출시 기준의 keyStore파일 생성하여 앱 개발자 식별 및 앱 보안 강화
+              </li>
+            </ul>
+            <div>
+              <p class="etc-list-title">성과 및 경험</p>
+              <ul class="bullet-list">
+                <li>
+                  강의 기준 버전(0.66)에서 학습당시 최신버전(0.73)으로 개발을
+                  진행하며 변경된<br />
+                  규칙과 호환되는 파일이 변경(java -> kotlin)되어 발생하는
+                  문제들을 직접 <br />
+                  부딪히며 해결하고 최신 버전 ReactNative의 방향성과 전반적인
+                  플로우에 대한<br />
+                  이해도를 향상시킬 수 있었습니다.
+                </li>
+                <li>
+                  스플래시 스크린을 통해 초기 로딩 시 스크린을 띄워 사용자
+                  경험을 향상
+                </li>
+                <li>
+                  코드푸쉬를 활용하여 신속한 버그 fix 및 버전업에 있어 개발자
+                  경험 향상
+                </li>
+                <li>
+                  ReactNative의 폴더 구조에 대한 이해도 향상과 작동방식, 기존
+                  웹에서의 React와 차이점 등을 학습
+                </li>
+                <li>
+                  patch-package 사용 경험과 라이브러리 커스텀을 통해 커스텀 접근
+                  방식에 대한 이해도 향상
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p class="etc-list-title">사용 기술</p>
+              <p class="etc-list-content">
+                ReactNative, TypeScript, patch-package, Firebase-Messaging,
+                CodePush, WebSocket, Redux-Toolkit
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 레이아웃 갤러리 -->
+      <div class="project-container">
+        <div class="project-title-header">
+          <p class="title">레이아웃 갤러리</p>
+          <p class="project-type">개인</p>
+          <a
+            href="https://layout-gallery-beryl.vercel.app/"
+            target="_blank"
+            class="demo"
+          >
+            데모
+            <i class="arrow-right"></i>
+          </a>
+          <a
+            href="https://github.com/zeriong/layout-gallery"
+            target="_blank"
+            class="github-icon"
+          >
+            <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+            <i class="arrow-right"></i>
+          </a>
+        </div>
+        <p class="project-intro-desc">
+          레이아웃, UI 개발 역량 향상과 Figma, Zeplin을 경험하기 위해 UX
+          CRUSH에서 제공하는 무료 디자인 시안대로 개발한 페이지가 모인
+          갤러리형식의 프로젝트입니다.
+        </p>
+        <div class="project-detail-main">
+          <div class="preview-container">
+            <div class="preview-img-wrap">
+              <img
+                src="/assets/images/preview/layoutGallery.jpg"
+                alt="preview"
+              />
+            </div>
+            <p class="dev-part">Frontend Engineer</p>
+            <p class="dev-date-range">2023.02 ~ 2023.03</p>
+          </div>
+          <div class="content-container">
+            <ul class="bullet-list">
+              <li>Figma 디자인 시안을 Zeplin을 활용하여 작업</li>
+              <li>
+                "Food Delivery" 디자인 템플릿 기반으로 반응형 웹페이지 구성
+              </li>
+              <li>
+                "Crypto App" 디자인 템플릿 기반으로 모바일 레이아웃과 SVG를
+                활용한<br />
+                그래프 구현
+              </li>
+            </ul>
+            <div>
+              <p class="etc-list-title">성과 및 경험</p>
+              <ul class="bullet-list">
+                <li>
+                  Figma, Zeplin의 활용 능력 숙달 및 플러그인 적용 방식 학습
+                </li>
+                <li>SVG를 활용한 데이터 시각화 개념 학습</li>
+              </ul>
+            </div>
+            <div>
+              <p class="etc-list-title">사용 기술</p>
+              <p class="etc-list-content">
+                TypeScript, React, Redux Toolkit, Tailwind CSS
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 노마드코더 강의 코스 -->
+      <div class="project-container">
+        <div class="project-title-header">
+          <p class="title">노마드코더 강의 코스</p>
+          <p class="project-type">개인</p>
+        </div>
+
+        <p class="project-intro-desc">
+          개인적으로 진행하던 학습 방식에서 한계를 느껴 시작하게 된 노마드코더
+          강사님의 기초 강의 학습 목록과 결과물입니다.
         </p>
 
-        <!-- ReactNative FoodDeliveryApp -->
-        <div class="project-container is-first">
-            <div class="project-title-header">
-                <p class="title">배달 라이더 앱 클론 코딩 (Android)</p>
-                <p class='project-type'>개인</p>
-                <a href="https://github.com/zeriong/react-native-deliveryApp"
-                   target="_blank"
-                   class="github-icon">
-                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                    <i class="arrow-right"></i>
-                </a>
+        <div class="project-detail-main">
+          <div class="preview-container">
+            <div class="preview-img-wrap">
+              <img src="/assets/images/preview/nomad.jpg" alt="preview" />
             </div>
-            <p class="project-intro-desc">
-                ReactNative를 사용한 모바일 앱 개발에 대한 전반적인 이해도 향상을 목적으로 모바일 배달 라이더
-                앱을 클론 코딩하는 강의를 통해 학습한 결과물입니다.
-            </p>
-            <div class="project-detail-main">
-                <div class="preview-container">
-                    <div class="preview-img-wrap">
-                        <img src="/assets/images/preview/reactNative.png" alt="preview"/>
-                    </div>
-                    <p class="dev-part">
-                        Frontend Engineer
-                    </p>
-                    <p class="dev-date-range">2024.01 ~ 2024.02</p>
-                </div>
-                <div class="content-container">
-                    <ul class="bullet-list">
-                        <li>AndroidManifest에 필요 권한을 명시하고 권한 획득 커스텀 훅을 생성</li>
-                        <li>patch-package를 통해 [ npm install ] 실행 시 커스텀된 라이브러리가 적용되도록 자동화</li>
-                        <li>Firebase - Messaging을 활용한 푸쉬알림 구현</li>
-                        <li>커스텀된 NMap 라이브러리를 통해 네이버지도 연동</li>
-                        <li>TMap API를 통해 내비게이션을 연동하고 커스텀 모듈을 생성하고 패키지에 추가</li>
-                        <li>웹소켓을 훅으로 활용하여 실시간 오더 조회 기능 구현</li>
-                        <li>즉시 배포 가능한 aab, apk 파일 생성 명령어 추가</li>
-                        <li>출시 기준의 keyStore파일 생성하여 앱 개발자 식별 및 앱 보안 강화</li>
-                    </ul>
-                    <div>
-                        <p class="etc-list-title">성과 및 경험</p>
-                        <ul class="bullet-list">
-                            <li>
-                                강의 기준 버전(0.66)에서 학습당시 최신버전(0.73)으로 개발을 진행하며 변경된<br/>
-                                규칙과 호환되는 파일이 변경(java -> kotlin)되어 발생하는 문제들을 직접 <br/>
-                                부딪히며 해결하고 최신 버전 ReactNative의 방향성과 전반적인 플로우에 대한<br/>
-                                이해도를 향상시킬 수 있었습니다.
-                            </li>
-                            <li>스플래시 스크린을 통해 초기 로딩 시 스크린을 띄워 사용자 경험을 향상</li>
-                            <li>코드푸쉬를 활용하여 신속한 버그 fix 및 버전업에 있어 개발자 경험 향상</li>
-                            <li>ReactNative의 폴더 구조에 대한 이해도 향상과 작동방식, 기존 웹에서의 React와 차이점 등을 학습</li>
-                            <li>patch-package 사용 경험과 라이브러리 커스텀을 통해 커스텀 접근 방식에 대한 이해도 향상</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="etc-list-title">사용 기술</p>
-                        <p class="etc-list-content">
-                            ReactNative, TypeScript, patch-package, Firebase-Messaging, CodePush, WebSocket, Redux-Toolkit
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <p class="dev-date-range">2022.10 ~ 2022.12</p>
+          </div>
 
-        <!-- 레이아웃 갤러리 -->
-        <div class="project-container">
-            <div class="project-title-header">
-                <p class="title">레이아웃 갤러리</p>
-                <p class='project-type'>개인</p>
-                <a href="https://layout-gallery-beryl.vercel.app/" target="_blank" class="demo">
+          <div class="learning-content-container">
+            <!-- NestJS practice -->
+            <div>
+              <div class="nomad-content">
+                <div class="nomad-title">
+                  <p style="font-weight: 700">NestJS로 API 만들기</p>
+                  <p style="color: rgb(75 85 99)">(TypeScript, NestJS)</p>
+                </div>
+                <div class="title-badges">
+                  <a
+                    href="https://github.com/zeriong/nest-intro"
+                    target="_blank"
+                    class="github-icon"
+                  >
+                    <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                    <i class="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+              <ul class="bullet-list" style="margin-top: 2px">
+                <li>
+                  모듈형식의 아키텍처를 제공하는 NodeJS기반의 백엔드 프레임워크
+                  학습
+                </li>
+              </ul>
+            </div>
+
+            <!-- NextJS practice -->
+            <div>
+              <div class="nomad-content">
+                <div class="nomad-title">
+                  <p style="font-weight: 700">NextJS 시작하기</p>
+                  <p style="color: rgb(75 85 99)">(NextJS)</p>
+                </div>
+                <div class="title-badges">
+                  <a
+                    href="https://github.com/zeriong/nextjs-intro"
+                    target="_blank"
+                    class="github-icon"
+                  >
+                    <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                    <i class="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+              <ul class="bullet-list" style="margin-top: 2px">
+                <li>
+                  SSR와 SEO의 개념을 이해하고 NextJS프레임워크의 작동 방식 학습
+                </li>
+              </ul>
+            </div>
+
+            <!-- Zwitter practice -->
+            <div>
+              <div class="nomad-content">
+                <div class="nomad-title">
+                  <p style="font-weight: 700">트위터 클론코딩</p>
+                  <p style="color: rgb(75 85 99)">(React, Firebase)</p>
+                </div>
+                <div class="title-badges">
+                  <a
+                    href="https://zeriong.github.io/zwitter/"
+                    target="_blank"
+                    class="demo"
+                  >
                     데모
                     <i class="arrow-right"></i>
-                </a>
-                <a href="https://github.com/zeriong/layout-gallery"
-                   target="_blank"
-                   class="github-icon">
-                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
+                  </a>
+                  <a
+                    href="https://github.com/zeriong/zwitter"
+                    target="_blank"
+                    class="github-icon"
+                  >
+                    <img src="/assets/images/icons/git-symbol.svg" alt="git" />
                     <i class="arrow-right"></i>
-                </a>
-            </div>
-            <p class="project-intro-desc">
-                레이아웃, UI 개발 역량 향상과 Figma, Zeplin을 경험하기 위해 UX CRUSH에서 제공하는 무료 디자인 시안대로 개발한 페이지가 모인 갤러리형식의 프로젝트입니다.
-            </p>
-            <div class="project-detail-main">
-                <div class="preview-container">
-                    <div class="preview-img-wrap">
-                        <img src="/assets/images/preview/layoutGallery.jpg" alt="preview"/>
-                    </div>
-                    <p class="dev-part">
-                        Frontend Engineer
-                    </p>
-                    <p class="dev-date-range">2023.02 ~ 2023.03</p>
+                  </a>
                 </div>
-                <div class="content-container">
-                    <ul class="bullet-list">
-                        <li>Figma 디자인 시안을 Zeplin을 활용하여 작업</li>
-                        <li>"Food Delivery" 디자인 템플릿 기반으로 반응형 웹페이지 구성</li>
-                        <li>"Crypto App" 디자인 템플릿 기반으로 모바일 레이아웃과 SVG를 활용한<br/>
-                            그래프 구현</li>
-                    </ul>
-                    <div>
-                        <p class="etc-list-title">성과 및 경험</p>
-                        <ul class="bullet-list">
-                            <li>Figma, Zeplin의 활용 능력 숙달 및 플러그인 적용 방식 학습</li>
-                            <li>SVG를 활용한 데이터 시각화 개념 학습</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="etc-list-title">사용 기술</p>
-                        <p class="etc-list-content">
-                            TypeScript, React, Redux Toolkit, Tailwind CSS
-                        </p>
-                    </div>
-                </div>
+              </div>
+              <ul class="bullet-list" style="margin-top: 2px">
+                <li>
+                  React 심화 학습과 서버리스의 개념, 실시간 업데이트, OAuth2.0
+                  등 핵심 기능 학습
+                </li>
+              </ul>
             </div>
+
+            <!-- Redux practice -->
+            <div>
+              <div class="nomad-content">
+                <div class="nomad-title">
+                  <p style="font-weight: 700">초보자를 위한 리덕스 101</p>
+                  <p style="color: rgb(75 85 99)">
+                    (React, Redux, Redux-Toolkit)
+                  </p>
+                </div>
+                <div class="title-badges">
+                  <a
+                    href="https://github.com/zeriong/vanilla-react-redux"
+                    target="_blank"
+                    class="github-icon"
+                  >
+                    <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                    <i class="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+              <ul class="bullet-list" style="margin-top: 2px">
+                <li>상태관리에 대한 개념과 Redux의 작동 방식 학습</li>
+              </ul>
+            </div>
+
+            <!-- Hooks practice -->
+            <div>
+              <div class="nomad-content">
+                <div class="nomad-title">
+                  <p style="font-weight: 700">실전형 리액트 Hooks</p>
+                  <p style="color: rgb(75 85 99)">(React Hook)</p>
+                </div>
+                <div class="title-badges">
+                  <a
+                    href="https://github.com/zeriong/Hooks"
+                    target="_blank"
+                    class="github-icon"
+                  >
+                    <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                    <i class="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+              <ul class="bullet-list" style="margin-top: 2px">
+                <li>
+                  기본적인 React Hooks에 대한 개념을 이해하고 Custom Hooks를
+                  만들며 학습
+                </li>
+              </ul>
+            </div>
+
+            <!-- React MovieApp practice -->
+            <div>
+              <div class="nomad-content">
+                <div class="nomad-title">
+                  <p style="font-weight: 700">React로 영화 웹 서비스 만들기</p>
+                  <p style="color: rgb(75 85 99)">(React, gh-pages)</p>
+                </div>
+                <div class="title-badges">
+                  <a
+                    href="https://zeriong.github.io/movie_app/"
+                    target="_blank"
+                    class="demo"
+                  >
+                    데모
+                    <i class="arrow-right"></i>
+                  </a>
+                  <a
+                    href="https://github.com/zeriong/movie_app"
+                    target="_blank"
+                    class="github-icon"
+                  >
+                    <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                    <i class="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+              <ul class="bullet-list" style="margin-top: 2px">
+                <li>
+                  React의 기본적인 작동 방식과 Github의 gh-pages로 배포를
+                  경험하며 학습
+                </li>
+              </ul>
+            </div>
+
+            <!-- VanillaJS PaintApp practice -->
+            <div>
+              <div class="nomad-content">
+                <div class="nomad-title">
+                  <p style="font-weight: 700">바닐라 JS로 그림앱 만들기</p>
+                  <p style="color: rgb(75 85 99)">(Vanilla JS, CSS)</p>
+                </div>
+                <div class="title-badges">
+                  <a
+                    href="https://github.com/zeriong/paint-app"
+                    target="_blank"
+                    class="github-icon"
+                  >
+                    <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                    <i class="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+              <ul class="bullet-list" style="margin-top: 2px">
+                <li>canvas의 기초적인 기능 구현을 통해 Vanilla JS 기초 학습</li>
+              </ul>
+            </div>
+
+            <!-- ChromeApp practice -->
+            <div>
+              <div class="nomad-content">
+                <div class="nomad-title">
+                  <p style="font-weight: 700">바닐라 JS로 크롬 앱 만들기</p>
+                  <p style="color: rgb(75 85 99)">(Vanilla JS)</p>
+                </div>
+                <div class="title-badges">
+                  <a
+                    href="https://github.com/zeriong/learning-start/tree/main/04.nomad-corders/momentum_app"
+                    target="_blank"
+                    class="github-icon"
+                  >
+                    <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                    <i class="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+              <ul class="bullet-list" style="margin-top: 2px">
+                <li>
+                  if문, Local Storage, Fetch를 통한 API사용법 등 Vanilla JS
+                  기본기 심화 학습
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 웹개발 기초 학습 -->
+      <div class="project-container">
+        <div class="project-title-header">
+          <p class="title">웹개발 기초 학습</p>
+          <p class="project-type">개인</p>
         </div>
 
-        <!-- 노마드코더 강의 코스 -->
-        <div class="project-container">
-            <div class="project-title-header">
-                <p class="title">노마드코더 강의 코스</p>
-                <p class='project-type'>개인</p>
-            </div>
-
-            <p class="project-intro-desc">
-                개인적으로 진행하던 학습 방식에서 한계를 느껴 시작하게 된 노마드코더 강사님의 기초 강의 학습 목록과 결과물입니다.
-            </p>
-
-            <div class="project-detail-main">
-                <div class="preview-container">
-                    <div class="preview-img-wrap">
-                        <img src="/assets/images/preview/nomad.jpg" alt="preview"/>
-                    </div>
-                    <p class="dev-date-range">2022.10 ~ 2022.12</p>
-                </div>
-
-                <div class="learning-content-container">
-
-                    <!-- NestJS practice -->
-                    <div>
-                        <div class="nomad-content">
-                            <div class="nomad-title">
-                                <p style="font-weight: 700;">
-                                    NestJS로 API 만들기
-                                </p>
-                                <p style="color: rgb(75 85 99);">
-                                    (TypeScript, NestJS)
-                                </p>
-                            </div>
-                            <div class="title-badges">
-                                <a href="https://github.com/zeriong/nest-intro"
-                                   target="_blank"
-                                   class="github-icon">
-                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                    <i class="arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <ul class="bullet-list" style="margin-top: 2px;">
-                            <li>모듈형식의 아키텍처를 제공하는 NodeJS기반의 백엔드 프레임워크 학습</li>
-                        </ul>
-                    </div>
-
-                    <!-- NextJS practice -->
-                    <div>
-                        <div class="nomad-content">
-                            <div class="nomad-title">
-                                <p style="font-weight: 700;">
-                                    NextJS 시작하기
-                                </p>
-                                <p style="color: rgb(75 85 99);">
-                                    (NextJS)
-                                </p>
-                            </div>
-                            <div class="title-badges">
-                                <a href="https://github.com/zeriong/nextjs-intro"
-                                   target="_blank"
-                                   class="github-icon">
-                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                    <i class="arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <ul class="bullet-list" style="margin-top: 2px;">
-                            <li>SSR와 SEO의 개념을 이해하고 NextJS프레임워크의 작동 방식 학습</li>
-                        </ul>
-                    </div>
-
-                    <!-- Zwitter practice -->
-                    <div>
-                        <div class="nomad-content">
-                            <div class="nomad-title">
-                                <p style="font-weight: 700;">
-                                    트위터 클론코딩
-                                </p>
-                                <p style="color: rgb(75 85 99);">
-                                    (React, Firebase)
-                                </p>
-                            </div>
-                            <div class="title-badges">
-                                <a href="https://zeriong.github.io/zwitter/" target="_blank" class="demo">
-                                    데모
-                                    <i class="arrow-right"></i>
-                                </a>
-                                <a href="https://github.com/zeriong/zwitter"
-                                   target="_blank"
-                                   class="github-icon">
-                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                    <i class="arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <ul class="bullet-list" style="margin-top: 2px;">
-                            <li>React 심화 학습과 서버리스의 개념, 실시간 업데이트, OAuth2.0 등 핵심 기능 학습</li>
-                        </ul>
-                    </div>
-
-
-                    <!-- Redux practice -->
-                    <div>
-                        <div class="nomad-content">
-                            <div class="nomad-title">
-                                <p style="font-weight: 700;">
-                                    초보자를 위한 리덕스 101
-                                </p>
-                                <p style="color: rgb(75 85 99);">
-                                    (React, Redux, Redux-Toolkit)
-                                </p>
-                            </div>
-                            <div class="title-badges">
-                                <a href="https://github.com/zeriong/vanilla-react-redux"
-                                   target="_blank"
-                                   class="github-icon">
-                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                    <i class="arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <ul class="bullet-list" style="margin-top: 2px;">
-                            <li>상태관리에 대한 개념과 Redux의 작동 방식 학습</li>
-                        </ul>
-                    </div>
-
-                    <!-- Hooks practice -->
-                    <div>
-                        <div class="nomad-content">
-                            <div class="nomad-title">
-                                <p style="font-weight: 700;">
-                                    실전형 리액트 Hooks
-                                </p>
-                                <p style="color: rgb(75 85 99);">
-                                    (React Hook)
-                                </p>
-                            </div>
-                            <div class="title-badges">
-                                <a href="https://github.com/zeriong/Hooks"
-                                   target="_blank"
-                                   class="github-icon">
-                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                    <i class="arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <ul class="bullet-list" style="margin-top: 2px;">
-                            <li>기본적인 React Hooks에 대한 개념을 이해하고 Custom Hooks를 만들며 학습</li>
-                        </ul>
-                    </div>
-
-                    <!-- React MovieApp practice -->
-                    <div>
-                        <div class="nomad-content">
-                            <div class="nomad-title">
-                                <p style="font-weight: 700;">
-                                    React로 영화 웹 서비스 만들기
-                                </p>
-                                <p style="color: rgb(75 85 99);">
-                                    (React, gh-pages)
-                                </p>
-                            </div>
-                            <div class="title-badges">
-                                <a href="https://zeriong.github.io/movie_app/" target="_blank" class="demo">
-                                    데모
-                                    <i class="arrow-right"></i>
-                                </a>
-                                <a href="https://github.com/zeriong/movie_app"
-                                   target="_blank"
-                                   class="github-icon">
-                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                    <i class="arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <ul class="bullet-list" style="margin-top: 2px;">
-                            <li>React의 기본적인 작동 방식과 Github의 gh-pages로 배포를 경험하며 학습</li>
-                        </ul>
-                    </div>
-
-
-                    <!-- VanillaJS PaintApp practice -->
-                    <div>
-                        <div class="nomad-content">
-                            <div class="nomad-title">
-                                <p style="font-weight: 700;">
-                                    바닐라 JS로 그림앱 만들기
-                                </p>
-                                <p style="color: rgb(75 85 99);">
-                                    (Vanilla JS, CSS)
-                                </p>
-                            </div>
-                            <div class="title-badges">
-                                <a href="https://github.com/zeriong/paint-app"
-                                   target="_blank"
-                                   class="github-icon">
-                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                    <i class="arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <ul class="bullet-list" style="margin-top: 2px;">
-                            <li>canvas의 기초적인 기능 구현을 통해 Vanilla JS 기초 학습</li>
-                        </ul>
-                    </div>
-
-                    <!-- ChromeApp practice -->
-                    <div>
-                        <div class="nomad-content">
-                            <div class="nomad-title">
-                                <p style="font-weight: 700;">
-                                    바닐라 JS로 크롬 앱 만들기
-                                </p>
-                                <p style="color: rgb(75 85 99);">
-                                    (Vanilla JS)
-                                </p>
-                            </div>
-                            <div class="title-badges">
-                                <a href="https://github.com/zeriong/learning-start/tree/main/04.nomad-corders/momentum_app"
-                                   target="_blank"
-                                   class="github-icon">
-                                    <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                    <i class="arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <ul class="bullet-list" style="margin-top: 2px;">
-                            <li>if문, Local Storage, Fetch를 통한 API사용법 등 Vanilla JS 기본기 심화 학습</li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- 웹개발 기초 학습 -->
-        <div class="project-container">
-
-            <div class="project-title-header">
-                <p class="title">웹개발 기초 학습</p>
-                <p class='project-type'>개인</p>
-            </div>
-
-            <p class="project-intro-desc">
-                개발에 관심을 가지고 시작하였던 기초 학습 과정입니다. 학습 과정에서 복잡한 코드를 통해 시각적인 결과가 만들어지는 개발에 재미를 느꼈고 목표와 진로를 결정하게 된 중요한 계기가 되었습니다.
-            </p>
-
-            <div class="project-detail-main">
-
-                <div class="preview-container">
-                    <div class="preview-img-wrap">
-                        <img src="/assets/images/preview/practice.jpg" alt="preview"/>
-                    </div>
-                    <p class="dev-date-range">2022.06 ~ 2022.10</p>
-                </div>
-
-                <div class="practice-container">
-
-                    <!-- 클론 학습내용 -->
-                    <div>
-                        <div class="practice-title">
-                            <p class="practice-text">
-                                03. clone
-                            </p>
-                            <a href="https://github.com/zeriong/learning-start/tree/main/03.clone"
-                               target="_blank"
-                               class="github-icon">
-                                <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                <i class="arrow-right"></i>
-                            </a>
-                        </div>
-                        <p class="practice-desc">그간 학습한 내용을 바탕으로 다양한 유형의 반응형 사이트에 대한 레이아웃 및 UI에 대한 클론 코딩을 진행하였습니다.</p>
-                        <div class="desc-container">
-                            <div>
-                                <p class="desc-title">
-                                    clone_nhn
-                                </p>
-                                <p class="desc-content">
-                                    NHN Cloud의 랜딩 페이지를 클론 코딩하여 반응형 레이아웃과 UI 요소 개발 학습
-                                </p>
-                            </div>
-                            <div>
-                                <p class="desc-title">
-                                    clone_discord
-                                </p>
-                                <p class="desc-content">
-                                    Discord 대시보드 페이지를 클론 코딩하여 레이아웃과 UI 요소 개발 학습
-                                </p>
-                            </div>
-                            <div>
-                                <p class="desc-title">
-                                    clone_partner
-                                </p>
-                                <p class="desc-content">
-                                    반응형 랜딩 페이지 개발을 통해 영상삽입, 라이브러리 사용, 인터랙션 구현 등 학습
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 그리드 학습내용 -->
-                    <div>
-                        <div class="practice-title">
-                            <p class="practice-text">
-                                02. grid
-                            </p>
-                            <a href="https://github.com/zeriong/learning-start/tree/main/02.grids"
-                               target="_blank"
-                               class="github-icon">
-                                <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                <i class="arrow-right"></i>
-                            </a>
-                        </div>
-                        <p class="practice-desc">CSS에 대한 이해와 기본적인 레이아웃, 그리드 구성 숙달을 위해 진행한 내용입니다.</p>
-                        <div class="desc-container">
-                            <div>
-                                <p class="desc-title">
-                                    AppStack, OverWatch, Slack, The Noun Project, Twitch, Youtube
-                                </p>
-                                <p class="desc-content">
-                                    각기 다른 유형의 레이아웃을 가진 6개의 사이트를 반응형 레이아웃과 그리드만을<br/>
-                                    클로닝하며 학습
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 웹개발 연습 내용 -->
-                    <div>
-                        <div class="practice-title">
-                            <p class="practice-text">
-                                01. practice
-                            </p>
-                            <a href="https://github.com/zeriong/learning-start/tree/main/01.practice"
-                               target="_blank"
-                               class="github-icon">
-                                <img src="/assets/images/icons/git-symbol.svg" alt="git"/>
-                                <i class="arrow-right"></i>
-                            </a>
-                        </div>
-                        <p class="practice-desc">HTML, CSS, JS 에 대한 기초적인 이해를 위해 진행한 내용입니다.</p>
-                        <div class="desc-container">
-                            <div>
-                                <p class="desc-title">
-                                    slider-sample
-                                </p>
-                                <p class="desc-content">
-                                    슬라이더를 구현하며 CSS와 JS 심화 학습
-                                </p>
-                            </div>
-                            <div>
-                                <p class="desc-title">
-                                    ze_monster
-                                </p>
-                                <p class="desc-content">
-                                    JS 숙련을 위해 몬스터를 잡고 레벨업을 하는 간단한 기능을 구현
-                                </p>
-                            </div>
-                            <div>
-                                <p class="desc-title">
-                                    JS_Practice
-                                </p>
-                                <p class="desc-content">
-                                    JS에 대한 학습자료를 찾아 메모하며 적용
-                                </p>
-                            </div>
-                            <div>
-                                <p class="desc-title">
-                                    calculator
-                                </p>
-                                <p class="desc-content">
-                                    계산기를 구현해보며 조금 더 심화된 JS 학습
-                                </p>
-                            </div>
-                            <div>
-                                <p class="desc-title">
-                                    web_site_cloning
-                                </p>
-                                <p class="desc-content">
-                                    유튜브 강의로 웹페이지 클로닝을 진행하며 HTML, CSS, JS를 통해 웹페이지 구현
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-
-        <p class="projects-braces" style="margin-left: 0; margin-top: 4px; padding-bottom: 36px;">
-            }
+        <p class="project-intro-desc">
+          개발에 관심을 가지고 시작하였던 기초 학습 과정입니다. 학습 과정에서
+          복잡한 코드를 통해 시각적인 결과가 만들어지는 개발에 재미를 느꼈고
+          목표와 진로를 결정하게 된 중요한 계기가 되었습니다.
         </p>
+
+        <div class="project-detail-main">
+          <div class="preview-container">
+            <div class="preview-img-wrap">
+              <img src="/assets/images/preview/practice.jpg" alt="preview" />
+            </div>
+            <p class="dev-date-range">2022.06 ~ 2022.10</p>
+          </div>
+
+          <div class="practice-container">
+            <!-- 클론 학습내용 -->
+            <div>
+              <div class="practice-title">
+                <p class="practice-text">03. clone</p>
+                <a
+                  href="https://github.com/zeriong/learning-start/tree/main/03.clone"
+                  target="_blank"
+                  class="github-icon"
+                >
+                  <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                  <i class="arrow-right"></i>
+                </a>
+              </div>
+              <p class="practice-desc">
+                그간 학습한 내용을 바탕으로 다양한 유형의 반응형 사이트에 대한
+                레이아웃 및 UI에 대한 클론 코딩을 진행하였습니다.
+              </p>
+              <div class="desc-container">
+                <div>
+                  <p class="desc-title">clone_nhn</p>
+                  <p class="desc-content">
+                    NHN Cloud의 랜딩 페이지를 클론 코딩하여 반응형 레이아웃과 UI
+                    요소 개발 학습
+                  </p>
+                </div>
+                <div>
+                  <p class="desc-title">clone_discord</p>
+                  <p class="desc-content">
+                    Discord 대시보드 페이지를 클론 코딩하여 레이아웃과 UI 요소
+                    개발 학습
+                  </p>
+                </div>
+                <div>
+                  <p class="desc-title">clone_partner</p>
+                  <p class="desc-content">
+                    반응형 랜딩 페이지 개발을 통해 영상삽입, 라이브러리 사용,
+                    인터랙션 구현 등 학습
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 그리드 학습내용 -->
+            <div>
+              <div class="practice-title">
+                <p class="practice-text">02. grid</p>
+                <a
+                  href="https://github.com/zeriong/learning-start/tree/main/02.grids"
+                  target="_blank"
+                  class="github-icon"
+                >
+                  <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                  <i class="arrow-right"></i>
+                </a>
+              </div>
+              <p class="practice-desc">
+                CSS에 대한 이해와 기본적인 레이아웃, 그리드 구성 숙달을 위해
+                진행한 내용입니다.
+              </p>
+              <div class="desc-container">
+                <div>
+                  <p class="desc-title">
+                    AppStack, OverWatch, Slack, The Noun Project, Twitch,
+                    Youtube
+                  </p>
+                  <p class="desc-content">
+                    각기 다른 유형의 레이아웃을 가진 6개의 사이트를 반응형
+                    레이아웃과 그리드만을<br />
+                    클로닝하며 학습
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 웹개발 연습 내용 -->
+            <div>
+              <div class="practice-title">
+                <p class="practice-text">01. practice</p>
+                <a
+                  href="https://github.com/zeriong/learning-start/tree/main/01.practice"
+                  target="_blank"
+                  class="github-icon"
+                >
+                  <img src="/assets/images/icons/git-symbol.svg" alt="git" />
+                  <i class="arrow-right"></i>
+                </a>
+              </div>
+              <p class="practice-desc">
+                HTML, CSS, JS 에 대한 기초적인 이해를 위해 진행한 내용입니다.
+              </p>
+              <div class="desc-container">
+                <div>
+                  <p class="desc-title">slider-sample</p>
+                  <p class="desc-content">
+                    슬라이더를 구현하며 CSS와 JS 심화 학습
+                  </p>
+                </div>
+                <div>
+                  <p class="desc-title">ze_monster</p>
+                  <p class="desc-content">
+                    JS 숙련을 위해 몬스터를 잡고 레벨업을 하는 간단한 기능을
+                    구현
+                  </p>
+                </div>
+                <div>
+                  <p class="desc-title">JS_Practice</p>
+                  <p class="desc-content">
+                    JS에 대한 학습자료를 찾아 메모하며 적용
+                  </p>
+                </div>
+                <div>
+                  <p class="desc-title">calculator</p>
+                  <p class="desc-content">
+                    계산기를 구현해보며 조금 더 심화된 JS 학습
+                  </p>
+                </div>
+                <div>
+                  <p class="desc-title">web_site_cloning</p>
+                  <p class="desc-content">
+                    유튜브 강의로 웹페이지 클로닝을 진행하며 HTML, CSS, JS를
+                    통해 웹페이지 구현
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p
+        class="projects-braces"
+        style="margin-left: 0; margin-top: 4px; padding-bottom: 36px"
+      >
+        }
+      </p>
     </section>
 
     <script>
-        // 버튼 섹션 연결
-        const navbarLinks = document.querySelectorAll('#navbar button');
+      // 버튼 섹션 연결
+      const navbarLinks = document.querySelectorAll("#navbar button");
 
-        // 네비게이션 노출 컨트롤
-        let lastScrollTop = 0;
-        const navbar = document.getElementById('navbar');
-        let clicked = false;
-        let scrollTimeout = null;
+      // 네비게이션 노출 컨트롤
+      let lastScrollTop = 0;
+      const navbar = document.getElementById("navbar");
+      let clicked = false;
+      let scrollTimeout = null;
 
-        // 클릭 이벤트 등록
-        navbarLinks.forEach(link => clickNavSection(link));
-        // 스크롤 이벤트 등록
-        window.addEventListener('scroll', scrollNavSection);
+      // 클릭 이벤트 등록
+      navbarLinks.forEach((link) => clickNavSection(link));
+      // 스크롤 이벤트 등록
+      window.addEventListener("scroll", scrollNavSection);
 
-        /** 포트폴리오 아이프레임 대응 메세지 전송 */
-        // 문서 높이 계산
-        function sendHeight() {
-            const height = document.getElementById('projectsBody').offsetHeight
-            console.log('내부 콘솔')
-            window.parent.postMessage('height:' + height); // 부모 페이지에 높이 전송
+      /** 포트폴리오 아이프레임 대응 메세지 전송 */
+      let lastHeight = 0; // 이전 높이를 저장
+      let resizeTimeout = null; // 디바운스를 위한 타임아웃
+
+      // 문서 높이 계산
+      function sendHeight() {
+        const height = document.getElementById("projectsBody").offsetHeight;
+
+        // 높이가 실제로 변경되었을 때만 메시지 전송
+        if (height !== lastHeight) {
+          console.log("내부 콘솔", height);
+          lastHeight = height;
+          window.parent.postMessage("height:" + height);
         }
-        // 로드 시 높이 전송
-        window.onload = sendHeight;
-        // 창 크기 변경시 높이 다시 전송
-        window.onresize = sendHeight;
+      }
+      // 로드 시 높이 전송
+      window.onload = sendHeight;
 
-        // 프로젝트 클릭 메세지 전송
-        function sendClickProjects() {
-            window.parent.postMessage('click:projects'); // 부모 페이지에 높이 전송
+      // 창 크기 변경시 디바운스 적용하여 높이 다시 전송
+      window.onresize = function () {
+        if (resizeTimeout) {
+          clearTimeout(resizeTimeout);
         }
-        // 러닝 클릭 메세지 전송
-        function sendClickLearning() {
-            window.parent.postMessage('click:learning'); // 부모 페이지에 높이 전송
+        resizeTimeout = setTimeout(sendHeight, 150);
+      };
+
+      // 프로젝트 클릭 메세지 전송
+      function sendClickProjects() {
+        window.parent.postMessage("click:projects"); // 부모 페이지에 높이 전송
+      }
+      // 러닝 클릭 메세지 전송
+      function sendClickLearning() {
+        window.parent.postMessage("click:learning"); // 부모 페이지에 높이 전송
+      }
+      // navbarLinks elements의 적용할 이벤트 등록 함수
+      function clickNavSection(link) {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (e.target.id === "toLearning") {
+            e.target.classList.add("active");
+            document.querySelector("#toProjects").classList.remove("active");
+
+            sendClickLearning();
+          } else if (e.target.id === "toProjects") {
+            e.target.classList.add("active");
+            document.querySelector("#toLearning").classList.remove("active");
+
+            sendClickProjects();
+          }
+          clicked = true;
+          const targetId = e.target.getAttribute("data-target");
+          const targetElement = document.getElementById(targetId);
+          window.scrollTo({
+            top: targetElement.offsetTop - navbar.offsetHeight,
+            behavior: "smooth",
+          });
+        });
+      }
+
+      // 스크롤 시 nav section 노출 컨트롤 함수
+      function scrollNavSection() {
+        // timeout을 재귀적으로 호출하여 클릭 이동 시 스크롤링 체크
+        if (clicked) {
+          if (scrollTimeout !== null) {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = null;
+          }
+          scrollTimeout = setTimeout(() => {
+            clicked = false;
+          }, 50);
+          return;
         }
-        // navbarLinks elements의 적용할 이벤트 등록 함수
-        function clickNavSection(link) {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (e.target.id === 'toLearning') {
-                    e.target.classList.add('active');
-                    document.querySelector('#toProjects').classList.remove('active');
-
-                    sendClickLearning()
-                } else if (e.target.id === 'toProjects') {
-                    e.target.classList.add('active');
-                    document.querySelector('#toLearning').classList.remove('active');
-
-                    sendClickProjects()
-                }
-                clicked = true;
-                const targetId = e.target.getAttribute('data-target');
-                const targetElement = document.getElementById(targetId);
-                window.scrollTo({
-                    top: targetElement.offsetTop - navbar.offsetHeight,
-                    behavior: 'smooth'
-                });
-            });
+        // 노출 컨트롤
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          navbar.style.top = "-61px";
+        } else {
+          navbar.style.top = "0";
         }
+        lastScrollTop = scrollTop;
 
-        // 스크롤 시 nav section 노출 컨트롤 함수
-        function scrollNavSection() {
-            // timeout을 재귀적으로 호출하여 클릭 이동 시 스크롤링 체크
-            if (clicked) {
-                if (scrollTimeout !== null) {
-                    clearTimeout(scrollTimeout);
-                    scrollTimeout = null;
-                }
-                scrollTimeout = setTimeout(() => {
-                    clicked = false;
-                }, 50);
-                return;
-            }
-            // 노출 컨트롤
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                navbar.style.top = '-61px';
-            } else {
-                navbar.style.top = '0';
-            }
-            lastScrollTop = scrollTop;
-
-            // 스크롤 섹션 영역 체크
-            let fromTop = window.scrollY + navbar.offsetHeight;
-            navbarLinks.forEach(link => {
-                let section = document.querySelector(link.getAttribute('href'));
-                if (
-                    section.offsetTop <= fromTop &&
-                    section.offsetTop + section.offsetHeight > fromTop
-                ) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        }
+        // 스크롤 섹션 영역 체크
+        let fromTop = window.scrollY + navbar.offsetHeight;
+        navbarLinks.forEach((link) => {
+          let section = document.querySelector(link.getAttribute("href"));
+          if (
+            section.offsetTop <= fromTop &&
+            section.offsetTop + section.offsetHeight > fromTop
+          ) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      }
     </script>
-</body>
+  </body>
 </html>
